@@ -6,17 +6,28 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import {
-    Brain, BookOpen, Award, Smartphone, Shield,
+    Brain, BookOpen, Award, Shield,
     LayoutDashboard, CreditCard, FileText, Video,
     Code, Briefcase, MonitorPlay, Users,
-    ClipboardList, Bell
+    ClipboardList, Bell, Check
 } from 'lucide-react';
+
+const AndroidAppleIcon = ({ size = 24 }: { size?: number }) => (
+    <div className="flex items-center gap-1.5" style={{ width: size * 2.2, height: size }}>
+        <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+            <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4483-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997zm-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997zm11.4045-6.02l1.9973-3.4592a.416.416 0 0 0-.1521-.5676.416.416 0 0 0-.5676.1521l-2.0223 3.503C15.5902 8.244 13.8533 7.8512 12 7.8512s-3.5902.3928-5.1367 1.0988L4.841 5.447a.416.416 0 0 0-.5676-.1521.416.416 0 0 0-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.44z" />
+        </svg>
+        <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+            <path d="M16.365 20.473c-1.332 1.349-2.766 1.4-4.321.472-1.46-.867-2.822-.867-4.28 0-1.636 1.01-2.909.886-4.24-.49C1.192 16.59-1.22 9.073 2.502 4.414c1.64-2.054 3.791-2.614 5.378-2.614 1.708 0 3.3.945 4.35 1.455.975-.41 2.545-1.574 4.544-1.574 2.825 0 4.881 1.6 5.86 3.65-5.286 2.503-4.3 8.356.9 10.428-1.127 2.222-2.182 3.821-3.17 4.714m-3.86-17.74c1.554-1.95 2.155-4.47.16-5.83-2.138-1.554-4.8 1.144-4.8 1.144-1.342 1.6-1.536 3.96.2 5.093 1.042.61 2.378.136 3.32-.423" />
+        </svg>
+    </div>
+);
 
 const features = [
     { title: "AI Powered", text: "Our ERP Enhances decision-making with predictive insights, automates administrative tasks for efficiency, and provides personalized learning", icon: Brain },
     { title: "NEP 2020 Compliant", text: "Our Campus ERP is NEP 2020-compliant, offering flexible, personalized learning paths and a curriculum structure", icon: BookOpen },
     { title: "NBA, NAAC, NIRF COMPLIANT", text: "Our ERP ensures compliance with NBA, NAAC, and NIRF standards by facilitating streamlined accreditation processes", icon: Award },
-    { title: "Excl. Android & iOS Apps", text: "Personalised College Apps on Play Store, App Store & Web Applications for Seamless Access on Browser & Mobile.", icon: Smartphone },
+    { title: "Excl. Android & iOS Apps", text: "Personalised College Apps on Play Store, App Store & Web Applications for Seamless Access on Browser & Mobile.", icon: AndroidAppleIcon },
     { title: "Admin Panel Access", text: "Exclusive Admin Access to Relevant Stakeholders of the College to Edit, Upload, Create Various Data or Fields", icon: Shield },
     { title: "Comprehensive Dashboard", text: "Interactive Dashboards for College Management, Principal, Dean and Various Department and Administration Heads for Insightful Data and Efficient Management", icon: LayoutDashboard },
     { title: "Integrated Payment Gateway", text: "Collect Fees from Students and also other Transactions through Integrated Payment Gateway on Mobile and also through Browser.", icon: CreditCard },
@@ -28,6 +39,287 @@ const features = [
     { title: "Wall - Facebook of the College", text: "Exclusive Inbuilt Social Media Platform for College to share your thoughts with the Entire Campus.", icon: Users },
     { title: "Dedicated Test Engine", text: "Integrated Test Engine to conduct Various Online Assessment Tests with detailed Result Analyses", icon: ClipboardList },
     { title: "Effective Communication", text: "Stay connected with entire Campus Stakeholders through Timely Alerts, Circulars, and updates", icon: Bell },
+];
+
+const coreModulesData = [
+    {
+        pillText: "Core Module",
+        titlePrefix: "Academic",
+        titleHighlight: "Management",
+        gradientText: "from-indigo-600 to-purple-600",
+        theme: {
+            pillBg: "bg-indigo-50 border-indigo-100",
+            pillDot: "bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.4)]",
+            pillText: "text-indigo-600",
+            glow1: "bg-indigo-300/20",
+            glow2: "bg-purple-300/20",
+            iconBg: "bg-indigo-50",
+            iconBgHover: "group-hover/item:bg-indigo-500",
+            iconBorder: "border-indigo-100",
+            iconBorderHover: "group-hover/item:border-indigo-500",
+            iconText: "text-indigo-500",
+            imageGlow: "from-indigo-400/10 to-purple-400/10",
+            imageBacking: "from-indigo-400/15 to-purple-400/15"
+        },
+        imageSrc: "/images/homeimage/report1.png",
+        imageAlt: "Academic Management Dashboard",
+        isImageRight: true,
+        listItems: [
+            "Complete Track of Campus Academics",
+            "NEP 2020 Compliant",
+            "Automated CO PO Mapping and Attainment Calculation",
+            "Automated Time Table, Lesson Plan Tracking, Syllabus Coverage Progress and Alerts",
+            "Conduct Unlimited Online Classes with Unlimited Students at ZERO Cost",
+            "Dedicated Test Engine for Seamless Online Exam Conduction",
+            "Customized Dashboards to Monitor Daily Progress/Activities",
+            "Digital Approvals which Saves Abundant Amount of Time & Paper",
+            "Generation of University Compliance Reports"
+        ]
+    },
+    {
+        pillText: "Core Module",
+        titlePrefix: "Administration",
+        titleHighlight: "Management",
+        gradientText: "from-emerald-600 to-teal-600",
+        theme: {
+            pillBg: "bg-emerald-50 border-emerald-100",
+            pillDot: "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.4)]",
+            pillText: "text-emerald-600",
+            glow1: "bg-emerald-300/20",
+            glow2: "bg-teal-300/20",
+            iconBg: "bg-emerald-50",
+            iconBgHover: "group-hover/item:bg-emerald-500",
+            iconBorder: "border-emerald-100",
+            iconBorderHover: "group-hover/item:border-emerald-500",
+            iconText: "text-emerald-500",
+            imageGlow: "from-emerald-400/10 to-teal-400/10",
+            imageBacking: "from-emerald-400/15 to-teal-400/15"
+        },
+        imageSrc: "/images/homeimage/report2.png",
+        imageAlt: "Administration Management Dashboard",
+        isImageRight: false,
+        listItems: [
+            "Track Employee, Staff Attendance and Process Automated Pay Rolls",
+            "Fee Dues Management",
+            "New Admissions Management",
+            "Enquiries Handling & Visitor Management",
+            "Effective Leave Management System",
+            "Generation of Invoices & Receives as per Std. Templates",
+            "Effective Tracking of Inventory"
+        ]
+    },
+    {
+        pillText: "Core Module",
+        titlePrefix: "Examination",
+        titleHighlight: "Management",
+        gradientText: "from-cyan-600 to-blue-600",
+        theme: {
+            pillBg: "bg-cyan-50 border-cyan-100",
+            pillDot: "bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.4)]",
+            pillText: "text-cyan-600",
+            glow1: "bg-cyan-300/20",
+            glow2: "bg-blue-300/20",
+            iconBg: "bg-cyan-50",
+            iconBgHover: "group-hover/item:bg-cyan-500",
+            iconBorder: "border-cyan-100",
+            iconBorderHover: "group-hover/item:border-cyan-500",
+            iconText: "text-cyan-500",
+            imageGlow: "from-cyan-400/10 to-blue-400/10",
+            imageBacking: "from-cyan-400/15 to-blue-400/15"
+        },
+        imageSrc: "/images/homeimage/report3.png",
+        imageAlt: "Examination Management Dashboard",
+        isImageRight: true,
+        listItems: [
+            "Launching Examination Registration",
+            "Auto Generation of Examination Time Tables, Seating Plans, Invigilation Details, etc.",
+            "Online Student Attendance for Examinations",
+            "Setting Rules for Examination Evaluation",
+            "Bulk Generation of Hall Tickets and Issuing the Same to Students Subject to Defined Conditions",
+            "Generation of Promotion/Detention List based on Conditions",
+            "Calculations of Gradings/Percentages based on Conditions",
+            "Manual Evaluation/ Bulk Uploading of the Marks Scored by Students",
+            "Digital Evaluation",
+            "Publishing of Results",
+            "Generation of Mark Sheets & Certificates as per the Templates",
+            "Result Analyses, Reports along with Customised Analytics"
+        ]
+    },
+    {
+        pillText: "Core Module",
+        titlePrefix: "Placement",
+        titleHighlight: "Management",
+        gradientText: "from-amber-600 to-orange-600",
+        theme: {
+            pillBg: "bg-amber-50 border-amber-100",
+            pillDot: "bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.4)]",
+            pillText: "text-amber-600",
+            glow1: "bg-amber-300/20",
+            glow2: "bg-orange-300/20",
+            iconBg: "bg-amber-50",
+            iconBgHover: "group-hover/item:bg-amber-500",
+            iconBorder: "border-amber-100",
+            iconBorderHover: "group-hover/item:border-amber-500",
+            iconText: "text-amber-500",
+            imageGlow: "from-amber-400/10 to-orange-400/10",
+            imageBacking: "from-amber-400/15 to-orange-400/15"
+        },
+        imageSrc: "/images/homeimage/report4.png",
+        imageAlt: "Placement Management Dashboard",
+        isImageRight: false,
+        listItems: [
+            "Maintain Companies Information at One Place",
+            "Maintain Placement History for Data-Driven Insights",
+            "Publishing Placement Drives Information",
+            "Create Eligible Students List in a Few Clicks",
+            "Conduct Online Assessments",
+            "Conduct Online Interviews",
+            "Publishing Results",
+            "Maintaining Alumni Details"
+        ]
+    },
+    {
+        pillText: "Core Module",
+        titlePrefix: "Learning",
+        titleHighlight: "Management",
+        gradientText: "from-rose-600 to-red-600",
+        theme: {
+            pillBg: "bg-rose-50 border-rose-100",
+            pillDot: "bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.4)]",
+            pillText: "text-rose-600",
+            glow1: "bg-rose-300/20",
+            glow2: "bg-red-300/20",
+            iconBg: "bg-rose-50",
+            iconBgHover: "group-hover/item:bg-rose-500",
+            iconBorder: "border-rose-100",
+            iconBorderHover: "group-hover/item:border-rose-500",
+            iconText: "text-rose-500",
+            imageGlow: "from-rose-400/10 to-red-400/10",
+            imageBacking: "from-rose-400/15 to-red-400/15"
+        },
+        imageSrc: "/images/homeimage/report5.png",
+        imageAlt: "Learning Management Dashboard",
+        isImageRight: true,
+        listItems: [
+            "Access to the Department through a Mobile App",
+            "Multi-Language Coding Compiler for Coding Practice and Hackathons",
+            "Access to Semester Exam Content",
+            "Access to Placement Exam Video Courses",
+            "Access to Study Material Published by Faculty",
+            "Submit Assignments/Projects Online",
+            "Social Networking with Peer Groups / Fellow Students",
+            "Join Clubs which brings like-minded students to a Single Place",
+            "Download Hall Tickets, Results, Mark Sheets",
+            "Raise Digital Requests",
+            "Stay in Touch with your Mentor through Chat Facility",
+            "Fee Reminders & Payments through the App",
+            "Track the Live Status of the Bus",
+            "Reserve a Book in the Library and Return Reminders",
+            "Book Hostel Rooms",
+            "Share your thoughts with College on the College Social Networking Platform"
+        ]
+    },
+    {
+        pillText: "Core Module",
+        titlePrefix: "Library",
+        titleHighlight: "Management",
+        gradientText: "from-yellow-600 to-amber-600",
+        theme: {
+            pillBg: "bg-yellow-50 border-yellow-100",
+            pillDot: "bg-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.4)]",
+            pillText: "text-yellow-600",
+            glow1: "bg-yellow-300/20",
+            glow2: "bg-amber-300/20",
+            iconBg: "bg-yellow-50",
+            iconBgHover: "group-hover/item:bg-yellow-500",
+            iconBorder: "border-yellow-100",
+            iconBorderHover: "group-hover/item:border-yellow-500",
+            iconText: "text-yellow-500",
+            imageGlow: "from-yellow-400/10 to-amber-400/10",
+            imageBacking: "from-yellow-400/15 to-amber-400/15"
+        },
+        imageSrc: "/images/homeimage/report6.png",
+        imageAlt: "Library Management Dashboard",
+        isImageRight: false,
+        listItems: [
+            "Maintain a List of Books/Titles/Journals",
+            "Track Book Issue/Return",
+            "Generate Overdue List",
+            "Send Alerts",
+            "Track Book Reservations",
+            "Collect Late Fee/ Fine",
+            "Generate Various Reports"
+        ]
+    },
+    {
+        pillText: "Core Module",
+        titlePrefix: "Transportation",
+        titleHighlight: "Management",
+        gradientText: "from-purple-600 to-indigo-600",
+        theme: {
+            pillBg: "bg-purple-50 border-purple-100",
+            pillDot: "bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.4)]",
+            pillText: "text-purple-600",
+            glow1: "bg-purple-300/20",
+            glow2: "bg-indigo-300/20",
+            iconBg: "bg-purple-50",
+            iconBgHover: "group-hover/item:bg-purple-500",
+            iconBorder: "border-purple-100",
+            iconBorderHover: "group-hover/item:border-purple-500",
+            iconText: "text-purple-500",
+            imageGlow: "from-purple-400/10 to-indigo-400/10",
+            imageBacking: "from-purple-400/15 to-indigo-400/15"
+        },
+        imageSrc: "/images/homeimage/report7.png",
+        imageAlt: "Transportation Management Dashboard",
+        isImageRight: true,
+        listItems: [
+            "Maintain Bus Details/Routes",
+            "Track Students List",
+            "Track Faculty & Staff List",
+            "Maintain Fee Details/Dues",
+            "Driver Details & Attendance",
+            "Track Expenses",
+            "Track Live Location of the Bus",
+            "Maintain Vehicle Documents & Due Dates",
+            "Generate Reports"
+        ]
+    },
+    {
+        pillText: "Core Module",
+        titlePrefix: "Hostel",
+        titleHighlight: "Management",
+        gradientText: "from-blue-700 to-cyan-600",
+        theme: {
+            pillBg: "bg-blue-50 border-blue-100",
+            pillDot: "bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.4)]",
+            pillText: "text-blue-600",
+            glow1: "bg-blue-400/20",
+            glow2: "bg-cyan-400/20",
+            iconBg: "bg-blue-50",
+            iconBgHover: "group-hover/item:bg-blue-500",
+            iconBorder: "border-blue-100",
+            iconBorderHover: "group-hover/item:border-blue-500",
+            iconText: "text-blue-500",
+            imageGlow: "from-blue-500/10 to-cyan-500/10",
+            imageBacking: "from-blue-500/15 to-cyan-500/15"
+        },
+        imageSrc: "/images/homeimage/report8.png",
+        imageAlt: "Hostel Management Dashboard",
+        isImageRight: false,
+        listItems: [
+            "Maintain Hostel Details/Occupancy",
+            "Hostel Students List",
+            "Hostel Faculty List",
+            "Fee Details/Dues",
+            "Track In/Out Time",
+            "Track Student Permissions",
+            "Locate Students using Geo Fencing / Tracking",
+            "Inventory",
+            "Hostel/Room Transfer",
+            "Reports"
+        ]
+    }
 ];
 
 const AicasPage = () => {
@@ -212,25 +504,24 @@ const AicasPage = () => {
             </main>
 
             {/* Features Section */}
-            <section className="py-24 bg-slate-50 relative overflow-hidden">
-                {/* Background Decor */}
-                <div className="absolute top-0 right-0 w-1/3 h-[500px] bg-indigo-50/50 blur-[100px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/2" />
-                <div className="absolute bottom-0 left-0 w-1/3 h-[500px] bg-purple-50/50 blur-[100px] rounded-full pointer-events-none translate-y-1/2 -translate-x-1/2" />
-
+            <section className="py-24 relative overflow-hidden bg-white">
                 <div className="container mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.6 }}
-                        className="mb-16"
+                        className="mb-14"
                     >
-                        <h2 className="text-3xl md:text-5xl font-black text-slate-800 tracking-tight">
-                            The Extra Edge with us
-                        </h2>
+                        <div className="flex flex-col gap-2">
+                            <span className="text-[#8B5CF6] font-bold tracking-wider uppercase text-sm">Why Choose AICAS</span>
+                            <h2 className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+                                Unlock Your <span className="text-[#8B5CF6]">Extra Edge</span>
+                            </h2>
+                        </div>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {features.map((feature, idx) => (
                             <motion.div
                                 key={idx}
@@ -238,17 +529,15 @@ const AicasPage = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.5, delay: (idx % 3) * 0.1 }}
-                                className="bg-white rounded-[1.5rem] p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(99,102,241,0.08)] transition-all duration-300 border border-slate-100 group relative overflow-hidden hover:-translate-y-1"
+                                className="bg-[#FCDCC3] p-6 lg:p-8 transition-transform duration-300 hover:-translate-y-1"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/0 to-purple-50/0 group-hover:from-indigo-50/50 group-hover:to-purple-50/50 transition-colors duration-500 pointer-events-none" />
-
-                                <div className="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 relative z-10">
-                                    <feature.icon size={26} strokeWidth={2} />
+                                <div className="h-[42px] px-3 rounded-lg bg-[#8B5CF6] text-white flex items-center justify-center mb-4 shadow-sm inline-flex">
+                                    <feature.icon size={22} />
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-indigo-600 transition-colors relative z-10">
+                                <h3 className="text-[17px] font-bold text-slate-900 mb-2">
                                     {feature.title}
                                 </h3>
-                                <p className="text-slate-500 font-medium leading-relaxed text-[15px] relative z-10">
+                                <p className="text-slate-800/80 font-medium leading-[1.6] text-[13px]">
                                     {feature.text}
                                 </p>
                             </motion.div>
@@ -256,6 +545,71 @@ const AicasPage = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Scalable Core Modules Sections */}
+            {coreModulesData.map((module, idx) => (
+                <section key={idx} className={`py-16 relative overflow-hidden flex items-center border-t border-slate-100 ${idx % 2 === 0 ? 'bg-slate-50/50' : 'bg-white'}`}>
+                    {/* Modern Light Gradient Background with Blobs */}
+                    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                        <div className={`absolute top-1/4 ${module.isImageRight ? 'left-1/4' : 'right-1/4'} w-[600px] h-[600px] ${module.theme.glow1} rounded-full blur-[100px] mix-blend-multiply -z-10`} />
+                        <div className={`absolute bottom-0 ${module.isImageRight ? 'right-0' : 'left-0'} w-[600px] h-[600px] ${module.theme.glow2} rounded-full blur-[120px] mix-blend-multiply -z-10`} />
+                        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)]"></div>
+                    </div>
+
+                    <div className={`container mx-auto max-w-7xl px-6 lg:px-8 relative z-10 flex flex-col ${module.isImageRight ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-10`}>
+
+                        {/* Text Column: Creative Text Presentation */}
+                        <motion.div
+                            initial={{ opacity: 0, x: module.isImageRight ? -40 : 40 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.7 }}
+                            className="lg:w-1/2 w-full"
+                        >
+                            <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full ${module.theme.pillBg} mb-5 shadow-[0_4px_10px_rgba(0,0,0,0.02)]`}>
+                                <span className={`w-1.5 h-1.5 rounded-full ${module.theme.pillDot} animate-pulse`}></span>
+                                <span className={`text-xs font-bold tracking-widest ${module.theme.pillText} uppercase`}>{module.pillText}</span>
+                            </div>
+
+                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
+                                {module.titlePrefix} <span className={`text-transparent bg-clip-text bg-gradient-to-r ${module.gradientText}`}>{module.titleHighlight}</span>
+                            </h2>
+
+                            <ul className="space-y-3">
+                                {module.listItems.map((item, i) => (
+                                    <li key={i} className="flex items-start group/item">
+                                        <div className={`mr-4 mt-0.5 w-6 h-6 rounded-full ${module.theme.iconBg} flex items-center justify-center flex-shrink-0 ${module.theme.iconBgHover} group-hover/item:scale-110 transition-all duration-300 border ${module.theme.iconBorder} ${module.theme.iconBorderHover}`}>
+                                            <Check className={`w-3.5 h-3.5 ${module.theme.iconText} group-hover/item:text-white transition-colors`} strokeWidth={3} />
+                                        </div>
+                                        <span className="text-slate-600 font-medium text-[15px] group-hover/item:text-slate-900 transition-colors leading-relaxed">
+                                            {item}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </motion.div>
+
+                        {/* Image Column */}
+                        <motion.div
+                            initial={{ opacity: 0, x: module.isImageRight ? 40 : -40 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.7, delay: 0.2 }}
+                            className="lg:w-1/2 w-full relative flex items-center justify-center pt-8 lg:pt-0"
+                        >
+                            <div className={`absolute inset-0 bg-gradient-to-${module.isImageRight ? 'tr' : 'tl'} ${module.theme.imageGlow} rounded-full blur-[80px] -z-10`} />
+
+                            <div className="relative group perspective-[1000px]">
+                                <img
+                                    src={module.imageSrc}
+                                    alt={module.imageAlt}
+                                    className={`relative z-10 w-full max-w-xl object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.1)] group-hover:-translate-y-4 ${module.isImageRight ? 'group-hover:rotate-1' : 'group-hover:-rotate-1'} transition-all duration-700 ease-out`}
+                                />
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
+            ))}
 
             <Footer />
             <WhatsAppButton />

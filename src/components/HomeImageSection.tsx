@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronRight, Terminal, Binary, Monitor, Sparkles, Cpu } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const HomeImageSection = () => {
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState("Comprehensive");
 
     const tabs = [
@@ -74,6 +76,7 @@ const HomeImageSection = () => {
                         viewport={{ once: true }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        onClick={() => navigate('/aicas')}
                         className="group flex items-center gap-3 bg-[#1E1B4B] text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-xl shadow-indigo-900/10 hover:bg-primary"
                     >
                         Explore Product
