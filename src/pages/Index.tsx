@@ -17,6 +17,14 @@ import MySkillForgeSection from "@/components/MySkillForgeSection";
 
 const ScrollToTop = () => {
   const [visible, setVisible] = useState(false);
+  const { scrollYProgress } = useScroll();
+
+  const pathLength = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   useEffect(() => {
     const toggleVisible = () => setVisible(window.pageYOffset > 500);
     window.addEventListener("scroll", toggleVisible);
@@ -28,9 +36,48 @@ const ScrollToTop = () => {
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0.5 }}
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-[1.25rem] bg-primary text-white shadow-2xl shadow-primary/40 hover:-translate-y-2 transition-all flex items-center justify-center"
+      className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-[#1e1b4b] text-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:-translate-y-2 transition-all flex items-center justify-center group overflow-hidden border-2 border-white/10"
     >
-      <ChevronUp className="w-8 h-8" />
+      {/* Circular Progress Bar */}
+      <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 100 100">
+        <circle
+          cx="50"
+          cy="50"
+          r="48"
+          stroke="currentColor"
+          strokeWidth="4"
+          fill="transparent"
+          className="text-white/10"
+        />
+        <motion.circle
+          cx="50"
+          cy="50"
+          r="48"
+          stroke="url(#progress-gradient)"
+          strokeWidth="4"
+          fill="transparent"
+          strokeDasharray="1"
+          style={{ pathLength }}
+        />
+        <defs>
+          <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#818cf8" />
+            <stop offset="100%" stopColor="#4f46e5" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      {/* Glossy Reflection Effect */}
+      <div className="absolute top-1 right-1 w-12 h-12 bg-gradient-to-br from-white/20 to-transparent rounded-full blur-[2px] opacity-60 pointer-events-none" />
+
+      {/* Icon */}
+      <svg
+        viewBox="0 0 24 24"
+        className="w-8 h-8 text-white fill-none stroke-current stroke-[2.5px] relative z-10"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M12 19V5M12 5L5 12M12 5L19 12" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
     </motion.button>
   );
 };
