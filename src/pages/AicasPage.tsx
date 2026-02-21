@@ -5,6 +5,30 @@ import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import {
+    Brain, BookOpen, Award, Smartphone, Shield,
+    LayoutDashboard, CreditCard, FileText, Video,
+    Code, Briefcase, MonitorPlay, Users,
+    ClipboardList, Bell
+} from 'lucide-react';
+
+const features = [
+    { title: "AI Powered", text: "Our ERP Enhances decision-making with predictive insights, automates administrative tasks for efficiency, and provides personalized learning", icon: Brain },
+    { title: "NEP 2020 Compliant", text: "Our Campus ERP is NEP 2020-compliant, offering flexible, personalized learning paths and a curriculum structure", icon: BookOpen },
+    { title: "NBA, NAAC, NIRF COMPLIANT", text: "Our ERP ensures compliance with NBA, NAAC, and NIRF standards by facilitating streamlined accreditation processes", icon: Award },
+    { title: "Excl. Android & iOS Apps", text: "Personalised College Apps on Play Store, App Store & Web Applications for Seamless Access on Browser & Mobile.", icon: Smartphone },
+    { title: "Admin Panel Access", text: "Exclusive Admin Access to Relevant Stakeholders of the College to Edit, Upload, Create Various Data or Fields", icon: Shield },
+    { title: "Comprehensive Dashboard", text: "Interactive Dashboards for College Management, Principal, Dean and Various Department and Administration Heads for Insightful Data and Efficient Management", icon: LayoutDashboard },
+    { title: "Integrated Payment Gateway", text: "Collect Fees from Students and also other Transactions through Integrated Payment Gateway on Mobile and also through Browser.", icon: CreditCard },
+    { title: "Semester Exam prep. Content", text: "Questions and Answers, Videos*, Relevant Study Material* Curated by Subject Experts Covering", icon: FileText },
+    { title: "Upskilling Videos", text: "Video Courses on Campus Placement Programmes , Company-wise Placement Cracker Video Courses Recorded by Subject Experts", icon: Video },
+    { title: "Multi Language Coding Compiler", text: "Dedicated Multi Language Coding Compiler for Students for Coding Practice & Hackathons", icon: Code },
+    { title: "Career Updates", text: "Regular Updates on Placement Opportunities and Notifications Related to Higher Education and PSUs", icon: Briefcase },
+    { title: "Free Integrated Online Class Platform", text: "Take Unlimited Classes from 10 - 10000 Students with No Extra Cost.", icon: MonitorPlay },
+    { title: "Wall - Facebook of the College", text: "Exclusive Inbuilt Social Media Platform for College to share your thoughts with the Entire Campus.", icon: Users },
+    { title: "Dedicated Test Engine", text: "Integrated Test Engine to conduct Various Online Assessment Tests with detailed Result Analyses", icon: ClipboardList },
+    { title: "Effective Communication", text: "Stay connected with entire Campus Stakeholders through Timely Alerts, Circulars, and updates", icon: Bell },
+];
 
 const AicasPage = () => {
     return (
@@ -186,6 +210,52 @@ const AicasPage = () => {
                     </div>
                 </div>
             </main>
+
+            {/* Features Section */}
+            <section className="py-24 bg-slate-50 relative overflow-hidden">
+                {/* Background Decor */}
+                <div className="absolute top-0 right-0 w-1/3 h-[500px] bg-indigo-50/50 blur-[100px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-1/3 h-[500px] bg-purple-50/50 blur-[100px] rounded-full pointer-events-none translate-y-1/2 -translate-x-1/2" />
+
+                <div className="container mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.6 }}
+                        className="mb-16"
+                    >
+                        <h2 className="text-3xl md:text-5xl font-black text-slate-800 tracking-tight">
+                            The Extra Edge with us
+                        </h2>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                        {features.map((feature, idx) => (
+                            <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ duration: 0.5, delay: (idx % 3) * 0.1 }}
+                                className="bg-white rounded-[1.5rem] p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(99,102,241,0.08)] transition-all duration-300 border border-slate-100 group relative overflow-hidden hover:-translate-y-1"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/0 to-purple-50/0 group-hover:from-indigo-50/50 group-hover:to-purple-50/50 transition-colors duration-500 pointer-events-none" />
+
+                                <div className="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 relative z-10">
+                                    <feature.icon size={26} strokeWidth={2} />
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-indigo-600 transition-colors relative z-10">
+                                    {feature.title}
+                                </h3>
+                                <p className="text-slate-500 font-medium leading-relaxed text-[15px] relative z-10">
+                                    {feature.text}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
             <Footer />
             <WhatsAppButton />
