@@ -123,6 +123,7 @@ const HomeImageSection = () => {
                             viewport={{ once: true }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            onClick={() => navigate('/syntaxworks')}
                             className="group flex items-center gap-4 bg-slate-900 text-white px-8 py-4 rounded-2xl shadow-2xl hover:bg-primary transition-all duration-300"
                         >
                             <span className="text-sm font-black uppercase tracking-widest">Explore Product</span>
