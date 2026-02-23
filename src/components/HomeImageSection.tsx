@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronRight, Terminal, Binary, Monitor, Sparkles, Cpu } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const HomeImageSection = () => {
     const navigate = useNavigate();
@@ -58,17 +58,20 @@ const HomeImageSection = () => {
             <div className="container relative z-10 px-4 md:px-6">
                 {/* Header Section */}
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-16">
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="flex items-center gap-4 bg-primary/10 border border-primary/20 px-10 py-3 rounded-full shadow-sm"
-                    >
-                        <Cpu className="text-primary w-6 h-6" />
-                        <h2 className="text-2xl md:text-3xl font-black text-primary tracking-tight">
-                            AICAS
-                        </h2>
-                    </motion.div>
+                    <Link to="/aicas">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="flex items-center gap-4 bg-[#EBE7F7] border border-primary/10 px-8 py-3 rounded-full shadow-sm hover:bg-primary/15 hover:border-primary/20 transition-all cursor-pointer"
+                        >
+                            <Cpu className="text-primary w-6 h-6 shrink-0" />
+                            <div className="flex flex-col">
+                                <span className="text-xl md:text-2xl font-black text-primary tracking-tight uppercase">AICAS</span>
+                                <span className="text-[10px] md:text-xs font-semibold text-primary/70 uppercase tracking-wider">AI Campus Automation</span>
+                            </div>
+                        </motion.div>
+                    </Link>
 
                     <motion.button
                         initial={{ opacity: 0, x: 20 }}
@@ -104,17 +107,20 @@ const HomeImageSection = () => {
                 <div className="max-w-7xl mx-auto pt-12">
                     <div className="flex flex-col md:flex-row justify-between items-center mb-20 px-2 gap-8">
                         <div>
-                            <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                className="flex items-center gap-4 bg-primary/10 border border-primary/20 px-10 py-3 rounded-full shadow-sm"
-                            >
-                                <Binary className="text-primary w-6 h-6" />
-                                <h2 className="text-2xl md:text-3xl font-black text-primary tracking-tight">
-                                    SyntaxWorks
-                                </h2>
-                            </motion.div>
+                            <Link to="/syntaxworks">
+                                <motion.div
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    className="flex items-center gap-4 bg-[#EBE7F7] border border-primary/10 px-8 py-3 rounded-full shadow-sm hover:bg-primary/15 hover:border-primary/20 transition-all cursor-pointer"
+                                >
+                                    <Binary className="text-primary w-6 h-6 shrink-0" />
+                                    <div className="flex flex-col">
+                                        <span className="text-xl md:text-2xl font-black text-primary tracking-tight">SyntaxWorks</span>
+                                        <span className="text-[10px] md:text-xs font-semibold text-primary/70 tracking-wider">Code · Build · Ship</span>
+                                    </div>
+                                </motion.div>
+                            </Link>
                         </div>
 
                         <motion.button

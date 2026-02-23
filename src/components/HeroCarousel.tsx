@@ -98,18 +98,18 @@ const HeroCarousel = () => {
               animate="center"
               exit="exit"
               transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.4 },
-                scale: { duration: 0.4 },
+                x: { type: "spring", stiffness: 280, damping: 32 },
+                opacity: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+                scale: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
               }}
               className="absolute inset-0 grid md:grid-cols-2 items-center gap-12"
             >
               {/* Left Content */}
               <div className="space-y-6 text-center md:text-left">
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+                  transition={{ delay: 0.12, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                   className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider"
                 >
                   <Sparkles className="w-3 h-3" />
@@ -118,23 +118,23 @@ const HeroCarousel = () => {
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ delay: 0.22, duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
                   className="text-4xl md:text-6xl font-extrabold leading-tight text-white tracking-tight"
                 >
                   {slide.title}
                 </motion.h1>
                 <motion.p
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ delay: 0.35, duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
                   className="text-lg md:text-xl text-slate-400 font-medium max-w-xl"
                 >
                   {slide.subtitle}
                 </motion.p>
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
+                  transition={{ delay: 0.5, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                 >
                   <a href={slide.link}>
                     <Button className="rounded-full bg-primary text-primary-foreground px-10 py-6 text-lg font-bold hover:shadow-lg hover:shadow-primary/20 transition-all hover:-translate-y-1">
@@ -146,9 +146,13 @@ const HeroCarousel = () => {
 
               {/* Right Image */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
+                initial={{ opacity: 0, scale: 0.92, x: 24 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{
+                  delay: 0.28,
+                  duration: 0.6,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
                 className="relative flex justify-center perspective-[1000px]"
               >
                 <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full scale-110" />

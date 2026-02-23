@@ -410,7 +410,7 @@ const AicasPage = () => {
                             <img
                                 src="/images/aicas-illustration.png"
                                 alt="AICAS Illustration"
-                                className="object-contain w-[95%] h-[95%] transform group-hover:-translate-y-4 group-hover:scale-105 transition-all duration-[1.5s] ease-out relative z-10 mix-blend-multiply"
+                                className="object-contain w-[95%] h-[95%] transform group-hover:-translate-y-4 group-hover:scale-105 transition-all duration-[1500ms] ease-out relative z-10 mix-blend-multiply"
                                 onError={(e) => {
                                     const target = e.target as HTMLImageElement;
                                     if (target.src.includes('aicas-illustration.png')) {

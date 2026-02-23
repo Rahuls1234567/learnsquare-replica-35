@@ -4,287 +4,30 @@ import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Lock, ChevronDown, Play, BookOpen, Bell, Briefcase, Trophy, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Lock, ChevronDown, Play, BookOpen, Bell, Briefcase, Trophy, Facebook, Instagram, Linkedin, Twitter, FileQuestion, Users, GraduationCap } from "lucide-react";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { toast } from "sonner";
-
-// Sample Data for Cascading Dropdowns
-const UNIVERSITY_DATA: Record<string, string[]> = {
-    "JNTU Hyderabad": [
-        "A A R MAHAVEER ENGINEERING COLLEGE, HYDERABAD",
-        "AARUSHI GROUP OF INSTITUTIONS, WARANGAL (RURAL)",
-        "ABDUL KALAM INSTITUTE OF TECHNOLOGICAL SCIENCES, BHADRADRI KOTHAGUDEM",
-        "ABHINAV HI-TECH COLLEGE OF ENGINEERING (FORMERLY HI-TECH COLLEGE OF ENGINEERING & TECHNOLOGY), RANGA REDDY",
-        "ACE ENGINEERING COLLEGE, MEDCHAL",
-        "ADAM'S ENGG COLLEGE, KHAMMAM",
-        "AL HABEEB COLLEGE OF ENGINEERING AND TECHNOLOGY, RANGA REDDY",
-        "ANNAMACHARYA INSTITUTE OF TECHNOLOGY & SCIENCES, RANGA REDDY",
-        "ANUBOSE INSTITUTE OF TECHNOLOGY, BHADRADRI KOTHAGUDEM",
-        "ANURAG COLLEGE OF ENGINEERING, MEDCHAL",
-        "ANURAG ENGINEERING COLLEGE, SURYAPET",
-        "ANURAG GROUP OF INSTITUIONS, MEDCHAL",
-        "ARJUN COLLEGE OF TECHNOLOGY & SCEINCES, RANGA REDDY",
-        "ARKAY COLLEGE OF ENGINEERING & TECHNOLOGY, NIZAMABAD",
-        "ASHOKA BUSINESS SCHOOL, YADADRI BHUVANAGIRI",
-        "ASHOKA INSTITUTE OF ENGINEERING & TECHNOLOGY, NALGONDA",
-        "AURORA'S ENGINEERING COLLEGE, HYDERABAD",
-        "AURORA'S SCIENTIFIC &TECHNOLOGICAL INSTITUTE, MEDCHAL",
-        "AURORA'S SCIENTIFIC, TECHNOLOGICAL AND RESEARCH ACADEMY, HYDERABAD",
-        "AURORA'S TECHNOLOGICAL AND RESEARCH INSTITUTE, MEDCHAL",
-        "AURORA’S TECHNOLOGICAL & MANAGEMENT ACADEMY, MEDCHAL",
-        "AURORA`S TECHNOLOGICAL INSTITUTE, KAMAREDDY",
-        "AVANTHI INSTITUTE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "AVANTHI INSTITUTE OF PHARMACEUTICAL SCIENCES, RANGA REDDY",
-        "AVANTHI'S P.G & RESERACH ACADEMY, RANGA REDDY",
-        "AVANTHI'S SCIENTIFIC TECHNOLOGICAL & RESEARCH ACADEMY, RANGA REDDY",
-        "AVN INSTITUTE OF ENGINEERING AND TECHNOLOGY, RANGA REDDY",
-        "AYAAN COLLEGE OF ENGINEERING AND TECH, RANGA REDDY",
-        "AZAD COLLEGE OF ENGINEERING AND TECHNOLOGY, RANGA REDDY",
-        "B.V.RAJU INSTITUTE OF TECHNOLOGY, MEDAK",
-        "BALAJI INSTITUTE OF MANAGEMENT SCIENCES, WARANGAL (RURAL)",
-        "BALAJI INSTITUTE OF TECHNOLOGY & SCIENCE, WARANGAL (RURAL)",
-        "BANDARI SRINIVAS INSTITUTE OF TECHNOLOGY, RANGA REDDY",
-        "BHARAT INSTITUTE OF ENGINEERING AND TECHNOLOGY, RANGA REDDY",
-        "BHARAT INSTITUTE OF TECHNOLOGY, RANGA REDDY",
-        "BHASKAR ENGINEERING COLLEGE, RANGA REDDY",
-        "BHOJ REDDY ENGINEERING COLLEGE FOR WOMEN, HYDERABAD",
-        "BOMMA INSTITUTE OF INFORMATICS, KHAMMAM",
-        "BOMMA INSTITUTE OF TECHNOLOGY AND SCIENCE, KHAMMAM",
-        "BRILLIANT GRAMMAR SCHOOL EDUCATIONAL SOCIETY'S GROUP OF INSTITUTIONS-INTEGRATED CAMPUS, RANGA REDDY",
-        "BRILLIANT INSTITUTE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "BVRIT HYDERABAD COLLEGE OF ENGINEERING FOR WOMEN, MEDCHAL",
-        "CHRISTU JYOTHI INSTITUTE OF TECHNOLOGY & SCIENCE, JANGAON",
-        "CMR COLLEGE OF ENGINEERING &TECHNOLOGY, MEDCHAL",
-        "CMR ENGINEERING COLLEGE, RANGA REDDY",
-        "CMR INSTITUTE OF TECHNOLOGY, MEDCHAL",
-        "CMR TECHNICAL CAMPUS, MEDCHAL",
-        "CSI WESLEY INSTITUTE OF TECHNOLOGY AND SCIENCES, HYDERABAD",
-        "CVM COLLEGE OF PHARMCAY, KARIMNAGAR",
-        "CVR COLLEGE OF ENGINEERING, RANGA REDDY",
-        "DARIPALLY ANANTHA RAMULU COLLEGE OF ENGINEERING & TECHNOLOGY, KHAMMAM",
-        "DHANVANTHARI INSTITUTE OF PHARMACEUTICAL SCIENCES, BHADRADRI KOTHAGUDEM",
-        "DHRUVA INSTITUTE OF ENGINEERING AND TECHNOLOGY, YADADRI BHUVANAGIRI",
-        "DR. V.R.K. COLLEGE OF ENGINEERING & TECHNOLOGY, KARIMNAGAR",
-        "DR.V.R.K WOMEN'S COLLEGE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "DRK COLLEGE OF ENGINEERING AND TECHNOLOGY, MEDCHAL",
-        "DRK INSTITUTE OF SCIENCE & TECHNOLOGY, MEDCHAL",
-        "ELLENKI COLLEGE OF ENGINEERING AND TECHNOLOGY, SANGAREDDY",
-        "ELLENKI INSTITUTE OF ENGINEERING AND TECHNOLOGY, SANGAREDDY",
-        "FARAH INSTITUTE OF TECHNOLOGY, RANGA REDDY",
-        "G.NARAYANAMMA INSTITUTE TECHNOLOGY & SCIENCE, FOR WOMEN, HYDERABAD",
-        "GANAPATHY ENGINEERING COLLEGE, WARANGAL (URBAN)",
-        "GANDHI ACADEMY OF TECHNICAL EDUCATION, SURYAPET",
-        "GEETANJALI COLLEGE OF ENGINEERING AND TECHNOLOGY, MEDCHAL",
-        "GLAND INSTITUTE OF PHARMACEUTICAL SCIENCES, MEDAK",
-        "GLOBAL INSTITUTE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "GNYANA SARASWATI COLLEGE OF ENGINEERING & TECHNOLONY, NIZAMABAD",
-        "GOKARAJU RANGARAJU INSTITUTE OF ENGINEERING & TECHNOLOGY, MEDCHAL",
-        "GURU NANAK INSTITUTE OF TECHNOLOGY, RANGA REDDY",
-        "GURU NANAK INSTITUTIONS TECHNICAL CAMPUS, RANGA REDDY",
-        "HARSHITH GROUP OF INSTITUTIONS, RANGA REDDY",
-        "HI POINT COLLEGE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "HOLY MARY INSTITUTE OF TECHNOLOGY & SCIENCE, MEDCHAL",
-        "HYDERABAD INSTITUTE OF TECHNOLOGY AND MANAGEMENT, MEDCHAL",
-        "IMMANUEL BUSINESS SCHOOL, YADADRI BHUVANAGIRI",
-        "INDUR INSTITUTE OF ENGINEERING & TECHNOLOGY, SIDDIPET",
-        "INSTITUTE OF AERONAUTICAL ENGINEERING, MEDCHAL",
-        "J.B.INSTITUTE OF ENGINEERING & TECHNOLOGY, HYDERABAD",
-        "JAYAMUKHI INSTITUTE OF PHARMACEUTICAL SCIENCES, WARANGAL (RURAL)",
-        "JAYAMUKHI INSTITUTE OF TECHNOLOGICAL SCIENCES, WARANGAL (RURAL)",
-        "JAYAPRAKASH NARAYAN COLLEGE OF ENGINEERING, MAHABUBNAGAR",
-        "JESUS PG COLLEGE, MEDCHAL",
-        "JJ INSTITUTE OF INFORMATION TECHNOLOGY, RANGA REDDY",
-        "JOGINPALLY B.R. ENGINEERING COLLEGE, RANGA REDDY",
-        "JYOTHISHMATHI COLLEGE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "JYOTHISHMATHI INSTITUTE OF PHARMACEUTICAL SCIENCES, KARIMNAGAR",
-        "JYOTHISHMATHI INSTITUTE OF TECHNOLOGICAL SCIENCES, KARIMNAGAR",
-        "JYOTHISHMATHI INSTITUTE OF TECHNOLOGY & SCIENCE, KARIMNAGAR",
-        "KAKATIYA INSTITUTE OF TECHNONOLGY AND SCIENCE FOR WOMEN, NIZAMABAD",
-        "KAMALA INSTITUTE OF TECHNOLOGY & SCIENCE, KARIMNAGAR",
-        "KASIREDDY NARAYAN REDDY COLLEGE OF ENGINEERING & RESEARCH, RANGA REDDY",
-        "KBR ENGINEERING COLLEGE, YADADRI BHUVANAGIRI",
-        "KESHAV MEMORIAL INSTITUTE OF TECHNOLOGY, HYDERABAD",
-        "KG REDDY COLLEGE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "KHADER MEMORIAL COLLEGE OF ENGINEERING & TECHNOLOGY, NALGONDA",
-        "KHAMMAM INSTITUTE OF TECHNOLOGY & SCIENCES, KHAMMAM",
-        "KLR COLLEGE OF ENGINEERING &TECHNOLOGY, BHADRADRI KOTHAGUDEM",
-        "KODADA INSTITUTE OF TECHNOLOGY & SCIENCE FOR WOMEN, SURYAPET",
-        "KOMMURI PRATAP REDDY INSTITUTE OF TECHNOLOGY, MEDCHAL",
-        "KRISHNA MURTHY INSTITUTE OF TECHNOLOGY & ENGINEERING, MEDCHAL",
-        "KSHATRIYA COLLEGE OF ENGINEERING, NIZAMABAD",
-        "KYASA INSTITUTE OF MANAGEMENT STUDIES, KARIMNAGAR",
-        "M. C. GUPTA COLLEGE OF BUSINESS MANAGEMENT, HYDERABAD",
-        "MADHIRA INSTITUTE OF TECHNOLAGY & SCIENCE, SURYAPET",
-        "MADHIRA INSTITUTE OF TECHNOLOGY & SCIENCES, SURYAPET",
-        "MAHATMA GANDHI INSTITUTE OF TECHNOLOGY, RANGA REDDY",
-        "MAHAVEER INSTITUTE OF SCIENCE & TECHNOLOGY, HYDERABAD",
-        "MALLA REDDY COLLEGE OF ENGINEERING AND TECHNOLOGY (AUTONOMOUS), MEDCHAL",
-        "MALLA REDDY COLLEGE OF ENGINEERING FOR WOMEN, MEDCHAL",
-        "MALLA REDDY COLLEGE OF ENGINEERING, MEDCHAL",
-        "MALLA REDDY ENGINEERING COLLEGE AND MANAGEMENT SCIENCES, MEDCHAL",
-        "MALLA REDDY ENGINEERING COLLEGE FOR WOMEN, MEDCHAL",
-        "MALLA REDDY ENGINEERING COLLEGE(AUTONOMOUS), MEDCHAL",
-        "MALLA REDDY INSTITUTE OF ENGINEERING AND TECHNOLOGY, MEDCHAL",
-        "MALLA REDDY INSTITUTE OF PHARMACEUTICAL SCIENCES, MEDCHAL",
-        "MALLA REDDY INSTITUTE OF TECHNOLOGY & SCIENCE, MEDCHAL",
-        "MALLA REDDY INSTITUTE OF TECHNOLOGY, MEDCHAL",
-        "MARRI LAXMAN REDDY INSTITUTE OF TECHNOLOGY AND MANAGEMENT, MEDCHAL",
-        "MEDAK COLLEGE OF ENGINEERING AND TECHNOLOGY, SIDDIPET",
-        "MEGHA INSTITUTE OF ENGINEERING & TECHNOLOGY FOR WOMEN, MEDCHAL",
-        "MINA INSTITUTE OF ENGINEERING & TECHNOLOGY FOR WOMEN, NALGONDA",
-        "MARRI LAXMAN REDDY INSTITUTE OF TECHNOLOGY, MEDCHAL",
-        "MLR INSTITUTE OF TECHNOLOGY, MEDCHAL",
-        "MNR COLLEGE OF ENGINEERING AND TECHNOLOGY, SANGAREDDY",
-        "MOHAMMADIYA INSTITUTE OF MANAGEMENT, KHAMMAM",
-        "MOONRAY INSTITUTE OF PHRAMCEUTICAL SCIENCES, RANGA REDDY",
-        "MOTHER TERESA INSTITUTE OF SCIENCE & TECHNOLOGY, KHAMMAM",
-        "MOTHER THERESSA COLLEGE OF ENGINEERING AND TECHNOLOGY, PEDDAPALLI",
-        "MUMTAZ COLLEGE OF ENGINEERING & TECHNOLOGY, HYDERABAD",
-        "NALGONDA INSTITUTE OF TECHNOLOGY & SCIENCE, NALGONDA",
-        "NALLA MALLA REDDY ENGINEERING COLLGE, MEDCHAL",
-        "NALLA NARASIMHA REDDY EDUCATION SOCIETY'S GROUP OF INSTITUTIONS, MEDCHAL",
-        "NARAYANA ENGINEERING & TECHNICAL CAMPUS, RANGA REDDY",
-        "NARSIMHA REDDY ENGINEERING COLLEGE, MEDCHAL",
-        "NETAJI INSTITUTE OF ENGINEERING & TECHNOLOGY, YADADRI BHUVANAGIRI",
-        "NETAJI INSTITUTE OF PHARMACEUTICAL SCIENCES, YADADRI BHUVANAGIRI",
-        "NETAJI SCHOOL OF MANAGMENT, YADADRI BHUVANAGIRI",
-        "NIGAMA ENGINEERING COLLEGE, PEDDAPALLI",
-        "NISHITHA COLLEGE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "NIZAM INSTITUTE OF ENGINEERING &TECHNOLOGY, YADADRI BHUVANAGIRI",
-        "NOBLE COLLEGE OF ENGINEERING & TECHNOLOGY FOR WOMEN, RANGA REDDY",
-        "NOVA COLLEGE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "NOVA COLLEGE OF PHARMACEUTICAL EDUCATION AND RESEARCH, RANGA REDDY",
-        "NOVA PG COLLEGE, RANGA REDDY",
-        "NRI INSTITUTE OF TECHNOLOGY, RANGA REDDY",
-        "PALLAVI ENGINEERING COLLEGE, RANGA REDDY",
-        "PALLAVI VIF COLLEGE OF ENGINEERING AND TECHNOLOGY, RANGA REDDY",
-        "PRATISHTA INSTITUTE OF PHARMACEUTICAL SCIENCES, SURYAPET",
-        "PRINCETON COLLEGE OF ENGG. & TECH, MEDCHAL",
-        "PRINCETON INSTITUTE OF ENGINEERING AND TECHNOLOGY FOR WOMEN, MEDCHAL",
-        "PRIYADARSHINI INSTITUTE OF SCIENCE & TECH, SANGAREDDY",
-        "PRIYADARSHINI INSTITUTE OF SCIENCE & TECHNOLOGY FOR WOMEN, KHAMMAM",
-        "PRRM ENGINEERING COLLEGE, RANGA REDDY",
-        "PULLA REDDY INSTITUTE OF TECHNOLOGY, MEDAK",
-        "RAJAMAHENDRA COLLEGE OF ENGINEERING, RANGA REDDY",
-        "RAMANANDATIRTHA ENGINEERING COLLEGE, NALGONDA",
-        "RAMAPPA ENGINEERING COLLEGE, WARANGAL (URBAN)",
-        "RATAGN GLOBAL BUSINESS SCHOOL, MEDAK",
-        "RISHI MS INSTITUTE OF ENGINEERING & TECHNOLOGY FOR WOMEN, MEDCHAL",
-        "RKLK P.G. COLLEGE, SURYAPET",
-        "ROYAL INSTITUTE OF TECHNOLOGY AND SCIENCE, RANGA REDDY",
-        "RRS COLLEGE OF ENGINEERING AND TECHNOLOGY, SANGAREDDY",
-        "S R ENGINEERING COLLEGE, WARANGAL (URBAN)",
-        "S.P.R. COLLEGE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "S.S.J ENGINEERING COLLEGE, RANGA REDDY",
-        "SAGAR GROUP OF INSTITUTIONS, SAGAR INSTITUTE OF TECHNOLOGY, RANGA REDDY",
-        "SAHAJA INSTITUTE OF TECHNOLOGY & SCIENCES FOR WOMEN, KARIMNAGAR",
-        "SAHAJA SCHOOL OF BUSINESS, PEDDAPALLI",
-        "SAI SPURTHI INSTITUTE OF TECHNOLOGY, KHAMMAM",
-        "SAMSKRUTI COLLEGE OF ENGINEERING & TECHNOLOGY, MEDCHAL",
-        "SANA ENGINEERING COLLEGE, SURYAPET",
-        "SARADA INSTITUTE OF TECHNOLOGY & SCIENCE, KHAMMAM",
-        "SCIENT INSTITUTE OF TECHNOLOGY, RANGA REDDY",
-        "SHADAN COLLEGE OF ENGINEERING AND TECHNOLOGY, HYDERABAD",
-        "SHADAN WOMENS COLLEGE OF ENGINEERING & TECHNOLOGY, HYDERABAD",
-        "SIDDHARTHA INSTITUTE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "SIDDHARTHA INSTITUTE OF TECHNOLOGY & SCIENCES, MEDCHAL",
-        "SINDHURA COLLEGE OF ENGINEERING & TECHNOLOGY, KARIMNAGAR",
-        "SLC'S INSTITUTE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "SPHOORTHY ENGINEERING COLLEGE, RANGA REDDY",
-        "SPRING FIELDS ENGINEERING COLLEGE, HYDERABAD",
-        "SREE CHAITANYA COLLEGE OF ENGINEERING, KARIMNAGAR",
-        "SREE CHAITANYA INSTITUTE OF PHARMACEUTICAL SCIENCES, KARIMNAGAR",
-        "SREE CHAITANYA INSTITUTE OF TECHNOLOGICAL SCIENCES, KARIMNAGAR",
-        "SREE CHAITANYA P.G. COLLEGE (MBA PROGRAMME), KARIMNAGAR",
-        "SREE DATTHA GROUP OF INSTITUTIONS, RANGA REDDY",
-        "SREE DATTHA INSTITUTE OF ENGINEERING AND SCIENCE, RANGA REDDY",
-        "SREE DATTHA SCHOOL OF BUSINESS MANAGEMENT, Mahabub Nagar",
-        "SREE RAMA INSTITUTE OF THECNOLOGY & SCIENCE, KHAMMAM",
-        "SREE VISVESVARAYA INSTITUTE OF TECHNOLOGY & SCIENCE, MAHABUBNAGAR",
-        "SREEKAVITHA ENGINEERING COLLEGE, KHAMMAM",
-        "SREENIDHI INSTITUTE OF SCIENCE & TECHNOLOGY, MEDCHAL",
-        "SREYAS INSTITUTE OF ENGINEERING AND TECHNOLOGY, RANGA REDDY",
-        "SRI CHAITANYA TECHNICAL CAMPUS, RANGA REDDY",
-        "SRI INDU COLLEGE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "SRI INDU INSTITUTE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "SRI SAI EDUCATIONAL SOCIETY’S GROUP OF INSTITUTIONS, SURYAPET",
-        "SRI VENKATESWARA ENGINEERING COLLEGE, SURYAPET",
-        "SRIDEVI WOMEN'S ENGINEERING COLLEGE, RANGA REDDY",
-        "SRR COLLEGE OF PHARMACEUTICAL SCIENCES, WARANGAL (URBAN)",
-        "ST. MARTIN'S ENGINEERING COLLEGE, MEDCHAL",
-        "ST. MARY'S ENGINEERING COLLEGE, YADADRI BHUVANAGIRI",
-        "ST. MARY'S GROUP OF INSTITUTIONS HYDERABAD, RANGA REDDY",
-        "ST. MARY’S INTEGRATED CAMPUS HYDEDRABAD, RANGA REDDY",
-        "ST. PETER'S ENGINEERING COLLEGE, MEDCHAL",
-        "SUDHEER REDDY COLLEGE OF ENGINEERING & TECHNOLOGY FOR WOMEN, NIZAMABAD",
-        "SUJALA BHARATI INSTITUTE OF TECHNOLOGY, WARANGAL (RURAL)",
-        "SUMATHI REDDY INSTITUTE OF TECHNOLOGY FOR WOMEN, WARANGAL (URBAN)",
-        "SUPRABHATH PG COLLEGE, YADADRI BHUVANAGIRI",
-        "SVS GROUP OF INSTITUTIONS, WARANGAL (URBAN)",
-        "SWAMI RAMANANDA TIRTHA INSTITUTE OF PHARMACEUTICAL SCIENCES, NALGONDA",
-        "SWAMI RAMANANDA TIRTHA INSTITUTE OF SCIENCE & TECHNOLOGY, NALGONDA",
-        "SWAMI VIVEKANANADA INSTITUE OF TECHNOLOGY, HYDERABAD",
-        "SWAMI VIVEKANANDA INSTITUTE OF PHARMACEUTICAL SCIENCES, YADADRI BHUVANAGIRI",
-        "SWARNA BHARATHI COLLEGE OF ENGINEERING, KHAMMAM",
-        "SWRNA BHARATHI INSTITUTE OF SCIENCE AND TECHNOLOGY, KHAMMAM",
-        "TALLA PADMAVATHI COLLEGE OF ENGINEERING, WARANGAL (URBAN)",
-        "TEEGALA KRISHNA REDDY ENGINEERING COLLEGE, RANGA REDDY",
-        "TEJA COLLEGE OF PHAMACY, SURYAPET",
-        "TIRUMALA ENGINEERING COLLEGE, MEDCHAL",
-        "TKR COLLEGE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "TRINITY COLLEGE OF ENGINEERING & TECHNOLOGY, KARIMNAGAR",
-        "TRINITY COLLEGE OF ENGINEERING AND TECHNOLOGY, PEDDAPALLI",
-        "TRR COLLEGE OF ENGINEERING, SANGAREDDY",
-        "TRV COLLEGE OF ENGINEERING & TECHNOLOGY, Mahaboobnagar",
-        "UNITY P.G. COLLEGE, YADADRI BHUVANAGIRI",
-        "VAAGDEVI COLLEGE OF ENGINEERING, WARANGAL (URBAN)",
-        "VAAGDEVI ENGINEERING COLLEGE, WARANGAL (URBAN)",
-        "VAAGESWARI COLLEGE OF ENGINEERING, KARIMNAGAR",
-        "VAAGESWARI INSTITUTE OF MANAGEMENT SCIENCES, KARIMNAGAR",
-        "VAAGESWARI INSTITUTE OF PHARMACEUTICAL SCIENCES, KARIMNAGAR",
-        "VARDHAMAN COLLEGE OF ENGINEERING, RANGA REDDY",
-        "VATHSALYA INSTITUTE OF SCIENCE AND TECHNOLOGY, YADADRI BHUVANAGIRI",
-        "VENKATESHWARA INSTITUTE OF PHARMACEUTICAL SCIENCES, NALGONDA",
-        "VIDYA JYOTHI INSTITUTE OF TECHNOLOGY, RANGA REDDY",
-        "VIGNAN INSTITUTE OF PHARMACEUTICAL SCIENCES, YADADRI BHUVANAGIRI",
-        "VIGNAN INSTITUTE OF TECHNOLOGY & SCIENCE, YADADRI BHUVANAGIRI",
-        "VIGNAN’S INSTITUTE OF MANAGEMENT AND TECHNOLOGY FOR WOMEN, MEDCHAL",
-        "VIGNAN’S INSTITUTE OF TECHNOLOGY & AERONAUTICAL ENGINEERING, YADADRI BHUVANAGIRI",
-        "VIGNANA BHARATHI ENGINEERING COLLEGE, RANGA REDDY",
-        "VIGNANA BHARATHI INSTITUTE OF TECHNOLOGY, MEDCHAL",
-        "VIJAY RURAL ENGINEERING COLLEGE, NIZAMABAD",
-        "VIJAYA ENGINEERING COLLEGE, KHAMMAM",
-        "VIJAYA KRISHNA INSTITUTE OF TECHNOLOGY AND SCIENCE, RANGA REDDY",
-        "VIKAS COLLEGE OF PHARMACEUTICAL SCIENCES, SURYAPET",
-        "VISHNU INSTITUTE OF PHARMACEUTICAL EDUCATION & RESEARCH, MEDAK",
-        "VISHWA BHARATHI PG COLLEGE OF ENGINEERING & MANAGEMENT, HYDERABAD",
-        "VISHWA BHARATHI PG COLLEGE OF ENGINEERING & MANAGEMENT, RANGA REDDY",
-        "VISION COLLEGE OF PHARMACEUTICAL SCIENCES & RESEARCH, MEDCHAL",
-        "VISVESVARAYA COLLEGE OF ENGINEERING & TECHNOLOGY, RANGA REDDY",
-        "VIVEKANANDA INSTITUTE OF SCIENCE & INFORMATION TECHNOLOGY, RANGA REDDY",
-        "VIVEKANANDA INSTITUTE OF TECHNOLOGY & SCIENCE, KARIMNAGAR",
-        "VIVEKANANDA INSTUTE OF ENGINEERING & TECHNOLOGY, MEDCHAL",
-        "VNR VIGNANA JYOTHI INSTITUTE OF ENGINEERING & TECHNOLOGY, MEDCHAL",
-        "OTHER"
-    ],
-    "JNTU Kakinada": [
-        "JNTU-K College of Engineering",
-        "University College of Engineering Narasaraopet",
-        "Gayatri Vidya Parishad College of Engineering",
-        "Sagi Rama Krishnam Raju Engineering College"
-    ],
-    "JNTU Anantapur": [
-        "JNTUA College of Engineering",
-        "G. Pulla Reddy Engineering College",
-        "Madanapalle Institute of Technology & Science"
-    ],
-    "Anna University Chennai": [
-        "College of Engineering, Guindy (CEG)",
-        "Madras Institute of Technology (MIT)",
-        "SSN College of Engineering",
-        "PSG College of Technology"
-    ]
-};
+import { UNIVERSITY_DATA } from "@/data/universityData";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from "@/components/ui/command";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 
 // Matching Navbar
 const SemesterPrepNavbar = () => {
@@ -316,35 +59,58 @@ const SemesterPrepNavbar = () => {
     );
 };
 
-const FeatureCard = ({ number, title, desc }: any) => (
-    <div className="flex items-start gap-4 group p-2">
-        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-lg group-hover:scale-110 transition-transform">
-            {number}
+const ExtraEdgeFeatureCard = ({ number, title, desc, icon: Icon }: { number: number; title: string; desc: string; icon: React.ComponentType<{ className?: string }> }) => (
+    <motion.div
+        initial={{ opacity: 0, x: 12 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.3, delay: number * 0.08 }}
+        className="flex items-start gap-4 group p-2 transition-all duration-300"
+    >
+        <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-indigo-500/25 group-hover:scale-105 group-hover:shadow-indigo-500/30 transition-transform">
+            <Icon className="w-6 h-6" />
         </div>
-        <div>
-            <h4 className="font-bold text-slate-800 text-base mb-1">{title}</h4>
-            <p className="text-slate-500 text-[13px] leading-relaxed">{desc}</p>
+        <div className="min-w-0">
+            <h4 className="font-bold text-slate-800 text-base mb-1.5">{title}</h4>
+            <p className="text-slate-600 text-[13px] leading-relaxed">{desc}</p>
         </div>
-    </div>
+    </motion.div>
 );
 
-const WhyCard = ({ title, items, icon: Icon, color }: any) => (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-50 hover:shadow-md transition-shadow relative overflow-hidden group h-full">
-        <div className={`absolute top-0 right-0 w-24 h-24 bg-${color}-50/50 rounded-full -mr-12 -mt-12 transition-transform group-hover:scale-150`} />
-        <div className={`w-12 h-12 rounded-xl bg-${color}-50 flex items-center justify-center mb-4 relative z-10`}>
-            <Icon className={`w-6 h-6 text-${color}-600`} />
-        </div>
-        <h4 className="font-bold text-slate-800 text-lg mb-4 relative z-10">{title}</h4>
-        <ul className="space-y-3 relative z-10">
-            {items.map((item: string, i: number) => (
-                <li key={i} className="flex items-start gap-2.5 text-[13px] text-slate-600 leading-relaxed">
-                    <div className={`w-1.5 h-1.5 rounded-full bg-${color}-400 mt-1.5 flex-shrink-0`} />
-                    {item}
-                </li>
-            ))}
-        </ul>
-    </div>
-);
+const WHY_CARD_STYLES: Record<string, { bg: string; iconBg: string; iconColor: string; dot: string }> = {
+    indigo: { bg: "bg-indigo-50/50", iconBg: "bg-indigo-50", iconColor: "text-indigo-600", dot: "bg-indigo-400" },
+    purple: { bg: "bg-purple-50/50", iconBg: "bg-purple-50", iconColor: "text-purple-600", dot: "bg-purple-400" },
+    blue: { bg: "bg-blue-50/50", iconBg: "bg-blue-50", iconColor: "text-blue-600", dot: "bg-blue-400" },
+    amber: { bg: "bg-amber-50/50", iconBg: "bg-amber-50", iconColor: "text-amber-600", dot: "bg-amber-400" },
+    green: { bg: "bg-emerald-50/50", iconBg: "bg-emerald-50", iconColor: "text-emerald-600", dot: "bg-emerald-400" },
+};
+
+const WhyCard = ({ title, items, icon: Icon, color }: { title: string; items: string[]; icon: React.ComponentType<{ className?: string }>; color: keyof typeof WHY_CARD_STYLES }) => {
+    const s = WHY_CARD_STYLES[color] || WHY_CARD_STYLES.indigo;
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -6 }}
+            className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:border-slate-200/80 transition-all duration-300 relative overflow-hidden group h-full"
+        >
+            <div className={`absolute top-0 right-0 w-28 h-28 ${s.bg} rounded-full -mr-14 -mt-14 transition-transform duration-300 group-hover:scale-150`} />
+            <div className={`w-12 h-12 rounded-xl ${s.iconBg} flex items-center justify-center mb-4 relative z-10`}>
+                <Icon className={`w-6 h-6 ${s.iconColor}`} />
+            </div>
+            <h4 className="font-bold text-slate-800 text-lg mb-4 relative z-10">{title}</h4>
+            <ul className="space-y-3 relative z-10">
+                {items.map((item: string, i: number) => (
+                    <li key={i} className="flex items-start gap-2.5 text-[13px] text-slate-600 leading-relaxed">
+                        <div className={`w-1.5 h-1.5 rounded-full ${s.dot} mt-1.5 flex-shrink-0`} />
+                        {item}
+                    </li>
+                ))}
+            </ul>
+        </motion.div>
+    );
+};
 
 const SemesterPrepPage = () => {
     const [formData, setFormData] = useState({
@@ -361,6 +127,29 @@ const SemesterPrepPage = () => {
     const colleges = useMemo(() => {
         return formData.university ? UNIVERSITY_DATA[formData.university] : [];
     }, [formData.university]);
+
+    const [collegeDropdownOpen, setCollegeDropdownOpen] = useState(false);
+
+    const [branchModalOpen, setBranchModalOpen] = useState(false);
+    const [selectedBranch, setSelectedBranch] = useState("");
+    const [branchFormData, setBranchFormData] = useState({ name: "", email: "", message: "" });
+
+    const openBranchModal = (branchName: string) => {
+        setSelectedBranch(branchName);
+        setBranchFormData({ name: "", email: "", message: "" });
+        setBranchModalOpen(true);
+    };
+
+    const handleBranchFormSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!branchFormData.name || !branchFormData.email || !branchFormData.message) {
+            toast.error("Please fill in all fields.");
+            return;
+        }
+        toast.success(`Request to explore ${selectedBranch} submitted. We'll get back to you soon!`);
+        setBranchModalOpen(false);
+        setBranchFormData({ name: "", email: "", message: "" });
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -433,7 +222,7 @@ const SemesterPrepPage = () => {
                         </div>
 
                         <div className="lg:col-span-12 xl:col-span-5 flex justify-center" id="registration-form">
-                            <div className="bg-white rounded-xl p-6 lg:p-8 shadow-[0_15px_50px_rgba(30,30,30,0.05)] border border-slate-100/80 w-full max-w-[420px]">
+                            <div className="bg-white rounded-xl p-6 lg:p-8 shadow-[0_15px_50px_rgba(30,30,30,0.05)] border border-slate-100/80 w-full max-w-[520px]">
                                 <h3 className="text-lg font-bold text-center mb-6">
                                     Register here to explore <span className="italic text-indigo-600 block mt-1 uppercase text-sm">FREE Content</span>
                                 </h3>
@@ -455,18 +244,43 @@ const SemesterPrepPage = () => {
                                         </select>
                                         <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                                     </div>
-                                    <div className="relative">
-                                        <select
-                                            value={formData.college}
-                                            onChange={(e) => setFormData({ ...formData, college: e.target.value })}
-                                            disabled={!formData.university}
-                                            className="w-full h-11 rounded border border-slate-200 bg-white px-4 text-sm text-slate-500 appearance-none focus:outline-none focus:ring-1 focus:ring-indigo-100 disabled:bg-slate-50"
-                                        >
-                                            <option value="">Select College</option>
-                                            {colleges.map(college => <option key={college} value={college}>{college}</option>)}
-                                        </select>
-                                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-                                    </div>
+                                    <Popover open={collegeDropdownOpen} onOpenChange={setCollegeDropdownOpen}>
+                                        <PopoverTrigger asChild>
+                                            <button
+                                                type="button"
+                                                disabled={!formData.university}
+                                                className="w-full h-11 rounded border border-slate-200 bg-white px-4 text-sm text-left text-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-100 disabled:bg-slate-50 disabled:cursor-not-allowed flex items-center justify-between"
+                                            >
+                                                <span className={formData.college ? "text-slate-800 truncate" : ""}>
+                                                    {formData.college || "Select College"}
+                                                </span>
+                                                <ChevronDown className="w-4 h-4 text-slate-400 shrink-0 ml-2" />
+                                            </button>
+                                        </PopoverTrigger>
+                                        <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0" align="start">
+                                            <Command>
+                                                <CommandInput placeholder="Search college..." className="h-10 text-sm" />
+                                                <CommandList>
+                                                    <CommandEmpty>No college found.</CommandEmpty>
+                                                    <CommandGroup>
+                                                        {colleges.map((college) => (
+                                                            <CommandItem
+                                                                key={college}
+                                                                value={college}
+                                                                onSelect={() => {
+                                                                    setFormData({ ...formData, college });
+                                                                    setCollegeDropdownOpen(false);
+                                                                }}
+                                                                className="text-sm cursor-pointer"
+                                                            >
+                                                                {college}
+                                                            </CommandItem>
+                                                        ))}
+                                                    </CommandGroup>
+                                                </CommandList>
+                                            </Command>
+                                        </PopoverContent>
+                                    </Popover>
                                     <Input
                                         placeholder="YOUR EMAIL"
                                         type="email"
@@ -515,33 +329,80 @@ const SemesterPrepPage = () => {
             </section>
 
             {/* Extra Edge Section */}
-            <section className="py-20 bg-white relative overflow-hidden">
-                <div className="container mx-auto px-6 max-w-7xl relative z-10 text-center">
-                    <div className="inline-block bg-indigo-600 text-white rounded px-6 py-2.5 text-xl font-bold mb-16">
-                        Get an Extra - Edge with <span className="font-black">SemesterPrep</span>
+            <section className="py-24 relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-indigo-50/30">
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                    <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-200/20 rounded-full blur-3xl" />
+                    <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-200/15 rounded-full blur-3xl" />
+                </div>
+                <div className="container mx-auto px-6 max-w-7xl relative z-10">
+                    <div className="text-center mb-16">
+                        <motion.span
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full px-8 py-3.5 text-lg font-bold shadow-xl shadow-indigo-500/25"
+                        >
+                            Get an Extra Edge with <span className="font-black">SemesterPrep</span>
+                        </motion.span>
                     </div>
 
-                    <div className="grid lg:grid-cols-2 gap-12 items-center text-left">
-                        <div>
-                            <img src="/images/semester_prep_hero_v3.png" alt="Features Illustration" className="w-full max-w-[500px] mx-auto opacity-80" />
-                        </div>
-                        <div className="space-y-6">
-                            <FeatureCard number="1" title="Univ. Sem Exam PYQ's & Answers" desc="10,000+ Univ. Sem Exam Prev. Year Questions & Answers Covering 120 + Subjects" />
-                            <FeatureCard number="2" title="Curated by Subject Experts" desc="Detailed Explanation of Answers from Top-Notch Subject Experts" />
-                            <FeatureCard number="3" title="Univ. Sem Exam PYQ.Papers" desc="Repository of Subject-wise Univ. Sem Exam Prev. Year Q.Papers" />
-                            <FeatureCard number="4" title="University Updates" desc="One Stop Destination for all University Exam Updates." />
-                            <FeatureCard number="5" title="Career Guidance" desc="Complete Guidance on Various Career Options after Graduation" />
+                    <div className="grid lg:grid-cols-2 gap-16 items-center text-left">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4 }}
+                            className="relative order-2 lg:order-1"
+                        >
+                            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-slate-200/50 ring-1 ring-slate-100">
+                                <img
+                                    src="/images/semester_prep_education_icon.png"
+                                    alt="SemesterPrep – study with PYQs, experts and career guidance"
+                                    className="w-full max-w-[560px] mx-auto object-contain"
+                                    onError={(e) => {
+                                        const t = e.target as HTMLImageElement;
+                                        t.onerror = null;
+                                        t.src = "/images/semester_prep_hero_v3.png";
+                                    }}
+                                />
+                            </div>
+                        </motion.div>
+                        <div className="space-y-4 order-1 lg:order-2">
+                            <ExtraEdgeFeatureCard number={1} title="Univ. Sem Exam PYQ's & Answers" desc="10,000+ Univ. Sem Exam Prev. Year Questions & Answers Covering 120 + Subjects" icon={FileQuestion} />
+                            <ExtraEdgeFeatureCard number={2} title="Curated by Subject Experts" desc="Detailed Explanation of Answers from Top-Notch Subject Experts" icon={Users} />
+                            <ExtraEdgeFeatureCard number={3} title="Univ. Sem Exam PYQ.Papers" desc="Repository of Subject-wise Univ. Sem Exam Prev. Year Q.Papers" icon={BookOpen} />
+                            <ExtraEdgeFeatureCard number={4} title="University Updates" desc="One Stop Destination for all University Exam Updates." icon={Bell} />
+                            <ExtraEdgeFeatureCard number={5} title="Career Guidance" desc="Complete Guidance on Various Career Options after Graduation" icon={GraduationCap} />
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Why SemesterPrep Section */}
-            <section className="py-20 bg-[#f8f7ff]">
-                <div className="container mx-auto px-6 max-w-7xl">
-                    <h3 className="text-3xl font-black text-center text-slate-800 mb-16">Why <span className="text-indigo-600">SemesterPrep?</span></h3>
+            <section className="py-24 relative overflow-hidden bg-gradient-to-b from-white via-[#f8f7ff] to-white">
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-1/4 right-0 w-80 h-80 bg-indigo-100/30 rounded-full blur-3xl" />
+                    <div className="absolute bottom-1/4 left-0 w-72 h-72 bg-purple-100/20 rounded-full blur-3xl" />
+                </div>
+                <div className="container mx-auto px-6 max-w-7xl relative z-10">
+                    <motion.h3
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-3xl md:text-4xl font-black text-center text-slate-800 mb-4"
+                    >
+                        Why <span className="text-indigo-600">SemesterPrep?</span>
+                    </motion.h3>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        className="text-center text-slate-500 text-sm md:text-base max-w-2xl mx-auto mb-14"
+                    >
+                        One platform for videos, PYQs, updates, and career guidance—built for your semester success.
+                    </motion.p>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                         <WhyCard
                             color="indigo" icon={Play}
                             title="Watch anytime"
@@ -549,7 +410,7 @@ const SemesterPrepPage = () => {
                         />
                         <WhyCard
                             color="purple" icon={BookOpen}
-                            title="Learn form anywhere"
+                            title="Learn from anywhere"
                             items={[
                                 "Subject-Wise, Chapter-Wise Question & Answers for Previous Year Univ. Sem Exam Q.Papers",
                                 "Short & Long Questions and Answers as per Univ Exam paper Pattern with Detailed Explanation",
@@ -568,8 +429,24 @@ const SemesterPrepPage = () => {
                             title="University Updates"
                             items={["Timely University Updates", "Semester Exam Syllabus, Timetables", "All Universities Student Notification", "Exam & Academic Calendars"]}
                         />
-                        <div className="lg:col-span-1 flex items-center justify-center">
-                            <img src="/images/semester_prep_hero_v3.png" className="w-48 h-auto opacity-50" />
+                        <div className="lg:col-span-1 flex items-center justify-center p-4">
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                className="relative max-w-[280px] mx-auto"
+                            >
+                                <img
+                                    src="/images/semester_prep_education_icon.png"
+                                    alt="SemesterPrep – learn together, anywhere"
+                                    className="w-full h-auto object-contain"
+                                    onError={(e) => {
+                                        const t = e.target as HTMLImageElement;
+                                        t.onerror = null;
+                                        t.src = "/images/semester_prep_hero_v3.png";
+                                    }}
+                                />
+                            </motion.div>
                         </div>
                         <WhyCard
                             color="green" icon={Briefcase}
@@ -622,101 +499,165 @@ const SemesterPrepPage = () => {
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer className="bg-slate-900 text-slate-300 pt-20 pb-10">
-                <div className="container mx-auto px-6 max-w-7xl">
-                    <div className="grid lg:grid-cols-4 gap-12 mb-16">
-                        <div className="lg:col-span-1 space-y-6">
-                            <h4 className="text-white font-black text-xl">About Us</h4>
-                            <p className="text-[13px] leading-relaxed text-slate-400">
-                                SemesterPrep is a One Stop Solution for all the Students in order to Score a High Percentage/CGPA in the University Semester Exams. We offer Content Curated by Academic Experts which has detailed Explanation of Answers to the University Semester Exam PYQs. We also Provide University Semester Exam PYQ Papers, Objective Type Q&A’s and many more. Apart From these, we also Provide Regular Updates on University Exams, Syllabus, Time Tables etc. We also Provide Guidance for Various Career Options in India and Abroad by giving Regular Updates. This Content Can be Accessed through Browser & App.
-                            </p>
-                        </div>
-                        <div>
-                            <h4 className="text-white font-black text-xl mb-6">Branches</h4>
-                            <div className="flex flex-wrap gap-x-2 gap-y-3 text-[12px] text-slate-400 font-bold">
-                                <span>EC | EE | ME</span>
-                                <span>CE | AI | IT</span>
-                                <span>CS | DS | AI & DS</span>
-                                <span>CYBER SECURITY</span>
-                                <span>IoT And Other Branches..</span>
+            {/* Footer - matches semesterprep.in structure and links */}
+            <footer className="relative bg-[#1a365d] text-white pt-0 pb-0">
+                {/* Footer curve (wavy top) */}
+                <div className="footer-curve relative w-full overflow-hidden" style={{ marginTop: "-1px" }}>
+                    <svg className="w-full h-16 md:h-20 fill-[#1a365d]" viewBox="0 0 1440 80" preserveAspectRatio="none">
+                        <path d="M0,40 Q360,0 720,40 T1440,40 L1440,80 L0,80 Z" className="opacity-95" />
+                        <path d="M0,50 Q360,10 720,50 T1440,50 L1440,80 L0,80 Z" fill="#234876" />
+                        <path d="M0,58 Q360,22 720,58 T1440,58 L1440,80 L0,80 Z" fill="#2d5a87" />
+                    </svg>
+                </div>
+
+                <section className="footer">
+                    <div className="container mx-auto px-6 max-w-7xl">
+                        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10">
+                            {/* About Us - col-lg-6 */}
+                            <div className="md:col-span-6">
+                                <h4 className="text-white font-black text-xl mb-4">About Us</h4>
+                                <p className="text-[13px] leading-relaxed text-white/90 font-bold">
+                                    SemesterPrep is a One Stop Solution for all the Students in order to Score a High Percentage/CGPA in the University Semester Exams. We offer Content Curated by Academic Experts which has detailed Explanation of Answers to the University Semester Exam PYQs. We also Provide University Semester Exam PYQ Papers, Objective Type Q&A's and many more. Apart From these, we also Provide Regular Updates on University Exams, Syllabus, Time Tables etc. We also Provide Guidance for Various Career Options in India and Abroad by giving Regular Updates. This Content Can be Accessed through Browser & App.
+                                </p>
                             </div>
-                        </div>
-                        <div className="space-y-8">
-                            <div>
-                                <h4 className="text-white font-black text-xl mb-6">Email us</h4>
-                                <p className="text-indigo-400 text-sm font-black whitespace-nowrap">info@semesterprep.in</p>
+                            {/* Branches - col-lg-4 */}
+                            <div className="md:col-span-4">
+                                <h4 className="text-white font-black text-xl mb-4">Branches</h4>
+                                <div className="branch text-[12px] text-white/90 leading-relaxed space-y-1">
+                                    <button type="button" onClick={() => openBranchModal("EC")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">EC</button>
+                                    <span className="text-white/50 mx-1">|</span>
+                                    <button type="button" onClick={() => openBranchModal("EE")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">EE</button>
+                                    <span className="text-white/50 mx-1">|</span>
+                                    <button type="button" onClick={() => openBranchModal("ME")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">ME</button>
+                                    <br />
+                                    <button type="button" onClick={() => openBranchModal("CE")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">CE</button>
+                                    <span className="text-white/50 mx-1">|</span>
+                                    <button type="button" onClick={() => openBranchModal("AI")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">AI</button>
+                                    <span className="text-white/50 mx-1">|</span>
+                                    <button type="button" onClick={() => openBranchModal("IT")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">IT</button>
+                                    <br />
+                                    <button type="button" onClick={() => openBranchModal("CS")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">CS</button>
+                                    <span className="text-white/50 mx-1">|</span>
+                                    <button type="button" onClick={() => openBranchModal("DS")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">DS</button>
+                                    <span className="text-white/50 mx-1">|</span>
+                                    <button type="button" onClick={() => openBranchModal("AI & DS")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">AI & DS</button>
+                                    <br />
+                                    <button type="button" onClick={() => openBranchModal("Cyber Security")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">Cyber Security</button>
+                                    <br />
+                                    <button type="button" onClick={() => openBranchModal("IoT And Other Branches")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">IoT And Other Branches..</button>
+                                </div>
                             </div>
-                            <div className="space-y-4">
-                                <p className="text-white font-black text-[11px] tracking-widest uppercase">Download SEMESTERPREP App Now!!</p>
-                                <div className="flex flex-col gap-3">
-                                    <img
-                                        onClick={() => toast.info("Android app link coming soon!")}
-                                        src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-                                        className="h-9 w-fit cursor-pointer hover:scale-105 transition-transform"
-                                    />
-                                    <img
-                                        onClick={() => toast.info("iOS app link coming soon!")}
-                                        src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"
-                                        className="h-9 w-fit cursor-pointer hover:scale-105 transition-transform"
-                                    />
+                            {/* Email us & Download App - col-lg-2 */}
+                            <div className="md:col-span-2">
+                                <h4 className="text-white font-black text-xl mb-4">Email us</h4>
+                                <p className="mb-4 text-sm text-white/90">
+                                    <a href="mailto:info@semesterprep.in" className="text-white/90 hover:text-white transition-colors">info@semesterprep.in</a>
+                                </p>
+                                <h5 className="text-white font-black text-sm mb-3">Download SEMESTERPREP <br />App Now!!</h5>
+                                <div className="flex flex-col gap-2">
+                                    <a href="https://play.google.com/store/apps/details?id=com.semesterprep_ap" target="_blank" rel="noopener noreferrer" className="inline-block">
+                                        <img src="https://semesterprep.in/frontend/images/get-on-android.png" alt="Get on Google Play" className="h-10 w-auto object-contain" onError={(e) => { (e.target as HTMLImageElement).src = "https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"; }} />
+                                    </a>
+                                    <a href="https://apps.apple.com/in/app/semesterprep/id1671087835" target="_blank" rel="noopener noreferrer" className="inline-block">
+                                        <img src="https://semesterprep.in/frontend/images/app-store.png" alt="Download on App Store" className="h-10 w-auto object-contain" onError={(e) => { (e.target as HTMLImageElement).src = "https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"; }} />
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <h4 className="text-white font-black text-xl mb-6">Follow Us</h4>
-                            <div className="flex gap-4">
-                                <a href="https://www.facebook.com/SemesterPrep-100588706273075" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-indigo-600 transition-colors">
-                                    <Facebook className="w-5 h-5" />
-                                </a>
-                                <a href="https://twitter.com/SemesterPrep" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-sky-500 transition-colors">
-                                    <Twitter className="w-5 h-5" />
-                                </a>
-                                <a href="https://www.instagram.com/semesterprep22/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-pink-600 transition-colors">
-                                    <Instagram className="w-5 h-5" />
-                                </a>
-                                <a href="https://www.linkedin.com/company/semesterprep/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 transition-colors">
-                                    <Linkedin className="w-5 h-5" />
-                                </a>
+
+                        <hr className="border-white/10 my-8" />
+
+                        {/* Courses, Quick Links, Our Courses - centered */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center pb-10">
+                            <div>
+                                <h5 className="text-white font-black text-sm uppercase tracking-wider mb-3">Courses Available for</h5>
+                                <ul className="space-y-2 text-[12px] text-white/90">
+                                    <li><a href="https://semesterprep.in/all-courses?course_id=&program_id=&university_id=18&year=&exam_type=" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Anna University Chennai</a></li>
+                                    <li><a href="https://semesterprep.in/all-courses?course_id=&program_id=&university_id=17&year=&exam_type=" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">JNTU Anantapur</a></li>
+                                    <li><a href="https://semesterprep.in/all-courses?course_id=&program_id=&university_id=16&year=&exam_type=" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">JNTU Kakinada</a></li>
+                                    <li><a href="https://semesterprep.in/all-courses?course_id=&program_id=&university_id=15&year=&exam_type=" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">JNTU Hyderabad</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 className="text-white font-black text-sm uppercase tracking-wider mb-3">Quick Links</h5>
+                                <ul className="space-y-2 text-[12px] text-white/90">
+                                    <li><a href="https://semesterprep.in/faq" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">FAQ</a></li>
+                                    <li><a href="https://semesterprep.in/terms" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Terms and Conditions</a></li>
+                                    <li><a href="https://semesterprep.in/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Privacy Policy</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 className="text-white font-black text-sm uppercase tracking-wider mb-3">Our Courses</h5>
+                                <ul className="space-y-2 text-[12px] text-white/90">
+                                    <li><a href="https://semesterprep.in/all-courses?course_id=1" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Engineering</a></li>
+                                    <li><a href="https://semesterprep.in/all-courses?course_id=2" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">CRT</a></li>
+                                    <li><a href="https://semesterprep.in/all-courses?course_id=5" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">DSA</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
+                </section>
 
-                    <hr className="border-slate-800/60 mb-10" />
-
-                    <div className="grid md:grid-cols-3 gap-12 text-[12px] text-slate-400 font-bold uppercase tracking-wider">
-                        <div className="space-y-4">
-                            <h5 className="text-white text-sm font-black tracking-widest">Courses Available for</h5>
-                            <ul className="space-y-2.5">
-                                <li className="hover:text-white cursor-pointer transition-colors">Anna University Chennai</li>
-                                <li className="hover:text-white cursor-pointer transition-colors">JNTU Anantapur</li>
-                                <li className="hover:text-white cursor-pointer transition-colors">JNTU Kakinada</li>
-                                <li className="hover:text-white cursor-pointer transition-colors">JNTU Hyderabad</li>
-                            </ul>
-                        </div>
-                        <div className="space-y-4">
-                            <h5 className="text-white text-sm font-black tracking-widest">Quick Links</h5>
-                            <ul className="space-y-2.5">
-                                <li onClick={() => toast.info("FAQ is coming soon!")} className="hover:text-white cursor-pointer transition-colors">FAQ</li>
-                                <li onClick={() => toast.info("Terms and Conditions page is coming soon!")} className="hover:text-white cursor-pointer transition-colors">Terms and Conditions</li>
-                                <li onClick={() => toast.info("Privacy Policy page is coming soon!")} className="hover:text-white cursor-pointer transition-colors">Privacy Policy</li>
-                            </ul>
-                        </div>
-                        <div className="space-y-4">
-                            <h5 className="text-white text-sm font-black tracking-widest">Our Courses</h5>
-                            <ul className="space-y-2.5">
-                                <li onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-white cursor-pointer transition-colors">Engineering</li>
-                                <li><Link to="/training-programs" className="hover:text-white cursor-pointer transition-colors">CRT</Link></li>
-                                <li><Link to="/myskillforge" className="hover:text-white cursor-pointer transition-colors">DSA</Link></li>
+                {/* Footer bottom */}
+                <section className="footer-bottom border-t border-white/10 py-6">
+                    <div className="container mx-auto px-6 max-w-7xl">
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <p className="text-white/70 text-[11px] text-center sm:text-left">
+                                © 2026 Copyright <br className="sm:hidden" /> LEARNSQUARE TECHNOLOGIES (OPC) PRIVATE LIMITED
+                            </p>
+                            <ul className="flex gap-4 justify-center sm:justify-end">
+                                <li><a href="https://www.facebook.com/SemesterPrep-100588706273075" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-colors" title="Facebook" aria-label="Facebook"><Facebook className="w-5 h-5" /></a></li>
+                                <li><a href="https://twitter.com/SemesterPrep" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-colors" title="Twitter" aria-label="Twitter"><Twitter className="w-5 h-5" /></a></li>
+                                <li><a href="https://www.instagram.com/semesterprep22/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-colors" title="Instagram" aria-label="Instagram"><Instagram className="w-5 h-5" /></a></li>
+                                <li><a href="https://www.linkedin.com/company/semesterprep/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-colors" title="LinkedIn" aria-label="LinkedIn"><Linkedin className="w-5 h-5" /></a></li>
                             </ul>
                         </div>
                     </div>
-
-                    <div className="mt-16 pt-8 border-t border-slate-800/40 text-center text-slate-500 text-[11px]">
-                        © 2024 Learn Square Technologies. All rights reserved.
-                    </div>
-                </div>
+                </section>
             </footer>
+
+            {/* Branch explore modal */}
+            <Dialog open={branchModalOpen} onOpenChange={setBranchModalOpen}>
+                <DialogContent className="sm:max-w-md rounded-xl border-slate-200 p-0 overflow-hidden">
+                    <div className="p-6">
+                        <DialogHeader>
+                            <DialogTitle className="text-center text-lg font-bold text-slate-800">
+                                The form for exploring this branch needs to be filled out
+                            </DialogTitle>
+                        </DialogHeader>
+                        <form onSubmit={handleBranchFormSubmit} className="mt-6 space-y-4">
+                            <Input
+                                placeholder="YOUR NAME"
+                                value={branchFormData.name}
+                                onChange={(e) => setBranchFormData({ ...branchFormData, name: e.target.value })}
+                                className="h-11 border-slate-200 rounded text-sm"
+                                required
+                            />
+                            <Input
+                                placeholder="YOUR EMAIL"
+                                type="email"
+                                value={branchFormData.email}
+                                onChange={(e) => setBranchFormData({ ...branchFormData, email: e.target.value })}
+                                className="h-11 border-slate-200 rounded text-sm"
+                                required
+                            />
+                            <Textarea
+                                placeholder="ENTER MESSAGE"
+                                value={branchFormData.message}
+                                onChange={(e) => setBranchFormData({ ...branchFormData, message: e.target.value })}
+                                className="min-h-[100px] resize-y rounded border-slate-200 text-sm"
+                                required
+                            />
+                            <Button
+                                type="submit"
+                                className="w-full h-12 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold rounded-lg shadow-lg"
+                            >
+                                Submit Request to Explore it
+                            </Button>
+                        </form>
+                    </div>
+                </DialogContent>
+            </Dialog>
 
             <WhatsAppButton />
         </div>

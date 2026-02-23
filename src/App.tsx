@@ -12,6 +12,9 @@ import MySkillForgePage from "./pages/MySkillForgePage";
 import TrainingProgramsPage from "./pages/TrainingProgramsPage";
 import TestPrepProPage from "./pages/TestPrepProPage";
 import SemesterPrepPage from "./pages/SemesterPrepPage";
+import PrivacyPage from "./pages/PrivacyPage";
+import TermsPage from "./pages/TermsPage";
+import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +35,9 @@ const App = () => (
           <Route path="/training-programs" element={<TrainingProgramsPage />} />
           <Route path="/testpreppro" element={<TestPrepProPage />} />
           <Route path="/semesterprep" element={<SemesterPrepPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/login" element={<LoginPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

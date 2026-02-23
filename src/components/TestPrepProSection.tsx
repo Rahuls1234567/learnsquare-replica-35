@@ -26,17 +26,20 @@ const TestPrepProSection = () => {
 
                 {/* 1. Header Row */}
                 <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="flex items-center gap-4 bg-primary/10 border border-primary/20 px-10 py-3 rounded-full shadow-sm"
-                    >
-                        <ClipboardCheck className="text-primary w-6 h-6" />
-                        <h2 className="text-2xl md:text-3xl font-black text-primary tracking-tight">
-                            Test Prep - Pro
-                        </h2>
-                    </motion.div>
+                    <Link to="/testpreppro">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="flex items-center gap-4 bg-[#EBE7F7] border border-primary/10 px-8 py-3 rounded-full shadow-sm hover:bg-primary/15 hover:border-primary/20 transition-all cursor-pointer"
+                        >
+                            <ClipboardCheck className="text-primary w-6 h-6 shrink-0" />
+                            <div className="flex flex-col">
+                                <span className="text-xl md:text-2xl font-black text-primary tracking-tight">Test Prep Pro</span>
+                                <span className="text-[10px] md:text-xs font-semibold text-primary/70 tracking-wider">Ace Every Test</span>
+                            </div>
+                        </motion.div>
+                    </Link>
 
                     <Link to="/testpreppro">
                         <motion.button

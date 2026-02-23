@@ -82,15 +82,7 @@ const ScrollToTop = () => {
   );
 };
 
-const Index = () => {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  return (
+const Index = () => (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -104,10 +96,6 @@ const Index = () => {
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-accent/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
       </div >
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-primary z-[60] origin-left"
-        style={{ scaleX }}
-      />
       <Navbar />
       <HeroCarousel />
       <ClientsLogoBar />
@@ -121,8 +109,7 @@ const Index = () => {
       <Footer />
       <WhatsAppButton />
       <ScrollToTop />
-    </motion.div >
-  );
-};
+    </motion.div>
+);
 
 export default Index;

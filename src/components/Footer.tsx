@@ -1,4 +1,5 @@
-import { Facebook, Twitter, Linkedin, Instagram, Youtube, ChevronRight, Apple, Play } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Linkedin, Instagram, Youtube, ChevronRight, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
 
 const companyLinks = [
@@ -10,12 +11,12 @@ const companyLinks = [
 ];
 
 const productFooterLinks = [
-  { name: "AICAS", href: "#products" },
-  { name: "SyntaxWorks", href: "#products" },
-  { name: "MySkillForge", href: "#products" },
-  { name: "SemesterPrep", href: "/semesterprep" },
-  { name: "Training Programs", href: "/training-programs" },
-  { name: "Test Prep - Pro", href: "/testpreppro" },
+  { name: "AICAS", href: "/aicas", external: false },
+  { name: "SyntaxWorks", href: "/syntaxworks", external: false },
+  { name: "MySkillForge", href: "/myskillforge", external: false },
+  { name: "SemesterPrep", href: "https://semesterprep.in/", external: true },
+  { name: "Training Programs", href: "/training-programs", external: false },
+  { name: "Test Prep - Pro", href: "/testpreppro", external: false },
 ];
 
 const trainingColumns = [
@@ -58,13 +59,20 @@ const Footer = () => (
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <a href="#" className="inline-block group transition-all duration-500">
+            <a href="/" className="inline-block group transition-all duration-500">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <img
-                  src="/images/logo-footer-white.png"
-                  alt="LEARNSQUARE"
-                  className="h-20 w-auto object-contain relative z-10 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_20px_rgba(79,70,229,0.3)] transition-all duration-500"
+                <div
+                  className="h-20 w-48 transition-transform group-hover:scale-105"
+                  style={{
+                    maskImage: 'url(/images/logo-footer-white.png)',
+                    WebkitMaskImage: 'url(/images/logo-footer-white.png)',
+                    maskSize: 'contain',
+                    WebkitMaskSize: 'contain',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskRepeat: 'no-repeat',
+                    background: 'linear-gradient(to right, #4F46E5, #9333EA, #C026D3)',
+                  }}
                 />
               </div>
             </a>
@@ -77,7 +85,9 @@ const Footer = () => (
             <div className="flex flex-wrap gap-4 pt-2">
               <motion.a
                 whileHover={{ y: -5, scale: 1.02 }}
-                href="#"
+                href="https://play.google.com/store/apps/details?id=com.semesterprep_ap"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/50 transition-all group/app shadow-2xl"
               >
                 <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center border border-white/10 group-hover/app:border-primary/50">
@@ -91,7 +101,9 @@ const Footer = () => (
 
               <motion.a
                 whileHover={{ y: -5, scale: 1.02 }}
-                href="#"
+                href="https://apps.apple.com/in/app/learnsquare/id1671087835"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/50 transition-all group/app shadow-2xl"
               >
                 <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center border border-white/10 group-hover/app:border-primary/50 text-white">
@@ -132,7 +144,11 @@ const Footer = () => (
               <ul className="space-y-4">
                 {productFooterLinks.map((l) => (
                   <li key={l.name}>
-                    <a href={l.href} className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-sm">
+                    <a
+                      href={l.href}
+                      className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-sm"
+                      {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    >
                       <ChevronRight className="w-3 h-3 text-primary opacity-0 -ml-4 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
                       {l.name}
                     </a>
@@ -171,23 +187,43 @@ const Footer = () => (
             © 2024 <span className="text-slate-300 font-black tracking-tight">LEARNSQUARE</span> Technologies. All rights reserved.
           </p>
           <div className="flex gap-8 text-slate-500 text-[13px] font-bold">
-            <a href="#" className="hover:text-white transition-colors underline underline-offset-8 decoration-primary/30 hover:decoration-primary">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors underline underline-offset-8 decoration-primary/30 hover:decoration-primary">Terms</a>
+            <Link to="/privacy" className="hover:text-white transition-colors underline underline-offset-8 decoration-primary/30 hover:decoration-primary">Privacy</Link>
+            <Link to="/terms" className="hover:text-white transition-colors underline underline-offset-8 decoration-primary/30 hover:decoration-primary">Terms</Link>
           </div>
         </div>
 
-        {/* Premium Social Cluster */}
+        {/* Social: Instagram, LinkedIn, YouTube only */}
         <div className="flex items-center gap-3">
-          {[Linkedin, Instagram, Youtube, Facebook, Twitter].map((Icon, i) => (
-            <motion.a
-              key={i}
-              whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.1)' }}
-              href="#"
-              className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-primary/50 transition-all group/social"
-            >
-              <Icon className="w-5 h-5 text-slate-400 group-hover/social:text-white transition-colors" />
-            </motion.a>
-          ))}
+          <motion.a
+            whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.1)' }}
+            href="https://www.instagram.com/learn_square/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-primary/50 transition-all group/social"
+            aria-label="Instagram"
+          >
+            <Instagram className="w-5 h-5 text-slate-400 group-hover/social:text-white transition-colors" />
+          </motion.a>
+          <motion.a
+            whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.1)' }}
+            href="https://www.linkedin.com/company/learnsquaretechnologies/?viewAsMember=true"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-primary/50 transition-all group/social"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="w-5 h-5 text-slate-400 group-hover/social:text-white transition-colors" />
+          </motion.a>
+          <motion.a
+            whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.1)' }}
+            href="https://www.youtube.com/@learnsquaretech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-primary/50 transition-all group/social"
+            aria-label="YouTube"
+          >
+            <Youtube className="w-5 h-5 text-slate-400 group-hover/social:text-white transition-colors" />
+          </motion.a>
         </div>
       </div>
     </div>

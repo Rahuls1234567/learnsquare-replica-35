@@ -9,6 +9,7 @@ const products = [
     description: "Helps you streamline Administration, enhance Efficiency, and improve Data Accuracy. The two layer AI Engine empowers you to optimize education and transform operations effortlessly.",
     icon: Cpu,
     link: "/aicas",
+    external: false,
     badge: "AI Powered",
     color: "from-blue-500/10 to-indigo-500/10",
     iconColor: "text-blue-600"
@@ -18,6 +19,7 @@ const products = [
     description: "SyntaxWorks helps you master coding and prepare for technical recruitment with multi-language support, dynamic testing, and performance analytics for efficient project development.",
     icon: Code2,
     link: "/syntaxworks",
+    external: false,
     badge: "Coding",
     color: "from-purple-500/10 to-fuchsia-500/10",
     iconColor: "text-purple-600"
@@ -27,6 +29,7 @@ const products = [
     description: "MySkillForge is a three-phase employability program designed to equip students with advanced technical skills and essential problem-solving, communication, and career-readiness abilities.",
     icon: Gem,
     link: "/myskillforge",
+    external: false,
     badge: "Skill Building",
     color: "from-emerald-500/10 to-teal-500/10",
     iconColor: "text-emerald-600"
@@ -35,7 +38,8 @@ const products = [
     title: "SemesterPrep",
     description: "SemesterPrep is your all-in-one solution for semester exam success, offering expert-curated materials, past papers, placement prep, and real-time updates—all accessible on any device.",
     icon: BookMarked,
-    link: "/semesterprep",
+    link: "https://semesterprep.in/",
+    external: true,
     badge: "Exam Prep",
     color: "from-orange-500/10 to-red-500/10",
     iconColor: "text-orange-600"
@@ -45,6 +49,7 @@ const products = [
     description: "Our programs provide you with hands-on, immersive training in recruitment preparation and emerging technologies, guiding you from foundational learning to full-scale project implementation.",
     icon: Presentation,
     link: "/training-programs",
+    external: false,
     badge: "Industry Ready",
     color: "from-pink-500/10 to-rose-500/10",
     iconColor: "text-pink-600"
@@ -54,6 +59,7 @@ const products = [
     description: "Our online programs, delivered through a dedicated platform featuring LMS, SyntaxWorks, and TestPrep Pro, offer flexibility with practical learning, enabling you to master technology.",
     icon: ClipboardList,
     link: "/testpreppro",
+    external: false,
     badge: "Assessment",
     color: "from-cyan-500/10 to-blue-500/10",
     iconColor: "text-cyan-600"
@@ -139,13 +145,25 @@ const ProductsSection = () => {
 
               {/* Bottom Area: Action Button */}
               <div className="pt-6 border-t border-white/5 relative z-10 w-full text-left">
-                <Link
-                  to={p.link}
-                  className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-primary hover:text-white hover:border-primary transition-all font-bold text-sm text-slate-300"
-                >
-                  Know More
-                  <ArrowRight className="w-4 h-4 text-primary group-hover:text-white" />
-                </Link>
+                {p.external ? (
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-primary hover:text-white hover:border-primary transition-all font-bold text-sm text-slate-300"
+                  >
+                    Know More
+                    <ArrowRight className="w-4 h-4 text-primary group-hover:text-white" />
+                  </a>
+                ) : (
+                  <Link
+                    to={p.link}
+                    className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-primary hover:text-white hover:border-primary transition-all font-bold text-sm text-slate-300"
+                  >
+                    Know More
+                    <ArrowRight className="w-4 h-4 text-primary group-hover:text-white" />
+                  </Link>
+                )}
               </div>
             </motion.div>
           ))}

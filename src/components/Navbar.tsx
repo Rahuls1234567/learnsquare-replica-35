@@ -12,12 +12,12 @@ const navLinks = [
 ];
 
 const products = [
-  { title: "AICAS", href: "/aicas" },
-  { title: "SyntaxWorks", href: "/syntaxworks" },
-  { title: "MySkillForge", href: "/myskillforge" },
-  { title: "SemesterPrep", href: "/semesterprep" },
-  { title: "Training Programs", href: "/training-programs" },
-  { title: "Test Prep - Pro", href: "/testpreppro" }
+  { title: "AICAS", href: "/aicas", external: false },
+  { title: "SyntaxWorks", href: "/syntaxworks", external: false },
+  { title: "MySkillForge", href: "/myskillforge", external: false },
+  { title: "SemesterPrep", href: "https://semesterprep.in/", external: true },
+  { title: "Training Programs", href: "/training-programs", external: false },
+  { title: "Test Prep - Pro", href: "/testpreppro", external: false }
 ];
 
 const Navbar = () => {
@@ -42,21 +42,14 @@ const Navbar = () => {
         }`}
     >
       <div className="container flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center group">
-          <div
-            className="h-12 w-48 transition-transform group-hover:scale-105"
-            style={{
-              maskImage: 'url(/images/logo-footer-white.png)',
-              WebkitMaskImage: 'url(/images/logo-footer-white.png)',
-              maskSize: 'contain',
-              WebkitMaskSize: 'contain',
-              maskRepeat: 'no-repeat',
-              WebkitMaskRepeat: 'no-repeat',
-              background: 'linear-gradient(to right, #4F46E5, #9333EA, #C026D3)',
-            }}
+        {/* Logo - LEARNSQUARE (laptop + cap + text) */}
+        <Link to="/" className="flex items-center group">
+          <img
+            src="/images/learnsquare_nav_logo.png"
+            alt="LEARNSQUARE"
+            className="h-11 w-auto max-w-[220px] object-contain object-left transition-transform group-hover:scale-105"
           />
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-10">
@@ -88,16 +81,29 @@ const Navbar = () => {
                     >
                       <div className="bg-[#7c66dc] shadow-2xl overflow-hidden rounded-lg">
                         <div className="flex flex-col">
-                          {products.map((p) => (
-                            <Link
-                              key={p.title}
-                              to={p.href}
-                              onClick={() => setOpen(false)}
-                              className="px-6 py-4 text-white font-bold text-[17px] hover:bg-white/10 transition-all hover:pl-8 active:scale-95 whitespace-nowrap cursor-pointer"
-                            >
-                              {p.title}
-                            </Link>
-                          ))}
+                          {products.map((p) =>
+                            p.external ? (
+                              <a
+                                key={p.title}
+                                href={p.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => setOpen(false)}
+                                className="px-6 py-4 text-white font-bold text-[17px] hover:bg-white/10 transition-all hover:pl-8 active:scale-95 whitespace-nowrap cursor-pointer"
+                              >
+                                {p.title}
+                              </a>
+                            ) : (
+                              <Link
+                                key={p.title}
+                                to={p.href}
+                                onClick={() => setOpen(false)}
+                                className="px-6 py-4 text-white font-bold text-[17px] hover:bg-white/10 transition-all hover:pl-8 active:scale-95 whitespace-nowrap cursor-pointer"
+                              >
+                                {p.title}
+                              </Link>
+                            )
+                          )}
                         </div>
                       </div>
                     </motion.div>
@@ -109,12 +115,11 @@ const Navbar = () => {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
-          <Button variant="ghost" className="font-bold text-foreground/70 hover:text-primary hover:bg-transparent transition-colors">
-            Login
-          </Button>
-          <Button className="bg-primary text-primary-foreground font-bold rounded-full px-8 py-6 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:-translate-y-0.5 active:scale-95 leading-none">
-            Get Started
-          </Button>
+          <Link to="/login">
+            <Button className="font-bold rounded-full px-8 py-6 bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:-translate-y-0.5 active:scale-95 leading-none">
+              Login
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -148,9 +153,10 @@ const Navbar = () => {
                   </Link>
                 </div>
               ))}
-              <div className="pt-6 space-y-4">
-                <Button className="w-full bg-primary text-primary-foreground font-bold rounded-2xl py-6 shadow-lg">Get Started</Button>
-                <Button variant="outline" className="w-full border-primary text-primary font-bold rounded-2xl py-6">Login</Button>
+              <div className="pt-6">
+                <Link to="/login" onClick={() => setOpen(false)}>
+                  <Button className="w-full bg-primary text-primary-foreground font-bold rounded-2xl py-6 shadow-lg">Login</Button>
+                </Link>
               </div>
             </div>
           </motion.div>

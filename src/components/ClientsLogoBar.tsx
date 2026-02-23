@@ -81,15 +81,20 @@ const ClientsLogoBar = () => {
                     scale: 1.05,
                     boxShadow: "0 20px 40px rgba(0,0,0,0.08)"
                   }}
-                  className={`flex shrink-0 items-center justify-center w-40 h-40 md:w-52 md:h-52 ${logo.bg} rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.04)] border-2 border-white cursor-pointer transition-all duration-300 relative group/card`}
+                  className={`flex shrink-0 items-center justify-center w-40 h-40 md:w-52 md:h-52 ${logo.bg} rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.04)] border-2 border-white cursor-pointer transition-all duration-300 relative group/card overflow-hidden`}
                 >
                   {/* Subtle Interactive Glow */}
                   <div className={`absolute inset-0 rounded-[2.5rem] opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 shadow-2xl ${logo.glow}`} />
 
+                  {/* Centered circular background behind logo */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/80 shadow-inner ring-2 ring-white/60 backdrop-blur-sm" />
+                  </div>
+
                   <img
                     src={logo.src}
                     alt="Client logo"
-                    className="h-16 md:h-24 w-auto object-contain z-10 transition-transform duration-500 group-hover/card:scale-110"
+                    className="h-16 md:h-24 w-auto object-contain z-10 relative transition-transform duration-500 group-hover/card:scale-110"
                     loading="lazy"
                   />
                 </motion.div>

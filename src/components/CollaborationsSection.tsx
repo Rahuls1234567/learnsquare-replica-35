@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 import { Handshake } from "lucide-react";
 
+/** Only two collaborations shown, duplicated for seamless marquee */
 const collaborations = [
   { image: "/images/client-1.png", title: "AICAS MoU with Modern Educational Society" },
   { image: "/images/client-2.png", title: "AICAS MoU with Shree Ramachandra College of Engineering" },
-  { image: "/images/client-3.png", title: "MoU with GPREC for Training" },
-  { image: "/images/client-4.png", title: "MoU with SHADAN for MySkillForge Program" },
 ];
 
 const CollaborationsSection = () => (
@@ -45,35 +44,42 @@ const CollaborationsSection = () => (
         </motion.p>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {collaborations.map((c, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="group relative bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden transition-all duration-500 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:-translate-y-2 flex flex-col"
-          >
-            <div className="h-48 overflow-hidden relative bg-slate-50 flex items-center justify-center p-8">
-              <div className="absolute inset-0 bg-primary/3 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
-              <img
-                src={c.image}
-                alt={c.title}
-                className="w-full h-full object-contain relative z-20 transition-transform duration-1000 group-hover:scale-110"
-                loading="lazy"
-              />
-            </div>
-            <div className="p-8 flex-grow flex items-center justify-center text-center relative z-20 border-t border-slate-50">
-              <p className="text-[15px] font-black text-slate-700 leading-relaxed group-hover:text-primary transition-colors font-heading tracking-tight">
-                {c.title}
-              </p>
-            </div>
+      {/* Infinite marquee – same effect as client logos */}
+      <div className="relative group -mx-4 md:-mx-6">
+        <div className="absolute inset-y-0 left-0 w-24 md:w-32 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-24 md:w-32 bg-gradient-to-l from-slate-50 to-transparent z-20 pointer-events-none" />
 
-            {/* Hover bottom glow */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-full blur-[1px]" />
+        <div className="flex overflow-hidden py-6">
+          <motion.div
+            className="flex shrink-0 gap-8 px-8"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 35, ease: "linear", repeat: Infinity }}
+          >
+            {[...collaborations, ...collaborations].map((c, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -10, scale: 1.02, boxShadow: "0 20px 50px rgba(0,0,0,0.08)" }}
+                className="group/card shrink-0 w-[320px] md:w-[380px] relative bg-white rounded-[2.5rem] border-2 border-white shadow-[0_10px_30px_rgba(0,0,0,0.06)] overflow-hidden flex flex-col transition-all duration-300 cursor-pointer"
+              >
+                <div className="h-48 overflow-hidden relative bg-slate-50 flex items-center justify-center p-8">
+                  <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover/card:opacity-100 transition-opacity z-10" />
+                  <img
+                    src={c.image}
+                    alt={c.title}
+                    className="w-full h-full object-contain relative z-20 transition-transform duration-700 group-hover/card:scale-110"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-6 md:p-8 flex-grow flex items-center justify-center text-center relative z-20 border-t border-slate-50">
+                  <p className="text-[14px] md:text-[15px] font-black text-slate-700 leading-relaxed group-hover/card:text-primary transition-colors font-heading tracking-tight">
+                    {c.title}
+                  </p>
+                </div>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-primary scale-x-0 group-hover/card:scale-x-100 transition-transform duration-500 rounded-full" />
+              </motion.div>
+            ))}
           </motion.div>
-        ))}
+        </div>
       </div>
     </div>
   </section>

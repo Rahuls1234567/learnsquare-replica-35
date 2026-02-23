@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
     GraduationCap,
     BadgeCheck,
@@ -16,36 +17,41 @@ const MySkillForgeSection = () => {
             <div className="container relative z-10 pt-16">
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="flex items-center gap-4 bg-primary/10 border border-primary/20 px-10 py-3 rounded-full shadow-sm"
-                    >
-                        <Rocket className="text-primary w-6 h-6" />
-                        <h2 className="text-2xl md:text-3xl font-black text-primary tracking-tight">
-                            MySkillForge
-                        </h2>
-                    </motion.div>
-
-                    <motion.button
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="group flex items-center gap-3 bg-[#1E1B4B] text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-xl shadow-indigo-900/10 hover:bg-primary"
-                    >
-                        Explore Product
-                        <svg
-                            className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
+                    <Link to="/myskillforge" className="block">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="flex items-center gap-4 bg-[#EBE7F7] border border-primary/10 px-8 py-3 rounded-full shadow-sm hover:bg-primary/15 hover:border-primary/20 transition-all cursor-pointer"
                         >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </motion.button>
+                            <Rocket className="text-primary w-6 h-6 shrink-0" />
+                            <div className="flex flex-col">
+                                <span className="text-xl md:text-2xl font-black text-primary tracking-tight">MySkillForge</span>
+                                <span className="text-[10px] md:text-xs font-semibold text-primary/70 tracking-wider">Skills for Tomorrow</span>
+                            </div>
+                        </motion.div>
+                    </Link>
+
+                    <Link to="/myskillforge">
+                        <motion.span
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="group flex items-center gap-3 bg-[#1E1B4B] text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-xl shadow-indigo-900/10 hover:bg-primary cursor-pointer inline-flex"
+                        >
+                            Explore Product
+                            <svg
+                                className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </motion.span>
+                    </Link>
                 </div>
 
                 <div className="grid lg:grid-cols-12 gap-8 items-stretch">
