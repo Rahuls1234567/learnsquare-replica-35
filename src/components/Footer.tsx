@@ -13,9 +13,9 @@ const productFooterLinks = [
   { name: "AICAS", href: "#products" },
   { name: "SyntaxWorks", href: "#products" },
   { name: "MySkillForge", href: "#products" },
-  { name: "SemesterPrep", href: "#products" },
-  { name: "Training Programs", href: "#products" },
-  { name: "Test Prep - Pro", href: "#products" },
+  { name: "SemesterPrep", href: "/semesterprep" },
+  { name: "Training Programs", href: "/training-programs" },
+  { name: "Test Prep - Pro", href: "/testpreppro" },
 ];
 
 const trainingColumns = [

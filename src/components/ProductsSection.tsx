@@ -17,7 +17,7 @@ const products = [
     title: "SyntaxWorks",
     description: "SyntaxWorks helps you master coding and prepare for technical recruitment with multi-language support, dynamic testing, and performance analytics for efficient project development.",
     icon: Code2,
-    link: "#",
+    link: "/syntaxworks",
     badge: "Coding",
     color: "from-purple-500/10 to-fuchsia-500/10",
     iconColor: "text-purple-600"
@@ -26,7 +26,7 @@ const products = [
     title: "MySkillForge",
     description: "MySkillForge is a three-phase employability program designed to equip students with advanced technical skills and essential problem-solving, communication, and career-readiness abilities.",
     icon: Gem,
-    link: "#",
+    link: "/myskillforge",
     badge: "Skill Building",
     color: "from-emerald-500/10 to-teal-500/10",
     iconColor: "text-emerald-600"
@@ -35,7 +35,7 @@ const products = [
     title: "SemesterPrep",
     description: "SemesterPrep is your all-in-one solution for semester exam success, offering expert-curated materials, past papers, placement prep, and real-time updates—all accessible on any device.",
     icon: BookMarked,
-    link: "#",
+    link: "/semesterprep",
     badge: "Exam Prep",
     color: "from-orange-500/10 to-red-500/10",
     iconColor: "text-orange-600"
@@ -44,7 +44,7 @@ const products = [
     title: "Training Programs",
     description: "Our programs provide you with hands-on, immersive training in recruitment preparation and emerging technologies, guiding you from foundational learning to full-scale project implementation.",
     icon: Presentation,
-    link: "#",
+    link: "/training-programs",
     badge: "Industry Ready",
     color: "from-pink-500/10 to-rose-500/10",
     iconColor: "text-pink-600"
@@ -53,7 +53,7 @@ const products = [
     title: "Test Prep - Pro",
     description: "Our online programs, delivered through a dedicated platform featuring LMS, SyntaxWorks, and TestPrep Pro, offer flexibility with practical learning, enabling you to master technology.",
     icon: ClipboardList,
-    link: "#",
+    link: "/testpreppro",
     badge: "Assessment",
     color: "from-cyan-500/10 to-blue-500/10",
     iconColor: "text-cyan-600"

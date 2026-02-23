@@ -13,11 +13,11 @@ const navLinks = [
 
 const products = [
   { title: "AICAS", href: "/aicas" },
-  { title: "SyntaxWorks", href: "#" },
-  { title: "MySkillForge", href: "#" },
-  { title: "SemesterPrep", href: "#" },
-  { title: "Training Programs", href: "#" },
-  { title: "Test Prep - Pro", href: "#" }
+  { title: "SyntaxWorks", href: "/syntaxworks" },
+  { title: "MySkillForge", href: "/myskillforge" },
+  { title: "SemesterPrep", href: "/semesterprep" },
+  { title: "Training Programs", href: "/training-programs" },
+  { title: "Test Prep - Pro", href: "/testpreppro" }
 ];
 
 const Navbar = () => {
@@ -28,7 +28,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -36,9 +36,9 @@ const Navbar = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${scrolled
-        ? "bg-white/90 backdrop-blur-xl border-b border-border shadow-sm py-2"
-        : "bg-white py-4 md:py-6"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 transform-gpu ${scrolled
+        ? "bg-white/90 backdrop-blur-xl border-b border-border shadow-sm py-3"
+        : "bg-white py-5"
         }`}
     >
       <div className="container flex items-center justify-between">

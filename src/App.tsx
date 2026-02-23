@@ -7,7 +7,11 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import AicasPage from "./pages/AicasPage";
-import SyntaxWorks from "./pages/SyntaxWorks";
+import SyntaxWorksPage from "./pages/SyntaxWorksPage";
+import MySkillForgePage from "./pages/MySkillForgePage";
+import TrainingProgramsPage from "./pages/TrainingProgramsPage";
+import TestPrepProPage from "./pages/TestPrepProPage";
+import SemesterPrepPage from "./pages/SemesterPrepPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,7 +27,11 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/aicas" element={<AicasPage />} />
-          <Route path="/syntaxworks" element={<SyntaxWorks />} />
+          <Route path="/syntaxworks" element={<SyntaxWorksPage />} />
+          <Route path="/myskillforge" element={<MySkillForgePage />} />
+          <Route path="/training-programs" element={<TrainingProgramsPage />} />
+          <Route path="/testpreppro" element={<TestPrepProPage />} />
+          <Route path="/semesterprep" element={<SemesterPrepPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
