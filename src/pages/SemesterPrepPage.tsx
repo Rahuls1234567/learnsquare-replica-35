@@ -713,7 +713,7 @@ const SemesterPrepPage = () => {
                     </div>
 
                     <div className="mt-16 pt-8 border-t border-slate-800/40 text-center text-slate-500 text-[11px]">
-                        © 2024 Learnsquere Technologies. All rights reserved.
+                        © 2024 Learn Square Technologies. All rights reserved.
                     </div>
                 </div>
             </footer>
