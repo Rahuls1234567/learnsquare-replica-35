@@ -1,106 +1,99 @@
-import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
-import { Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 
-const logos = [
-  { src: "/images/logo-1.png", bg: "bg-blue-50", glow: "shadow-blue-500/20" },
-  { src: "/images/logo-2.png", bg: "bg-indigo-50", glow: "shadow-indigo-500/20" },
-  { src: "/images/logo-3.png", bg: "bg-purple-50", glow: "shadow-purple-500/20" },
-  { src: "/images/logo-4.png", bg: "bg-rose-50", glow: "shadow-rose-500/20" },
-  { src: "/images/logo-5.png", bg: "bg-orange-50", glow: "shadow-orange-500/20" },
-  { src: "/images/logo-6.png", bg: "bg-emerald-50", glow: "shadow-emerald-500/20" },
-  { src: "/images/logo-7.png", bg: "bg-amber-50", glow: "shadow-amber-500/20" },
-  { src: "/images/logo-8.png", bg: "bg-sky-50", glow: "shadow-sky-500/20" },
-  { src: "/images/logo-9.png", bg: "bg-violet-50", glow: "shadow-violet-500/20" },
-  { src: "/images/logo-10.png", bg: "bg-slate-50", glow: "shadow-slate-500/20" },
+const clientLogos = [
+  "/images/logo-1.png",
+  "/images/logo-2.png",
+  "/images/logo-3.png",
+  "/images/logo-4.png",
+  "/images/logo-5.png",
+  "/images/logo-6.png",
+  "/images/logo-7.png",
+  "/images/logo-8.png",
+  "/images/logo-9.png",
+  "/images/logo-10.png",
 ];
 
 const ClientsLogoBar = () => {
   return (
-    <section className="py-32 relative overflow-hidden bg-white">
-      {/* Delicate Atmospheric Ambient Glow */}
-      <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/2 right-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
+    <section className="py-24 relative overflow-hidden bg-white">
 
-      <div className="container relative z-10">
-        {/* Refined Luxury Header Section */}
-        <div className="text-center mb-28 space-y-4">
+      {/* Colorful Ambient Grid & Glows for Maximum Pop */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f472b610_1px,transparent_1px),linear-gradient(to_bottom,#818cf810_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+      <div className="absolute -top-40 -left-20 w-[600px] h-[600px] bg-pink-400/20 rounded-full blur-[120px] mix-blend-multiply pointer-events-none animate-pulse-slow" />
+      <div className="absolute top-20 -right-20 w-[600px] h-[600px] bg-indigo-400/20 rounded-full blur-[120px] mix-blend-multiply pointer-events-none" />
+
+      <div className="container px-4 mx-auto relative z-10">
+        {/* Vibrant Floating Header */}
+        <div className="flex flex-col items-center justify-center mb-16 space-y-4 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-slate-50 text-slate-500 text-[9px] font-bold uppercase tracking-[0.4em] mx-auto shadow-sm"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-pink-100 bg-white shadow-[0_4px_20px_rgba(236,72,153,0.1)] relative overflow-hidden group"
           >
-            <Sparkles className="w-3 h-3 text-primary" />
-            Trusted by Leaders
+            <div className="absolute inset-0 bg-gradient-to-r from-pink-50 via-purple-50 to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <span className="flex h-2 w-2 rounded-full bg-pink-500 animate-pulse ring-4 ring-pink-500/30 relative z-10" />
+            <span className="text-[10px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-violet-600 uppercase tracking-widest relative z-10">
+              Trusted by Industry Leaders
+            </span>
           </motion.div>
 
-          <div className="relative block">
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-none"
-            >
-              Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-600">Partnerships</span>
-            </motion.h2>
-
-            <motion.div
-              initial={{ width: 0, opacity: 0 }}
-              whileInView={{ width: "120px", opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="h-1.5 bg-gradient-to-r from-primary to-accent rounded-full mx-auto mt-6 blur-[1px]"
-            />
-          </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.6 }}
+            className="text-4xl md:text-6xl font-black tracking-tight"
+          >
+            Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-gradient-x">Partnerships</span>
+          </motion.h2>
         </div>
+      </div>
 
-        {/* Professional Infinite Marquee */}
-        <div className="relative group">
-          {/* Edge Fades for a seamless 'proper' look */}
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
+      {/* The Central Visual Container */}
+      <div className="relative w-full max-w-[1500px] mx-auto h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
 
-          <div className="flex overflow-hidden py-10">
-            <motion.div
-              className="flex shrink-0 gap-8 px-8"
-              animate={{
-                x: ["0%", "-50%"],
-              }}
-              transition={{
-                duration: 40,
-                ease: "linear",
-                repeat: Infinity,
-              }}
-            >
-              {[...logos, ...logos].map((logo, i) => (
-                <motion.div
-                  key={i}
-                  whileHover={{
-                    y: -10,
-                    scale: 1.05,
-                    boxShadow: "0 20px 40px rgba(0,0,0,0.08)"
-                  }}
-                  className={`flex shrink-0 items-center justify-center w-40 h-40 md:w-52 md:h-52 ${logo.bg} rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.04)] border-2 border-white cursor-pointer transition-all duration-300 relative group/card overflow-hidden`}
-                >
-                  {/* Subtle Interactive Glow */}
-                  <div className={`absolute inset-0 rounded-[2.5rem] opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 shadow-2xl ${logo.glow}`} />
+        {/* The Crisp, Hyper-Vibrant Core Sphere */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-fuchsia-400 via-purple-500 to-indigo-600 shadow-[inset_0_0_80px_rgba(255,255,255,0.3),0_10px_60px_rgba(168,85,247,0.4)] pointer-events-none" />
 
-                  {/* Centered circular background behind logo */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/80 shadow-inner ring-2 ring-white/60 backdrop-blur-sm" />
-                  </div>
+        {/* Extra glowing orbs tightly grouped around the core circle for color bleeding */}
+        <div className="absolute top-1/2 left-[40%] -translate-y-[80%] w-[150px] h-[150px] bg-pink-400 rounded-full blur-[40px] opacity-60 pointer-events-none mix-blend-screen" />
+        <div className="absolute top-[60%] left-[60%] w-[200px] h-[200px] bg-cyan-400 rounded-full blur-[50px] opacity-60 pointer-events-none mix-blend-screen" />
 
+        {/* The Frosted Glass Pill Container */}
+        <div className="absolute top-1/2 left-[2%] right-[2%] md:left-[5%] md:right-[5%] -translate-y-1/2 h-[220px] md:h-[280px] bg-white/20 backdrop-blur-[24px] rounded-[4rem] md:rounded-[6rem] shadow-[0_8px_40px_rgba(30,27,75,0.08),inset_0_0_0_1.5px_rgba(255,255,255,0.8),inset_0_0_30px_rgba(255,255,255,0.5)] pointer-events-none z-0" />
+
+        {/* Intense Edge Fades (Blends the pill and track seamlessly into white bg) */}
+        <div className="absolute inset-y-0 left-0 w-32 md:w-[350px] bg-gradient-to-r from-white via-white/95 to-transparent z-20 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-32 md:w-[350px] bg-gradient-to-l from-white via-white/95 to-transparent z-20 pointer-events-none" />
+
+        {/* Marquee Track */}
+        <div className="relative z-10 flex overflow-visible w-full items-center py-12">
+          <motion.div
+            className="flex w-max shrink-0 items-center"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              duration: 35,
+              ease: "linear",
+              repeat: Infinity,
+            }}
+          >
+            {[...clientLogos, ...clientLogos].map((src, idx) => (
+              <div key={idx} className="px-5 md:px-7 shrink-0 relative group">
+                {/* Colorful shadow that blooms on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-indigo-400 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500" />
+
+                <div className="relative flex items-center justify-center w-[140px] h-[140px] md:w-[170px] md:h-[170px] bg-white/95 backdrop-blur-md rounded-3xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1),0_0_0_1px_rgba(255,255,255,1)] transition-all duration-300 hover:scale-[1.12] hover:-translate-y-2 cursor-pointer z-10">
                   <img
-                    src={logo.src}
-                    alt="Client logo"
-                    className="h-16 md:h-24 w-auto object-contain z-10 relative transition-transform duration-500 group-hover/card:scale-110"
+                    src={src}
+                    alt={`Partner institution logo`}
                     loading="lazy"
+                    className="max-w-[75%] max-h-[75%] object-contain relative z-10 transition-transform duration-300 group-hover:scale-105"
                   />
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

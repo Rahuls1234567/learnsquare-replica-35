@@ -42,7 +42,7 @@ const trainingColumns = [
 ];
 
 const Footer = () => (
-  <footer className="bg-[#050816] text-white pt-24 pb-12 relative overflow-hidden font-sans">
+  <footer className="bg-[#080111] text-white pt-24 pb-12 relative overflow-hidden font-sans">
     {/* Cinematic Premium Background Elements */}
     <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.05)_0%,transparent_70%)] pointer-events-none" />

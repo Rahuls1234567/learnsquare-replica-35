@@ -3,7 +3,7 @@ const WhatsAppButton = () => (
     href="https://wa.me/9000177063"
     target="_blank"
     rel="noopener noreferrer"
-    className="fixed bottom-28 right-6 z-50 w-16 h-16 rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_0_20px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform group animate-bounce-subtle"
+    className="fixed bottom-10 left-6 z-50 w-16 h-16 rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_0_20px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform group animate-bounce-subtle"
     aria-label="Chat on WhatsApp"
   >
     {/* Real WhatsApp SVG Logo */}

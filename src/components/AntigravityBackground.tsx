@@ -43,7 +43,7 @@ const AntigravityBackground: React.FC = () => {
             }
 
             draw(context: CanvasRenderingContext2D) {
-                context.fillStyle = `rgba(91, 71, 204, ${this.opacity})`;
+                context.fillStyle = `rgba(139, 92, 246, ${this.opacity})`;
                 context.beginPath();
                 context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 context.fill();
@@ -67,7 +67,7 @@ const AntigravityBackground: React.FC = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Draw connections
-            ctx.strokeStyle = 'rgba(91, 71, 204, 0.05)';
+            ctx.strokeStyle = 'rgba(139, 92, 246, 0.15)';
             ctx.lineWidth = 0.5;
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {

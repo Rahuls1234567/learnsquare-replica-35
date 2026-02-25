@@ -67,103 +67,79 @@ const products = [
 ];
 
 const ProductsSection = () => {
-
   return (
-    <section id="products" className="pt-24 pb-24 bg-[#030014] relative overflow-hidden text-white font-sans">
-      <AntigravityBackground />
-      {/* Cinematic background effects */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.08)_0%,transparent_70%)] pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-[150px] translate-y-1/2 -translate-x-1/2" />
-
-      <div className="container relative z-10">
-        <div className="flex flex-col mb-20">
+    <section id="products" className="pt-32 pb-40 bg-[#0B0914] relative overflow-hidden text-white">
+      <div className="container relative z-10 max-w-7xl mx-auto px-4 lg:px-8">
+        <div className="max-w-4xl mb-24 space-y-6">
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-fit flex items-center gap-2 bg-black border border-primary/40 px-8 py-2.5 rounded-full shadow-[0_0_15px_rgba(91,71,204,0.2)] mb-8"
+            className="flex items-center gap-4 group"
           >
-            <span className="text-xl font-medium text-primary tracking-wide">
-              Products
-            </span>
+            <div className="h-[2px] w-12 bg-blue-600" />
+            <div className="text-blue-500 font-black uppercase tracking-[0.3em] text-[11px]">
+              THE SUITE
+            </div>
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-7xl font-bold text-white tracking-tight mb-6"
+            className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tighter"
           >
-            Empowering Educational Institutions
+            <span className="text-white block">Empowering</span>
+            <span className="text-blue-500 block">Excellence.</span>
           </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300"
-          >
-            Empowering Institutions to Deliver Excellence with Cutting-Edge Technology
-          </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10 w-full">
           {products.map((p, i) => (
             <motion.div
               key={p.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group relative flex flex-col p-8 rounded-[2.5rem] bg-[#1E1B4B] border border-white/5 hover:border-primary/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(79,70,229,0.15)] hover:-translate-y-2 text-left overflow-hidden"
+              className="relative flex flex-col items-center group"
             >
-              {/* Creative Background Glow */}
-              <div className={`absolute -top-24 -right-24 w-48 h-48 rounded-full blur-[80px] opacity-10 group-hover:opacity-20 transition-opacity bg-gradient-to-br ${p.color}`} />
 
-              {/* Top Area: Icon and Badge */}
-              <div className="flex justify-between items-start mb-8 relative z-10">
-                <div className={`p-4 rounded-2xl bg-white/5 border border-white/10 shadow-sm group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-500`}>
-                  <p.icon className={`w-8 h-8 ${p.iconColor} stroke-[1.5px] group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]`} />
-                </div>
-                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-primary group-hover:border-primary/30 transition-all">
-                  {p.badge}
-                </span>
-              </div>
-
-              {/* Content Area */}
-              <div className="flex-grow space-y-4 mb-8 relative z-10">
-                <h4 className="text-2xl font-black tracking-tight text-white group-hover:text-primary transition-colors font-heading">
-                  {p.title}
-                </h4>
-                <p className="text-slate-400 leading-relaxed font-bold text-[15px] group-hover:text-slate-300 transition-colors">
-                  {p.description}
-                </p>
-              </div>
-
-              {/* Bottom Area: Action Button */}
-              <div className="pt-6 border-t border-white/5 relative z-10 w-full text-left">
-                {p.external ? (
-                  <a
-                    href={p.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-primary hover:text-white hover:border-primary transition-all font-bold text-sm text-slate-300"
+              {/* The Card */}
+              <div className="relative z-10 w-full p-8 md:p-10 rounded-[2rem] bg-[#171523] border border-white/[0.04] flex flex-col h-full transition-all duration-300 hover:border-white/10 hover:bg-[#1C1A29]">
+                <div className="flex justify-between items-start mb-8">
+                  <div className={`w-16 h-16 rounded-2xl bg-black/30 border border-white/[0.06] flex items-center justify-center p-3.5 transition-transform duration-500 group-hover:scale-105`}>
+                    <p.icon className={`w-full h-full ${p.iconColor} transition-colors`} />
+                  </div>
+                  <div
+                    className="text-[9.5px] font-black uppercase tracking-[0.15em] px-3 py-1.5 rounded-md bg-blue-600 text-white"
                   >
-                    Know More
-                    <ArrowRight className="w-4 h-4 text-primary group-hover:text-white" />
-                  </a>
-                ) : (
+                    {p.badge}
+                  </div>
+                </div>
+
+                <div className="space-y-4 mb-12 flex-grow relative z-10">
+                  <h4 className="text-3xl font-black italic tracking-tight text-white/95">
+                    {p.title}
+                  </h4>
+                  <p className="text-white/40 font-bold text-[13px] leading-[1.8] min-h-[5rem]">
+                    {p.description}
+                  </p>
+                </div>
+
+                <div className="pt-6 border-t border-white/[0.04] relative z-10">
                   <Link
                     to={p.link}
-                    className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-primary hover:text-white hover:border-primary transition-all font-bold text-sm text-slate-300"
+                    className="flex items-center gap-4 group/btn w-fit"
                   >
-                    Know More
-                    <ArrowRight className="w-4 h-4 text-primary group-hover:text-white" />
+                    <div className="w-10 h-10 rounded-full border border-white/[0.08] flex items-center justify-center group-hover/btn:bg-white group-hover/btn:border-white transition-all bg-white/[0.02]">
+                      <ArrowRight className="w-4 h-4 text-white/60 group-hover/btn:text-black transition-colors" />
+                    </div>
+                    <span className="text-[11px] font-black uppercase tracking-[0.15em] text-white/70 group-hover/btn:text-white transition-colors">
+                      Learn More
+                    </span>
                   </Link>
-                )}
+                </div>
               </div>
             </motion.div>
           ))}

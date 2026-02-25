@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
@@ -22,147 +22,150 @@ const products = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [showProducts, setShowProducts] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 transform-gpu ${scrolled
-        ? "bg-white/90 backdrop-blur-xl border-b border-border shadow-sm py-3"
-        : "bg-white py-5"
-        }`}
-    >
-      <div className="container flex items-center justify-between">
-        {/* Logo - LEARNSQUARE (laptop + cap + text) */}
-        <Link to="/" className="flex items-center group">
-          <img
-            src="/images/learnsquare_nav_logo.png"
-            alt="LEARNSQUARE"
-            className="h-11 w-auto max-w-[220px] object-contain object-left transition-transform group-hover:scale-105"
-          />
-        </Link>
+    <>
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-primary z-[60] origin-left"
+        style={{ scaleX }}
+      />
+      <header
+        className={`fixed top-8 inset-x-0 z-50 transition-all duration-500 transform-gpu bg-transparent h-0`}
+      >
+        <div className="container px-4">
+          <div className="flex items-center bg-white/80 backdrop-blur-3xl border border-white/50 rounded-[1.5rem] p-1.5 px-4 md:px-6 shadow-[0_30px_60px_rgba(0,0,0,0.1)] min-h-[72px]">
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-10">
-          {navLinks.map((l) => (
-            <div
-              key={l.label}
-              className="relative py-2"
-              onMouseEnter={() => l.hasDropdown && setShowProducts(true)}
-              onMouseLeave={() => l.hasDropdown && setShowProducts(false)}
-            >
-              <Link
-                to={l.href}
-                className="relative text-[15px] font-bold text-foreground/70 hover:text-primary transition-colors group flex items-center gap-1"
-              >
-                {l.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+            {/* LEFT AREA: Logo Only (flex-1) */}
+            <div className="flex-1 flex items-center relative h-full">
+              <Link to="/" className="flex-shrink-0 flex items-center group active:scale-95 absolute -left-4 top-1/2 -translate-y-1/2 z-[60]">
+                <img
+                  src="/images/learnsquare_nav_logo_v2.png"
+                  alt="LEARNSQUARE"
+                  className="h-24 md:h-40 w-auto object-contain scale-110 md:scale-125 hover:scale-110 md:hover:scale-150 transition-transform duration-300 drop-shadow-sm origin-left"
+                />
               </Link>
-
-              {/* Products Dropdown (Vertical List Style) */}
-              {l.hasDropdown && (
-                <AnimatePresence>
-                  {showProducts && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 w-[260px] pt-4 z-[100]"
-                    >
-                      <div className="bg-[#7c66dc] shadow-2xl overflow-hidden rounded-lg">
-                        <div className="flex flex-col">
-                          {products.map((p) =>
-                            p.external ? (
-                              <a
-                                key={p.title}
-                                href={p.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={() => setOpen(false)}
-                                className="px-6 py-4 text-white font-bold text-[17px] hover:bg-white/10 transition-all hover:pl-8 active:scale-95 whitespace-nowrap cursor-pointer"
-                              >
-                                {p.title}
-                              </a>
-                            ) : (
-                              <Link
-                                key={p.title}
-                                to={p.href}
-                                onClick={() => setOpen(false)}
-                                className="px-6 py-4 text-white font-bold text-[17px] hover:bg-white/10 transition-all hover:pl-8 active:scale-95 whitespace-nowrap cursor-pointer"
-                              >
-                                {p.title}
-                              </Link>
-                            )
-                          )}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              )}
             </div>
-          ))}
-        </nav>
 
-        <div className="hidden md:flex items-center gap-4">
-          <Link to="/login">
-            <Button className="font-bold rounded-full px-8 py-6 bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:-translate-y-0.5 active:scale-95 leading-none">
-              Login
-            </Button>
-          </Link>
-        </div>
-
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden p-2 rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden bg-background/95 backdrop-blur-xl border-t border-border mt-2"
-          >
-            <div className="container py-8 space-y-6">
+            {/* CENTER AREA: Nav Links (Visible on lg+) */}
+            <nav className="hidden lg:flex items-center gap-1">
               {navLinks.map((l) => (
-                <div key={l.label}>
+                <div
+                  key={l.label}
+                  className="relative"
+                  onMouseEnter={() => l.hasDropdown && setShowProducts(true)}
+                  onMouseLeave={() => l.hasDropdown && setShowProducts(false)}
+                >
                   <Link
                     to={l.href}
-                    className="flex items-center justify-between py-2 text-lg font-bold text-foreground/80 hover:text-primary transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-2.5 text-[12.5px] font-bold uppercase tracking-[0.05em] text-slate-700 hover:text-primary rounded-xl transition-all"
+                  >
+                    {l.label}
+                    {l.hasDropdown && <ChevronRight className={`w-3.5 h-3.5 transition-transform text-slate-400 ${showProducts ? 'rotate-90' : ''}`} />}
+                  </Link>
+
+                  {/* Dropdown */}
+                  {l.hasDropdown && (
+                    <AnimatePresence>
+                      {showProducts && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.9, y: 10 }}
+                          className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[100]"
+                        >
+                          <div className="bg-white/95 backdrop-blur-3xl border border-slate-200 shadow-[0_30px_60px_rgba(0,0,0,0.15)] overflow-hidden rounded-[2rem] min-w-[280px] p-2">
+                            <div className="grid gap-1">
+                              {products.map((p) => (
+                                <Link
+                                  key={p.title}
+                                  to={p.href}
+                                  className="px-5 py-4 text-slate-600 font-bold text-[14px] hover:text-primary hover:bg-slate-50 rounded-2xl transition-all flex items-center justify-between group"
+                                >
+                                  <div className="flex items-center gap-3">
+                                    <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-400">
+                                      <ChevronRight className="w-4 h-4" />
+                                    </div>
+                                    {p.title}
+                                  </div>
+                                  <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0" />
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  )}
+                </div>
+              ))}
+            </nav>
+
+            {/* RIGHT AREA: Sign In & Mobile Toggle (flex-1) */}
+            <div className="flex-1 flex items-center justify-end gap-3">
+              <div className="hidden md:flex items-center">
+                <Link to="/login" className="px-7 py-2.5 text-[12.5px] font-black uppercase tracking-[0.1em] text-white bg-[#0c051e] hover:bg-primary rounded-xl transition-all shadow-lg hover:shadow-primary/20">
+                  Sign in
+                </Link>
+              </div>
+              <button
+                className="lg:hidden flex items-center justify-center w-11 h-11 bg-slate-900 rounded-xl text-white shadow-xl"
+                onClick={() => setOpen(!open)}
+              >
+                {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Mobile menu - Light Glass Theme */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: -20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -20 }}
+              className="lg:hidden absolute top-24 inset-x-6 z-40"
+            >
+              <div className="bg-white/95 backdrop-blur-3xl border border-slate-200 rounded-[2.5rem] p-6 shadow-2xl space-y-4">
+                {navLinks.map((l) => (
+                  <Link
+                    key={l.label}
+                    to={l.href}
+                    className="flex items-center justify-between p-4 text-lg font-black text-slate-800 hover:bg-slate-50 rounded-2xl transition-all"
                     onClick={() => setOpen(false)}
                   >
                     {l.label}
-                    <ChevronRight className="w-5 h-5 opacity-50" />
+                    <ChevronRight className="w-5 h-5 opacity-30" />
                   </Link>
+                ))}
+                <div className="pt-6 border-t border-slate-100 space-y-4">
+                  <Button className="w-full bg-[#0c051e] text-white font-black uppercase tracking-[0.2em] rounded-2xl py-8 h-16 text-sm">Sign in</Button>
                 </div>
-              ))}
-              <div className="pt-6">
-                <Link to="/login" onClick={() => setOpen(false)}>
-                  <Button className="w-full bg-primary text-primary-foreground font-bold rounded-2xl py-6 shadow-lg">Login</Button>
-                </Link>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+    </>
   );
 };
 
