@@ -112,7 +112,7 @@ const TestPrepProSection = () => {
                                 viewport={{ once: true }}
                                 className="space-y-4"
                             >
-                                <h2 className="text-5xl xl:text-7xl font-black text-white tracking-[-0.05em] leading-[1.05]">
+                                <h2 className="text-3xl sm:text-5xl xl:text-7xl font-black text-white tracking-[-0.05em] leading-[1.05]">
                                     Elevate Academic <br />
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">Excellence</span>
                                 </h2>
@@ -157,7 +157,7 @@ const TestPrepProSection = () => {
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.1 * i, duration: 0.6 }}
                                 whileHover={{ x: -10, scale: 1.02 }}
-                                className="p-6 rounded-[2.5rem] bg-white/5 backdrop-blur-2xl border border-white/10 group hover:bg-white/[0.08] hover:border-blue-500/30 shadow-2xl transition-all duration-500 flex items-center gap-8 relative overflow-hidden"
+                                className="p-4 md:p-6 rounded-[2rem] md:rounded-[2.5rem] bg-white/5 backdrop-blur-2xl border border-white/10 group hover:bg-white/[0.08] hover:border-blue-500/30 shadow-2xl transition-all duration-500 flex flex-col sm:flex-row items-center sm:items-center gap-4 md:gap-8 relative overflow-hidden"
                             >
                                 {/* Floating Glow Fragment */}
                                 <div className={`absolute -right-10 -top-10 w-32 h-32 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-700 blur-3xl`} />
@@ -169,12 +169,12 @@ const TestPrepProSection = () => {
 
                                 <div className="space-y-1.5 flex-1 min-w-0">
                                     <div className="flex items-center gap-3">
-                                        <h5 className="text-lg font-black text-white uppercase tracking-tight group-hover:text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-300 transition-all truncate">
+                                        <h5 className="text-base md:text-lg font-black text-white uppercase tracking-tight group-hover:text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-300 transition-all text-center sm:text-left truncate">
                                             {feature.title}
                                         </h5>
                                         <CheckCircle2 className="w-4 h-4 text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                                     </div>
-                                    <p className="text-slate-400 text-sm font-medium leading-relaxed group-hover:text-slate-200 transition-colors">
+                                    <p className="text-slate-400 text-xs md:text-sm font-medium leading-relaxed group-hover:text-slate-200 transition-colors text-center sm:text-left">
                                         {feature.desc}
                                     </p>
                                 </div>
@@ -191,7 +191,7 @@ const TestPrepProSection = () => {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="p-5 flex items-center justify-between rounded-[2rem] bg-gradient-to-r from-blue-900/20 to-indigo-900/20 backdrop-blur-3xl border border-white/10 text-white/70 px-10 shadow-2xl"
+                            className="p-5 flex flex-col md:flex-row items-center justify-between gap-4 rounded-[2rem] bg-gradient-to-r from-blue-900/20 to-indigo-900/20 backdrop-blur-3xl border border-white/10 text-white/70 px-6 md:px-10 shadow-2xl"
                         >
                             <div className="flex items-center gap-4">
                                 <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">

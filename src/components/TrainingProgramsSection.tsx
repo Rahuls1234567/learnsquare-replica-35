@@ -94,7 +94,7 @@ const TrainingProgramsSection = () => {
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="text-4xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] leading-[1.1] text-slate-950 whitespace-nowrap"
+                            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] leading-[1.1] text-slate-950"
                         >
                             Tailored <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 italic inline-block pr-4">Offline Training</span>
                         </motion.h2>
@@ -128,12 +128,7 @@ const TrainingProgramsSection = () => {
                 </div>
 
                 {/* SaaS Dynamic Grid - Vibrant Compact Cards */}
-                <div
-                    className="grid gap-5 w-full"
-                    style={{
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))'
-                    }}
-                >
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-5 w-full">
                     {trainingCategories.map((item, i) => (
                         <motion.div
                             key={i}
@@ -145,30 +140,30 @@ const TrainingProgramsSection = () => {
                                 duration: 0.6
                             }}
                             whileHover={{ y: -10, scale: 1.05 }}
-                            className={`p-7 rounded-[2.5rem] bg-gradient-to-br ${item.color} border border-white/20 transition-all duration-500 group relative overflow-hidden flex flex-col h-full shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.2)] cursor-pointer text-white`}
+                            className={`p-4 sm:p-7 rounded-2xl sm:rounded-[2.5rem] bg-gradient-to-br ${item.color} border border-white/20 transition-all duration-500 group relative overflow-hidden flex flex-col h-full shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.2)] cursor-pointer text-white`}
                         >
                             {/* Glass Texture & Depth Overlay */}
                             <div className="absolute inset-0 bg-white/5 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(255,255,255,0.2)_0%,transparent_60%)]" />
 
-                            <div className="flex justify-between items-start mb-8 relative z-10">
+                            <div className="flex justify-between items-start mb-4 sm:mb-8 relative z-10">
                                 <div className="relative">
                                     <div className="absolute inset-0 bg-white/20 blur-xl rounded-full" />
-                                    <div className="relative w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xl group-hover:rotate-6 group-hover:scale-110 transition-all duration-500">
-                                        <item.icon className="w-7 h-7" strokeWidth={2.5} />
+                                    <div className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xl group-hover:rotate-6 group-hover:scale-110 transition-all duration-500">
+                                        <item.icon className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={2.5} />
                                     </div>
                                 </div>
-                                <span className="text-4xl font-black text-white/10 group-hover:text-white/20 transition-colors tracking-tighter leading-none">
+                                <span className="text-xl sm:text-4xl font-black text-white/10 group-hover:text-white/20 transition-colors tracking-tighter leading-none">
                                     {item.id}
                                 </span>
                             </div>
 
-                            <div className="relative z-10 space-y-3 flex-grow">
-                                <h4 className="text-lg font-black uppercase tracking-tight leading-tight">
+                            <div className="relative z-10 space-y-1 sm:space-y-3 flex-grow">
+                                <h4 className="text-[11px] sm:text-lg font-black uppercase tracking-tight leading-tight">
                                     {item.title}
                                 </h4>
-                                <div className="w-8 h-[2px] bg-white/20 group-hover:w-full transition-all duration-700 rounded-full" />
-                                <p className="text-[11px] text-white/70 font-medium leading-relaxed group-hover:text-white transition-colors">
+                                <div className="w-6 sm:w-8 h-[2px] bg-white/20 group-hover:w-full transition-all duration-700 rounded-full" />
+                                <p className="text-[9px] sm:text-[11px] text-white/70 font-medium leading-relaxed group-hover:text-white transition-colors line-clamp-2 sm:line-clamp-none">
                                     {item.desc}
                                 </p>
                             </div>
@@ -189,7 +184,7 @@ const TrainingProgramsSection = () => {
                         <div className="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 group-hover:scale-110 transition-transform">
                             <Sparkles className="text-indigo-600 w-6 h-6" />
                         </div>
-                        <p className="text-lg md:text-xl text-slate-600 font-bold italic leading-relaxed">
+                        <p className="text-base md:text-xl text-slate-600 font-bold italic leading-relaxed">
                             "Our mission is to foster a real-world learning environment that propels every student toward excellence."
                         </p>
                     </div>

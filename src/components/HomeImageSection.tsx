@@ -91,7 +91,7 @@ const HomeImageSection = () => {
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-950 tracking-[-0.04em] leading-[1.05]"
+                                    className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-950 tracking-[-0.04em] leading-[1.05]"
                                 >
                                     Transforming Campuses <br className="hidden md:block" />
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 italic inline-block pr-6">with AI Brilliance</span>
@@ -160,7 +160,7 @@ const HomeImageSection = () => {
                     </div>
 
                     {/* Features Grid - Refined Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-5">
                         {[
                             { num: '01', title: 'ACADEMICS MANAGEMENT', desc: 'End to End Management of College Academics, Daily Classes, Students Progress, Communication to Faculty & Students and all Day to Day Activities', icon: GraduationCap, color: 'from-blue-500 to-indigo-600', shadow: 'shadow-blue-500/20' },
                             { num: '02', title: 'ADMINISTRATION MANAGEMENT', desc: 'End-End Management of College Faculty, Students, Staff, Fee Payments, Daily Ops, Payrolls and Many More', icon: Building2, color: 'from-rose-500 to-pink-600', shadow: 'shadow-rose-500/20' },
@@ -184,7 +184,7 @@ const HomeImageSection = () => {
                                     ease: [0.22, 1, 0.36, 1]
                                 }}
                                 whileHover={{ y: -10, scale: 1.02 }}
-                                className={`group relative bg-gradient-to-br ${management.color} border border-white/20 rounded-[2.5rem] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_50px_100px_rgba(0,0,0,0.2)] transition-all duration-700 flex flex-col items-start overflow-hidden cursor-pointer text-white`}
+                                className={`group relative bg-gradient-to-br ${management.color} border border-white/20 rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] p-4 sm:p-6 md:p-8 shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_50px_100px_rgba(0,0,0,0.2)] transition-all duration-700 flex flex-col items-start overflow-hidden cursor-pointer text-white`}
                             >
                                 {/* Glass Texture & Depth Overlay */}
                                 <div className="absolute inset-0 opacity-[0.05] pointer-events-none group-hover:opacity-[0.1] transition-opacity mix-blend-overlay"
@@ -192,29 +192,29 @@ const HomeImageSection = () => {
                                 />
                                 <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                                <div className="flex items-start justify-between w-full mb-8 relative z-10">
+                                <div className="flex items-start justify-between w-full mb-4 sm:mb-8 relative z-10">
                                     <div className="relative">
                                         <div className="absolute inset-0 bg-white/20 blur-xl rounded-full" />
-                                        <div className="relative w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xl group-hover:rotate-6 transition-transform duration-500">
-                                            <management.icon className="w-7 h-7" strokeWidth={2.5} />
+                                        <div className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xl group-hover:rotate-6 transition-transform duration-500">
+                                            <management.icon className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={2.5} />
                                         </div>
                                     </div>
                                     <div className="flex flex-col items-end">
-                                        <span className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-1">Module</span>
-                                        <span className="text-4xl font-black text-white/10 group-hover:text-white/20 transition-colors tracking-tighter leading-none">
+                                        <span className="text-[8px] sm:text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-1">Module</span>
+                                        <span className="text-2xl sm:text-4xl font-black text-white/10 group-hover:text-white/20 transition-colors tracking-tighter leading-none">
                                             {management.num}
                                         </span>
                                     </div>
                                 </div>
 
-                                <div className="space-y-4 relative z-10 flex-grow">
-                                    <h4 className="text-base font-black uppercase tracking-tight leading-[1.1]">
+                                <div className="space-y-2 sm:space-y-4 relative z-10 flex-grow">
+                                    <h4 className="text-[10px] sm:text-sm md:text-base font-black uppercase tracking-tight leading-[1.1]">
                                         {management.title.split(' ').map((word, idx) => (
                                             <span key={idx} className="block">{word}</span>
                                         ))}
                                     </h4>
-                                    <div className="w-8 h-[2px] bg-white/20 group-hover:w-full transition-all duration-700 rounded-full" />
-                                    <p className="text-[11px] text-white/70 font-medium leading-relaxed group-hover:text-white transition-colors line-clamp-4">
+                                    <div className="w-6 h-[2px] bg-white/20 group-hover:w-full transition-all duration-700 rounded-full" />
+                                    <p className="text-[9px] sm:text-[11px] text-white/70 font-medium leading-relaxed group-hover:text-white transition-colors line-clamp-3 sm:line-clamp-4">
                                         {management.desc}
                                     </p>
                                 </div>
@@ -273,7 +273,7 @@ const HomeImageSection = () => {
                                     viewport={{ once: true }}
                                     className="space-y-4"
                                 >
-                                    <h2 className="text-5xl xl:text-7xl font-black text-white tracking-[-0.05em] leading-[1.05]">
+                                    <h2 className="text-3xl sm:text-5xl xl:text-7xl font-black text-white tracking-[-0.05em] leading-[1.05]">
                                         The Next Gen <br />
                                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 italic inline-block pr-8">Coding Compiler</span>
                                     </h2>
@@ -328,7 +328,7 @@ const HomeImageSection = () => {
                         </div>
 
                         {/* Right Column: High-Density Interactive Cards (7/12 cols) */}
-                        <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-2 gap-3 sm:gap-4">
                             {tabs.map((tab, i) => (
                                 <motion.div
                                     key={tab.id}
@@ -337,29 +337,29 @@ const HomeImageSection = () => {
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.1 * i }}
                                     whileHover={{ y: -8, scale: 1.02 }}
-                                    className="p-8 rounded-[2.5rem] bg-white/5 backdrop-blur-3xl border border-white/10 hover:bg-white/[0.08] hover:border-indigo-500/30 transition-all duration-500 group relative overflow-hidden"
+                                    className="p-4 sm:p-8 rounded-2xl sm:rounded-[2.5rem] bg-white/5 backdrop-blur-3xl border border-white/10 hover:bg-white/[0.08] hover:border-indigo-500/30 transition-all duration-500 group relative overflow-hidden"
                                 >
                                     {/* Floating Glow Fragment */}
                                     <div className="absolute -right-10 -top-10 w-24 h-24 bg-indigo-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-                                    <div className="flex justify-between items-start mb-6">
-                                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                                            {i === 0 && <Monitor className="w-7 h-7 text-indigo-400" />}
-                                            {i === 1 && <Binary className="w-7 h-7 text-purple-400" />}
-                                            {i === 2 && <BarChart3 className="w-7 h-7 text-blue-400" />}
-                                            {i === 3 && <Zap className="w-7 h-7 text-amber-400" />}
+                                    <div className="flex justify-between items-start mb-4 sm:mb-6">
+                                        <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                                            {i === 0 && <Monitor className="w-5 h-5 sm:w-7 sm:h-7 text-indigo-400" />}
+                                            {i === 1 && <Binary className="w-5 h-5 sm:w-7 sm:h-7 text-purple-400" />}
+                                            {i === 2 && <BarChart3 className="w-5 h-5 sm:w-7 sm:h-7 text-blue-400" />}
+                                            {i === 3 && <Zap className="w-5 h-5 sm:w-7 sm:h-7 text-amber-400" />}
                                         </div>
-                                        <span className="text-2xl font-black text-white/5 group-hover:text-white/10 transition-colors tracking-tighter">0{i + 1}</span>
+                                        <span className="text-xl sm:text-2xl font-black text-white/5 group-hover:text-white/10 transition-colors tracking-tighter">0{i + 1}</span>
                                     </div>
 
-                                    <h4 className="text-base font-black text-white uppercase tracking-tight mb-3 group-hover:text-indigo-400 transition-colors">
+                                    <h4 className="text-[10px] sm:text-base font-black text-white uppercase tracking-tight mb-2 sm:mb-3 group-hover:text-indigo-400 transition-colors">
                                         {tab.id === "Comprehensive" && "Language Support"}
                                         {tab.id === "Algorithm" && "Algo & DS Practice"}
                                         {tab.id === "Analytics" && "Deep Analytics"}
                                         {tab.id === "Testing" && "Dynamic Testing"}
                                     </h4>
-                                    <p className="text-[13px] text-slate-400 font-medium leading-relaxed group-hover:text-slate-200 transition-colors">
-                                        {tab.description[0].substring(0, 100)}...
+                                    <p className="text-[9px] sm:text-[13px] text-slate-400 font-medium leading-relaxed group-hover:text-slate-200 transition-colors line-clamp-3 sm:line-clamp-none">
+                                        {tab.description[0].substring(0, 80)}...
                                     </p>
 
                                     <div className="mt-6 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">

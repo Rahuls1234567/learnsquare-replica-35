@@ -43,7 +43,7 @@ const ClientsLogoBar = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="text-4xl md:text-6xl font-black tracking-tight"
+            className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight"
           >
             Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-gradient-x">Partnerships</span>
           </motion.h2>
@@ -54,14 +54,14 @@ const ClientsLogoBar = () => {
       <div className="relative w-full max-w-[1500px] mx-auto h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
 
         {/* The Crisp, Hyper-Vibrant Core Sphere */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-fuchsia-400 via-purple-500 to-indigo-600 shadow-[inset_0_0_80px_rgba(255,255,255,0.3),0_10px_60px_rgba(168,85,247,0.4)] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[450px] md:h-[450px] rounded-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-fuchsia-400 via-purple-500 to-indigo-600 shadow-[inset_0_0_80px_rgba(255,255,255,0.3),0_10px_60px_rgba(168,85,247,0.4)] pointer-events-none" />
 
         {/* Extra glowing orbs tightly grouped around the core circle for color bleeding */}
         <div className="absolute top-1/2 left-[40%] -translate-y-[80%] w-[150px] h-[150px] bg-pink-400 rounded-full blur-[40px] opacity-60 pointer-events-none mix-blend-screen" />
         <div className="absolute top-[60%] left-[60%] w-[200px] h-[200px] bg-cyan-400 rounded-full blur-[50px] opacity-60 pointer-events-none mix-blend-screen" />
 
         {/* The Frosted Glass Pill Container */}
-        <div className="absolute top-1/2 left-[2%] right-[2%] md:left-[5%] md:right-[5%] -translate-y-1/2 h-[220px] md:h-[280px] bg-white/20 backdrop-blur-[24px] rounded-[4rem] md:rounded-[6rem] shadow-[0_8px_40px_rgba(30,27,75,0.08),inset_0_0_0_1.5px_rgba(255,255,255,0.8),inset_0_0_30px_rgba(255,255,255,0.5)] pointer-events-none z-0" />
+        <div className="absolute top-1/2 left-[2%] right-[2%] md:left-[5%] md:right-[5%] -translate-y-1/2 h-[180px] sm:h-[220px] md:h-[280px] bg-white/20 backdrop-blur-[24px] rounded-[3rem] sm:rounded-[4rem] md:rounded-[6rem] shadow-[0_8px_40px_rgba(30,27,75,0.08),inset_0_0_0_1.5px_rgba(255,255,255,0.8),inset_0_0_30px_rgba(255,255,255,0.5)] pointer-events-none z-0" />
 
         {/* Intense Edge Fades (Blends the pill and track seamlessly into white bg) */}
         <div className="absolute inset-y-0 left-0 w-32 md:w-[350px] bg-gradient-to-r from-white via-white/95 to-transparent z-20 pointer-events-none" />
@@ -83,7 +83,7 @@ const ClientsLogoBar = () => {
                 {/* Colorful shadow that blooms on hover */}
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-indigo-400 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500" />
 
-                <div className="relative flex items-center justify-center w-[140px] h-[140px] md:w-[170px] md:h-[170px] bg-white/95 backdrop-blur-md rounded-3xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1),0_0_0_1px_rgba(255,255,255,1)] transition-all duration-300 hover:scale-[1.12] hover:-translate-y-2 cursor-pointer z-10">
+                <div className="relative flex items-center justify-center w-[110px] h-[110px] sm:w-[140px] sm:h-[140px] md:w-[170px] md:h-[170px] bg-white/95 backdrop-blur-md rounded-2xl md:rounded-3xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1),0_0_0_1px_rgba(255,255,255,1)] transition-all duration-300 hover:scale-[1.12] hover:-translate-y-2 cursor-pointer z-10">
                   <img
                     src={src}
                     alt={`Partner institution logo`}

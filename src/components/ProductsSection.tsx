@@ -77,14 +77,14 @@ const ProductsSection = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tighter"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tighter"
           >
             <span className="text-white block">Empowering</span>
             <span className="text-blue-500 block">Excellence.</span>
           </motion.h2>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 relative z-10 w-full">
           {products.map((p, i) => (
             <motion.div
               key={p.title}
@@ -96,9 +96,9 @@ const ProductsSection = () => {
             >
 
               {/* The Card */}
-              <div className="relative z-10 w-full p-8 md:p-10 rounded-[2rem] bg-[#171523] border border-white/[0.04] flex flex-col h-full transition-all duration-300 hover:border-white/10 hover:bg-[#1C1A29]">
-                <div className="flex justify-between items-start mb-8">
-                  <div className={`w-16 h-16 rounded-2xl bg-black/30 border border-white/[0.06] flex items-center justify-center p-3.5 transition-transform duration-500 group-hover:scale-105`}>
+              <div className="relative z-10 w-full p-4 sm:p-8 md:p-10 rounded-2xl md:rounded-[2rem] bg-[#171523] border border-white/[0.04] flex flex-col h-full transition-all duration-300 hover:border-white/10 hover:bg-[#1C1A29]">
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-3 sm:gap-0 mb-4 sm:mb-8">
+                  <div className={`w-10 h-10 sm:w-16 sm:h-16 rounded-lg sm:rounded-2xl bg-black/30 border border-white/[0.06] flex items-center justify-center p-2 sm:p-3.5 transition-transform duration-500 group-hover:scale-105`}>
                     <p.icon className={`w-full h-full ${p.iconColor} transition-colors`} />
                   </div>
                   <div
@@ -108,24 +108,24 @@ const ProductsSection = () => {
                   </div>
                 </div>
 
-                <div className="space-y-4 mb-12 flex-grow relative z-10">
-                  <h4 className="text-3xl font-black italic tracking-tight text-white/95">
+                <div className="space-y-2 sm:space-y-4 mb-4 sm:mb-12 flex-grow relative z-10">
+                  <h4 className="text-lg sm:text-3xl font-black italic tracking-tight text-white/95 leading-tight">
                     {p.title}
                   </h4>
-                  <p className="text-white/40 font-bold text-[13px] leading-[1.8] min-h-[5rem]">
+                  <p className="text-white/40 font-bold text-[10px] sm:text-[13px] leading-[1.4] sm:leading-[1.8] line-clamp-3 sm:line-clamp-none">
                     {p.description}
                   </p>
                 </div>
 
-                <div className="pt-6 border-t border-white/[0.04] relative z-10">
+                <div className="pt-4 sm:pt-6 border-t border-white/[0.04] relative z-10">
                   <Link
                     to={p.link}
-                    className="flex items-center gap-4 group/btn w-fit"
+                    className="flex items-center gap-2 sm:gap-4 group/btn w-fit"
                   >
-                    <div className="w-10 h-10 rounded-full border border-white/[0.08] flex items-center justify-center group-hover/btn:bg-white group-hover/btn:border-white transition-all bg-white/[0.02]">
-                      <ArrowRight className="w-4 h-4 text-white/60 group-hover/btn:text-black transition-colors" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-white/[0.08] flex items-center justify-center group-hover/btn:bg-white group-hover/btn:border-white transition-all bg-white/[0.02]">
+                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-white/60 group-hover/btn:text-black transition-colors" />
                     </div>
-                    <span className="text-[11px] font-black uppercase tracking-[0.15em] text-white/70 group-hover/btn:text-white transition-colors">
+                    <span className="text-[9px] sm:text-[11px] font-black uppercase tracking-[0.1em] sm:tracking-[0.15em] text-white/70 group-hover/btn:text-white transition-colors">
                       Learn More
                     </span>
                   </Link>

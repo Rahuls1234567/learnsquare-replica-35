@@ -189,12 +189,12 @@ const SemesterPrepPage = () => {
                     <div className="grid lg:grid-cols-12 gap-8 items-center max-w-7xl mx-auto">
                         <div className="lg:col-span-12 xl:col-span-7 flex flex-col items-center text-center space-y-4">
                             <div className="space-y-1">
-                                <h1 className="text-[1.8rem] md:text-3xl lg:text-[2.8rem] xl:text-[3.2rem] font-black leading-tight">
+                                <h1 className="text-[1.6rem] sm:text-[2rem] md:text-3xl lg:text-[2.8rem] xl:text-[3.2rem] font-black leading-tight">
                                     <span className="text-indigo-600">Learn Smart.</span>{" "}
                                     <span className="text-purple-600">Learn Fast.</span>
                                 </h1>
-                                <h2 className="text-xl md:text-2xl lg:text-[2.2rem] xl:text-[2.5rem] font-bold text-slate-700">One Stop Solution</h2>
-                                <p className="text-sm md:text-base text-slate-500 font-medium whitespace-nowrap">for Your Semester Exam Preparation.</p>
+                                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-[2.2rem] xl:text-[2.5rem] font-bold text-slate-700">One Stop Solution</h2>
+                                <p className="text-sm md:text-base text-slate-500 font-medium whitespace-normal">for Your Semester Exam Preparation.</p>
                             </div>
 
                             <div className="relative w-full max-w-[360px] lg:max-w-[400px] xl:max-w-[440px]">
@@ -402,7 +402,7 @@ const SemesterPrepPage = () => {
                         One platform for videos, PYQs, updates, and career guidance—built for your semester success.
                     </motion.p>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
                         <WhyCard
                             color="indigo" icon={Play}
                             title="Watch anytime"
@@ -461,7 +461,7 @@ const SemesterPrepPage = () => {
             <section className="py-24 bg-gradient-to-b from-[#6e45e2] to-[#88d3ce] text-white">
                 <div className="container mx-auto px-6 text-center">
                     <h3 className="text-3xl font-black mb-16">Reviews By Our Success & Top Students</h3>
-                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8 max-w-6xl mx-auto">
                         {[
                             {
                                 name: "Rishab",
@@ -482,17 +482,17 @@ const SemesterPrepPage = () => {
                                 text: "Thanks for Putting all the PYQs at a Single Place. Its a Good App"
                             }
                         ].map((rev, i) => (
-                            <motion.div key={i} whileHover={{ y: -10 }} className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 text-left">
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className="w-14 h-14 rounded-full border-2 border-white/30 overflow-hidden shadow-lg">
+                            <motion.div key={i} whileHover={{ y: -10 }} className="bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-8 border border-white/20 text-left">
+                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4 sm:mb-6">
+                                    <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border-2 border-white/30 overflow-hidden shadow-lg">
                                         <img src={rev.img} alt={rev.name} className="w-full h-full object-cover" />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-lg">{rev.name}</h4>
-                                        <p className="text-white/70 text-[10px] font-black uppercase tracking-widest">{rev.year}</p>
+                                        <h4 className="font-bold text-sm sm:text-lg">{rev.name}</h4>
+                                        <p className="text-white/70 text-[8px] sm:text-[10px] font-black uppercase tracking-widest">{rev.year}</p>
                                     </div>
                                 </div>
-                                <p className="text-sm leading-relaxed text-white/90 italic">"{rev.text}"</p>
+                                <p className="text-[10px] sm:text-sm leading-relaxed text-white/90 italic line-clamp-4 sm:line-clamp-none">"{rev.text}"</p>
                             </motion.div>
                         ))}
                     </div>

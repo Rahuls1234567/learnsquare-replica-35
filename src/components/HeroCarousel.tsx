@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Sparkles, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import AntigravityBackground from "./AntigravityBackground";
 
@@ -87,18 +87,29 @@ const slides = [
 const HeroCarousel = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  // Use MotionValues for parallax to avoid re-rendering on mousemove
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth out the motion
+  const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
 
   useEffect(() => {
     const handleMouse = (e: MouseEvent) => {
-      setMousePos({
-        x: (e.clientX / window.innerWidth - 0.5) * 40,
-        y: (e.clientY / window.innerHeight - 0.5) * 40,
-      });
+      // Normalize to -0.5 to 0.5 range
+      mouseX.set((e.clientX / window.innerWidth - 0.5));
+      mouseY.set((e.clientY / window.innerHeight - 0.5));
     };
-    window.addEventListener("mousemove", handleMouse);
+
+    // Only add mouse parallax on non-touch devices
+    if (window.matchMedia("(pointer: fine)").matches) {
+      window.addEventListener("mousemove", handleMouse);
+    }
+
     return () => window.removeEventListener("mousemove", handleMouse);
-  }, []);
+  }, [mouseX, mouseY]);
 
   const next = useCallback(() => {
     setDirection(1);
@@ -120,7 +131,7 @@ const HeroCarousel = () => {
   return (
     <section className="relative bg-[#0a041a] overflow-hidden min-h-screen flex items-center pt-24 perspective-[1500px]">
       {/* Background Layer: Kinetic Typography */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.03] select-none pointer-events-none">
+      <div className="absolute inset-0 z-0 hidden lg:flex items-center justify-center opacity-[0.03] select-none pointer-events-none">
         <motion.h2
           key={`bg-text-${current}`}
           initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
@@ -179,14 +190,20 @@ const HeroCarousel = () => {
 
                   <div className="relative">
                     <motion.h1
-                      style={{ x: mousePos.x * 0.2, y: mousePos.y * 0.2 }}
-                      className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-none tracking-tightest filter drop-shadow-[0_10px_30px_rgba(255,255,255,0.1)]"
+                      style={{
+                        x: useTransform(smoothMouseX, v => v * 8),
+                        y: useTransform(smoothMouseY, v => v * 8)
+                      }}
+                      className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white leading-none tracking-tightest filter drop-shadow-[0_10px_30px_rgba(255,255,255,0.1)]"
                     >
                       {slide.title.split(' - ')[0]}
                     </motion.h1>
                     <motion.div
-                      style={{ x: -mousePos.x * 0.4, y: -mousePos.y * 0.4 }}
-                      className="absolute -bottom-4 left-0 text-4xl md:text-6xl font-black text-stroke-white opacity-20 whitespace-nowrap pointer-events-none"
+                      style={{
+                        x: useTransform(smoothMouseX, v => v * -16),
+                        y: useTransform(smoothMouseY, v => v * -16)
+                      }}
+                      className="absolute -bottom-4 left-0 text-3xl sm:text-4xl md:text-6xl font-black text-stroke-white opacity-20 whitespace-nowrap pointer-events-none hidden md:block"
                     >
                       {slide.title.split(' - ')[0]}
                     </motion.div>
@@ -207,44 +224,44 @@ const HeroCarousel = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
-                    className="flex items-center gap-6"
+                    className="flex items-center gap-4 md:gap-6"
                   >
                     {slide.link.startsWith('http') ? (
-                      <a href={slide.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
+                      <a href={slide.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 md:gap-6 group">
                         <div className="relative">
                           <motion.div
                             animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
                             transition={{ duration: 3, repeat: Infinity }}
                             className={`absolute -inset-4 rounded-full blur-2xl bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} opacity-50`}
                           />
-                          <Button className={`relative h-20 w-20 rounded-full bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} text-white hover:scale-110 active:scale-95 transition-all shadow-[0_0_50px_rgba(255,255,255,0.2)] flex items-center justify-center p-0 border-none`}>
-                            <ChevronRight className="w-9 h-9 group-hover:translate-x-1.5 transition-transform" />
+                          <Button className={`relative h-14 w-14 md:h-20 md:w-20 rounded-full bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} text-white hover:scale-110 active:scale-95 transition-all shadow-[0_0_50px_rgba(255,255,255,0.2)] flex items-center justify-center p-0 border-none`}>
+                            <ChevronRight className="w-6 h-6 md:w-9 md:h-9 group-hover:translate-x-1.5 transition-transform" />
                           </Button>
                         </div>
                         <div className="flex flex-col">
-                          <span className={`text-transparent bg-clip-text bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} font-black uppercase text-xl md:text-2xl tracking-[0.25em] drop-shadow-sm transition-all duration-300 group-hover:tracking-[0.3em]`}>
+                          <span className={`text-transparent bg-clip-text bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} font-black uppercase text-lg md:text-2xl tracking-[0.25em] drop-shadow-sm transition-all duration-300 group-hover:tracking-[0.3em]`}>
                             Explore
                           </span>
-                          <div className={`h-1.5 w-0 group-hover:w-full bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} transition-all duration-500 rounded-full mt-2 shadow-[0_0_15px_rgba(255,255,255,0.3)]`} />
+                          <div className={`h-1 w-0 group-hover:w-full bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} transition-all duration-500 rounded-full mt-1 shadow-[0_0_15px_rgba(255,255,255,0.3)]`} />
                         </div>
                       </a>
                     ) : (
-                      <Link to={slide.link} className="flex items-center gap-6 group">
+                      <Link to={slide.link} className="flex items-center gap-4 md:gap-6 group">
                         <div className="relative">
                           <motion.div
                             animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
                             transition={{ duration: 3, repeat: Infinity }}
                             className={`absolute -inset-4 rounded-full blur-2xl bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} opacity-50`}
                           />
-                          <Button className={`relative h-20 w-20 rounded-full bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} text-white hover:scale-110 active:scale-95 transition-all shadow-[0_0_50px_rgba(255,255,255,0.2)] flex items-center justify-center p-0 border-none`}>
-                            <ChevronRight className="w-9 h-9 group-hover:translate-x-1.5 transition-transform" />
+                          <Button className={`relative h-14 w-14 md:h-20 md:w-20 rounded-full bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} text-white hover:scale-110 active:scale-95 transition-all shadow-[0_0_50px_rgba(255,255,255,0.2)] flex items-center justify-center p-0 border-none`}>
+                            <ChevronRight className="w-6 h-6 md:w-9 md:h-9 group-hover:translate-x-1.5 transition-transform" />
                           </Button>
                         </div>
                         <div className="flex flex-col">
-                          <span className={`text-transparent bg-clip-text bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} font-black uppercase text-xl md:text-2xl tracking-[0.25em] drop-shadow-sm transition-all duration-300 group-hover:tracking-[0.3em]`}>
+                          <span className={`text-transparent bg-clip-text bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} font-black uppercase text-lg md:text-2xl tracking-[0.25em] drop-shadow-sm transition-all duration-300 group-hover:tracking-[0.3em]`}>
                             Explore
                           </span>
-                          <div className={`h-1.5 w-0 group-hover:w-full bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} transition-all duration-500 rounded-full mt-2 shadow-[0_0_15px_rgba(255,255,255,0.3)]`} />
+                          <div className={`h-1 w-0 group-hover:w-full bg-gradient-to-r ${slide.color.replace(/\/20/g, '')} transition-all duration-500 rounded-full mt-1 shadow-[0_0_15px_rgba(255,255,255,0.3)]`} />
                         </div>
                       </Link>
                     )}
@@ -266,39 +283,39 @@ const HeroCarousel = () => {
 
                 <motion.div
                   style={{
-                    x: -mousePos.x * 0.8,
-                    y: -mousePos.y * 0.8,
-                    rotateX: -mousePos.y * 0.2,
-                    rotateY: mousePos.x * 0.2
+                    x: useTransform(smoothMouseX, v => v * -32),
+                    y: useTransform(smoothMouseY, v => v * -32),
+                    rotateX: useTransform(smoothMouseY, v => v * -8),
+                    rotateY: useTransform(smoothMouseX, v => v * 8)
                   }}
-                  className="relative z-30 w-full max-w-md glass-chrome rounded-[3rem] p-10 space-y-10 group overflow-hidden"
+                  className="relative z-30 w-full max-w-md glass-chrome rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 space-y-6 md:space-y-10 group overflow-hidden"
                 >
-                  <div className="absolute top-0 right-0 p-6 opacity-20">
-                    <Sparkles className="w-12 h-12 text-white" />
+                  <div className="absolute top-0 right-0 p-4 md:p-6 opacity-20">
+                    <Sparkles className="w-8 h-8 md:w-12 md:h-12 text-white" />
                   </div>
 
-                  <div className="space-y-2">
-                    <span className="text-accent font-black text-xs uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-md">
+                  <div className="space-y-1 md:space-y-2">
+                    <span className="text-accent font-black text-[10px] md:text-xs uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-md">
                       {slide.cardSubtitle}
                     </span>
-                    <h3 className="text-4xl font-black text-white tracking-tighter italic">
+                    <h3 className="text-2xl md:text-4xl font-black text-white tracking-tighter italic">
                       {slide.cardTitle}
                     </h3>
                   </div>
 
-                  <ul className="space-y-6">
+                  <ul className="space-y-4 md:space-y-6">
                     {slide.features?.slice(0, 4).map((f, i) => (
                       <motion.li
                         key={i}
                         initial={{ x: 20, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ delay: 0.6 + i * 0.1 }}
-                        className="flex items-center gap-4 group/item"
+                        className="flex items-center gap-3 md:gap-4 group/item"
                       >
-                        <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-[10px] font-black group-hover/item:bg-white group-hover/item:text-black transition-all">
+                        <div className="w-6 h-6 md:w-8 md:h-8 rounded-full border border-white/20 flex items-center justify-center text-[8px] md:text-[10px] font-black group-hover/item:bg-white group-hover/item:text-black transition-all">
                           0{i + 1}
                         </div>
-                        <span className="text-slate-300 font-bold text-sm tracking-wide group-hover/item:text-white transition-colors">
+                        <span className="text-slate-300 font-bold text-xs md:text-sm tracking-wide group-hover/item:text-white transition-colors">
                           {f}
                         </span>
                       </motion.li>
@@ -326,23 +343,24 @@ const HeroCarousel = () => {
       </div>
 
       {/* Extreme Navigation */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-12 z-50">
-        <button onClick={prev} className="group p-4 hover:scale-125 transition-transform">
-          <ChevronLeft className="w-10 h-10 text-white/20 group-hover:text-white transition-colors" />
+      <div className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-6 md:gap-12 z-50">
+        <button onClick={prev} className="group p-2 md:p-4 hover:scale-125 transition-transform" aria-label="Previous slide">
+          <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 text-white/20 group-hover:text-white transition-colors" />
         </button>
 
-        <div className="flex gap-4">
+        <div className="flex gap-2 md:gap-4">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`h-1.5 transition-all duration-500 rounded-full ${i === current ? 'w-24 bg-white shadow-[0_0_20px_white]' : 'w-4 bg-white/20'}`}
+              className={`h-1 md:h-1.5 transition-all duration-500 rounded-full ${i === current ? 'w-12 md:w-24 bg-white shadow-[0_0_20px_white]' : 'w-2 md:w-4 bg-white/20'}`}
+              aria-label={`Go to slide ${i + 1}`}
             />
           ))}
         </div>
 
-        <button onClick={next} className="group p-4 hover:scale-125 transition-transform">
-          <ChevronRight className="w-10 h-10 text-white/20 group-hover:text-white transition-colors" />
+        <button onClick={next} className="group p-2 md:p-4 hover:scale-125 transition-transform" aria-label="Next slide">
+          <ChevronRight className="w-8 h-8 md:w-10 md:h-10 text-white/20 group-hover:text-white transition-colors" />
         </button>
       </div>
 

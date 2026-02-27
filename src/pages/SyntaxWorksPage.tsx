@@ -11,7 +11,7 @@ import { Code2, Zap, Layout, Bug, Sparkles, Shield, Rocket, Globe } from "lucide
 const FeatureCard = ({ title, desc, img, reverse = false, icon: Icon }: any) => {
     return (
         <div
-            className={`group relative overflow-hidden rounded-[4rem] p-8 md:p-14 border border-indigo-50 shadow-[0_40px_100px_rgba(0,0,0,0.04)] hover:shadow-[0_50px_120px_rgba(0,0,0,0.08)] transition-all duration-700 bg-white`}
+            className={`group relative overflow-hidden rounded-[2rem] md:rounded-[4rem] p-6 sm:p-8 md:p-14 border border-indigo-50 shadow-[0_40px_100px_rgba(0,0,0,0.04)] hover:shadow-[0_50px_120px_rgba(0,0,0,0.08)] transition-all duration-700 bg-white`}
         >
             {/* Texture Background */}
             <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
@@ -41,7 +41,7 @@ const FeatureCard = ({ title, desc, img, reverse = false, icon: Icon }: any) => 
                 <div className={`${reverse ? 'md:order-2' : ''} relative`}>
                     <motion.div
                         whileHover={{ y: -10, rotate: reverse ? -2 : 2 }}
-                        className="relative z-10 overflow-hidden rounded-[3rem] shadow-2xl bg-white aspect-[4/3] border-4 border-white"
+                        className="relative z-10 overflow-hidden rounded-[1.5rem] md:rounded-[3rem] shadow-2xl bg-white aspect-[4/3] border-4 border-white"
                     >
                         <img
                             src={img}
@@ -143,7 +143,7 @@ const SyntaxWorksPage = () => {
                                     <span>AI-POWERED PLATFORM</span>
                                 </motion.div>
 
-                                <h1 className="text-6xl md:text-8xl font-black leading-[0.95] tracking-tighter">
+                                <h1 className="text-4xl sm:text-6xl md:text-8xl font-black leading-[0.95] tracking-tighter">
                                     Syntax<br />
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">Works</span>
                                 </h1>
@@ -185,7 +185,7 @@ const SyntaxWorksPage = () => {
                                 transition={{ duration: 0.8, delay: 0.5 }}
                                 className="relative"
                             >
-                                <div className="glass-chrome rounded-[3rem] p-8 md:p-12 border border-white/20 shadow-2xl relative z-10">
+                                <div className="glass-chrome rounded-[2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-12 border border-white/20 shadow-2xl relative z-10">
                                     <div className="text-center mb-8">
                                         <h3 className="text-3xl font-black text-white tracking-tight">Get Started</h3>
                                         <p className="text-indigo-200/70 font-bold mt-2">Transform your campus automation today</p>
@@ -244,7 +244,7 @@ const SyntaxWorksPage = () => {
                                 >
                                     Product Highlights
                                 </motion.div>
-                                <h2 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tight">Key Features</h2>
+                                <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-slate-900 tracking-tight">Key Features</h2>
                                 <p className="text-slate-500 font-bold mt-4 max-w-2xl mx-auto">Discover the powerful tools and capabilities that make SyntaxWorks the industry leader in campus automation.</p>
                             </div>
 

@@ -159,7 +159,7 @@ const TestPrepProPage = () => {
                 />
 
                 <div className="container relative z-10 max-w-7xl mx-auto px-6">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-10">
 
                         {/* Title Card */}
                         <div className="lg:col-span-1 flex flex-col justify-center space-y-6">
@@ -212,18 +212,18 @@ const TestPrepProPage = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: idx * 0.05 }}
-                                className="group relative bg-[#111] rounded-[2.5rem] p-10 border border-white/5 hover:border-purple-500/30 transition-all duration-500"
+                                className="group relative bg-[#111] rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-10 border border-white/5 hover:border-purple-500/30 transition-all duration-500"
                             >
                                 <div className="absolute inset-0 z-0 opacity-10 group-hover:opacity-20 transition-opacity">
                                     <img src="/images/card_premium_texture.png" className="w-full h-full object-cover" alt="" />
                                 </div>
                                 <div className="relative z-10 space-y-6">
-                                    <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-purple-600/20 group-hover:scale-110 transition-transform">
+                                    <div className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-xl shadow-purple-600/20 group-hover:scale-110 transition-transform">
                                         {feature.icon}
                                     </div>
-                                    <div className="space-y-4">
-                                        <h3 className="text-2xl font-black text-white tracking-tight">{feature.title}</h3>
-                                        <p className="text-slate-400 font-bold text-sm leading-relaxed italic">
+                                    <div className="space-y-2 sm:space-y-4">
+                                        <h3 className="text-sm sm:text-2xl font-black text-white tracking-tight leading-tight">{feature.title}</h3>
+                                        <p className="text-slate-400 font-bold text-[9px] sm:text-sm leading-relaxed italic line-clamp-3 sm:line-clamp-none">
                                             {feature.desc}
                                         </p>
                                     </div>

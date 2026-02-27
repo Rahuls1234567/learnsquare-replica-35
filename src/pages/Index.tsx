@@ -91,9 +91,9 @@ const Index = () => (
   >
     <AntigravityBackground />
 
-    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none opacity-60">
-      <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-[150px] animate-pulse" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-purple-600/20 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
+    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none opacity-40">
+      <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-[150px]" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-purple-600/20 rounded-full blur-[150px]" />
     </div >
     <Navbar />
     <HeroCarousel />

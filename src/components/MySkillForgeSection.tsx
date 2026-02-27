@@ -63,7 +63,7 @@ const MySkillForgeSection = () => {
                                 viewport={{ once: true }}
                                 className="space-y-6"
                             >
-                                <h1 className="text-6xl xl:text-8xl font-black text-slate-950 tracking-[-0.05em] leading-[0.9] inline-block">
+                                <h1 className="text-3xl sm:text-6xl xl:text-8xl font-black text-slate-950 tracking-[-0.05em] leading-[0.9] inline-block">
                                     Unleash Your <br />
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-500 italic pr-6 inline-block">Potential</span>
                                 </h1>
@@ -111,7 +111,7 @@ const MySkillForgeSection = () => {
                     {/* Right Column: High-Density Feature Surface */}
                     <div className="grid grid-cols-1 gap-6">
                         {/* 2x3 Compact Feature Grid */}
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {features.map((feature, i) => (
                                 <motion.div
                                     key={i}
@@ -151,7 +151,7 @@ const MySkillForgeSection = () => {
                             <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-blue-400/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
 
                             <Sparkles className="text-indigo-300 w-8 h-8 mb-6 relative z-10 animate-pulse" />
-                            <p className="text-xl font-bold italic leading-relaxed tracking-tight relative z-10 text-indigo-50">
+                            <p className="text-lg md:text-xl font-bold italic leading-relaxed tracking-tight relative z-10 text-indigo-50">
                                 "MySkillForge is a three-phase employability program designed to equip students with advanced technical skills and essential problem solving, communication, and career-readiness abilities."
                             </p>
                             <div className="mt-8 flex items-center gap-4 relative z-10">

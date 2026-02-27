@@ -17,7 +17,7 @@ import { Rocket, BookOpen, Briefcase, Zap, Star, ShieldCheck, Brain, MessageSqua
 const FeatureCard = ({ title, desc, img, reverse = false, icon: Icon, color }: any) => {
     return (
         <div
-            className={`group relative overflow-hidden rounded-[3rem] p-8 md:p-14 border border-indigo-50 shadow-[0_40px_100px_rgba(0,0,0,0.04)] hover:shadow-[0_50px_120px_rgba(0,0,0,0.08)] transition-all duration-700 bg-white`}
+            className={`group relative overflow-hidden rounded-[2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-14 border border-indigo-50 shadow-[0_40px_100px_rgba(0,0,0,0.04)] hover:shadow-[0_50px_120px_rgba(0,0,0,0.08)] transition-all duration-700 bg-white`}
         >
             {/* Texture Background */}
             <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
@@ -178,7 +178,7 @@ const MySkillForgePage = () => {
                                         transition={{ duration: 0.8 }}
                                         className="relative"
                                     >
-                                        <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-[#FF1493] drop-shadow-[0_10px_40px_rgba(255,20,147,0.4)]">
+                                        <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter text-[#FF1493] drop-shadow-[0_10px_40px_rgba(255,20,147,0.4)]">
                                             MySkillForge
                                         </h2>
                                     </motion.div>
@@ -228,8 +228,8 @@ const MySkillForgePage = () => {
                                 transition={{ duration: 0.8, delay: 0.5 }}
                                 className="relative"
                             >
-                                <div className="glass-chrome rounded-[3rem] p-8 md:p-12 border border-white/20 shadow-2xl relative z-10">
-                                    <h3 className="text-2xl font-black text-white text-center mb-8 tracking-tight">Fill in your Details to Enrol !!</h3>
+                                <div className="glass-chrome rounded-[2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-12 border border-white/20 shadow-2xl relative z-10">
+                                    <h3 className="text-xl md:text-2xl font-black text-white text-center mb-6 md:mb-8 tracking-tight">Fill in your Details to Enrol !!</h3>
 
                                     <form className="space-y-4">
                                         <div className="grid md:grid-cols-2 gap-4">
@@ -340,7 +340,7 @@ const MySkillForgePage = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="relative group p-8 rounded-[3rem] bg-white border border-slate-100 flex flex-col items-center justify-center text-center shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] transition-all duration-500"
+                                    className="relative group p-6 sm:p-8 rounded-[2rem] md:rounded-[3rem] bg-white border border-slate-100 flex flex-col items-center justify-center text-center shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] transition-all duration-500"
                                 >
                                     <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center mb-6 text-slate-400 group-hover:scale-110 transition-transform">
                                         <stat.icon className="w-6 h-6" style={{ color: stat.color }} />
@@ -365,7 +365,7 @@ const MySkillForgePage = () => {
                                 <span className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-black text-[10px] uppercase tracking-[0.3em] shadow-xl mb-10 inline-block">
                                     Limited Slots Only
                                 </span>
-                                <h3 className="text-5xl md:text-7xl font-black text-slate-900 mb-16 tracking-tighter">
+                                <h3 className="text-3xl sm:text-5xl md:text-7xl font-black text-slate-900 mb-16 tracking-tighter">
                                     Next Batch <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF1493] to-purple-600">Update!</span>
                                 </h3>
 
@@ -390,7 +390,7 @@ const MySkillForgePage = () => {
                                 <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-12 border-t border-slate-100 w-full">
                                     <span className="text-xl md:text-2xl font-black text-slate-400 tracking-tight">Program Fee:</span>
                                     <div className="flex items-baseline gap-2">
-                                        <span className="text-6xl md:text-7xl font-black text-slate-900 tracking-tighter">₹235/-</span>
+                                        <span className="text-4xl sm:text-6xl md:text-7xl font-black text-slate-900 tracking-tighter">₹235/-</span>
                                         <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">(Incl. of GST)</span>
                                     </div>
                                 </div>
@@ -406,9 +406,9 @@ const MySkillForgePage = () => {
                             <span className="px-6 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-[#3c379a] font-black text-xs uppercase tracking-[0.2em] mb-4 inline-block">
                                 Why Choose Us
                             </span>
-                            <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight mt-4">Salient Features</h2>
+                            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 tracking-tight mt-4">Salient Features</h2>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                             {[
                                 {
                                     title: "Comprehensive 3-Phase Program",
@@ -453,7 +453,7 @@ const MySkillForgePage = () => {
                                     color: "#3b82f6"
                                 }
                             ].map((feature, idx) => (
-                                <div key={idx} className="group relative overflow-hidden rounded-[2.5rem] bg-white border border-slate-100 p-8 shadow-xl hover:shadow-2xl transition-all duration-500">
+                                <div key={idx} className="group relative overflow-hidden rounded-[2rem] bg-white border border-slate-100 p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-500">
                                     <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-40 transition-opacity">
                                         <img src="/images/card_premium_texture.png" className="w-full h-full object-cover" alt="" />
                                     </div>
@@ -557,11 +557,11 @@ const MySkillForgePage = () => {
                         <span className="px-6 py-2 rounded-full bg-slate-100 border border-slate-200 text-slate-600 font-black text-xs uppercase tracking-[0.2em] mb-4 inline-block">
                             Curriculum Depth
                         </span>
-                        <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight mt-4">In-Depth Learning Path</h2>
+                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 tracking-tight mt-4">In-Depth Learning Path</h2>
                     </div>
 
                     {/* Phase I */}
-                    <div className="rounded-[3.5rem] bg-slate-950 p-8 md:p-20 text-white overflow-hidden relative border border-white/10 shadow-2xl">
+                    <div className="rounded-[2.5rem] md:rounded-[3.5rem] bg-slate-950 p-8 md:p-20 text-white overflow-hidden relative border border-white/10 shadow-2xl">
                         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2" />
                         <div className="relative z-10 space-y-12">
                             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -581,7 +581,7 @@ const MySkillForgePage = () => {
                                     { title: "Technical Writing", type: "Short Course", mode: "Recorded Online", hours: 8, duration: "Anytime", certificate: "Graded", icon: PenTool },
                                     { title: "Using Github as a Code Repository", type: "Boot Camp", mode: "Live Online", hours: 6, duration: "3 Days", certificate: "Participation", icon: Github },
                                 ].map((prog, i) => (
-                                    <div key={i} className="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] hover:bg-white/[0.08] transition-all group hover:scale-[1.02] duration-500">
+                                    <div key={i} className="bg-white/5 border border-white/10 p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] hover:bg-white/[0.08] transition-all group hover:scale-[1.02] duration-500">
                                         <div className="w-12 h-12 rounded-2xl bg-purple-500/20 flex items-center justify-center mb-6 text-purple-400 group-hover:scale-110 transition-transform">
                                             <prog.icon className="w-6 h-6" />
                                         </div>
@@ -608,7 +608,7 @@ const MySkillForgePage = () => {
                     </div>
 
                     {/* Phase II */}
-                    <div className="rounded-[3.5rem] bg-white p-8 md:p-20 text-slate-950 overflow-hidden relative border border-slate-100 shadow-[0_50px_100px_rgba(0,0,0,0.06)]">
+                    <div className="rounded-[2.5rem] md:rounded-[3.5rem] bg-white p-8 md:p-20 text-slate-950 overflow-hidden relative border border-slate-100 shadow-[0_50px_100px_rgba(0,0,0,0.06)]">
                         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-100/50 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
                         <div className="relative z-10 space-y-12">
                             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -628,7 +628,7 @@ const MySkillForgePage = () => {
                                     { title: "React / Bootstrap", type: "Boot Camp", mode: "Live Online", hours: 10, duration: "5 Days", certificate: "Graded", icon: Atom },
                                     { title: "Emerging Technologies", type: "Boot Camp", mode: "Live Online", hours: 6, duration: "3 Days", certificate: "Participation", icon: Cpu },
                                 ].map((prog, i) => (
-                                    <div key={i} className="bg-slate-50 border border-slate-100 p-8 rounded-[2.5rem] hover:bg-white hover:shadow-2xl hover:shadow-slate-200 transition-all group hover:scale-[1.02] duration-500">
+                                    <div key={i} className="bg-slate-50 border border-slate-100 p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] hover:bg-white hover:shadow-2xl hover:shadow-slate-200 transition-all group hover:scale-[1.02] duration-500">
                                         <div className="w-12 h-12 rounded-2xl bg-orange-100 flex items-center justify-center mb-6 text-orange-600 group-hover:scale-110 transition-transform">
                                             <prog.icon className="w-6 h-6" />
                                         </div>
@@ -661,7 +661,7 @@ const MySkillForgePage = () => {
                             <div className="max-w-4xl space-y-10">
                                 <div className="space-y-4">
                                     <span className="text-indigo-300 font-black text-xs uppercase tracking-[0.3em]">PHASE III</span>
-                                    <h2 className="text-4xl md:text-6xl font-black tracking-tight">Hackathon-Style Internship</h2>
+                                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight">Hackathon-Style Internship</h2>
                                 </div>
                                 <div className="bg-white/10 backdrop-blur-xl border border-white/10 p-8 md:p-12 rounded-[3.5rem] relative">
                                     <div className="absolute -top-10 -right-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl" />

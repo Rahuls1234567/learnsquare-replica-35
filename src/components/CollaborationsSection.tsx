@@ -47,7 +47,7 @@ const CollaborationsSection = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-950 tracking-[-0.05em] leading-[1.1]"
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-950 tracking-[-0.05em] leading-[1.1]"
             >
               Client <span className="text-indigo-600 italic">Collaborations</span>
             </motion.h2>
@@ -56,7 +56,7 @@ const CollaborationsSection = () => {
 
         {/* Dual Photo Display Grid */}
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10">
             <AnimatePresence mode="wait">
               {[0, 1].map((offset) => {
                 const item = collaborations[currentIndex + offset];
@@ -77,7 +77,7 @@ const CollaborationsSection = () => {
                       />
                     </div>
                     <div className="px-4">
-                      <h4 className="text-lg md:text-xl font-bold text-slate-900 leading-tight">
+                      <h4 className="text-xs sm:text-base md:text-xl font-bold text-slate-900 leading-tight">
                         {item.title}
                       </h4>
                     </div>

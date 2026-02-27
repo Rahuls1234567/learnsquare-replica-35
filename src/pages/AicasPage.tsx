@@ -47,13 +47,13 @@ const LiveDashboardMockup = ({
         <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${themeGradient} opacity-50`} />
 
         {/* Top Bar Navigation - Dark Glass */}
-        <div className="h-14 md:h-16 bg-slate-900/40 backdrop-blur-3xl border-b border-white/5 flex items-center px-6 md:px-10 gap-4 md:gap-8 shrink-0 relative z-10">
+        <div className="h-14 md:h-16 bg-slate-900/60 border-b border-white/5 flex items-center px-6 md:px-10 gap-4 md:gap-8 shrink-0 relative z-10">
             <div className="flex items-center gap-3 mr-auto">
-                <div className={`w-3 h-3 rounded-full bg-gradient-to-tr ${themeGradient} shadow-[0_0_10px_rgba(99,102,241,0.5)] animate-pulse`} />
+                <div className={`w-3 h-3 rounded-full bg-gradient-to-tr ${themeGradient} shadow-[0_0_10px_rgba(99,102,241,0.5)]`} />
                 <span className="text-[10px] md:text-sm font-black text-white uppercase tracking-[0.2em] opacity-90">{moduleName}</span>
             </div>
             {["OVERVIEW", "ANALYTICS", "TEAM", "LOGS"].map((tab, i) => (
-                <div key={tab} className={`px-4 md:px-5 py-1.5 rounded-full text-[7px] md:text-[9px] font-black tracking-[0.15em] transition-all duration-300 ${i === 1 ? `bg-white/10 text-white border border-white/10` : 'text-slate-500'}`}>
+                <div key={tab} className={`px-4 md:px-5 py-1.5 rounded-full text-[7px] md:text-[9px] font-black tracking-[0.15em] transition-all duration-300 ${i === 1 ? `bg-white/20 text-white border border-white/10` : 'text-slate-500'}`}>
                     {tab}
                 </div>
             ))}
@@ -67,7 +67,7 @@ const LiveDashboardMockup = ({
             <div className="col-span-12 md:col-span-8 grid grid-cols-2 gap-6 md:gap-8 content-start">
 
                 {/* Stats Card 1: Skill Indicators / Metrics */}
-                <div className="bg-slate-900/40 backdrop-blur-xl rounded-[2.5rem] p-6 md:p-8 shadow-2xl border border-white/5 flex flex-col justify-between group/card relative overflow-hidden">
+                <div className="bg-slate-900/60 rounded-[2.5rem] p-6 md:p-8 shadow-2xl border border-white/5 flex flex-col justify-between group/card relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-4 opacity-10">
                         <LayoutDashboard className="w-12 h-12 text-white" />
                     </div>
@@ -92,7 +92,7 @@ const LiveDashboardMockup = ({
                 </div>
 
                 {/* Stats Card 2: Iconic Glowing Gauges */}
-                <div className="bg-slate-900/40 backdrop-blur-xl rounded-[2.5rem] p-6 md:p-8 shadow-2xl border border-white/5 flex items-center justify-center relative overflow-hidden group/gauge">
+                <div className="bg-slate-900/60 rounded-[2.5rem] p-6 md:p-8 shadow-2xl border border-white/5 flex items-center justify-center relative overflow-hidden group/gauge">
                     <div className="relative flex items-center scale-90 md:scale-100">
                         {/* Gauge 1 (Red/Pink Glow) */}
                         <div className="relative w-20 h-20 md:w-32 md:h-32 -mr-8 md:-mr-12 z-10 drop-shadow-[0_0_25px_rgba(244,63,94,0.3)]">
@@ -119,7 +119,7 @@ const LiveDashboardMockup = ({
                 </div>
 
                 {/* Stats Card 3: Performance Wave with Glow */}
-                <div className="col-span-2 bg-slate-900/40 backdrop-blur-xl rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-10 flex flex-col justify-between min-h-[160px] md:min-h-[240px] relative overflow-hidden border border-white/5 shadow-2xl">
+                <div className="col-span-2 bg-slate-900/80 rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-10 flex flex-col justify-between min-h-[160px] md:min-h-[240px] relative overflow-hidden border border-white/5 shadow-2xl">
                     <div className="relative z-10 flex justify-between items-start">
                         <div className="space-y-1">
                             <span className="text-[14px] md:text-xl font-black text-white tracking-tight">{chartLabel}</span>
@@ -151,7 +151,7 @@ const LiveDashboardMockup = ({
 
             {/* Right Column: Mini Calendar & Tasks */}
             <div className="col-span-4 hidden md:flex flex-col gap-6 h-full">
-                <div className="bg-slate-900/40 backdrop-blur-xl rounded-[3rem] p-0 shadow-2xl border border-white/5 flex-grow flex flex-col overflow-hidden">
+                <div className="bg-slate-900/80 rounded-[3rem] p-0 shadow-2xl border border-white/5 flex-grow flex flex-col overflow-hidden">
                     <div className="h-14 w-full bg-gradient-to-r from-rose-500 to-rose-600 flex items-center justify-between px-8 relative overflow-hidden">
                         <div className="absolute right-0 top-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl" />
                         <span className="text-[10px] font-black tracking-[0.3em] text-white">PLANNER</span>
@@ -189,7 +189,7 @@ const LiveDashboardMockup = ({
                 </div>
             </div>
         </div>
-    </div>
+    </div >
 );
 
 const features = [
@@ -615,12 +615,12 @@ const AicasPage = () => {
                             {/* Shimmering Top Pill */}
                             <div className="relative group cursor-default inline-block">
                                 <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
-                                <div className="relative bg-slate-900/50 backdrop-blur-xl border border-indigo-500/30 text-indigo-400 px-6 py-2.5 rounded-full font-black tracking-[0.2em] text-[10px] uppercase shadow-2xl flex items-center gap-2 overflow-hidden">
+                                <div className="relative bg-slate-900/80 border border-indigo-500/30 text-indigo-400 px-6 py-2.5 rounded-full font-black tracking-[0.2em] text-[10px] uppercase shadow-2xl flex items-center gap-2 overflow-hidden">
                                     <span className="relative z-10">AI Powered AICAS</span>
                                 </div>
                             </div>
 
-                            <h2 className="text-5xl md:text-6xl lg:text-[5.5rem] font-black tracking-[-0.04em] leading-[0.9] flex flex-col items-start">
+                            <h2 className="text-4xl sm:text-6xl lg:text-[5.5rem] font-black tracking-[-0.04em] leading-[0.9] flex flex-col items-start">
                                 <span className="text-white drop-shadow-[0_10px_30px_rgba(255,255,255,0.1)]">Campus</span>
                                 <span className="text-slate-300 italic">Automation</span>
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">Solution</span>
@@ -656,7 +656,7 @@ const AicasPage = () => {
                             {/* Card Glow Background */}
                             <div className="absolute -inset-1 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-[2.5rem] blur-3xl opacity-20 group-hover:opacity-40 transition duration-1000" />
 
-                            <div className="relative bg-slate-900/60 backdrop-blur-[40px] rounded-[2.5rem] p-8 md:p-10 shadow-2xl border border-white/10 flex flex-col h-full overflow-hidden">
+                            <div className="relative bg-slate-900/90 rounded-[2.5rem] p-8 md:p-10 shadow-2xl border border-white/10 flex flex-col h-full overflow-hidden">
                                 {/* Form Background Dark Theme Layer */}
                                 <div className="absolute inset-0 z-0 opacity-[0.4] mix-blend-overlay pointer-events-none">
                                     <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-transparent" />
@@ -745,29 +745,8 @@ const AicasPage = () => {
                     {/* Radial Base Cinematic Glow */}
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,#1e1b4b_0%,#020617_80%)] opacity-90" />
 
-                    {/* Liquid 'Wave Pumping' Layer 1 */}
-                    <motion.div
-                        animate={{
-                            borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "70% 30% 30% 70% / 70% 70% 30% 30%", "30% 70% 70% 30% / 30% 30% 70% 70%"],
-                            scale: [1, 1.15, 1],
-                            x: [0, 50, 0],
-                            y: [0, -30, 0]
-                        }}
-                        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute top-[-20%] left-[-10%] w-[100%] h-[120%] bg-indigo-500/10 blur-[120px]"
-                    />
-
-                    {/* Liquid 'Wave Pumping' Layer 2 */}
-                    <motion.div
-                        animate={{
-                            borderRadius: ["70% 30% 30% 70% / 70% 70% 30% 30%", "30% 70% 70% 30% / 30% 30% 70% 70%", "70% 30% 30% 70% / 70% 70% 30% 30%"],
-                            scale: [1.15, 1, 1.15],
-                            x: [0, -60, 0],
-                            y: [0, 40, 0]
-                        }}
-                        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute bottom-[-20%] right-[-10%] w-[100%] h-[120%] bg-purple-600/10 blur-[140px]"
-                    />
+                    <div className="absolute top-[-20%] left-[-10%] w-[100%] h-[120%] bg-indigo-500/5 blur-[80px]" />
+                    <div className="absolute bottom-[-20%] right-[-10%] w-[100%] h-[120%] bg-purple-600/5 blur-[80px]" />
 
                     {/* Rhythmic 'Pulse' Pump Overlay */}
                     <motion.div
@@ -784,11 +763,9 @@ const AicasPage = () => {
                     />
 
                     {/* Sinusoidal Fluid Waves (Pumping Motion) */}
-                    <div className="absolute bottom-0 left-0 w-full h-1/2 opacity-20">
+                    <div className="absolute bottom-0 left-0 w-full h-1/2 opacity-10">
                         <svg className="w-[200%] h-full" viewBox="0 0 1000 100" preserveAspectRatio="none">
-                            <motion.path
-                                animate={{ x: [0, -500] }}
-                                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                            <path
                                 d="M0 80 C 250 120, 250 20, 500 80 C 750 120, 750 20, 1000 80 V 100 H 0 Z"
                                 fill="url(#waveGradient)"
                             />
@@ -829,7 +806,7 @@ const AicasPage = () => {
                         </div>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                         {features.map((feature, idx) => (
                             <motion.div
                                 key={idx}
@@ -837,20 +814,20 @@ const AicasPage = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.6, delay: (idx % 3) * 0.1 }}
-                                className="group/feature relative p-10 rounded-[3rem] bg-slate-900/40 backdrop-blur-xl border border-white/5 shadow-2xl transition-all duration-700 hover:border-indigo-500/30 hover:-translate-y-3 overflow-hidden flex flex-col items-start"
+                                className="group/feature relative p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] bg-slate-900/60 border border-white/5 shadow-2xl transition-all duration-700 hover:border-indigo-500/30 hover:-translate-y-3 overflow-hidden flex flex-col items-start"
                             >
                                 {/* Decorative Glow Accent */}
                                 <div className="absolute -inset-10 bg-gradient-to-br from-indigo-500/10 to-transparent opacity-0 group-hover/feature:opacity-100 blur-[80px] transition-all duration-1000" />
 
-                                <div className="relative z-10 w-20 h-20 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center mb-10 group-hover/feature:bg-indigo-600 group-hover/feature:scale-110 transition-all duration-500 shadow-2xl">
-                                    <feature.icon className="w-10 h-10 text-indigo-400 group-hover/feature:text-white transition-colors duration-500" />
+                                <div className="relative z-10 w-12 h-12 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 md:mb-10 group-hover/feature:bg-indigo-600 group-hover/feature:scale-110 transition-all duration-500 shadow-2xl">
+                                    <feature.icon className="w-6 h-6 md:w-10 md:h-10 text-indigo-400 group-hover/feature:text-white transition-colors duration-500" />
                                 </div>
 
-                                <div className="relative z-10 flex-grow space-y-4">
-                                    <h3 className="text-2xl font-black text-white tracking-tight leading-tight group-hover/feature:text-indigo-400 transition-colors">
+                                <div className="relative z-10 flex-grow space-y-3 md:space-y-4">
+                                    <h3 className="text-xl md:text-2xl font-black text-white tracking-tight leading-tight group-hover/feature:text-indigo-400 transition-colors">
                                         {feature.title}
                                     </h3>
-                                    <p className="text-slate-400 font-bold leading-relaxed transition-all duration-500 group-hover/feature:text-slate-200">
+                                    <p className="text-slate-400 font-bold leading-relaxed transition-all duration-500 group-hover/feature:text-slate-200 text-sm md:text-base">
                                         {feature.text}
                                     </p>
                                 </div>
@@ -895,9 +872,9 @@ const AicasPage = () => {
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
-                                        className={`inline-flex items-center gap-3 px-6 py-2.5 rounded-2xl bg-white/5 border border-white/10 shadow-sm backdrop-blur-md`}
+                                        className={`inline-flex items-center gap-3 px-6 py-2.5 rounded-2xl bg-white/5 border border-white/10 shadow-sm`}
                                     >
-                                        <span className={`w-2.5 h-2.5 rounded-full ${module.theme.pillDot} animate-pulse`} />
+                                        <span className={`w-2.5 h-2.5 rounded-full ${module.theme.pillDot}`} />
                                         <span className={`text-xs font-black tracking-[0.4em] text-white uppercase`}>{module.pillText}</span>
                                     </motion.div>
 
@@ -905,7 +882,7 @@ const AicasPage = () => {
                                         <span className="absolute -top-12 -left-4 text-8xl md:text-[10rem] font-black text-white/5 uppercase select-none pointer-events-none tracking-tighter">
                                             {module.titlePrefix.substring(0, 5)}
                                         </span>
-                                        <h2 className="text-5xl md:text-7xl font-black text-white tracking-tight leading-[0.9] relative z-10">
+                                        <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[0.9] relative z-10">
                                             {module.titlePrefix}
                                             <span className={`block text-transparent bg-clip-text bg-gradient-to-r ${module.gradientText} italic mt-2 drop-shadow-2xl`}>
                                                 {module.titleHighlight}

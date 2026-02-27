@@ -26,10 +26,10 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`fixed top-8 inset-x-0 z-50 transition-all duration-500 transform-gpu bg-transparent h-0`}
+        className={`fixed top-4 md:top-8 inset-x-0 z-50 transition-all duration-500 transform-gpu bg-transparent h-0`}
       >
         <div className="container px-4">
-          <div className="flex items-center bg-white/80 backdrop-blur-3xl border border-white/50 rounded-[1.5rem] p-1.5 px-4 md:px-6 shadow-[0_30px_60px_rgba(0,0,0,0.1)] min-h-[72px]">
+          <div className="flex items-center bg-white/90 backdrop-blur-xl border border-white/50 rounded-[1.5rem] p-1.5 px-4 md:px-6 shadow-[0_30px_60px_rgba(0,0,0,0.1)] min-h-[72px]">
 
             {/* LEFT AREA: Logo Only (flex-1) */}
             <div className="flex-1 flex items-center relative h-full">
@@ -37,7 +37,7 @@ const Navbar = () => {
                 <img
                   src="/images/learnsquare_nav_logo_v2.png"
                   alt="LEARNSQUARE"
-                  className="h-24 md:h-40 w-auto object-contain scale-110 md:scale-125 hover:scale-110 md:hover:scale-150 transition-transform duration-300 drop-shadow-sm origin-left"
+                  className="h-20 md:h-40 w-auto object-contain scale-110 md:scale-125 hover:scale-110 md:hover:scale-150 transition-transform duration-300 drop-shadow-sm origin-left"
                 />
               </Link>
             </div>
@@ -69,7 +69,7 @@ const Navbar = () => {
                           exit={{ opacity: 0, scale: 0.9, y: 10 }}
                           className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[100]"
                         >
-                          <div className="bg-white/95 backdrop-blur-3xl border border-slate-200 shadow-[0_30px_60px_rgba(0,0,0,0.15)] overflow-hidden rounded-[2rem] min-w-[280px] p-2">
+                          <div className="bg-white/95 backdrop-blur-xl border border-slate-200 shadow-[0_30px_60px_rgba(0,0,0,0.15)] overflow-hidden rounded-[2rem] min-w-[280px] p-2">
                             <div className="grid gap-1">
                               {products.map((p) => (
                                 <Link
@@ -123,22 +123,61 @@ const Navbar = () => {
               initial={{ opacity: 0, scale: 0.95, y: -20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              className="lg:hidden absolute top-24 inset-x-6 z-40"
+              className="lg:hidden absolute top-20 inset-x-4 z-40 max-h-[80vh] overflow-y-auto"
             >
-              <div className="bg-white/95 backdrop-blur-3xl border border-slate-200 rounded-[2.5rem] p-6 shadow-2xl space-y-4">
+              <div className="bg-white/95 backdrop-blur-xl border border-slate-200 rounded-[2rem] p-4 sm:p-6 shadow-2xl space-y-1">
                 {navLinks.map((l) => (
-                  <Link
-                    key={l.label}
-                    to={l.href}
-                    className="flex items-center justify-between p-4 text-lg font-black text-slate-800 hover:bg-slate-50 rounded-2xl transition-all"
-                    onClick={() => setOpen(false)}
-                  >
-                    {l.label}
-                    <ChevronRight className="w-5 h-5 opacity-30" />
-                  </Link>
+                  <div key={l.label}>
+                    {l.hasDropdown ? (
+                      <div>
+                        <button
+                          onClick={() => setShowProducts(!showProducts)}
+                          className="flex items-center justify-between w-full p-3.5 text-base font-black text-slate-800 hover:bg-slate-50 rounded-xl transition-all"
+                        >
+                          {l.label}
+                          <ChevronRight className={`w-4 h-4 transition-transform ${showProducts ? 'rotate-90' : ''}`} />
+                        </button>
+                        <AnimatePresence>
+                          {showProducts && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden pl-4"
+                            >
+                              {products.map((p) => (
+                                <Link
+                                  key={p.title}
+                                  to={p.href}
+                                  target={p.external ? "_blank" : undefined}
+                                  rel={p.external ? "noopener noreferrer" : undefined}
+                                  className="flex items-center gap-3 p-3 text-base font-bold text-slate-600 hover:text-primary transition-all"
+                                  onClick={() => setOpen(false)}
+                                >
+                                  <ChevronRight className="w-4 h-4 text-slate-400" />
+                                  {p.title}
+                                </Link>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      <Link
+                        to={l.href}
+                        className="flex items-center justify-between p-3.5 text-base font-black text-slate-800 hover:bg-slate-50 rounded-xl transition-all"
+                        onClick={() => setOpen(false)}
+                      >
+                        {l.label}
+                        <ChevronRight className="w-4 h-4 opacity-30" />
+                      </Link>
+                    )}
+                  </div>
                 ))}
                 <div className="pt-6 border-t border-slate-100 space-y-4">
-                  <Button className="w-full bg-[#0c051e] text-white font-black uppercase tracking-[0.2em] rounded-2xl py-8 h-16 text-sm">Sign in</Button>
+                  <Link to="/login" onClick={() => setOpen(false)}>
+                    <Button className="w-full bg-[#0c051e] text-white font-black uppercase tracking-[0.2em] rounded-2xl py-8 h-16 text-sm">Sign in</Button>
+                  </Link>
                 </div>
               </div>
             </motion.div>

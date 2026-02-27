@@ -50,7 +50,7 @@ const About = () => {
             <AntigravityBackground />
             <Navbar />
 
-            <main className="relative pt-20 pb-8">
+            <main className="relative pt-32 pb-8">
                 {/* Background Decorative Waves */}
                 <div className="absolute inset-0 z-0 opacity-20 pointer-events-none overflow-hidden">
                     <svg className="absolute w-full h-full" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +84,7 @@ const About = () => {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4 }}
-                            className="text-3xl md:text-5xl font-black text-slate-800 tracking-tight leading-[1.2] mb-10 max-w-5xl mx-auto"
+                            className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-800 tracking-tight leading-[1.2] mb-10 max-w-5xl mx-auto px-4"
                         >
                             To Revolutionise the Educational Landscape by Providing{" "}
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-indigo-600 to-accent">
@@ -104,7 +104,7 @@ const About = () => {
                             </p>
                         </motion.div>
 
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -z-10 animate-pulse" />
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -z-10" />
                     </div>
                 </div>
 
@@ -165,12 +165,12 @@ const About = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="text-4xl md:text-5xl font-black text-[#4338ca] mb-10 tracking-tight"
+                                className="text-3xl md:text-5xl font-black text-[#4338ca] mb-10 tracking-tight"
                             >
                                 Our Team
                             </motion.h2>
 
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                            <div className="grid grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-8 max-w-6xl mx-auto">
                                 {team.map((m, idx) => (
                                     <Dialog key={idx}>
                                         <DialogTrigger asChild>
@@ -178,13 +178,13 @@ const About = () => {
                                                 initial={{ opacity: 0, x: idx === 0 ? -30 : 30 }}
                                                 whileInView={{ opacity: 1, x: 0 }}
                                                 viewport={{ once: true }}
-                                                className="bg-white p-8 md:p-10 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.04)] flex flex-col md:flex-row items-center gap-8 relative group hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 cursor-pointer"
+                                                className="bg-white p-5 md:p-10 rounded-[2rem] md:rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.04)] flex flex-col md:flex-row items-center gap-5 md:gap-8 relative group hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 cursor-pointer"
                                             >
                                                 <div className="absolute top-6 right-6 opacity-30 group-hover:opacity-100 transition-opacity">
                                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
                                                 </div>
 
-                                                <div className="w-32 h-32 md:w-36 md:h-36 shrink-0 rounded-full overflow-hidden border-4 border-slate-50 shadow-lg group-hover:border-primary/20 transition-colors">
+                                                <div className="w-24 h-24 md:w-36 md:h-36 shrink-0 rounded-full overflow-hidden border-4 border-slate-50 shadow-lg group-hover:border-primary/20 transition-colors">
                                                     <img
                                                         src={m.image}
                                                         alt={m.name}
@@ -192,10 +192,10 @@ const About = () => {
                                                     />
                                                 </div>
 
-                                                <div className="text-center md:text-left space-y-2">
-                                                    <h3 className="text-2xl font-bold text-slate-800">{m.name}</h3>
-                                                    <p className="text-[#6366f1] text-[15px] font-bold">{m.role}</p>
-                                                    <p className="text-slate-600 font-medium text-[14px] leading-relaxed">
+                                                <div className="text-center md:text-left space-y-1 md:space-y-2">
+                                                    <h3 className="text-xl md:text-2xl font-bold text-slate-800">{m.name}</h3>
+                                                    <p className="text-[#6366f1] text-[13px] md:text-[15px] font-bold">{m.role}</p>
+                                                    <p className="text-slate-600 font-medium text-[13px] md:text-[14px] leading-relaxed">
                                                         {m.shortBio}
                                                     </p>
                                                 </div>

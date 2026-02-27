@@ -109,7 +109,7 @@ const SemesterPrepSection = () => {
                 viewport={{ once: true }}
                 className="space-y-4"
               >
-                <h2 className="text-5xl xl:text-7xl font-black text-white tracking-[-0.05em] leading-[1.05]">
+                <h2 className="text-3xl sm:text-5xl xl:text-7xl font-black text-white tracking-[-0.05em] leading-[1.05]">
                   Ace Your <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400">Semesters</span>
                 </h2>
@@ -136,7 +136,7 @@ const SemesterPrepSection = () => {
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0 25px 50px -12px rgba(139,92,246,0.5)" }}
                 whileTap={{ scale: 0.98 }}
-                className="group flex items-center gap-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-xl shadow-purple-500/25"
+                className="group flex items-center gap-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-8 md:px-10 py-4 md:py-5 rounded-xl md:rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-xl shadow-purple-500/25"
               >
                 Explore Product
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
@@ -145,7 +145,7 @@ const SemesterPrepSection = () => {
           </div>
 
           {/* Right Column: High-Density Interactive Cards (7/12 cols) */}
-          <div className="lg:col-span-7 space-y-4">
+          <div className="lg:col-span-7 grid grid-cols-2 lg:grid-cols-1 gap-3 lg:gap-4">
             {features.map((feature, i) => (
               <motion.div
                 key={i}
@@ -154,19 +154,19 @@ const SemesterPrepSection = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 * i, duration: 0.6 }}
                 whileHover={{ x: -10, scale: 1.02 }}
-                className="p-6 rounded-[2.5rem] bg-white/5 backdrop-blur-2xl border border-white/10 group hover:bg-white/[0.08] hover:border-purple-500/30 hover:shadow-[0_20px_50px_rgba(139,92,246,0.15)] transition-all duration-500 flex items-center gap-8 relative overflow-hidden"
+                className="p-3 sm:p-4 md:p-6 rounded-[1.5rem] md:rounded-[2.5rem] bg-white/5 backdrop-blur-2xl border border-white/10 group hover:bg-white/[0.08] hover:border-purple-500/30 hover:shadow-[0_20px_50px_rgba(139,92,246,0.15)] transition-all duration-500 flex flex-col sm:flex-row items-center sm:items-center gap-3 md:gap-8 relative overflow-hidden"
               >
                 {/* Floating Glow Fragment */}
                 <div className={`absolute -right-10 -top-10 w-32 h-32 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-700 blur-3xl`} />
 
                 {/* Dynamic Icon Container */}
-                <div className={`w-16 h-16 rounded-[1.5rem] bg-gradient-to-br ${feature.gradient} flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg ${feature.glow}`}>
-                  <feature.icon className="w-8 h-8 text-white" strokeWidth={2} />
+                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-[1.5rem] bg-gradient-to-br ${feature.gradient} flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg ${feature.glow}`}>
+                  <feature.icon className="w-6 h-6 md:w-8 md:h-8 text-white" strokeWidth={2} />
                 </div>
 
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-3">
-                    <h5 className="text-lg font-black text-white uppercase tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-purple-300 transition-all truncate">
+                    <h5 className="text-[10px] sm:text-base md:text-lg font-black text-white uppercase tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-purple-300 transition-all text-center sm:text-left truncate">
                       {feature.title}
                     </h5>
                     <motion.div
@@ -177,7 +177,7 @@ const SemesterPrepSection = () => {
                       <CheckCircle2 className="w-4 h-4 text-purple-400" />
                     </motion.div>
                   </div>
-                  <p className="text-slate-400 text-sm font-medium leading-relaxed group-hover:text-slate-200 transition-colors">
+                  <p className="text-slate-400 text-xs md:text-sm font-medium leading-relaxed group-hover:text-slate-200 transition-colors text-center sm:text-left">
                     {feature.desc}
                   </p>
                 </div>
@@ -194,7 +194,7 @@ const SemesterPrepSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="p-5 flex items-center justify-between rounded-[2rem] bg-gradient-to-r from-purple-900/20 to-indigo-900/20 backdrop-blur-3xl border border-white/10 text-white/70 px-10 shadow-2xl"
+              className="p-5 flex flex-col md:flex-row items-center justify-between gap-4 rounded-[2rem] bg-gradient-to-r from-purple-900/20 to-indigo-900/20 backdrop-blur-3xl border border-white/10 text-white/70 px-6 md:px-10 shadow-2xl"
             >
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center">

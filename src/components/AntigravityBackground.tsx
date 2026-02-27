@@ -12,7 +12,9 @@ const AntigravityBackground: React.FC = () => {
 
         let animationFrameId: number;
         let particles: Particle[] = [];
-        const particleCount = 100;
+        const isMobile = window.innerWidth < 768;
+        const particleCount = isMobile ? 40 : 100;
+        const connectionDistance = isMobile ? 100 : 150;
 
         class Particle {
             x: number;
@@ -26,8 +28,8 @@ const AntigravityBackground: React.FC = () => {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
                 this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
                 this.opacity = Math.random() * 0.5 + 0.2;
             }
 
@@ -66,19 +68,25 @@ const AntigravityBackground: React.FC = () => {
         const animate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw connections
-            ctx.strokeStyle = 'rgba(139, 92, 246, 0.15)';
+            // Draw connections - Optimized loop
+            ctx.strokeStyle = 'rgba(139, 92, 246, 0.12)';
             ctx.lineWidth = 0.5;
             for (let i = 0; i < particles.length; i++) {
+                const p1 = particles[i];
+                // Only check against a subset of particles or use a grid-based approach if count was higher
+                // For 40-100 particles, we can just be more careful.
                 for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const p2 = particles[j];
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
 
-                    if (distance < 150) {
+                    // Quicker distance check using squared values to avoid Math.sqrt
+                    const distSq = dx * dx + dy * dy;
+
+                    if (distSq < connectionDistance * connectionDistance) {
                         ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
                         ctx.stroke();
                     }
                 }
