@@ -71,17 +71,7 @@ const ProductsSection = () => {
     <section id="products" className="pt-32 pb-40 bg-[#0B0914] relative overflow-hidden text-white">
       <div className="container relative z-10 max-w-7xl mx-auto px-4 lg:px-8">
         <div className="max-w-4xl mb-24 space-y-6">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-4 group"
-          >
-            <div className="h-[2px] w-12 bg-blue-600" />
-            <div className="text-blue-500 font-black uppercase tracking-[0.3em] text-[11px]">
-              THE SUITE
-            </div>
-          </motion.div>
+
 
           <motion.h2
             initial={{ opacity: 0, y: 30 }}

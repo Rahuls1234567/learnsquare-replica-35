@@ -23,6 +23,175 @@ const AndroidAppleIcon = ({ size = 24 }: { size?: number }) => (
     </div>
 );
 
+// High-Fidelity Digital Dashboard Mockup Component
+const LiveDashboardMockup = ({
+    themeGradient = "from-indigo-500 to-purple-500",
+    moduleName = "Dashboard",
+    stats = [
+        { label: "Metric 1", value: 4, color: "bg-cyan-400" },
+        { label: "Metric 2", value: 3, color: "bg-rose-400" },
+        { label: "Metric 3", value: 5, color: "bg-cyan-400" },
+        { label: "Metric 4", value: 2, color: "bg-rose-400" },
+    ],
+    gauges = [75, 50],
+    chartLabel = "Growth Index"
+}: {
+    themeGradient?: string,
+    moduleName?: string,
+    stats?: { label: string, value: number, color: string }[],
+    gauges?: number[],
+    chartLabel?: string
+}) => (
+    <div className="relative w-full aspect-[1.5/1] bg-[#020617] rounded-[3rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8)] flex flex-col font-sans border border-white/10 select-none pointer-events-none transform group-hover:scale-[1.03] transition-all duration-[1.2s] ease-out">
+        {/* Top Glow Layer */}
+        <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${themeGradient} opacity-50`} />
+
+        {/* Top Bar Navigation - Dark Glass */}
+        <div className="h-14 md:h-16 bg-slate-900/40 backdrop-blur-3xl border-b border-white/5 flex items-center px-6 md:px-10 gap-4 md:gap-8 shrink-0 relative z-10">
+            <div className="flex items-center gap-3 mr-auto">
+                <div className={`w-3 h-3 rounded-full bg-gradient-to-tr ${themeGradient} shadow-[0_0_10px_rgba(99,102,241,0.5)] animate-pulse`} />
+                <span className="text-[10px] md:text-sm font-black text-white uppercase tracking-[0.2em] opacity-90">{moduleName}</span>
+            </div>
+            {["OVERVIEW", "ANALYTICS", "TEAM", "LOGS"].map((tab, i) => (
+                <div key={tab} className={`px-4 md:px-5 py-1.5 rounded-full text-[7px] md:text-[9px] font-black tracking-[0.15em] transition-all duration-300 ${i === 1 ? `bg-white/10 text-white border border-white/10` : 'text-slate-500'}`}>
+                    {tab}
+                </div>
+            ))}
+            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-tr from-slate-700 to-slate-800 border border-white/10 shadow-lg" />
+        </div>
+
+        {/* Main Dashboard Content Area */}
+        <div className="flex-grow p-6 md:p-10 grid grid-cols-12 gap-6 md:gap-8 bg-transparent relative z-0">
+
+            {/* Left Column: Metrics & Analytics */}
+            <div className="col-span-12 md:col-span-8 grid grid-cols-2 gap-6 md:gap-8 content-start">
+
+                {/* Stats Card 1: Skill Indicators / Metrics */}
+                <div className="bg-slate-900/40 backdrop-blur-xl rounded-[2.5rem] p-6 md:p-8 shadow-2xl border border-white/5 flex flex-col justify-between group/card relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-4 opacity-10">
+                        <LayoutDashboard className="w-12 h-12 text-white" />
+                    </div>
+                    <div className="grid grid-cols-1 gap-y-5 relative z-10">
+                        {stats.map((stat, n) => (
+                            <div key={n} className="flex items-center justify-between gap-4">
+                                <div className="flex flex-col gap-1.5 flex-grow">
+                                    <span className="text-[6px] md:text-[8px] font-black text-slate-400 uppercase tracking-[0.25em]">{stat.label}</span>
+                                    <div className="w-full bg-white/5 h-1.5 md:h-2.5 rounded-full overflow-hidden flex gap-1">
+                                        {[...Array(5)].map((_, i) => (
+                                            <div key={i} className={`flex-grow rounded-full transition-all duration-700 delay-[${n * 100}ms] ${i < stat.value
+                                                ? `${stat.color} shadow-[0_0_12px_rgba(34,211,238,0.2)]`
+                                                : 'bg-white/5'
+                                                }`} />
+                                        ))}
+                                    </div>
+                                </div>
+                                <span className="text-[10px] md:text-xs font-black text-white/50">{Math.floor((stat.value / 5) * 100)}%</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Stats Card 2: Iconic Glowing Gauges */}
+                <div className="bg-slate-900/40 backdrop-blur-xl rounded-[2.5rem] p-6 md:p-8 shadow-2xl border border-white/5 flex items-center justify-center relative overflow-hidden group/gauge">
+                    <div className="relative flex items-center scale-90 md:scale-100">
+                        {/* Gauge 1 (Red/Pink Glow) */}
+                        <div className="relative w-20 h-20 md:w-32 md:h-32 -mr-8 md:-mr-12 z-10 drop-shadow-[0_0_25px_rgba(244,63,94,0.3)]">
+                            <svg className="w-full h-full -rotate-90">
+                                <circle cx="50%" cy="50%" r="40%" stroke="#1e1b4b" strokeWidth="15%" fill="none" />
+                                <circle cx="50%" cy="50%" r="40%" stroke="#f43f5e" strokeWidth="15%" fill="none" strokeDasharray={`${gauges[0] * 2.5} 251`} strokeLinecap="round" className="drop-shadow-[0_0_8px_rgba(244,63,94,0.8)]" />
+                            </svg>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                <span className="text-[12px] md:text-lg font-black text-white">{gauges[0]}%</span>
+                            </div>
+                        </div>
+                        {/* Gauge 2 (Cyan/Blue Glow) */}
+                        <div className="relative w-20 h-20 md:w-32 md:h-32 z-20 drop-shadow-[0_0_25px_rgba(6,182,212,0.3)]">
+                            <div className="absolute inset-0 rounded-full border-[10px] md:border-[16px] border-[#020617] z-0" />
+                            <svg className="w-full h-full -rotate-90 relative z-10">
+                                <circle cx="50%" cy="50%" r="40%" stroke="#083344" strokeWidth="15%" fill="none" />
+                                <circle cx="50%" cy="50%" r="40%" stroke="#06b6d4" strokeWidth="15%" fill="none" strokeDasharray={`${gauges[1] * 2.5} 251`} strokeLinecap="round" className="drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                            </svg>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center z-30">
+                                <span className="text-[12px] md:text-lg font-black text-white">{gauges[1]}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Stats Card 3: Performance Wave with Glow */}
+                <div className="col-span-2 bg-slate-900/40 backdrop-blur-xl rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-10 flex flex-col justify-between min-h-[160px] md:min-h-[240px] relative overflow-hidden border border-white/5 shadow-2xl">
+                    <div className="relative z-10 flex justify-between items-start">
+                        <div className="space-y-1">
+                            <span className="text-[14px] md:text-xl font-black text-white tracking-tight">{chartLabel}</span>
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                                <span className="text-[8px] md:text-[10px] font-black text-emerald-400 uppercase tracking-widest">System Active</span>
+                            </div>
+                        </div>
+                        <div className="bg-white/5 px-4 py-2 rounded-2xl border border-white/5">
+                            <span className="text-[10px] md:text-sm font-black text-white">+24.5%</span>
+                        </div>
+                    </div>
+
+                    {/* Glowing Wave SVG */}
+                    <div className="absolute inset-x-0 bottom-0 z-0 h-1/2">
+                        <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 40">
+                            <defs>
+                                <linearGradient id="glow-grad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="#6366f1" stopOpacity="0.3" />
+                                    <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M0,40 C15,35 25,10 45,25 C65,40 85,5 100,25 L100,40 L0,40 Z" fill="url(#glow-grad)" />
+                            <path d="M0,40 C15,35 25,10 45,25 C65,40 85,5 100,25" fill="none" stroke="#6366f1" strokeWidth="3" strokeLinecap="round" className="drop-shadow-[0_0_12px_rgba(99,102,241,1)]" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            {/* Right Column: Mini Calendar & Tasks */}
+            <div className="col-span-4 hidden md:flex flex-col gap-6 h-full">
+                <div className="bg-slate-900/40 backdrop-blur-xl rounded-[3rem] p-0 shadow-2xl border border-white/5 flex-grow flex flex-col overflow-hidden">
+                    <div className="h-14 w-full bg-gradient-to-r from-rose-500 to-rose-600 flex items-center justify-between px-8 relative overflow-hidden">
+                        <div className="absolute right-0 top-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl" />
+                        <span className="text-[10px] font-black tracking-[0.3em] text-white">PLANNER</span>
+                        <div className="flex gap-2 relative z-10">
+                            <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                        </div>
+                    </div>
+                    <div className="p-8 flex-grow bg-transparent">
+                        <div className="grid grid-cols-7 gap-y-5 gap-x-2 text-center">
+                            {["M", "T", "W", "T", "F", "S", "S"].map(day => (
+                                <span key={day} className="text-[8px] font-black text-slate-600">{day}</span>
+                            ))}
+                            {["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"].map((day, i) => (
+                                <div key={i} className={`aspect-square flex items-center justify-center text-[10px] font-black transition-all duration-300 rounded-xl ${day === "16"
+                                    ? 'bg-rose-500 text-white shadow-[0_10px_20px_rgba(244,63,94,0.4)] scale-110'
+                                    : 'text-slate-400 hover:bg-white/5'
+                                    }`}>
+                                    {day}
+                                </div>
+                            ))}
+                        </div>
+                        <div className="mt-8 pt-8 border-t border-white/5 space-y-4">
+                            {[1, 2].map(id => (
+                                <div key={id} className="flex items-center gap-4 group/item">
+                                    <div className={`w-1 h-8 rounded-full ${id === 1 ? 'bg-indigo-500' : 'bg-cyan-500'}`} />
+                                    <div className="flex flex-col">
+                                        <span className="text-[10px] font-black text-white/80 uppercase tracking-widest leading-none">Task {id}</span>
+                                        <span className="text-[8px] font-bold text-slate-500 uppercase tracking-tighter">Due in 2h</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+);
+
 const features = [
     { title: "AI Powered", text: "Our ERP Enhances decision-making with predictive insights, automates administrative tasks for efficiency, and provides personalized learning", icon: Brain },
     { title: "NEP 2020 Compliant", text: "Our Campus ERP is NEP 2020-compliant, offering flexible, personalized learning paths and a curriculum structure", icon: BookOpen },
@@ -61,9 +230,19 @@ const coreModulesData = [
             imageGlow: "from-indigo-400/10 to-purple-400/10",
             imageBacking: "from-indigo-400/15 to-purple-400/15"
         },
-        imageSrc: "/images/homeimage/report1.png",
+        imageSrc: "/images/homeimage/report1_premium.png",
         imageAlt: "Academic Management Dashboard",
         isImageRight: true,
+        mockupData: {
+            stats: [
+                { label: "Attendance", value: 5, color: "bg-indigo-500" },
+                { label: "Syllabus", value: 4, color: "bg-rose-500" },
+                { label: "CO-PO Map", value: 5, color: "bg-indigo-500" },
+                { label: "Assignments", value: 3, color: "bg-rose-500" },
+            ],
+            gauges: [88, 72],
+            chartLabel: "Academic Performance Index"
+        },
         listItems: [
             "Complete Track of Campus Academics",
             "NEP 2020 Compliant",
@@ -95,9 +274,19 @@ const coreModulesData = [
             imageGlow: "from-emerald-400/10 to-teal-400/10",
             imageBacking: "from-emerald-400/15 to-teal-400/15"
         },
-        imageSrc: "/images/homeimage/report2.png",
+        imageSrc: "/images/homeimage/report2_premium.png",
         imageAlt: "Administration Management Dashboard",
         isImageRight: false,
+        mockupData: {
+            stats: [
+                { label: "Staff Attd.", value: 5, color: "bg-emerald-500" },
+                { label: "Fee Dues", value: 2, color: "bg-amber-500" },
+                { label: "Inventory", value: 4, color: "bg-emerald-500" },
+                { label: "Invoices", value: 5, color: "bg-amber-500" },
+            ],
+            gauges: [94, 65],
+            chartLabel: "Efficiency Matrix"
+        },
         listItems: [
             "Track Employee, Staff Attendance and Process Automated Pay Rolls",
             "Fee Dues Management",
@@ -127,9 +316,19 @@ const coreModulesData = [
             imageGlow: "from-cyan-400/10 to-blue-400/10",
             imageBacking: "from-cyan-400/15 to-blue-400/15"
         },
-        imageSrc: "/images/homeimage/report3.png",
+        imageSrc: "/images/homeimage/report3_premium.png",
         imageAlt: "Examination Management Dashboard",
         isImageRight: true,
+        mockupData: {
+            stats: [
+                { label: "Exam Reg.", value: 5, color: "bg-blue-500" },
+                { label: "Evaluation", value: 4, color: "bg-cyan-500" },
+                { label: "Result Pub.", value: 5, color: "bg-blue-500" },
+                { label: "Mark Sheets", value: 4, color: "bg-cyan-500" },
+            ],
+            gauges: [98, 85],
+            chartLabel: "Grading Curves"
+        },
         listItems: [
             "Launching Examination Registration",
             "Auto Generation of Examination Time Tables, Seating Plans, Invigilation Details, etc.",
@@ -164,9 +363,19 @@ const coreModulesData = [
             imageGlow: "from-amber-400/10 to-orange-400/10",
             imageBacking: "from-amber-400/15 to-orange-400/15"
         },
-        imageSrc: "/images/homeimage/report4.png",
+        imageSrc: "/images/homeimage/report4_premium.png",
         imageAlt: "Placement Management Dashboard",
         isImageRight: false,
+        mockupData: {
+            stats: [
+                { label: "Companies", value: 5, color: "bg-orange-500" },
+                { label: "Offers", value: 4, color: "bg-amber-500" },
+                { label: "Interviews", value: 5, color: "bg-orange-500" },
+                { label: "Alumni", value: 4, color: "bg-amber-500" },
+            ],
+            gauges: [78, 62],
+            chartLabel: "Placement Velocity"
+        },
         listItems: [
             "Maintain Companies Information at One Place",
             "Maintain Placement History for Data-Driven Insights",
@@ -197,9 +406,19 @@ const coreModulesData = [
             imageGlow: "from-rose-400/10 to-red-400/10",
             imageBacking: "from-rose-400/15 to-red-400/15"
         },
-        imageSrc: "/images/homeimage/report5.png",
+        imageSrc: "/images/homeimage/report5_premium.png",
         imageAlt: "Learning Management Dashboard",
         isImageRight: true,
+        mockupData: {
+            stats: [
+                { label: "Video Watch", value: 5, color: "bg-red-500" },
+                { label: "Assignments", value: 3, color: "bg-rose-500" },
+                { label: "Code Practice", value: 5, color: "bg-red-500" },
+                { label: "Mock Tests", value: 4, color: "bg-rose-500" },
+            ],
+            gauges: [85, 45],
+            chartLabel: "Learner Engagement"
+        },
         listItems: [
             "Access to the Department through a Mobile App",
             "Multi-Language Coding Compiler for Coding Practice and Hackathons",
@@ -238,9 +457,19 @@ const coreModulesData = [
             imageGlow: "from-yellow-400/10 to-amber-400/10",
             imageBacking: "from-yellow-400/15 to-amber-400/15"
         },
-        imageSrc: "/images/homeimage/report6.png",
+        imageSrc: "/images/homeimage/report6_premium.png",
         imageAlt: "Library Management Dashboard",
         isImageRight: false,
+        mockupData: {
+            stats: [
+                { label: "Book Issues", value: 5, color: "bg-amber-500" },
+                { label: "Overdue", value: 1, color: "bg-yellow-500" },
+                { label: "Reservations", value: 4, color: "bg-amber-500" },
+                { label: "New Titles", value: 3, color: "bg-yellow-500" },
+            ],
+            gauges: [92, 58],
+            chartLabel: "Circulation Index"
+        },
         listItems: [
             "Maintain a List of Books/Titles/Journals",
             "Track Book Issue/Return",
@@ -270,9 +499,19 @@ const coreModulesData = [
             imageGlow: "from-purple-400/10 to-indigo-400/10",
             imageBacking: "from-purple-400/15 to-indigo-400/15"
         },
-        imageSrc: "/images/homeimage/report7.png",
+        imageSrc: "/images/homeimage/report7_premium.png",
         imageAlt: "Transportation Management Dashboard",
         isImageRight: true,
+        mockupData: {
+            stats: [
+                { label: "Bus Routes", value: 5, color: "bg-indigo-500" },
+                { label: "Fuel Efficiency", value: 4, color: "bg-purple-500" },
+                { label: "Maintenance", value: 3, color: "bg-indigo-500" },
+                { label: "Live Tracking", value: 5, color: "bg-purple-500" },
+            ],
+            gauges: [89, 74],
+            chartLabel: "Fleet Status"
+        },
         listItems: [
             "Maintain Bus Details/Routes",
             "Track Students List",
@@ -304,9 +543,19 @@ const coreModulesData = [
             imageGlow: "from-blue-500/10 to-cyan-500/10",
             imageBacking: "from-blue-500/15 to-cyan-500/15"
         },
-        imageSrc: "/images/homeimage/report8.png",
+        imageSrc: "/images/homeimage/report8_premium.png",
         imageAlt: "Hostel Management Dashboard",
         isImageRight: false,
+        mockupData: {
+            stats: [
+                { label: "Occupancy", value: 5, color: "bg-blue-500" },
+                { label: "In/Out Time", value: 4, color: "bg-cyan-500" },
+                { label: "Permissions", value: 3, color: "bg-blue-500" },
+                { label: "Inventory", value: 5, color: "bg-cyan-500" },
+            ],
+            gauges: [82, 45],
+            chartLabel: "Facility Health Hub"
+        },
         listItems: [
             "Maintain Hostel Details/Occupancy",
             "Hostel Students List",
@@ -328,183 +577,237 @@ const AicasPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="min-h-screen bg-white relative overflow-x-hidden"
+            className="min-h-screen bg-[#020617] relative overflow-x-hidden"
         >
             <Navbar />
 
             <main className="relative pt-24 pb-20">
-                {/* Clean, Modern Background Effects */}
-                <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none overflow-hidden flex flex-col justify-between">
-                    {/* Top Right Subtle Glow */}
-                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-100 rounded-full blur-[120px] opacity-60 translate-x-1/3 -translate-y-1/3" />
-
-                    {/* Center Left Subtle Glow */}
-                    <div className="absolute top-[40%] left-0 w-[500px] h-[500px] bg-indigo-50 rounded-full blur-[100px] opacity-70 -translate-x-1/2" />
-
-                    {/* Abstract Line Backgrounds */}
-                    <img src="/images/line2.png" alt="" className="absolute top-20 left-0 w-[70vw] md:w-[50vw] object-contain opacity-[0.35] mix-blend-multiply pointer-events-none" />
-                    <img src="/images/line6.png" alt="" className="absolute bottom-40 right-0 w-[70vw] md:w-[50vw] object-contain opacity-[0.25] mix-blend-multiply pointer-events-none transform scale-x-[-1]" />
-
-                    {/* Bottom Wave Graphics Matching Reference */}
-                    <div className="absolute bottom-0 left-0 w-full opacity-30">
-                        <svg viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto translate-y-20">
-                            <path d="M0,224L48,213.3C96,203,192,181,288,186.7C384,192,480,224,576,213.3C672,203,768,149,864,128C960,107,1056,117,1152,144C1248,171,1344,213,1392,234.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" fill="url(#paint0_linear)" />
-                            <path d="M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,144C672,128,768,128,864,144C960,160,1056,192,1152,202.7C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" fill="url(#paint1_linear)" fillOpacity="0.5" />
-                            <defs>
-                                <linearGradient id="paint0_linear" x1="0" y1="320" x2="1440" y2="128" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="#F3E8FF" />
-                                    <stop offset="1" stopColor="#E0E7FF" stopOpacity="0.2" />
-                                </linearGradient>
-                                <linearGradient id="paint1_linear" x1="1440" y1="320" x2="0" y2="144" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="#E0E7FF" />
-                                    <stop offset="1" stopColor="#F3E8FF" stopOpacity="0.2" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-
-                        {/* Wavy line dashes as seen in image */}
-                        <svg viewBox="0 0 1440 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute bottom-10 left-0 w-full opacity-40">
-                            <path d="M-100 150C200 50 400 250 720 150C1040 50 1240 250 1540 150" stroke="#8B5CF6" strokeWidth="1" strokeDasharray="10 10" />
-                            <path d="M-100 100C200 0 400 200 720 100C1040 0 1240 200 1540 100" stroke="#6366F1" strokeWidth="0.5" strokeDasharray="5 15" />
-                        </svg>
+                {/* Cinematic Dark Background System */}
+                <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none bg-[#020617]">
+                    {/* Dark Premium Background Image */}
+                    <div className="absolute inset-0 opacity-[0.6] mix-blend-screen">
+                        <img
+                            src="/images/aicas_dark_bg.png"
+                            className="w-full h-full object-cover scale-100"
+                            alt=""
+                        />
                     </div>
+
+                    {/* Dark Mode Glows */}
+                    <div className="absolute top-[-10%] right-[-10%] w-[1000px] h-[1000px] bg-indigo-600/20 rounded-full blur-[160px]" />
+                    <div className="absolute bottom-[-10%] left-[-10%] w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[140px]" />
+
+                    {/* Subtle Overlay to ensure readability */}
+                    <div className="absolute inset-0 bg-slate-950/40" />
                 </div>
 
                 <div className="container relative z-10 flex flex-col items-center">
 
-                    {/* Header Section */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7 }}
-                        className="flex flex-col items-center text-center max-w-4xl mx-auto mb-10 space-y-4"
-                    >
-                        {/* Top Pill */}
-                        <div className="bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] text-white px-6 py-2 rounded-full font-bold tracking-widest text-xs uppercase shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:scale-105 transition-transform cursor-default">
-                            AI Powered AICAS
-                        </div>
+                    <div className="grid lg:grid-cols-2 gap-12 w-full items-center max-w-7xl mx-auto py-12">
 
-                        <h2 className="text-4xl md:text-5xl lg:text-[3.5rem] font-black text-slate-800 tracking-tighter leading-[1.05]">
-                            Campus Automation Solution
-                        </h2>
-
-                        <p className="text-lg md:text-xl text-slate-500 font-medium tracking-wide max-w-2xl leading-relaxed">
-                            Transforming Campuses with <span className="text-indigo-600 font-bold">AI Brilliance</span>
-                        </p>
-                    </motion.div>
-
-                    <div className="grid lg:grid-cols-2 gap-8 w-full items-center max-w-6xl mx-auto">
-
-                        {/* Left Column: Pure Floating Illustration */}
+                        {/* Left Column: Text & Hero Content */}
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="relative w-full aspect-square md:aspect-auto md:h-[450px] flex items-center justify-center group"
+                            initial={{ opacity: 0, x: -50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8 }}
+                            className="flex flex-col items-start text-left space-y-8"
                         >
-                            {/* Ambient Floating Glows */}
-                            <div className="absolute top-[10%] right-[20%] w-[300px] h-[300px] bg-purple-300/30 rounded-full blur-[80px] group-hover:scale-110 transition-transform duration-1000" />
-                            <div className="absolute bottom-[10%] left-[20%] w-[300px] h-[300px] bg-indigo-300/30 rounded-full blur-[80px] group-hover:scale-110 transition-transform duration-1000" />
+                            {/* Shimmering Top Pill */}
+                            <div className="relative group cursor-default inline-block">
+                                <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
+                                <div className="relative bg-slate-900/50 backdrop-blur-xl border border-indigo-500/30 text-indigo-400 px-6 py-2.5 rounded-full font-black tracking-[0.2em] text-[10px] uppercase shadow-2xl flex items-center gap-2 overflow-hidden">
+                                    <span className="relative z-10">AI Powered AICAS</span>
+                                </div>
+                            </div>
 
-                            {/* Floating image with no bounding box */}
-                            <img
-                                src="/images/aicas-illustration.png"
-                                alt="AICAS Illustration"
-                                className="object-contain w-[95%] h-[95%] transform group-hover:-translate-y-4 group-hover:scale-105 transition-all duration-[1500ms] ease-out relative z-10 mix-blend-multiply"
-                                onError={(e) => {
-                                    const target = e.target as HTMLImageElement;
-                                    if (target.src.includes('aicas-illustration.png')) {
-                                        target.style.display = 'none';
-                                        target.parentElement!.innerHTML = `
-                                            <div class="flex flex-col items-center justify-center text-center p-8 w-full h-full relative z-10 gap-6">
-                                                <div class="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 rounded-[3rem] border border-white shadow-xl shadow-indigo-900/5 backdrop-blur-sm -z-10"></div>
-                                                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-indigo-400">
-                                                    <path d="M12 2V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M8 6H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M16 6H8C6.89543 6 6 6.89543 6 8V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V8C18 6.89543 17.1046 6 16 6Z" fill="#e0e7ff" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M9 12V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M15 12V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M2 13H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    <path d="M19 13H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                                <p class="text-lg font-bold text-indigo-400">Illustration Placeholder</p>
-                                            </div>
-                                        `;
-                                    }
-                                }}
-                            />
+                            <h2 className="text-5xl md:text-6xl lg:text-[5.5rem] font-black tracking-[-0.04em] leading-[0.9] flex flex-col items-start">
+                                <span className="text-white drop-shadow-[0_10px_30px_rgba(255,255,255,0.1)]">Campus</span>
+                                <span className="text-slate-300 italic">Automation</span>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">Solution</span>
+                            </h2>
+
+                            <div className="space-y-6">
+                                <p className="text-xl md:text-2xl text-slate-300 font-bold max-w-xl leading-relaxed tracking-tight">
+                                    Transforming Campuses with <span className="text-indigo-400 italic">AI Brilliance</span>
+                                </p>
+                                <div className="h-1.5 w-32 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full shadow-[0_0_20px_rgba(99,102,241,0.8)]" />
+                            </div>
+
+                            <div className="pt-4 flex gap-6">
+                                <div className="flex flex-col">
+                                    <span className="text-3xl font-black text-white">40%</span>
+                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Efficiency Boost</span>
+                                </div>
+                                <div className="w-[1px] bg-slate-800 h-10 self-center" />
+                                <div className="flex flex-col">
+                                    <span className="text-3xl font-black text-white">100%</span>
+                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Digital Inclusion</span>
+                                </div>
+                            </div>
                         </motion.div>
 
-                        {/* Right Column: Contact Form */}
+                        {/* Right Column: Premium Dark Contact Form */}
                         <motion.div
-                            initial={{ opacity: 0, x: 40 }}
+                            initial={{ opacity: 0, x: 50 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.7, delay: 0.4 }}
-                            className="bg-white/80 backdrop-blur-3xl rounded-[2rem] p-6 md:p-8 shadow-[0_20px_80px_rgba(99,102,241,0.08)] border border-white relative overflow-hidden group"
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="relative group h-full"
                         >
-                            <div className="absolute top-0 right-0 w-40 h-40 bg-indigo-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                            {/* Card Glow Background */}
+                            <div className="absolute -inset-1 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-[2.5rem] blur-3xl opacity-20 group-hover:opacity-40 transition duration-1000" />
 
-                            <h3 className="text-2xl font-black text-center text-slate-800 mb-6 tracking-tight">
-                                Get Started Today
-                            </h3>
-
-                            <form className="space-y-4 relative z-10" onSubmit={(e) => e.preventDefault()}>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <Input
-                                        placeholder="First Name*"
-                                        className="h-12 bg-white/70 border-slate-200/60 rounded-xl focus:bg-white transition-all text-slate-800 placeholder:text-slate-400 focus-visible:ring-indigo-500/30 font-medium"
-                                    />
-                                    <Input
-                                        placeholder="Last Name*"
-                                        className="h-12 bg-white/70 border-slate-200/60 rounded-xl focus:bg-white transition-all text-slate-800 placeholder:text-slate-400 focus-visible:ring-indigo-500/30 font-medium"
-                                    />
+                            <div className="relative bg-slate-900/60 backdrop-blur-[40px] rounded-[2.5rem] p-8 md:p-10 shadow-2xl border border-white/10 flex flex-col h-full overflow-hidden">
+                                {/* Form Background Dark Theme Layer */}
+                                <div className="absolute inset-0 z-0 opacity-[0.4] mix-blend-overlay pointer-events-none">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-transparent" />
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <Input
-                                        placeholder="Whatsapp No.*"
-                                        className="h-12 bg-white/70 border-slate-200/60 rounded-xl focus:bg-white transition-all text-slate-800 placeholder:text-slate-400 focus-visible:ring-indigo-500/30 font-medium"
-                                    />
-                                    <Input
-                                        placeholder="Email*"
-                                        type="email"
-                                        className="h-12 bg-white/70 border-slate-200/60 rounded-xl focus:bg-white transition-all text-slate-800 placeholder:text-slate-400 focus-visible:ring-indigo-500/30 font-medium"
-                                    />
+                                <div className="relative z-10 mb-8 text-center">
+                                    <h3 className="text-3xl font-black text-white tracking-tight leading-none mb-3">
+                                        Get Started Today
+                                    </h3>
+                                    <div className="h-1 w-12 bg-indigo-500 rounded-full mx-auto shadow-[0_0_15px_rgba(99,102,241,0.8)]" />
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <Input
-                                        placeholder="College Name*"
-                                        className="h-12 bg-white/70 border-slate-200/60 rounded-xl focus:bg-white transition-all text-slate-800 placeholder:text-slate-400 focus-visible:ring-indigo-500/30 font-medium"
-                                    />
-                                    <Input
-                                        placeholder="City*"
-                                        className="h-12 bg-white/70 border-slate-200/60 rounded-xl focus:bg-white transition-all text-slate-800 placeholder:text-slate-400 focus-visible:ring-indigo-500/30 font-medium"
-                                    />
-                                </div>
+                                <form className="space-y-5 relative z-10 flex-grow" onSubmit={(e) => e.preventDefault()}>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        <div className="space-y-2">
+                                            <Input
+                                                placeholder="First Name*"
+                                                className="h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Input
+                                                placeholder="Last Name*"
+                                                className="h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner"
+                                            />
+                                        </div>
+                                    </div>
 
-                                <Textarea
-                                    placeholder="Message*"
-                                    className="min-h-[100px] bg-white/70 border-slate-200/60 rounded-xl focus:bg-white transition-all text-slate-800 placeholder:text-slate-400 focus-visible:ring-indigo-500/30 resize-none pt-4 font-medium"
-                                />
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        <div className="space-y-2">
+                                            <Input
+                                                placeholder="Whatsapp No.*"
+                                                className="h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Input
+                                                placeholder="Email*"
+                                                type="email"
+                                                className="h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner"
+                                            />
+                                        </div>
+                                    </div>
 
-                                <div className="flex justify-center pt-4">
-                                    <Button
-                                        type="submit"
-                                        className="w-full sm:w-auto min-w-[240px] h-12 bg-slate-900 hover:bg-slate-800 text-white font-bold text-lg rounded-2xl transition-all duration-300 shadow-[0_10px_40px_rgba(0,0,0,0.15)] hover:shadow-[0_15px_50px_rgba(99,102,241,0.3)] active:scale-[0.98]"
-                                    >
-                                        Send Inquiry
-                                    </Button>
-                                </div>
-                            </form>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        <div className="space-y-2">
+                                            <Input
+                                                placeholder="College Name*"
+                                                className="h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Input
+                                                placeholder="City*"
+                                                className="h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <Textarea
+                                        placeholder="Message*"
+                                        className="min-h-[120px] bg-white/5 border-white/10 rounded-[1.5rem] focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 resize-none pt-5 px-6 font-bold text-sm shadow-inner"
+                                    />
+
+                                    <div className="pt-6">
+                                        <button
+                                            type="submit"
+                                            className="w-full relative group/btn overflow-hidden rounded-[1.2rem] h-16 bg-white text-slate-950 font-black text-lg tracking-widest transition-all duration-500 shadow-2xl hover:shadow-indigo-500/50 active:scale-95"
+                                        >
+                                            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
+                                            <span className="relative z-10 uppercase group-hover/btn:text-white transition-colors duration-500">Send Inquiry</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </motion.div>
 
                     </div>
                 </div>
             </main>
 
-            {/* Features Section */}
-            <section className="py-24 relative overflow-hidden bg-white">
+            {/* Features Section - Redesigned as Premium Dark Mode (Obsidian) */}
+            <section className="py-32 relative overflow-hidden bg-[#020617] border-y border-white/5">
+                {/* High-Fidelity Fluid Wave Background System */}
+                <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
+                    {/* Radial Base Cinematic Glow */}
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,#1e1b4b_0%,#020617_80%)] opacity-90" />
+
+                    {/* Liquid 'Wave Pumping' Layer 1 */}
+                    <motion.div
+                        animate={{
+                            borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "70% 30% 30% 70% / 70% 70% 30% 30%", "30% 70% 70% 30% / 30% 30% 70% 70%"],
+                            scale: [1, 1.15, 1],
+                            x: [0, 50, 0],
+                            y: [0, -30, 0]
+                        }}
+                        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute top-[-20%] left-[-10%] w-[100%] h-[120%] bg-indigo-500/10 blur-[120px]"
+                    />
+
+                    {/* Liquid 'Wave Pumping' Layer 2 */}
+                    <motion.div
+                        animate={{
+                            borderRadius: ["70% 30% 30% 70% / 70% 70% 30% 30%", "30% 70% 70% 30% / 30% 30% 70% 70%", "70% 30% 30% 70% / 70% 70% 30% 30%"],
+                            scale: [1.15, 1, 1.15],
+                            x: [0, -60, 0],
+                            y: [0, 40, 0]
+                        }}
+                        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute bottom-[-20%] right-[-10%] w-[100%] h-[120%] bg-purple-600/10 blur-[140px]"
+                    />
+
+                    {/* Rhythmic 'Pulse' Pump Overlay */}
+                    <motion.div
+                        animate={{
+                            scale: [1, 1.04, 1],
+                            opacity: [0.6, 1, 0.6]
+                        }}
+                        transition={{
+                            duration: 0.8,
+                            repeat: Infinity,
+                            ease: [0.4, 0, 0.2, 1] // Heartbeat-style ease
+                        }}
+                        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.08)_0%,transparent_70%)] mix-blend-screen"
+                    />
+
+                    {/* Sinusoidal Fluid Waves (Pumping Motion) */}
+                    <div className="absolute bottom-0 left-0 w-full h-1/2 opacity-20">
+                        <svg className="w-[200%] h-full" viewBox="0 0 1000 100" preserveAspectRatio="none">
+                            <motion.path
+                                animate={{ x: [0, -500] }}
+                                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                                d="M0 80 C 250 120, 250 20, 500 80 C 750 120, 750 20, 1000 80 V 100 H 0 Z"
+                                fill="url(#waveGradient)"
+                            />
+                            <defs>
+                                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stopColor="#6366f1" stopOpacity="0.4" />
+                                    <stop offset="100%" stopColor="#d946ef" stopOpacity="0" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    {/* Technical Fine Mesh Overlay (Static for contrast) */}
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,#000_80%,transparent_100%)]" />
+
+                    {/* Subtle Premium Noise Texture */}
+                    <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+                </div>
+
                 <div className="container mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -514,102 +817,152 @@ const AicasPage = () => {
                         className="mb-14"
                     >
                         <div className="flex flex-col gap-2">
-                            <span className="text-[#8B5CF6] font-bold tracking-wider uppercase text-sm">Why Choose AICAS</span>
-                            <h2 className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-                                Unlock Your <span className="text-[#8B5CF6]">Extra Edge</span>
-                            </h2>
+                            <span className="text-indigo-400 font-bold tracking-[0.4em] uppercase text-xs">Why Choose AICAS</span>
+                            <div className="relative">
+                                <span className="absolute -top-10 -left-4 text-7xl md:text-9xl font-black text-white/5 uppercase select-none pointer-events-none tracking-tighter">
+                                    FEATURES
+                                </span>
+                                <h2 className="text-4xl lg:text-5xl font-black text-white tracking-tight relative z-10">
+                                    Unlock Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500 italic">Extra Edge</span>
+                                </h2>
+                            </div>
                         </div>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {features.map((feature, idx) => (
                             <motion.div
                                 key={idx}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
-                                transition={{ duration: 0.5, delay: (idx % 3) * 0.1 }}
-                                className="bg-[#FCDCC3] p-6 lg:p-8 transition-transform duration-300 hover:-translate-y-1"
+                                transition={{ duration: 0.6, delay: (idx % 3) * 0.1 }}
+                                className="group/feature relative p-10 rounded-[3rem] bg-slate-900/40 backdrop-blur-xl border border-white/5 shadow-2xl transition-all duration-700 hover:border-indigo-500/30 hover:-translate-y-3 overflow-hidden flex flex-col items-start"
                             >
-                                <div className="h-[42px] px-3 rounded-lg bg-[#8B5CF6] text-white flex items-center justify-center mb-4 shadow-sm inline-flex">
-                                    <feature.icon size={22} />
+                                {/* Decorative Glow Accent */}
+                                <div className="absolute -inset-10 bg-gradient-to-br from-indigo-500/10 to-transparent opacity-0 group-hover/feature:opacity-100 blur-[80px] transition-all duration-1000" />
+
+                                <div className="relative z-10 w-20 h-20 rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center mb-10 group-hover/feature:bg-indigo-600 group-hover/feature:scale-110 transition-all duration-500 shadow-2xl">
+                                    <feature.icon className="w-10 h-10 text-indigo-400 group-hover/feature:text-white transition-colors duration-500" />
                                 </div>
-                                <h3 className="text-[17px] font-bold text-slate-900 mb-2">
-                                    {feature.title}
-                                </h3>
-                                <p className="text-slate-800/80 font-medium leading-[1.6] text-[13px]">
-                                    {feature.text}
-                                </p>
+
+                                <div className="relative z-10 flex-grow space-y-4">
+                                    <h3 className="text-2xl font-black text-white tracking-tight leading-tight group-hover/feature:text-indigo-400 transition-colors">
+                                        {feature.title}
+                                    </h3>
+                                    <p className="text-slate-400 font-bold leading-relaxed transition-all duration-500 group-hover/feature:text-slate-200">
+                                        {feature.text}
+                                    </p>
+                                </div>
+
+                                <div className="absolute bottom-10 left-10 h-1.5 w-10 bg-white/5 rounded-full group-hover/feature:w-24 group-hover/feature:bg-indigo-500 transition-all duration-700" />
                             </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Scalable Core Modules Sections */}
-            {coreModulesData.map((module, idx) => (
-                <section key={idx} className={`py-16 relative overflow-hidden flex items-center border-t border-slate-100 ${idx % 2 === 0 ? 'bg-slate-50/50' : 'bg-white'}`}>
-                    {/* Modern Light Gradient Background with Blobs */}
-                    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                        <div className={`absolute top-1/4 ${module.isImageRight ? 'left-1/4' : 'right-1/4'} w-[600px] h-[600px] ${module.theme.glow1} rounded-full blur-[100px] mix-blend-multiply -z-10`} />
-                        <div className={`absolute bottom-0 ${module.isImageRight ? 'right-0' : 'left-0'} w-[600px] h-[600px] ${module.theme.glow2} rounded-full blur-[120px] mix-blend-multiply -z-10`} />
-                        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)]"></div>
-                    </div>
+            {/* Premium Feature Showcase Sections - Redesigned to High-Fidelity Dark Mode */}
+            <div className="space-y-0 relative">
+                {/* Global Connective Background */}
+                <div className="absolute inset-0 bg-slate-950 -z-10" />
 
-                    <div className={`container mx-auto max-w-7xl px-6 lg:px-8 relative z-10 flex flex-col ${module.isImageRight ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-10`}>
+                {coreModulesData.map((module, idx) => (
+                    <section
+                        key={idx}
+                        className={`py-32 relative overflow-hidden flex items-center ${idx % 2 === 0 ? 'bg-[#020617]' : 'bg-transparent'}`}
+                    >
+                        {/* kinetic Technical Background */}
+                        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-40">
+                            {/* Theme-colored Glow */}
+                            <div className={`absolute top-1/2 ${module.isImageRight ? 'left-[10%]' : 'right-[10%]'} w-[800px] h-[800px] ${module.theme.glow1} rounded-full blur-[160px] -translate-y-1/2 opacity-[0.06]`} />
 
-                        {/* Text Column: Creative Text Presentation */}
-                        <motion.div
-                            initial={{ opacity: 0, x: module.isImageRight ? -40 : 40 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.7 }}
-                            className="lg:w-1/2 w-full"
-                        >
-                            <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full ${module.theme.pillBg} mb-5 shadow-[0_4px_10px_rgba(0,0,0,0.02)]`}>
-                                <span className={`w-1.5 h-1.5 rounded-full ${module.theme.pillDot} animate-pulse`}></span>
-                                <span className={`text-xs font-bold tracking-widest ${module.theme.pillText} uppercase`}>{module.pillText}</span>
-                            </div>
+                            {/* Technical Grid/Dots */}
+                            <div className={`absolute inset-y-0 ${module.isImageRight ? 'left-0 w-1/2' : 'right-0 w-1/2'} bg-[radial-gradient(#ffffff05_1.5px,transparent_1.5px)] [background-size:60px_60px] opacity-100`} />
+                        </div>
 
-                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                                {module.titlePrefix} <span className={`text-transparent bg-clip-text bg-gradient-to-r ${module.gradientText}`}>{module.titleHighlight}</span>
-                            </h2>
+                        <div className={`container mx-auto max-w-7xl px-6 lg:px-8 relative z-10 flex flex-col ${module.isImageRight ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-20`}>
 
-                            <ul className="space-y-3">
-                                {module.listItems.map((item, i) => (
-                                    <li key={i} className="flex items-start group/item">
-                                        <div className={`mr-4 mt-0.5 w-6 h-6 rounded-full ${module.theme.iconBg} flex items-center justify-center flex-shrink-0 ${module.theme.iconBgHover} group-hover/item:scale-110 transition-all duration-300 border ${module.theme.iconBorder} ${module.theme.iconBorderHover}`}>
-                                            <Check className={`w-3.5 h-3.5 ${module.theme.iconText} group-hover/item:text-white transition-colors`} strokeWidth={3} />
-                                        </div>
-                                        <span className="text-slate-600 font-medium text-[15px] group-hover/item:text-slate-900 transition-colors leading-relaxed">
-                                            {item}
+                            {/* Text Content Column */}
+                            <motion.div
+                                initial={{ opacity: 0, x: module.isImageRight ? -50 : 50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true, margin: "-100px" }}
+                                transition={{ duration: 0.8, ease: "easeOut" }}
+                                className="lg:w-1/2 w-full space-y-12"
+                            >
+                                <div className="space-y-8">
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        className={`inline-flex items-center gap-3 px-6 py-2.5 rounded-2xl bg-white/5 border border-white/10 shadow-sm backdrop-blur-md`}
+                                    >
+                                        <span className={`w-2.5 h-2.5 rounded-full ${module.theme.pillDot} animate-pulse`} />
+                                        <span className={`text-xs font-black tracking-[0.4em] text-white uppercase`}>{module.pillText}</span>
+                                    </motion.div>
+
+                                    <div className="relative">
+                                        <span className="absolute -top-12 -left-4 text-8xl md:text-[10rem] font-black text-white/5 uppercase select-none pointer-events-none tracking-tighter">
+                                            {module.titlePrefix.substring(0, 5)}
                                         </span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </motion.div>
+                                        <h2 className="text-5xl md:text-7xl font-black text-white tracking-tight leading-[0.9] relative z-10">
+                                            {module.titlePrefix}
+                                            <span className={`block text-transparent bg-clip-text bg-gradient-to-r ${module.gradientText} italic mt-2 drop-shadow-2xl`}>
+                                                {module.titleHighlight}
+                                            </span>
+                                        </h2>
+                                    </div>
+                                </div>
 
-                        {/* Image Column */}
-                        <motion.div
-                            initial={{ opacity: 0, x: module.isImageRight ? 40 : -40 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.7, delay: 0.2 }}
-                            className="lg:w-1/2 w-full relative flex items-center justify-center pt-8 lg:pt-0"
-                        >
-                            <div className={`absolute inset-0 bg-gradient-to-${module.isImageRight ? 'tr' : 'tl'} ${module.theme.imageGlow} rounded-full blur-[80px] -z-10`} />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-7">
+                                    {module.listItems.map((item, i) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ opacity: 0, x: -10 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: i * 0.04 }}
+                                            className="flex items-start gap-5 group/item"
+                                        >
+                                            <div className={`mt-1 w-7 h-7 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover/item:bg-gradient-to-br ${module.gradientText} group-hover/item:border-transparent transition-all duration-500 shadow-lg`}>
+                                                <Check className={`w-4 h-4 text-white group-hover/item:text-white transition-colors`} strokeWidth={4} />
+                                            </div>
+                                            <span className="text-base font-bold text-slate-400 group-hover/item:text-white transition-colors leading-snug py-0.5">
+                                                {item}
+                                            </span>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </motion.div>
 
-                            <div className="relative group perspective-[1000px]">
-                                <img
-                                    src={module.imageSrc}
-                                    alt={module.imageAlt}
-                                    className={`relative z-10 w-full max-w-xl object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.1)] group-hover:-translate-y-4 ${module.isImageRight ? 'group-hover:rotate-1' : 'group-hover:-rotate-1'} transition-all duration-700 ease-out`}
-                                />
-                            </div>
-                        </motion.div>
-                    </div>
-                </section>
-            ))}
+                            {/* Dashboard Premium Image Column */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true, margin: "-100px" }}
+                                transition={{ duration: 0.8 }}
+                                className="lg:w-1/2 w-full relative group"
+                            >
+                                {/* Magnetic Glow */}
+                                <div className={`absolute -inset-16 bg-gradient-to-br ${module.gradientText} opacity-0 blur-[120px] rounded-full group-hover:opacity-[0.15] transition-all duration-1000`} />
+
+                                <div className="relative rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden bg-slate-900 border border-white/10 shadow-[0_60px_120px_rgba(0,0,0,0.6)] transform group-hover:scale-[1.02] transition-all duration-[1.2s] ease-out">
+                                    <img
+                                        src={module.imageSrc}
+                                        alt={module.imageAlt}
+                                        className="w-full h-auto object-cover"
+                                    />
+
+                                    {/* Glass Overlay for Premium Feel */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent pointer-events-none" />
+                                </div>
+
+
+                            </motion.div>
+                        </div>
+                    </section>
+                ))}
+            </div>
 
             <Footer />
             <WhatsAppButton />

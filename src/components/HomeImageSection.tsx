@@ -175,43 +175,52 @@ const HomeImageSection = () => {
                         ].map((management, i) => (
                             <motion.div
                                 key={management.num}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: 0.05 * i }}
-                                whileHover={{ y: -12, scale: 1.02 }}
-                                className="group relative bg-[#ffffff] border border-slate-100 rounded-[2.5rem] p-8 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:border-indigo-400/30 hover:shadow-[0_40px_80px_rgba(99,102,241,0.12)] transition-all duration-500 flex flex-col items-start overflow-hidden cursor-pointer"
+                                transition={{
+                                    delay: 0.05 * i,
+                                    duration: 0.6,
+                                    ease: [0.22, 1, 0.36, 1]
+                                }}
+                                whileHover={{ y: -10, scale: 1.02 }}
+                                className={`group relative bg-gradient-to-br ${management.color} border border-white/20 rounded-[2.5rem] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_50px_100px_rgba(0,0,0,0.2)] transition-all duration-700 flex flex-col items-start overflow-hidden cursor-pointer text-white`}
                             >
-                                {/* Shimmer Sweep Effect */}
-                                <div className="absolute inset-0 -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-[1500ms] ease-in-out bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none z-20" />
+                                {/* Glass Texture & Depth Overlay */}
+                                <div className="absolute inset-0 opacity-[0.05] pointer-events-none group-hover:opacity-[0.1] transition-opacity mix-blend-overlay"
+                                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+                                />
+                                <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                                {/* Interactive Spotlight Glow */}
-                                <div className={`absolute -right-16 -top-16 w-32 h-32 bg-gradient-to-br ${management.color} opacity-0 group-hover:opacity-10 blur-3xl transition-all duration-700 rounded-full group-hover:scale-[2]`} />
-
-                                <div className="flex items-center justify-between w-full mb-8 relative z-10">
-                                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${management.color} ${management.shadow} flex items-center justify-center text-white transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl`}>
-                                        <management.icon className="w-7 h-7" strokeWidth={2.5} />
+                                <div className="flex items-start justify-between w-full mb-8 relative z-10">
+                                    <div className="relative">
+                                        <div className="absolute inset-0 bg-white/20 blur-xl rounded-full" />
+                                        <div className="relative w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-xl group-hover:rotate-6 transition-transform duration-500">
+                                            <management.icon className="w-7 h-7" strokeWidth={2.5} />
+                                        </div>
                                     </div>
-                                    <span className="text-3xl font-black text-slate-100/50 group-hover:text-indigo-500/10 transition-colors tracking-tighter">
-                                        {management.num}
-                                    </span>
+                                    <div className="flex flex-col items-end">
+                                        <span className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-1">Module</span>
+                                        <span className="text-4xl font-black text-white/10 group-hover:text-white/20 transition-colors tracking-tighter leading-none">
+                                            {management.num}
+                                        </span>
+                                    </div>
                                 </div>
 
-                                <h4 className="text-[14px] font-black uppercase text-slate-950 tracking-tight mb-2 group-hover:text-indigo-600 transition-colors leading-[1.2] relative z-10">
-                                    {management.title}
-                                </h4>
-                                <p className="text-[11px] text-slate-400 font-medium leading-relaxed group-hover:text-slate-600 transition-colors relative z-10">
-                                    {management.desc}
-                                </p>
-
-                                {/* Micro-Interaction: Reveal Arrow */}
-                                <div className="mt-6 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-3 group-hover:translate-y-0 relative z-10">
-                                    <span className="text-[9px] font-black text-indigo-400 uppercase tracking-widest">Explore</span>
-                                    <ArrowRight className="w-3 h-3 text-indigo-500" />
+                                <div className="space-y-4 relative z-10 flex-grow">
+                                    <h4 className="text-base font-black uppercase tracking-tight leading-[1.1]">
+                                        {management.title.split(' ').map((word, idx) => (
+                                            <span key={idx} className="block">{word}</span>
+                                        ))}
+                                    </h4>
+                                    <div className="w-8 h-[2px] bg-white/20 group-hover:w-full transition-all duration-700 rounded-full" />
+                                    <p className="text-[11px] text-white/70 font-medium leading-relaxed group-hover:text-white transition-colors line-clamp-4">
+                                        {management.desc}
+                                    </p>
                                 </div>
 
-                                {/* Animated Border Glow (Bottom) */}
-                                <div className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${management.color} w-0 group-hover:w-full transition-all duration-700 ease-out`} />
+                                {/* Interactive Shimmer Sweep */}
+                                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[2000ms] ease-in-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none z-20" />
                             </motion.div>
                         ))}
                     </div>

@@ -124,7 +124,7 @@ const About = () => {
                                 </h2>
                                 <ul className="space-y-6 text-slate-100 text-[14px] md:text-[15px] leading-relaxed list-disc pl-5">
                                     <li className="pl-2">
-                                        Empowering Students for Success through Comprehensive Semester Exam Preparation fostering a culture of Academic Excellence and Personal Growth through <span className="font-bold underline">SemesterPrep</span>
+                                        Empowering Students for Success through Comprehensive Semester Exam Preparation fostering a culture of Academic Excellence and Personal Growth through <a href="https://semesterprep.in/" target="_blank" rel="noopener noreferrer" className="font-bold underline hover:text-primary transition-colors">SemesterPrep</a>
                                     </li>
                                     <li className="pl-2">
                                         Our vision is also to serve as the catalyst for holistic student development by offering a diverse range of High-Quality Training Programs within the College Environment. We aim to empower students with the knowledge, skills, and competencies needed to excel academically, professionally, and personally
@@ -141,35 +141,13 @@ const About = () => {
                                 <div className="bg-white p-6 rounded-[3rem] shadow-2xl relative overflow-hidden group border-8 border-white">
                                     <div className="w-full h-full min-h-[350px] lg:min-h-[480px] relative rounded-[2rem] overflow-hidden">
                                         <img
-                                            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
+                                            src="/aboutimage.jpeg"
                                             alt="Students Learning AI"
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-accent/10 pointer-events-none" />
 
-                                        <div className="absolute inset-0 z-10 p-8 flex flex-col justify-between pointer-events-none">
-                                            <div className="flex justify-between items-start">
-                                                <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-14 h-14 bg-rose-500 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-rose-500/20">
-                                                    <Sparkles className="w-8 h-8" />
-                                                </motion.div>
-                                                <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="w-12 h-12 bg-sky-400 rounded-xl flex items-center justify-center text-white shadow-lg shadow-sky-400/20">
-                                                    <Monitor className="w-6 h-6" />
-                                                </motion.div>
-                                            </div>
-                                            <div className="flex justify-center -mb-4">
-                                                <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 2, repeat: Infinity }} className="w-20 h-20 bg-primary/95 backdrop-blur-md rounded-full flex items-center justify-center text-white shadow-2xl border-4 border-white/20">
-                                                    <span className="font-black text-xl">AI</span>
-                                                </motion.div>
-                                            </div>
-                                            <div className="flex justify-between items-end">
-                                                <motion.div animate={{ x: [0, 10, 0] }} transition={{ duration: 5, repeat: Infinity }} className="w-10 h-10 bg-amber-400 rounded-lg flex items-center justify-center text-white shadow-md shadow-amber-400/20">
-                                                    <div className="w-4 h-4 bg-white rounded-full" />
-                                                </motion.div>
-                                                <motion.div animate={{ scale: [0.9, 1, 0.9] }} transition={{ duration: 3.5, repeat: Infinity }} className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-emerald-500/20">
-                                                    <BadgeCheck className="w-10 h-10" />
-                                                </motion.div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none" />
                                 </div>

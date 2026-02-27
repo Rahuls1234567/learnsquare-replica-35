@@ -23,30 +23,8 @@ const products = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showProducts, setShowProducts] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
   return (
     <>
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-primary z-[60] origin-left"
-        style={{ scaleX }}
-      />
       <header
         className={`fixed top-8 inset-x-0 z-50 transition-all duration-500 transform-gpu bg-transparent h-0`}
       >
@@ -97,6 +75,8 @@ const Navbar = () => {
                                 <Link
                                   key={p.title}
                                   to={p.href}
+                                  target={p.external ? "_blank" : undefined}
+                                  rel={p.external ? "noopener noreferrer" : undefined}
                                   className="px-5 py-4 text-slate-600 font-bold text-[14px] hover:text-primary hover:bg-slate-50 rounded-2xl transition-all flex items-center justify-between group"
                                 >
                                   <div className="flex items-center gap-3">

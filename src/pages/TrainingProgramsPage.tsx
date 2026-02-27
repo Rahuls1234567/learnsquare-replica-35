@@ -624,80 +624,76 @@ const TrainingProgramsPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="min-h-screen bg-white relative overflow-x-hidden"
+            className="min-h-screen bg-[#050505] relative overflow-x-hidden"
         >
             <Navbar />
 
             <main className="relative pt-32 pb-24">
-                {/* Background Decorations - Enhanced with Lines */}
+                {/* Premium Background Elements */}
                 <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                    {/* Grid Pattern */}
-                    <div className="absolute inset-0 opacity-[0.03]"
+                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(124,102,220,0.15),transparent_70%)]" />
+                    <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] animate-pulse" />
+                    <div className="absolute bottom-[10%] left-[-5%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]" />
+
+                    {/* Subtle Grid */}
+                    <div className="absolute inset-0 opacity-[0.05]"
                         style={{
-                            backgroundImage: `linear-gradient(#4F46E5 1px, transparent 1px), linear-gradient(90deg, #4F46E5 1px, transparent 1px)`,
-                            backgroundSize: '40px 40px'
+                            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+                            backgroundSize: '80px 80px'
                         }}
                     />
-
-                    {/* Perspective Lines */}
-                    <svg className="absolute w-full h-full opacity-[0.05]" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <defs>
-                            <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="#4F46E5" stopOpacity="0" />
-                                <stop offset="50%" stopColor="#4F46E5" stopOpacity="1" />
-                                <stop offset="100%" stopColor="#4F46E5" stopOpacity="0" />
-                            </linearGradient>
-                        </defs>
-                        <line x1="0" y1="20" x2="100" y2="80" stroke="url(#line-gradient)" strokeWidth="0.1" />
-                        <line x1="0" y1="80" x2="100" y2="20" stroke="url(#line-gradient)" strokeWidth="0.1" />
-                        <line x1="20" y1="0" x2="80" y2="100" stroke="url(#line-gradient)" strokeWidth="0.1" />
-                        <line x1="80" y1="0" x2="20" y2="100" stroke="url(#line-gradient)" strokeWidth="0.1" />
-                    </svg>
-
-                    <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-purple-50/30 rounded-full blur-[120px] translate-x-1/4 -translate-y-1/4" />
                 </div>
 
                 <div className="container relative z-10 mx-auto px-4 md:px-6">
                     {/* Top Badge */}
-                    <div className="flex justify-center mb-16">
+                    <div className="flex justify-center mb-20">
                         <motion.div
                             initial={{ y: -20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
-                            className="bg-[#7c66dc] text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl shadow-purple-200/50"
+                            className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-10 py-3 rounded-full font-black text-sm uppercase tracking-[0.3em] shadow-[0_10px_30px_rgba(124,102,220,0.3)] border border-white/20"
                         >
                             Training Programs
                         </motion.div>
                     </div>
 
-                    <div className="grid lg:grid-cols-2 gap-12 items-stretch">
+                    <div className="grid lg:grid-cols-2 gap-16 items-center">
                         {/* Left Content */}
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="flex flex-col h-full justify-between space-y-8 py-2"
+                            className="flex flex-col space-y-10"
                         >
-                            <div className="relative">
+                            <div className="relative group">
+                                <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-[100px] group-hover:bg-purple-500/30 transition-all duration-700" />
                                 <motion.div
-                                    animate={{ y: [0, -10, 0] }}
-                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                    className="relative z-10 w-full mx-auto lg:mx-0 flex items-center justify-center p-4"
+                                    animate={{
+                                        y: [0, -15, 0],
+                                        rotate: [0, 2, 0]
+                                    }}
+                                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                                    className="relative z-10 w-full flex items-center justify-center"
                                 >
                                     <img
                                         src="/images/homeimage/training program.png"
                                         alt="Training Programs Illustration"
-                                        className="w-full h-auto max-h-[320px] object-contain"
+                                        className="w-full h-auto max-h-[400px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
                                     />
                                 </motion.div>
                             </div>
 
-                            <div className="space-y-6">
-                                <h1 className="text-3xl md:text-4xl font-black text-slate-800 leading-tight tracking-tight">
-                                    Comprehensive <span className="text-[#4F46E5]">Training Programs designed</span> for Students seeking to stay ahead in today’s competitive landscape
+                            <div className="space-y-8">
+                                <h1 className="text-4xl md:text-6xl font-black text-white leading-[1.1] tracking-tight">
+                                    Unlock Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">Potential</span> with <br />
+                                    Advanced Skills
                                 </h1>
-                                <p className="text-slate-500 font-bold text-lg leading-relaxed">
-                                    Unlock Skills, Anytime, Anywhere – Learn, Grow, Succeed with Us!
+                                <p className="text-slate-400 font-bold text-lg md:text-xl leading-relaxed max-w-xl">
+                                    Comprehensive training designed for students seeking to stay ahead in today's rapid competitive landscape.
                                 </p>
+                                <div className="flex items-center gap-4 text-indigo-400 font-black text-sm uppercase tracking-widest">
+                                    <Zap className="w-5 h-5 fill-indigo-400" />
+                                    Learn • Grow • Succeed
+                                </div>
                             </div>
                         </motion.div>
 
@@ -706,96 +702,87 @@ const TrainingProgramsPage = () => {
                             initial={{ opacity: 0, x: 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="bg-white rounded-2xl p-8 md:p-12 shadow-[0_40px_100px_rgba(0,0,0,0.08)] border border-slate-50 relative overflow-hidden flex flex-col h-full"
+                            className="bg-white/5 backdrop-blur-xl rounded-[3rem] p-10 md:p-14 border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.4)] relative group"
                         >
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent pointer-events-none" />
 
-                            <h2 className="text-2xl font-black text-slate-800 text-center mb-10 relative z-10">Contact Us Today</h2>
+                            <h2 className="text-3xl font-black text-white mb-10 text-center tracking-tight">Enquire Now</h2>
 
-                            <form className="space-y-5 relative z-10">
-                                <div className="grid md:grid-cols-2 gap-5">
-                                    <div className="space-y-2">
-                                        <Input placeholder="First Name*" className="h-12 rounded-xl border-slate-200 bg-slate-50/50 font-bold px-6 focus:ring-2 focus:ring-purple-100 placeholder:text-slate-400 transition-all" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Input placeholder="Last Name*" className="h-12 rounded-xl border-slate-200 bg-slate-50/50 font-bold px-6 focus:ring-2 focus:ring-purple-100 placeholder:text-slate-400 transition-all" />
-                                    </div>
+                            <form className="space-y-6 relative z-10">
+                                <div className="grid md:grid-cols-2 gap-6">
+                                    <Input placeholder="First Name*" className="h-14 rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 px-7 focus:ring-2 focus:ring-purple-500/50 transition-all" />
+                                    <Input placeholder="Last Name*" className="h-14 rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 px-7 focus:ring-2 focus:ring-purple-500/50 transition-all" />
                                 </div>
-                                <div className="grid md:grid-cols-2 gap-5">
-                                    <div className="space-y-2">
-                                        <Input placeholder="Whatsapp No.*" className="h-12 rounded-xl border-slate-200 bg-slate-50/50 font-bold px-6 focus:ring-2 focus:ring-purple-100 placeholder:text-slate-400 transition-all" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Input placeholder="Email*" className="h-12 rounded-xl border-slate-200 bg-slate-50/50 font-bold px-6 focus:ring-2 focus:ring-purple-100 placeholder:text-slate-400 transition-all" />
-                                    </div>
+                                <div className="grid md:grid-cols-2 gap-6">
+                                    <Input placeholder="Whatsapp No.*" className="h-14 rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 focus:ring-2 focus:ring-purple-500/50 transition-all" />
+                                    <Input placeholder="Email*" className="h-14 rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 focus:ring-2 focus:ring-purple-500/50 transition-all" />
                                 </div>
-                                <div className="grid md:grid-cols-2 gap-5">
-                                    <div className="space-y-2">
-                                        <Input placeholder="College Name*" className="h-12 rounded-xl border-slate-200 bg-slate-50/50 font-bold px-6 focus:ring-2 focus:ring-purple-100 placeholder:text-slate-400 transition-all" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Input placeholder="City*" className="h-12 rounded-xl border-slate-200 bg-slate-50/50 font-bold px-6 focus:ring-2 focus:ring-purple-100 placeholder:text-slate-400 transition-all" />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <Textarea
-                                        placeholder="Message*"
-                                        className="min-h-[120px] rounded-xl border-slate-200 bg-slate-50/50 font-bold px-6 py-4 focus:ring-2 focus:ring-purple-100 placeholder:text-slate-400 transition-all resize-none"
-                                    />
-                                </div>
+                                <Input placeholder="College Name*" className="h-14 rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 focus:ring-2 focus:ring-purple-500/50 transition-all" />
+                                <Input placeholder="City*" className="h-14 rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 focus:ring-2 focus:ring-purple-500/50 transition-all" />
+                                <Textarea
+                                    placeholder="Tell us what you're looking for..."
+                                    className="min-h-[120px] rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 py-5 focus:ring-2 focus:ring-purple-500/50 transition-all resize-none"
+                                />
 
-                                <div className="flex justify-center pt-4">
-                                    <Button className="h-12 px-16 rounded-full bg-[#ede9fe] text-slate-900 font-black text-lg hover:bg-[#ddd6fe] transition-all shadow-xl active:scale-95 group/btn border-none">
-                                        Submit !!
-                                        <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                                    </Button>
-                                </div>
+                                <Button className="w-full h-16 rounded-[2rem] bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black text-xl hover:opacity-90 transition-all shadow-xl active:scale-95 group/btn border-none mt-4">
+                                    Send Message
+                                    <Send className="ml-3 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                </Button>
                             </form>
                         </motion.div>
                     </div>
 
                     {/* Our Training Programs Section */}
-                    <div className="mt-40 space-y-16">
-                        <div className="text-center">
-                            <h2 className="text-4xl font-black text-slate-800 tracking-tight">Our Training Programs</h2>
+                    <div className="mt-48 space-y-20">
+                        <div className="text-center space-y-4">
+                            <span className="text-purple-400 font-black text-sm uppercase tracking-[0.4em]">Expert Led</span>
+                            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter">Our Core Modules</h2>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                             {programs.map((prog, i) => (
                                 <motion.div
                                     key={i}
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1 }}
-                                    className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_30px_70px_rgba(0,0,0,0.08)] transition-all group"
+                                    transition={{ delay: i * 0.05 }}
+                                    className="group relative bg-[#111] rounded-[2.5rem] p-8 border border-white/5 hover:border-purple-500/30 transition-all duration-500 overflow-hidden"
                                 >
-                                    <div className="relative overflow-hidden rounded-xl aspect-video mb-6">
-                                        <img
-                                            src={prog.img}
-                                            alt={prog.title}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        />
+                                    {/* Texture & Glow */}
+                                    <div className="absolute inset-0 z-0 opacity-10 group-hover:opacity-20 transition-opacity">
+                                        <img src="/images/card_premium_texture.png" className="w-full h-full object-cover" alt="" />
                                     </div>
-                                    <div className="space-y-4 px-2 mb-6">
-                                        <h3 className="text-xl font-black text-slate-800">{prog.title}</h3>
-                                        <p className="text-slate-500 font-bold text-sm leading-relaxed">
-                                            {prog.desc}
-                                        </p>
-                                    </div>
-                                    <div className="flex gap-3 px-2">
-                                        <Button
-                                            variant="ghost"
-                                            onClick={() => setSelectedProgram(prog)}
-                                            className="rounded-full bg-[#ede9fe] text-[#7c66dc] font-black text-xs px-6 hover:bg-[#d8d1fd]"
-                                        >
-                                            View
-                                        </Button>
-                                        {prog.title !== "Python Full Stack" && (
-                                            <Button className="rounded-full bg-[#7c66dc] text-white font-black text-xs px-6 hover:bg-[#5a48bd]">
-                                                Explore More
+                                    <div className="absolute -top-24 -right-24 w-48 h-48 bg-purple-600/10 rounded-full blur-[80px] group-hover:bg-purple-600/30 transition-all duration-500" />
+
+                                    <div className="relative z-10 h-full flex flex-col">
+                                        <div className="relative overflow-hidden rounded-[2rem] aspect-[16/10] mb-8 bg-[#1a1a1a]">
+                                            <img
+                                                src={prog.img}
+                                                alt={prog.title}
+                                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent opacity-60" />
+                                        </div>
+
+                                        <div className="space-y-4 flex-grow">
+                                            <h3 className="text-2xl font-black text-white tracking-tight">{prog.title}</h3>
+                                            <p className="text-slate-400 font-bold text-sm leading-relaxed line-clamp-2 italic">
+                                                {prog.desc}
+                                            </p>
+                                        </div>
+
+                                        <div className="flex items-center gap-4 mt-8 pt-8 border-t border-white/5">
+                                            <Button
+                                                onClick={() => setSelectedProgram(prog)}
+                                                className="flex-grow h-12 rounded-full bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-purple-500 hover:text-white transition-all shadow-lg active:scale-95"
+                                            >
+                                                Curriculum Details
                                             </Button>
-                                        )}
+                                            <button className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all text-white">
+                                                <Zap className="w-4 h-4 fill-current" />
+                                            </button>
+                                        </div>
                                     </div>
                                 </motion.div>
                             ))}
