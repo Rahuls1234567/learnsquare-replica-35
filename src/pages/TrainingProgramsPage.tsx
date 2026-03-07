@@ -624,77 +624,108 @@ const TrainingProgramsPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="min-h-screen bg-[#050505] relative overflow-x-hidden"
+            className="min-h-screen bg-[#f8fafc] relative overflow-x-hidden"
         >
             <Navbar />
 
-            <main className="relative pt-32 pb-24">
-                {/* Premium Background Elements */}
-                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(124,102,220,0.15),transparent_70%)]" />
-                    <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] animate-pulse" />
-                    <div className="absolute bottom-[10%] left-[-5%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]" />
-
-                    {/* Subtle Grid */}
-                    <div className="absolute inset-0 opacity-[0.05]"
+            <main className="relative pt-24 pb-20 overflow-hidden">
+                {/* Cinematic Background System */}
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-white" />
+                    <div className="absolute inset-0 opacity-[0.4] mix-blend-multiply">
+                        <img src="/images/premium_light_tech_bg.png" className="w-full h-full object-cover" alt="" />
+                    </div>
+                    {/* Animated Technical Grids */}
+                    <div className="absolute inset-0 opacity-[0.03]"
                         style={{
-                            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-                            backgroundSize: '80px 80px'
+                            backgroundImage: `radial-gradient(circle at 1px 1px, #4f46e5 1px, transparent 0)`,
+                            backgroundSize: '40px 40px'
                         }}
+                    />
+                    <div className="absolute inset-0 opacity-10"
+                        style={{
+                            backgroundImage: `linear-gradient(#f1f5f9 1px, transparent 1px), linear-gradient(90deg, #f1f5f9 1px, transparent 1px)`,
+                            backgroundSize: '100px 100px'
+                        }}
+                    />
+
+                    {/* Cinematic Glows */}
+                    <motion.div
+                        animate={{
+                            scale: [1, 1.2, 1],
+                            opacity: [0.05, 0.1, 0.05]
+                        }}
+                        transition={{ duration: 10, repeat: Infinity }}
+                        className="absolute top-[-10%] left-[-10%] w-[1000px] h-[1000px] bg-indigo-600/10 rounded-full blur-[160px]"
+                    />
+                    <motion.div
+                        animate={{
+                            scale: [1.2, 1, 1.2],
+                            opacity: [0.03, 0.08, 0.03]
+                        }}
+                        transition={{ duration: 8, repeat: Infinity }}
+                        className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[140px]"
                     />
                 </div>
 
                 <div className="container relative z-10 mx-auto px-4 md:px-6">
-                    {/* Top Badge */}
-                    <div className="flex justify-center mb-20">
+                    {/* Top Center Product Name - Purple Background, White Letters */}
+                    <div className="flex justify-center pt-12 mb-8">
                         <motion.div
-                            initial={{ y: -20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-10 py-3 rounded-full font-black text-sm uppercase tracking-[0.3em] shadow-[0_10px_30px_rgba(124,102,220,0.3)] border border-white/20"
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="px-10 py-3.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black text-xs tracking-[0.5em] uppercase shadow-[0_10px_30px_rgba(124,102,220,0.3)] border border-white/20"
                         >
                             Training Programs
                         </motion.div>
                     </div>
 
-                    <div className="grid lg:grid-cols-2 gap-16 items-center">
-                        {/* Left Content */}
+                    <div className="grid lg:grid-cols-2 gap-16 items-center min-h-[90vh]">
+                        {/* Left Side: Cinematic Content */}
                         <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="flex flex-col space-y-10"
+                            initial={{ opacity: 0, x: -50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 1, delay: 0.2 }}
+                            className="text-slate-950 space-y-12"
                         >
-                            <div className="relative group">
-                                <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-[100px] group-hover:bg-purple-500/30 transition-all duration-700" />
+                            <div className="space-y-6">
                                 <motion.div
-                                    animate={{
-                                        y: [0, -15, 0],
-                                        rotate: [0, 2, 0]
-                                    }}
-                                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                                    className="relative z-10 w-full flex items-center justify-center"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="inline-flex items-center gap-3 px-6 py-2.5 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600 text-[10px] font-black tracking-[0.4em] uppercase"
                                 >
-                                    <img
-                                        src="/images/homeimage/training program.png"
-                                        alt="Training Programs Illustration"
-                                        className="w-full h-auto max-h-[400px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-                                    />
+                                    <div className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
+                                    <span>EXPERT-LED TRAINING</span>
                                 </motion.div>
+
+                                <h1 className="text-3xl sm:text-5xl md:text-6xl font-black leading-normal tracking-tighter pt-2 pb-6">
+                                    Unlock Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 italic inline-block pr-8 pb-1">Potential</span>
+                                </h1>
+
+                                <p className="text-lg md:text-xl text-slate-600 font-bold leading-relaxed max-w-xl">
+                                    Advanced skill development for the next generation of engineers. Stay ahead with our comprehensive curriculum.
+                                </p>
                             </div>
 
-                            <div className="space-y-8">
-                                <h1 className="text-4xl md:text-6xl font-black text-white leading-[1.1] tracking-tight">
-                                    Unlock Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">Potential</span> with <br />
-                                    Advanced Skills
-                                </h1>
-                                <p className="text-slate-400 font-bold text-lg md:text-xl leading-relaxed max-w-xl">
-                                    Comprehensive training designed for students seeking to stay ahead in today's rapid competitive landscape.
-                                </p>
-                                <div className="flex items-center gap-4 text-indigo-400 font-black text-sm uppercase tracking-widest">
-                                    <Zap className="w-5 h-5 fill-indigo-400" />
-                                    Learn • Grow • Succeed
+                            {/* Premium Mockup Display */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                transition={{ duration: 1, delay: 0.4 }}
+                                className="relative group"
+                            >
+                                <div className="absolute -inset-4 bg-indigo-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                                <div className="relative rounded-[2rem] overflow-hidden border-2 border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] bg-white aspect-video max-w-md">
+                                    <img
+                                        src="/images/training_programs_premium.png"
+                                        alt="Training Dashboard"
+                                        className="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10 pointer-events-none" />
                                 </div>
-                            </div>
+
+
+                            </motion.div>
                         </motion.div>
 
                         {/* Right Content: Contact Form */}
@@ -702,32 +733,32 @@ const TrainingProgramsPage = () => {
                             initial={{ opacity: 0, x: 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="bg-white/5 backdrop-blur-xl rounded-[3rem] p-10 md:p-14 border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.4)] relative group"
+                            className="bg-white/80 backdrop-blur-3xl rounded-[3rem] p-8 md:p-10 border border-indigo-50 shadow-[0_40px_100px_rgba(99,102,241,0.08)] relative group max-w-lg lg:ml-auto"
                         >
                             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent pointer-events-none" />
 
-                            <h2 className="text-3xl font-black text-white mb-10 text-center tracking-tight">Enquire Now</h2>
+                            <div className="text-center mb-8">
+                                <h2 className="text-3xl font-black text-slate-900 tracking-tight leading-none mb-3">Request Access</h2>
+                            </div>
 
-                            <form className="space-y-6 relative z-10">
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    <Input placeholder="First Name*" className="h-14 rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 px-7 focus:ring-2 focus:ring-purple-500/50 transition-all" />
-                                    <Input placeholder="Last Name*" className="h-14 rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 px-7 focus:ring-2 focus:ring-purple-500/50 transition-all" />
+                            <form className="space-y-5">
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <Input placeholder="First Name*" className="h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-indigo-500/20 transition-all text-sm" />
+                                    <Input placeholder="Last Name*" className="h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-indigo-500/20 transition-all text-sm" />
                                 </div>
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    <Input placeholder="Whatsapp No.*" className="h-14 rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 focus:ring-2 focus:ring-purple-500/50 transition-all" />
-                                    <Input placeholder="Email*" className="h-14 rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 focus:ring-2 focus:ring-purple-500/50 transition-all" />
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <Input placeholder="Whatsapp No.*" className="h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-indigo-500/20 transition-all text-sm" />
+                                    <Input placeholder="Email*" className="h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-indigo-500/20 transition-all text-sm" />
                                 </div>
-                                <Input placeholder="College Name*" className="h-14 rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 focus:ring-2 focus:ring-purple-500/50 transition-all" />
-                                <Input placeholder="City*" className="h-14 rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 focus:ring-2 focus:ring-purple-500/50 transition-all" />
-                                <Textarea
-                                    placeholder="Tell us what you're looking for..."
-                                    className="min-h-[120px] rounded-2xl border-white/10 bg-white/5 text-white placeholder:text-white/30 font-bold px-7 py-5 focus:ring-2 focus:ring-purple-500/50 transition-all resize-none"
-                                />
+                                <Input placeholder="College Name*" className="h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-indigo-500/20 transition-all text-sm" />
+                                <Textarea placeholder="Tell us what you're looking for..." className="min-h-[100px] rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold p-5 focus:ring-2 focus:ring-indigo-500/20 transition-all resize-none text-sm" />
 
-                                <Button className="w-full h-16 rounded-[2rem] bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black text-xl hover:opacity-90 transition-all shadow-xl active:scale-95 group/btn border-none mt-4">
-                                    Send Message
-                                    <Send className="ml-3 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                                </Button>
+                                <div className="flex justify-center mt-6">
+                                    <Button className="px-10 h-12 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black text-sm hover:shadow-[0_15px_30px_-10px_rgba(37,99,235,0.4)] hover:scale-[1.02] transition-all group/btn">
+                                        Get Started Now
+                                        <Rocket className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                    </Button>
+                                </div>
                             </form>
                         </motion.div>
                     </div>
@@ -735,8 +766,10 @@ const TrainingProgramsPage = () => {
                     {/* Our Training Programs Section */}
                     <div className="mt-48 space-y-20">
                         <div className="text-center space-y-4">
-                            <span className="text-purple-400 font-black text-sm uppercase tracking-[0.4em]">Expert Led</span>
-                            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter">Our Core Modules</h2>
+                            <span className="text-indigo-600 font-black text-sm uppercase tracking-[0.4em]">Expert Led</span>
+                            <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 leading-[1.2] pb-4">
+                                Our Core Modules
+                            </h2>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -747,7 +780,7 @@ const TrainingProgramsPage = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.05 }}
-                                    className="group relative bg-[#111] rounded-[2.5rem] p-8 border border-white/5 hover:border-purple-500/30 transition-all duration-500 overflow-hidden"
+                                    className="group relative bg-slate-50/50 rounded-[2.5rem] p-8 border border-indigo-100 hover:border-indigo-400/30 transition-all duration-500 overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(99,102,241,0.08)]"
                                 >
                                     {/* Texture & Glow */}
                                     <div className="absolute inset-0 z-0 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -756,30 +789,30 @@ const TrainingProgramsPage = () => {
                                     <div className="absolute -top-24 -right-24 w-48 h-48 bg-purple-600/10 rounded-full blur-[80px] group-hover:bg-purple-600/30 transition-all duration-500" />
 
                                     <div className="relative z-10 h-full flex flex-col">
-                                        <div className="relative overflow-hidden rounded-[2rem] aspect-[16/10] mb-8 bg-[#1a1a1a]">
+                                        <div className="relative overflow-hidden rounded-[2rem] aspect-[16/10] mb-8 bg-slate-50">
                                             <img
                                                 src={prog.img}
                                                 alt={prog.title}
                                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent opacity-60" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-60" />
                                         </div>
 
                                         <div className="space-y-4 flex-grow">
-                                            <h3 className="text-2xl font-black text-white tracking-tight">{prog.title}</h3>
-                                            <p className="text-slate-400 font-bold text-sm leading-relaxed line-clamp-2 italic">
+                                            <h3 className="text-2xl font-black text-indigo-600 tracking-tight">{prog.title}</h3>
+                                            <p className="text-slate-600 font-bold text-sm leading-relaxed line-clamp-2 italic">
                                                 {prog.desc}
                                             </p>
                                         </div>
 
-                                        <div className="flex items-center gap-4 mt-8 pt-8 border-t border-white/5">
+                                        <div className="flex items-center gap-4 mt-8 pt-8 border-t border-slate-100">
                                             <Button
                                                 onClick={() => setSelectedProgram(prog)}
-                                                className="flex-grow h-12 rounded-full bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-purple-500 hover:text-white transition-all shadow-lg active:scale-95"
+                                                className="flex-grow h-12 rounded-full bg-blue-600 text-white font-black text-xs uppercase tracking-widest hover:bg-blue-700 hover:text-white transition-all shadow-lg active:scale-95 border-none"
                                             >
                                                 Curriculum Details
                                             </Button>
-                                            <button className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all text-white">
+                                            <button className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-900 hover:text-white transition-all text-slate-900">
                                                 <Zap className="w-4 h-4 fill-current" />
                                             </button>
                                         </div>

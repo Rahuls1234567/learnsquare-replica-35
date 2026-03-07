@@ -1,19 +1,23 @@
 import { motion } from "framer-motion";
 
 const clientLogos = [
-  "/images/logo-1.png",
-  "/images/logo-2.png",
-  "/images/logo-3.png",
-  "/images/logo-4.png",
-  "/images/logo-5.png",
-  "/images/logo-6.png",
-  "/images/logo-7.png",
-  "/images/logo-8.png",
-  "/images/logo-9.png",
-  "/images/logo-10.png",
+  { src: "/images/logo-1.png", name: "Modern Educational Society" },
+  { src: "/images/logo-2.png", name: "Shree Ramachandra College of Engineering" },
+  { src: "/images/logo-3.png", name: "SHADAN" },
+  { src: "/images/logo-4.png", name: "GPREC" },
+  { src: "/images/logo-5.png", name: "SVIT" },
+  { src: "/images/logo-6.png", name: "City Chalapathi" },
+  { src: "/images/logo-7.png", name: "Malla Reddy University" },
+  { src: "/images/logo-8.png", name: "Institution 8" },
+  { src: "/images/logo-9.png", name: "Institution 9" },
+  { src: "/images/logo-10.png", name: "Institution 10" },
 ];
 
-const ClientsLogoBar = () => {
+interface ClientsLogoBarProps {
+  onLogoClick?: (institution: string) => void;
+}
+
+const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
   return (
     <section className="py-24 relative overflow-hidden bg-white">
 
@@ -78,15 +82,19 @@ const ClientsLogoBar = () => {
               repeat: Infinity,
             }}
           >
-            {[...clientLogos, ...clientLogos].map((src, idx) => (
-              <div key={idx} className="px-5 md:px-7 shrink-0 relative group">
+            {[...clientLogos, ...clientLogos].map((logo, idx) => (
+              <div
+                key={idx}
+                className="px-5 md:px-7 shrink-0 relative group"
+                onClick={() => onLogoClick?.(logo.name)}
+              >
                 {/* Colorful shadow that blooms on hover */}
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-indigo-400 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500" />
 
                 <div className="relative flex items-center justify-center w-[110px] h-[110px] sm:w-[140px] sm:h-[140px] md:w-[170px] md:h-[170px] bg-white/95 backdrop-blur-md rounded-2xl md:rounded-3xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1),0_0_0_1px_rgba(255,255,255,1)] transition-all duration-300 hover:scale-[1.12] hover:-translate-y-2 cursor-pointer z-10">
                   <img
-                    src={src}
-                    alt={`Partner institution logo`}
+                    src={logo.src}
+                    alt={logo.name}
                     loading="lazy"
                     className="max-w-[75%] max-h-[75%] object-contain relative z-10 transition-transform duration-300 group-hover:scale-105"
                   />

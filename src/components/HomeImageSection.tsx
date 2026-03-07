@@ -159,19 +159,18 @@ const HomeImageSection = () => {
                         </div>
                     </div>
 
-                    {/* Features Grid - Refined Cards */}
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-5">
                         {[
-                            { num: '01', title: 'ACADEMICS MANAGEMENT', desc: 'End to End Management of College Academics, Daily Classes, Students Progress, Communication to Faculty & Students and all Day to Day Activities', icon: GraduationCap, color: 'from-blue-500 to-indigo-600', shadow: 'shadow-blue-500/20' },
-                            { num: '02', title: 'ADMINISTRATION MANAGEMENT', desc: 'End-End Management of College Faculty, Students, Staff, Fee Payments, Daily Ops, Payrolls and Many More', icon: Building2, color: 'from-rose-500 to-pink-600', shadow: 'shadow-rose-500/20' },
-                            { num: '03', title: 'EXAMINATION MANAGEMENT', desc: 'Complete Examination Management which Covers Exam Schedule, Online Tests, Results & Analytics', icon: FileCheck, color: 'from-amber-500 to-orange-600', shadow: 'shadow-amber-500/20' },
-                            { num: '04', title: 'PLACEMENT MANAGEMENT', desc: 'End to End Management of Campus Placements from 1st Stage till Last Stage along with Historical Data Analyses', icon: Briefcase, color: 'from-emerald-500 to-teal-600', shadow: 'shadow-emerald-500/20' },
-                            { num: '05', title: 'LEARNING MANAGEMENT', desc: 'Interactive LMS with Various Content Types along with Online Tests, Coding Compiler and Several Other Functionalities', icon: Laptop, color: 'from-purple-500 to-fuchsia-600', shadow: 'shadow-purple-500/20' },
-                            { num: '06', title: 'LIBRARY MANAGEMENT', desc: 'Library Books and Asset Management Tracking, Book Issues/Returns and Reminders along with Several Other Functionalities', icon: Library, color: 'from-cyan-500 to-blue-600', shadow: 'shadow-cyan-500/20' },
-                            { num: '07', title: 'TRANSPORT MANAGEMENT', desc: 'LIVE Bus Tracking, Maintenance of Vehicle Documents & Records, Manage Drivers Payrolls & other Functionalities', icon: Bus, color: 'from-orange-500 to-red-600', shadow: 'shadow-orange-500/20' },
-                            { num: '08', title: 'HOSTEL MANAGEMENT', desc: 'Hostel Allotment, Live Tracking Students, Hostel Fee Management, Inventory, Due List & Reports', icon: BedDouble, color: 'from-indigo-500 to-violet-600', shadow: 'shadow-indigo-500/20' },
-                            { num: '09', title: 'PARENT MANAGEMENT', desc: 'Send Various Notifications to Parents, Fee Reminders, Send Attendance Information along with Several other Relevant College Updates', icon: Users, color: 'from-pink-500 to-rose-600', shadow: 'shadow-pink-500/20' },
-                            { num: '10', title: 'COMMUNICATION MANAGEMENT', desc: 'Stay Connected with Entire Campus and Send Various Information Via SMS, WhatsApp, Push Notifications & E-Mails', icon: MessageSquare, color: 'from-teal-500 to-emerald-600', shadow: 'shadow-teal-500/20' }
+                            { num: '01', title: 'PARENT MANAGEMENT', desc: 'Send Various Notifications to Parents, Fee Reminders, Send Attendance Information along with Several other Relevant College Updates', icon: Users, color: 'from-pink-500 to-rose-600', shadow: 'shadow-pink-500/20' },
+                            { num: '02', title: 'COMMUNICATION MANAGEMENT', desc: 'Stay Connected with Entire Campus and Send Various Information Via SMS, WhatsApp, Push Notifications & E-Mails', icon: MessageSquare, color: 'from-teal-500 to-emerald-600', shadow: 'shadow-teal-500/20' },
+                            { num: '03', title: 'ACADEMICS MANAGEMENT', desc: 'End to End Management of College Academics, Daily Classes, Students Progress, Communication to Faculty & Students and all Day to Day Activities', icon: GraduationCap, color: 'from-blue-500 to-indigo-600', shadow: 'shadow-blue-500/20' },
+                            { num: '04', title: 'ADMINISTRATION MANAGEMENT', desc: 'End-End Management of College Faculty, Students, Staff, Fee Payments, Daily Ops, Payrolls and Many More', icon: Building2, color: 'from-rose-500 to-pink-600', shadow: 'shadow-rose-500/20' },
+                            { num: '05', title: 'EXAMINATION MANAGEMENT', desc: 'Complete Examination Management which Covers Exam Schedule, Online Tests, Results & Analytics', icon: FileCheck, color: 'from-amber-500 to-orange-600', shadow: 'shadow-amber-500/20' },
+                            { num: '06', title: 'PLACEMENT MANAGEMENT', desc: 'End to End Management of Campus Placements from 1st Stage till Last Stage along with Historical Data Analyses', icon: Briefcase, color: 'from-emerald-500 to-teal-600', shadow: 'shadow-emerald-500/20' },
+                            { num: '07', title: 'LEARNING MANAGEMENT', desc: 'Interactive LMS with Various Content Types along with Online Tests, Coding Compiler and Several Other Functionalities', icon: Laptop, color: 'from-purple-500 to-fuchsia-600', shadow: 'shadow-purple-500/20' },
+                            { num: '08', title: 'LIBRARY MANAGEMENT', desc: 'Library Books and Asset Management Tracking, Book Issues/Returns and Reminders along with Several Other Functionalities', icon: Library, color: 'from-cyan-500 to-blue-600', shadow: 'shadow-cyan-500/20' },
+                            { num: '09', title: 'TRANSPORT MANAGEMENT', desc: 'LIVE Bus Tracking, Maintenance of Vehicle Documents & Records, Manage Drivers Payrolls & other Functionalities', icon: Bus, color: 'from-orange-500 to-red-600', shadow: 'shadow-orange-500/20' },
+                            { num: '10', title: 'HOSTEL MANAGEMENT', desc: 'Hostel Allotment, Live Tracking Students, Hostel Fee Management, Inventory, Due List & Reports', icon: BedDouble, color: 'from-indigo-500 to-violet-600', shadow: 'shadow-indigo-500/20' },
                         ].map((management, i) => (
                             <motion.div
                                 key={management.num}
@@ -273,7 +272,7 @@ const HomeImageSection = () => {
                                     viewport={{ once: true }}
                                     className="space-y-4"
                                 >
-                                    <h2 className="text-3xl sm:text-5xl xl:text-7xl font-black text-white tracking-[-0.05em] leading-[1.05]">
+                                    <h2 className="text-3xl sm:text-5xl xl:text-6xl font-black text-white tracking-[-0.05em] leading-[1.05]">
                                         The Next Gen <br />
                                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 italic inline-block pr-8">Coding Compiler</span>
                                     </h2>
@@ -337,7 +336,7 @@ const HomeImageSection = () => {
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.1 * i }}
                                     whileHover={{ y: -8, scale: 1.02 }}
-                                    className="p-4 sm:p-8 rounded-2xl sm:rounded-[2.5rem] bg-white/5 backdrop-blur-3xl border border-white/10 hover:bg-white/[0.08] hover:border-indigo-500/30 transition-all duration-500 group relative overflow-hidden"
+                                    className="p-4 sm:p-6 rounded-xl sm:rounded-[1.5rem] bg-white/5 backdrop-blur-3xl border border-white/10 hover:bg-white/[0.08] hover:border-indigo-500/30 transition-all duration-500 group relative overflow-hidden"
                                 >
                                     {/* Floating Glow Fragment */}
                                     <div className="absolute -right-10 -top-10 w-24 h-24 bg-indigo-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />

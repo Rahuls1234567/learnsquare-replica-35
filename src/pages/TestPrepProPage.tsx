@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Rocket, Star } from "lucide-react";
 
 const TestPrepProPage = () => {
     return (
@@ -12,148 +13,152 @@ const TestPrepProPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="min-h-screen bg-[#050505] relative overflow-x-hidden font-outfit"
+            className="min-h-screen bg-[#f8fafc] relative overflow-x-hidden font-outfit"
         >
             <Navbar />
 
-            <main className="relative pt-32 pb-20">
-                {/* Premium Background Elements */}
-                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex flex-col justify-between">
-                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(124,102,220,0.15),transparent_70%)]" />
-                    <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] animate-pulse" />
-                    <div className="absolute bottom-[10%] left-[-5%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]" />
-
-                    {/* Subtle Grid */}
-                    <div className="absolute inset-0 opacity-[0.05]"
+            <main className="relative pt-24 pb-20 overflow-hidden">
+                {/* Cinematic Background System */}
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-white" />
+                    <div className="absolute inset-0 opacity-[0.4] mix-blend-multiply">
+                        <img src="/images/premium_light_tech_bg.png" className="w-full h-full object-cover" alt="" />
+                    </div>
+                    {/* Animated Technical Grids */}
+                    <div className="absolute inset-0 opacity-[0.03]"
                         style={{
-                            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-                            backgroundSize: '80px 80px'
+                            backgroundImage: `radial-gradient(circle at 1px 1px, #3b82f6 1px, transparent 0)`,
+                            backgroundSize: '40px 40px'
                         }}
+                    />
+                    <div className="absolute inset-0 opacity-10"
+                        style={{
+                            backgroundImage: `linear-gradient(#f1f5f9 1px, transparent 1px), linear-gradient(90deg, #f1f5f9 1px, transparent 1px)`,
+                            backgroundSize: '100px 100px'
+                        }}
+                    />
+
+                    {/* Cinematic Glows */}
+                    <motion.div
+                        animate={{
+                            scale: [1, 1.2, 1],
+                            opacity: [0.05, 0.12, 0.05]
+                        }}
+                        transition={{ duration: 10, repeat: Infinity }}
+                        className="absolute top-[-10%] right-[-10%] w-[1000px] h-[1000px] bg-blue-600/10 rounded-full blur-[160px]"
+                    />
+                    <motion.div
+                        animate={{
+                            scale: [1.2, 1, 1.2],
+                            opacity: [0.03, 0.08, 0.03]
+                        }}
+                        transition={{ duration: 8, repeat: Infinity }}
+                        className="absolute bottom-[-10%] left-[-10%] w-[800px] h-[800px] bg-indigo-600/10 rounded-full blur-[140px]"
                     />
                 </div>
 
-                <div className="container relative z-10 flex flex-col items-center">
-
-                    {/* Header Section */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7 }}
-                        className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16 space-y-4"
-                    >
-                        {/* Top Badge */}
-                        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-10 py-3 rounded-full font-black text-sm uppercase tracking-[0.3em] shadow-[0_10px_30px_rgba(124,102,220,0.3)] border border-white/20">
-                            Test Prep - Pro
-                        </div>
-                    </motion.div>
-
-                    <div className="grid lg:grid-cols-2 gap-12 w-full items-stretch max-w-7xl mx-auto px-4">
-
-                        {/* Left Column: Hero Content & Illustration */}
+                <div className="container relative z-10 mx-auto px-4 md:px-6">
+                    {/* Top Center Product Name - Purple Background, White Letters */}
+                    <div className="flex justify-center pt-12 mb-8">
                         <motion.div
-                            initial={{ opacity: 0, x: -40 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
-                            className="flex flex-col justify-between h-full py-6 space-y-10"
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="px-10 py-3.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black text-xs tracking-[0.5em] uppercase shadow-[0_10px_30px_rgba(124,102,220,0.3)] border border-white/20"
                         >
-                            <div className="relative group flex justify-center">
-                                <div className="absolute inset-0 bg-indigo-500/10 rounded-full blur-[100px] group-hover:bg-indigo-500/20 transition-all duration-700" />
+                            Test Prep Pro
+                        </motion.div>
+                    </div>
+                    <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center min-h-[85vh]">
+                        {/* Left Side: Cinematic Content */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 1, delay: 0.2 }}
+                            className="text-slate-950 space-y-12"
+                        >
+                            <div className="space-y-6 text-center lg:text-left">
                                 <motion.div
-                                    animate={{
-                                        y: [0, -15, 0],
-                                        rotate: [0, 1, 0]
-                                    }}
-                                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                                    className="relative z-10 w-full flex items-center justify-center p-4"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="inline-flex items-center gap-3 px-6 py-2.5 rounded-2xl bg-blue-50 border border-blue-100 text-blue-600 text-[10px] font-black tracking-[0.4em] uppercase"
                                 >
-                                    <img
-                                        src="/images/test_prep_pro_hero.png"
-                                        alt="Assessment Platform Illustration"
-                                        className="object-contain w-full max-w-[420px] filter drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-                                    />
+                                    <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
+                                    <span>NEXT-GEN ASSESSMENT</span>
                                 </motion.div>
-                            </div>
 
-                            <div className="space-y-6 text-left">
-                                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] tracking-tight">
-                                    Adaptive <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400">Assessment</span> <br />
-                                    <span className="text-white/60">Platform</span>
+                                <h1 className="text-3xl sm:text-5xl md:text-6xl font-black leading-normal tracking-tighter pt-2 pb-6 text-center lg:text-left">
+                                    Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 italic inline-block pr-8 pb-1">Testing</span>
                                 </h1>
-                                <p className="text-lg md:text-xl text-slate-400 font-bold max-w-xl leading-relaxed">
-                                    Precision testing for students preparing for high-stakes recruitment and technical tests.
+
+                                <p className="text-lg md:text-xl text-slate-500 font-bold leading-relaxed max-w-xl mx-auto lg:mx-0">
+                                    Adaptive assessment platform for high-stakes recruitment and technical excellence.
                                 </p>
                             </div>
+
+                            {/* Premium Mockup Display */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                transition={{ duration: 1, delay: 0.4 }}
+                                className="relative group max-w-[500px] mx-auto lg:mx-0"
+                            >
+                                <div className="absolute -inset-4 bg-blue-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                                <div className="relative rounded-[2rem] overflow-hidden border-2 border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] bg-white aspect-video max-w-md">
+                                    <img
+                                        src="/images/test_prep_pro_premium.png"
+                                        alt="TestPrep Dashboard"
+                                        className="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10 pointer-events-none" />
+                                </div>
+                            </motion.div>
                         </motion.div>
 
-                        {/* Right Column: Contact Form */}
+                        {/* Right Side: Premium Glassmorphic Form */}
                         <motion.div
-                            initial={{ opacity: 0, x: 40 }}
+                            initial={{ opacity: 0, x: 50 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
-                            className="bg-white/5 backdrop-blur-xl rounded-[3rem] p-10 md:p-14 border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.4)] relative group flex flex-col justify-center"
+                            transition={{ duration: 1, delay: 0.3 }}
+                            className="relative"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent pointer-events-none" />
+                            <div className="absolute -inset-10 bg-indigo-500/5 blur-[100px] rounded-full pointer-events-none" />
 
-                            <h3 className="text-3xl font-black text-center text-white mb-10 tracking-tight">
-                                Enquire Now
-                            </h3>
-
-                            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <Input
-                                        placeholder="First Name*"
-                                        className="h-14 bg-white/5 border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500/40 transition-all text-white placeholder:text-white/20 px-7 font-bold"
-                                    />
-                                    <Input
-                                        placeholder="Last Name*"
-                                        className="h-14 bg-white/5 border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500/40 transition-all text-white placeholder:text-white/20 px-7 font-bold"
-                                    />
+                            <div className="relative bg-white/70 backdrop-blur-3xl rounded-[3rem] p-8 md:p-10 border border-indigo-50 shadow-[0_40px_100px_rgba(99,102,241,0.06)] max-w-lg lg:ml-auto">
+                                <div className="text-center mb-8">
+                                    <h2 className="text-3xl font-black text-slate-950 tracking-tight mb-3">Request Access</h2>
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <Input
-                                        placeholder="Whatsapp No.*"
-                                        className="h-14 bg-white/5 border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500/40 transition-all text-white placeholder:text-white/20 px-7 font-bold"
-                                    />
-                                    <Input
-                                        placeholder="Email*"
-                                        type="email"
-                                        className="h-14 bg-white/5 border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500/40 transition-all text-white placeholder:text-white/20 px-7 font-bold"
-                                    />
-                                </div>
+                                <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+                                    <div className="grid md:grid-cols-2 gap-4">
+                                        <Input placeholder="First Name*" className="h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-blue-500/20 transition-all text-sm" />
+                                        <Input placeholder="Last Name*" className="h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-blue-500/20 transition-all text-sm" />
+                                    </div>
+                                    <div className="grid md:grid-cols-2 gap-4">
+                                        <Input placeholder="Whatsapp No.*" className="h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-blue-500/20 transition-all text-sm" />
+                                        <Input placeholder="Email*" className="h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-blue-500/20 transition-all text-sm" />
+                                    </div>
+                                    <Input placeholder="College Name*" className="h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-blue-500/20 transition-all text-sm" />
+                                    <Textarea placeholder="Tell us about your preparation goals..." className="min-h-[100px] rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold p-5 focus:ring-2 focus:ring-blue-500/20 transition-all resize-none text-sm" />
 
-                                <Input
-                                    placeholder="College Name*"
-                                    className="h-14 bg-white/5 border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500/40 transition-all text-white placeholder:text-white/20 px-7 font-bold"
-                                />
-
-                                <Textarea
-                                    placeholder="Message*"
-                                    className="min-h-[120px] bg-white/5 border-white/10 rounded-2xl focus:ring-2 focus:ring-purple-500/40 transition-all text-white placeholder:text-white/20 px-7 pt-5 font-bold resize-none"
-                                />
-
-                                <div className="flex justify-center pt-4">
-                                    <Button
-                                        type="submit"
-                                        className="w-full h-16 bg-gradient-to-r from-purple-600 to-indigo-600 hover:opacity-90 text-white font-black text-xl rounded-[2rem] transition-all duration-300 shadow-xl active:scale-95"
-                                    >
-                                        Submit !!
-                                    </Button>
-                                </div>
-                            </form>
+                                    <div className="flex justify-center mt-6">
+                                        <Button className="px-10 h-12 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black text-sm hover:shadow-[0_15px_30px_-10px_rgba(37,99,235,0.4)] hover:scale-[1.02] transition-all group/btn shadow-xl border-none">
+                                            Join Prep Pro
+                                            <Rocket className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                        </Button>
+                                    </div>
+                                </form>
+                            </div>
                         </motion.div>
-
                     </div>
                 </div>
             </main>
 
             {/* Key Features Section */}
-            <section className="py-32 bg-[#080808] relative overflow-hidden">
+            <section className="py-32 bg-white relative overflow-hidden">
                 {/* Background Textures */}
                 <div className="absolute inset-0 opacity-[0.03] z-0"
                     style={{
-                        backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+                        backgroundImage: `linear-gradient(#f1f5f9 1px, transparent 1px), linear-gradient(90deg, #f1f5f9 1px, transparent 1px)`,
                         backgroundSize: '40px 40px'
                     }}
                 />
@@ -163,15 +168,11 @@ const TestPrepProPage = () => {
 
                         {/* Title Card */}
                         <div className="lg:col-span-1 flex flex-col justify-center space-y-6">
-                            <span className="text-purple-400 font-black text-sm uppercase tracking-[0.4em]">Advanced Features</span>
-                            <h2 className="text-5xl lg:text-7xl font-black text-white tracking-tighter">Precision Testing</h2>
-                            <div className="p-4 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
-                                <code className="text-[12px] text-purple-300/60 font-mono break-all leading-relaxed">
-                                    SELECT * FROM 'prep_engine' <br />
-                                    WHERE integrity='high' <br />
-                                    AND accuracy='100%'
-                                </code>
-                            </div>
+                            <span className="text-indigo-600 font-black text-sm uppercase tracking-[0.4em]">Advanced Features</span>
+                            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 leading-[1.2] pb-4">
+                                Precision Testing
+                            </h2>
+
                         </div>
 
                         {[
@@ -212,18 +213,18 @@ const TestPrepProPage = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: idx * 0.05 }}
-                                className="group relative bg-[#111] rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-10 border border-white/5 hover:border-purple-500/30 transition-all duration-500"
+                                className="group relative bg-slate-50/50 rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-10 border border-indigo-100 hover:border-indigo-400/30 transition-all duration-500 shadow-sm hover:shadow-[0_20px_40px_rgba(99,102,241,0.08)]"
                             >
                                 <div className="absolute inset-0 z-0 opacity-10 group-hover:opacity-20 transition-opacity">
                                     <img src="/images/card_premium_texture.png" className="w-full h-full object-cover" alt="" />
                                 </div>
                                 <div className="relative z-10 space-y-6">
-                                    <div className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-xl shadow-purple-600/20 group-hover:scale-110 transition-transform">
+                                    <div className="w-10 h-10 sm:w-14 sm:h-14 bg-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-xl shadow-blue-600/20 group-hover:scale-110 transition-transform">
                                         {feature.icon}
                                     </div>
                                     <div className="space-y-2 sm:space-y-4">
-                                        <h3 className="text-sm sm:text-2xl font-black text-white tracking-tight leading-tight">{feature.title}</h3>
-                                        <p className="text-slate-400 font-bold text-[9px] sm:text-sm leading-relaxed italic line-clamp-3 sm:line-clamp-none">
+                                        <h3 className="text-sm sm:text-2xl font-black text-indigo-600 tracking-tight leading-tight">{feature.title}</h3>
+                                        <p className="text-slate-600 font-bold text-[9px] sm:text-sm leading-relaxed italic line-clamp-3 sm:line-clamp-none">
                                             {feature.desc}
                                         </p>
                                     </div>

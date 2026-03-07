@@ -213,6 +213,70 @@ const features = [
 const coreModulesData = [
     {
         pillText: "Core Module",
+        titlePrefix: "Parent",
+        titleHighlight: "Management",
+        gradientText: "from-pink-600 to-rose-600",
+        theme: {
+            pillBg: "bg-pink-50 border-pink-100",
+            pillDot: "bg-pink-500 shadow-[0_0_10px_rgba(236,72,153,0.4)]",
+            pillText: "text-pink-600",
+            glow1: "bg-pink-300/20",
+            glow2: "bg-rose-300/20",
+            iconBg: "bg-pink-50",
+            iconBgHover: "group-hover/item:bg-pink-500",
+            iconBorder: "border-pink-100",
+            iconBorderHover: "group-hover/item:border-pink-500",
+            iconText: "text-pink-500",
+            imageGlow: "from-pink-400/10 to-rose-400/10",
+            imageBacking: "from-pink-400/15 to-rose-400/15"
+        },
+        imageSrc: "/images/homeimage/parent_mgmt_premium.png",
+        imageAlt: "Parent Management Dashboard",
+        isImageRight: true,
+        listItems: [
+            "Send Instant Notifications to Parents via App, SMS & WhatsApp",
+            "Automated Fee Reminders & Payment Status Updates",
+            "Real-time Attendance Alerts & Monthly Progress Reports",
+            "Performance Analytics & Exam Result Notifications",
+            "Virtual Parent-Teacher Meeting (PTM) Scheduling",
+            "Digital Consent Forms & Survey Participations",
+            "Track Child's Academic Journey & Campus Activities"
+        ]
+    },
+    {
+        pillText: "Core Module",
+        titlePrefix: "Communication",
+        titleHighlight: "Management",
+        gradientText: "from-teal-600 to-emerald-600",
+        theme: {
+            pillBg: "bg-teal-50 border-teal-100",
+            pillDot: "bg-teal-500 shadow-[0_0_10px_rgba(20,184,166,0.4)]",
+            pillText: "text-teal-600",
+            glow1: "bg-teal-300/20",
+            glow2: "bg-emerald-300/20",
+            iconBg: "bg-teal-50",
+            iconBgHover: "group-hover/item:bg-teal-500",
+            iconBorder: "border-teal-100",
+            iconBorderHover: "group-hover/item:border-teal-500",
+            iconText: "text-teal-500",
+            imageGlow: "from-teal-400/10 to-emerald-400/10",
+            imageBacking: "from-teal-400/15 to-emerald-400/15"
+        },
+        imageSrc: "/images/homeimage/comm_mgmt_premium.png",
+        imageAlt: "Communication Management Dashboard",
+        isImageRight: false,
+        listItems: [
+            "Centralized Multi-Channel Alert System (SMS, WhatsApp, Email, Push)",
+            "Automated Circular Distribution to Campus Stakeholders",
+            "Emergency Alerts & Real-time Update Broadcasting",
+            "Scheduled Notifications & Reminders",
+            "Two-way Communication Stream for Faculty and Students",
+            "AI-Powered Auto Responders for Common Queries",
+            "In-depth Delivery Reports & Analytics"
+        ]
+    },
+    {
+        pillText: "Integrated Module",
         titlePrefix: "Academic",
         titleHighlight: "Management",
         gradientText: "from-indigo-600 to-purple-600",
@@ -233,30 +297,18 @@ const coreModulesData = [
         imageSrc: "/images/homeimage/report1_premium.png",
         imageAlt: "Academic Management Dashboard",
         isImageRight: true,
-        mockupData: {
-            stats: [
-                { label: "Attendance", value: 5, color: "bg-indigo-500" },
-                { label: "Syllabus", value: 4, color: "bg-rose-500" },
-                { label: "CO-PO Map", value: 5, color: "bg-indigo-500" },
-                { label: "Assignments", value: 3, color: "bg-rose-500" },
-            ],
-            gauges: [88, 72],
-            chartLabel: "Academic Performance Index"
-        },
         listItems: [
             "Complete Track of Campus Academics",
             "NEP 2020 Compliant",
             "Automated CO PO Mapping and Attainment Calculation",
-            "Automated Time Table, Lesson Plan Tracking, Syllabus Coverage Progress and Alerts",
-            "Conduct Unlimited Online Classes with Unlimited Students at ZERO Cost",
-            "Dedicated Test Engine for Seamless Online Exam Conduction",
-            "Customized Dashboards to Monitor Daily Progress/Activities",
-            "Digital Approvals which Saves Abundant Amount of Time & Paper",
+            "Automated Time Table, Lesson Plan Tracking, Syllabus Coverage Progress",
+            "Conduct Unlimited Online Classes with Zero Extra Cost",
+            "Dedicated Test Engine for Online Exam Conduction",
             "Generation of University Compliance Reports"
         ]
     },
     {
-        pillText: "Core Module",
+        pillText: "Integrated Module",
         titlePrefix: "Administration",
         titleHighlight: "Management",
         gradientText: "from-emerald-600 to-teal-600",
@@ -277,20 +329,9 @@ const coreModulesData = [
         imageSrc: "/images/homeimage/report2_premium.png",
         imageAlt: "Administration Management Dashboard",
         isImageRight: false,
-        mockupData: {
-            stats: [
-                { label: "Staff Attd.", value: 5, color: "bg-emerald-500" },
-                { label: "Fee Dues", value: 2, color: "bg-amber-500" },
-                { label: "Inventory", value: 4, color: "bg-emerald-500" },
-                { label: "Invoices", value: 5, color: "bg-amber-500" },
-            ],
-            gauges: [94, 65],
-            chartLabel: "Efficiency Matrix"
-        },
         listItems: [
             "Track Employee, Staff Attendance and Process Automated Pay Rolls",
-            "Fee Dues Management",
-            "New Admissions Management",
+            "Fee Dues Management & New Admissions Management",
             "Enquiries Handling & Visitor Management",
             "Effective Leave Management System",
             "Generation of Invoices & Receives as per Std. Templates",
@@ -298,7 +339,7 @@ const coreModulesData = [
         ]
     },
     {
-        pillText: "Core Module",
+        pillText: "Integrated Module",
         titlePrefix: "Examination",
         titleHighlight: "Management",
         gradientText: "from-cyan-600 to-blue-600",
@@ -319,33 +360,18 @@ const coreModulesData = [
         imageSrc: "/images/homeimage/report3_premium.png",
         imageAlt: "Examination Management Dashboard",
         isImageRight: true,
-        mockupData: {
-            stats: [
-                { label: "Exam Reg.", value: 5, color: "bg-blue-500" },
-                { label: "Evaluation", value: 4, color: "bg-cyan-500" },
-                { label: "Result Pub.", value: 5, color: "bg-blue-500" },
-                { label: "Mark Sheets", value: 4, color: "bg-cyan-500" },
-            ],
-            gauges: [98, 85],
-            chartLabel: "Grading Curves"
-        },
         listItems: [
             "Launching Examination Registration",
-            "Auto Generation of Examination Time Tables, Seating Plans, Invigilation Details, etc.",
+            "Auto Generation of Exam Time Tables, Seating Plans",
             "Online Student Attendance for Examinations",
-            "Setting Rules for Examination Evaluation",
-            "Bulk Generation of Hall Tickets and Issuing the Same to Students Subject to Defined Conditions",
-            "Generation of Promotion/Detention List based on Conditions",
+            "Bulk Generation of Hall Tickets",
             "Calculations of Gradings/Percentages based on Conditions",
-            "Manual Evaluation/ Bulk Uploading of the Marks Scored by Students",
-            "Digital Evaluation",
-            "Publishing of Results",
-            "Generation of Mark Sheets & Certificates as per the Templates",
-            "Result Analyses, Reports along with Customised Analytics"
+            "Publishing of Results & Mark sheet generation",
+            "Result Analyses with Customised Analytics"
         ]
     },
     {
-        pillText: "Core Module",
+        pillText: "Integrated Module",
         titlePrefix: "Placement",
         titleHighlight: "Management",
         gradientText: "from-amber-600 to-orange-600",
@@ -366,29 +392,17 @@ const coreModulesData = [
         imageSrc: "/images/homeimage/report4_premium.png",
         imageAlt: "Placement Management Dashboard",
         isImageRight: false,
-        mockupData: {
-            stats: [
-                { label: "Companies", value: 5, color: "bg-orange-500" },
-                { label: "Offers", value: 4, color: "bg-amber-500" },
-                { label: "Interviews", value: 5, color: "bg-orange-500" },
-                { label: "Alumni", value: 4, color: "bg-amber-500" },
-            ],
-            gauges: [78, 62],
-            chartLabel: "Placement Velocity"
-        },
         listItems: [
             "Maintain Companies Information at One Place",
             "Maintain Placement History for Data-Driven Insights",
             "Publishing Placement Drives Information",
             "Create Eligible Students List in a Few Clicks",
-            "Conduct Online Assessments",
-            "Conduct Online Interviews",
-            "Publishing Results",
-            "Maintaining Alumni Details"
+            "Conduct Online Assessments & Interviews",
+            "Maintaining Detailed Alumni History"
         ]
     },
     {
-        pillText: "Core Module",
+        pillText: "Integrated Module",
         titlePrefix: "Learning",
         titleHighlight: "Management",
         gradientText: "from-rose-600 to-red-600",
@@ -409,37 +423,17 @@ const coreModulesData = [
         imageSrc: "/images/homeimage/report5_premium.png",
         imageAlt: "Learning Management Dashboard",
         isImageRight: true,
-        mockupData: {
-            stats: [
-                { label: "Video Watch", value: 5, color: "bg-red-500" },
-                { label: "Assignments", value: 3, color: "bg-rose-500" },
-                { label: "Code Practice", value: 5, color: "bg-red-500" },
-                { label: "Mock Tests", value: 4, color: "bg-rose-500" },
-            ],
-            gauges: [85, 45],
-            chartLabel: "Learner Engagement"
-        },
         listItems: [
-            "Access to the Department through a Mobile App",
-            "Multi-Language Coding Compiler for Coding Practice and Hackathons",
-            "Access to Semester Exam Content",
-            "Access to Placement Exam Video Courses",
-            "Access to Study Material Published by Faculty",
-            "Submit Assignments/Projects Online",
-            "Social Networking with Peer Groups / Fellow Students",
-            "Join Clubs which brings like-minded students to a Single Place",
-            "Download Hall Tickets, Results, Mark Sheets",
-            "Raise Digital Requests",
-            "Stay in Touch with your Mentor through Chat Facility",
-            "Fee Reminders & Payments through the App",
-            "Track the Live Status of the Bus",
-            "Reserve a Book in the Library and Return Reminders",
-            "Book Hostel Rooms",
-            "Share your thoughts with College on the College Social Networking Platform"
+            "Department Access through Mobile App",
+            "Multi-Language Coding Compiler for Practice",
+            "Access to Semester and Placement Prep Content",
+            "Online Assignment & Project Submission",
+            "Digital Requests & Faculty Chat Facility",
+            "Hall Ticket & Result Downloads via App"
         ]
     },
     {
-        pillText: "Core Module",
+        pillText: "Integrated Module",
         titlePrefix: "Library",
         titleHighlight: "Management",
         gradientText: "from-yellow-600 to-amber-600",
@@ -460,28 +454,16 @@ const coreModulesData = [
         imageSrc: "/images/homeimage/report6_premium.png",
         imageAlt: "Library Management Dashboard",
         isImageRight: false,
-        mockupData: {
-            stats: [
-                { label: "Book Issues", value: 5, color: "bg-amber-500" },
-                { label: "Overdue", value: 1, color: "bg-yellow-500" },
-                { label: "Reservations", value: 4, color: "bg-amber-500" },
-                { label: "New Titles", value: 3, color: "bg-yellow-500" },
-            ],
-            gauges: [92, 58],
-            chartLabel: "Circulation Index"
-        },
         listItems: [
-            "Maintain a List of Books/Titles/Journals",
-            "Track Book Issue/Return",
-            "Generate Overdue List",
-            "Send Alerts",
-            "Track Book Reservations",
-            "Collect Late Fee/ Fine",
-            "Generate Various Reports"
+            "Maintain List of Books/Titles/Journals",
+            "Track Book Issue/Return & Reservations",
+            "Automated Overdue List & Alerts",
+            "Late Fee Collection & Management",
+            "Comprehensive Circulation Analytics"
         ]
     },
     {
-        pillText: "Core Module",
+        pillText: "Integrated Module",
         titlePrefix: "Transportation",
         titleHighlight: "Management",
         gradientText: "from-purple-600 to-indigo-600",
@@ -497,35 +479,21 @@ const coreModulesData = [
             iconBorderHover: "group-hover/item:border-purple-500",
             iconText: "text-purple-500",
             imageGlow: "from-purple-400/10 to-indigo-400/10",
-            imageBacking: "from-purple-400/15 to-indigo-400/15"
+            imageBacking: "from-purple-400/15 to-purple-400/15"
         },
         imageSrc: "/images/homeimage/report7_premium.png",
         imageAlt: "Transportation Management Dashboard",
         isImageRight: true,
-        mockupData: {
-            stats: [
-                { label: "Bus Routes", value: 5, color: "bg-indigo-500" },
-                { label: "Fuel Efficiency", value: 4, color: "bg-purple-500" },
-                { label: "Maintenance", value: 3, color: "bg-indigo-500" },
-                { label: "Live Tracking", value: 5, color: "bg-purple-500" },
-            ],
-            gauges: [89, 74],
-            chartLabel: "Fleet Status"
-        },
         listItems: [
-            "Maintain Bus Details/Routes",
-            "Track Students List",
-            "Track Faculty & Staff List",
-            "Maintain Fee Details/Dues",
-            "Driver Details & Attendance",
-            "Track Expenses",
-            "Track Live Location of the Bus",
-            "Maintain Vehicle Documents & Due Dates",
-            "Generate Reports"
+            "Maintain Bus Details & Routes",
+            "Live Bus Location Tracking for Students",
+            "Track Fee Details & Dues",
+            "Driver Details & Attendance Management",
+            "Vehicle Document Expiry Reminders"
         ]
     },
     {
-        pillText: "Core Module",
+        pillText: "Integrated Module",
         titlePrefix: "Hostel",
         titleHighlight: "Management",
         gradientText: "from-blue-700 to-cyan-600",
@@ -546,27 +514,12 @@ const coreModulesData = [
         imageSrc: "/images/homeimage/report8_premium.png",
         imageAlt: "Hostel Management Dashboard",
         isImageRight: false,
-        mockupData: {
-            stats: [
-                { label: "Occupancy", value: 5, color: "bg-blue-500" },
-                { label: "In/Out Time", value: 4, color: "bg-cyan-500" },
-                { label: "Permissions", value: 3, color: "bg-blue-500" },
-                { label: "Inventory", value: 5, color: "bg-cyan-500" },
-            ],
-            gauges: [82, 45],
-            chartLabel: "Facility Health Hub"
-        },
         listItems: [
-            "Maintain Hostel Details/Occupancy",
-            "Hostel Students List",
-            "Hostel Faculty List",
-            "Fee Details/Dues",
-            "Track In/Out Time",
-            "Track Student Permissions",
-            "Locate Students using Geo Fencing / Tracking",
-            "Inventory",
-            "Hostel/Room Transfer",
-            "Reports"
+            "Hostel Allotment & Occupancy Tracking",
+            "Live Student Tracking & In/Out Monitoring",
+            "Fee Management & Automated Reminders",
+            "Inventory & Asset Tracking",
+            "Digital Room Transfer Requests"
         ]
     }
 ];
@@ -847,7 +800,7 @@ const AicasPage = () => {
                 {coreModulesData.map((module, idx) => (
                     <section
                         key={idx}
-                        className={`py-32 relative overflow-hidden flex items-center ${idx % 2 === 0 ? 'bg-[#020617]' : 'bg-transparent'}`}
+                        className={`py-16 md:py-24 lg:py-32 relative overflow-hidden flex items-center ${idx % 2 === 0 ? 'bg-[#020617]' : 'bg-transparent'}`}
                     >
                         {/* kinetic Technical Background */}
                         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-40">
@@ -858,7 +811,7 @@ const AicasPage = () => {
                             <div className={`absolute inset-y-0 ${module.isImageRight ? 'left-0 w-1/2' : 'right-0 w-1/2'} bg-[radial-gradient(#ffffff05_1.5px,transparent_1.5px)] [background-size:60px_60px] opacity-100`} />
                         </div>
 
-                        <div className={`container mx-auto max-w-7xl px-6 lg:px-8 relative z-10 flex flex-col ${module.isImageRight ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-20`}>
+                        <div className={`container mx-auto max-w-7xl px-6 lg:px-8 relative z-10 flex flex-col ${module.isImageRight ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-10 lg:gap-20`}>
 
                             {/* Text Content Column */}
                             <motion.div
@@ -866,9 +819,9 @@ const AicasPage = () => {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true, margin: "-100px" }}
                                 transition={{ duration: 0.8, ease: "easeOut" }}
-                                className="lg:w-1/2 w-full space-y-12"
+                                className="lg:w-1/2 w-full space-y-8 md:space-y-12"
                             >
-                                <div className="space-y-8">
+                                <div className="space-y-6 md:space-y-8">
                                     <motion.div
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
@@ -891,7 +844,7 @@ const AicasPage = () => {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-7">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 md:gap-y-7">
                                     {module.listItems.map((item, i) => (
                                         <motion.div
                                             key={i}

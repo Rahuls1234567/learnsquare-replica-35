@@ -26,19 +26,22 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`fixed top-4 md:top-8 inset-x-0 z-50 transition-all duration-500 transform-gpu bg-transparent h-0`}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 transform-gpu bg-white border-b border-slate-200 h-20 md:h-24 flex items-center shadow-sm`}
       >
-        <div className="container px-4">
-          <div className="flex items-center bg-white/90 backdrop-blur-xl border border-white/50 rounded-[1.5rem] p-1.5 px-4 md:px-6 shadow-[0_30px_60px_rgba(0,0,0,0.1)] min-h-[72px]">
+        <div className="w-full px-4 md:px-8">
+          <div className="flex items-center justify-between h-full">
 
             {/* LEFT AREA: Logo Only (flex-1) */}
-            <div className="flex-1 flex items-center relative h-full">
-              <Link to="/" className="flex-shrink-0 flex items-center group active:scale-95 absolute -left-4 top-1/2 -translate-y-1/2 z-[60]">
-                <img
-                  src="/images/learnsquare_nav_logo_v2.png"
-                  alt="LEARNSQUARE"
-                  className="h-20 md:h-40 w-auto object-contain scale-110 md:scale-125 hover:scale-110 md:hover:scale-150 transition-transform duration-300 drop-shadow-sm origin-left"
-                />
+            <div className="flex-1 flex items-center h-full">
+              <Link to="/" className="flex-shrink-0 flex items-center group active:scale-95 z-[60]">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-primary/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <img
+                    src="/logo/LEARNSQUARE_LOGO (500x200).png"
+                    alt="LEARNSQUARE"
+                    className="h-14 md:h-16 w-auto object-contain transition-all duration-500 group-hover:scale-105"
+                  />
+                </div>
               </Link>
             </div>
 
@@ -69,19 +72,19 @@ const Navbar = () => {
                           exit={{ opacity: 0, scale: 0.9, y: 10 }}
                           className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[100]"
                         >
-                          <div className="bg-white/95 backdrop-blur-xl border border-slate-200 shadow-[0_30px_60px_rgba(0,0,0,0.15)] overflow-hidden rounded-[2rem] min-w-[280px] p-2">
-                            <div className="grid gap-1">
+                          <div className="bg-white/95 backdrop-blur-xl border border-slate-200 shadow-[0_30px_60px_rgba(0,0,0,0.1)] overflow-hidden rounded-[2rem] min-w-[580px] p-2">
+                            <div className="grid grid-cols-3 gap-1">
                               {products.map((p) => (
                                 <Link
                                   key={p.title}
                                   to={p.href}
-                                  target={p.external ? "_blank" : undefined}
+                                  target={p.external ? (window.innerWidth < 768 ? "_self" : "_blank") : undefined}
                                   rel={p.external ? "noopener noreferrer" : undefined}
-                                  className="px-5 py-4 text-slate-600 font-bold text-[14px] hover:text-primary hover:bg-slate-50 rounded-2xl transition-all flex items-center justify-between group"
+                                  className="px-3 py-3 text-indigo-600 font-bold text-[12px] hover:text-primary hover:bg-indigo-50/50 rounded-xl transition-all flex items-center justify-between group border border-transparent hover:border-indigo-100"
                                 >
                                   <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-400">
-                                      <ChevronRight className="w-4 h-4" />
+                                    <div className="w-6 h-6 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-400">
+                                      <ChevronRight className="w-3 h-3" />
                                     </div>
                                     {p.title}
                                   </div>
@@ -101,12 +104,15 @@ const Navbar = () => {
             {/* RIGHT AREA: Sign In & Mobile Toggle (flex-1) */}
             <div className="flex-1 flex items-center justify-end gap-3">
               <div className="hidden md:flex items-center">
-                <Link to="/login" className="px-7 py-2.5 text-[12.5px] font-black uppercase tracking-[0.1em] text-white bg-[#0c051e] hover:bg-primary rounded-xl transition-all shadow-lg hover:shadow-primary/20">
-                  Sign in
+                <Link to="/login" className="relative group/login overflow-hidden px-8 py-3 rounded-xl transition-all">
+                  <div className="absolute inset-0 bg-slate-900 group-hover/login:bg-primary transition-colors duration-300" />
+                  <span className="relative z-10 text-[13px] font-black uppercase tracking-wider text-white">
+                    Sign in
+                  </span>
                 </Link>
               </div>
               <button
-                className="lg:hidden flex items-center justify-center w-11 h-11 bg-slate-900 rounded-xl text-white shadow-xl"
+                className="lg:hidden flex items-center justify-center w-12 h-12 bg-slate-100 border border-slate-200 rounded-xl text-slate-900 shadow-sm active:scale-95 transition-all"
                 onClick={() => setOpen(!open)}
               >
                 {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -149,7 +155,7 @@ const Navbar = () => {
                                 <Link
                                   key={p.title}
                                   to={p.href}
-                                  target={p.external ? "_blank" : undefined}
+                                  target={p.external ? (window.innerWidth < 768 ? "_self" : "_blank") : undefined}
                                   rel={p.external ? "noopener noreferrer" : undefined}
                                   className="flex items-center gap-3 p-3 text-base font-bold text-slate-600 hover:text-primary transition-all"
                                   onClick={() => setOpen(false)}

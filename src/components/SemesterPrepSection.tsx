@@ -84,7 +84,7 @@ const SemesterPrepSection = () => {
 
           {/* Left Column: Branding & Pitch (5/12 cols) */}
           <div className="lg:col-span-5 space-y-10">
-            <a href={SEMESTERPREP_URL} target="_blank" rel="noopener noreferrer">
+            <a href={SEMESTERPREP_URL} target={window.innerWidth < 768 ? "_self" : "_blank"} rel="noopener noreferrer">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -132,7 +132,7 @@ const SemesterPrepSection = () => {
               </motion.p>
             </div>
 
-            <a href={SEMESTERPREP_URL} target="_blank" rel="noopener noreferrer">
+            <a href={SEMESTERPREP_URL} target={window.innerWidth < 768 ? "_self" : "_blank"} rel="noopener noreferrer">
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0 25px 50px -12px rgba(139,92,246,0.5)" }}
                 whileTap={{ scale: 0.98 }}

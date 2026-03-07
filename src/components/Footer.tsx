@@ -62,17 +62,10 @@ const Footer = () => (
             <a href="/" className="inline-block group transition-all duration-500">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div
-                  className="h-20 w-48 transition-transform group-hover:scale-105"
-                  style={{
-                    maskImage: 'url(/images/logo-footer-white.png)',
-                    WebkitMaskImage: 'url(/images/logo-footer-white.png)',
-                    maskSize: 'contain',
-                    WebkitMaskSize: 'contain',
-                    maskRepeat: 'no-repeat',
-                    WebkitMaskRepeat: 'no-repeat',
-                    background: 'linear-gradient(to right, #4F46E5, #9333EA, #C026D3)',
-                  }}
+                <img
+                  src="/logo/LEARNSQUARE_LOGO (750x300).png"
+                  alt="LEARNSQUARE"
+                  className="h-16 md:h-20 w-auto object-contain transition-all duration-500 group-hover:scale-105"
                 />
               </div>
             </a>
@@ -147,7 +140,7 @@ const Footer = () => (
                     <a
                       href={l.href}
                       className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-sm"
-                      {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      {...(l.external ? { target: window.innerWidth < 768 ? "_self" : "_blank", rel: "noopener noreferrer" } : {})}
                     >
                       <ChevronRight className="w-3 h-3 text-primary opacity-0 -ml-4 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
                       {l.name}
@@ -161,15 +154,15 @@ const Footer = () => (
               <h4 className="text-sm font-black uppercase tracking-[0.2em] text-primary/80 font-heading">
                 Trending Programs
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-2 gap-4 md:gap-8">
                 {trainingColumns.map((col, idx) => (
                   <ul key={idx} className="space-y-4">
                     {col.map((item) => (
                       <li key={item}>
-                        <a href="#" className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-xs">
+                        <Link to="/training-programs" className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-xs">
                           <span className="w-1.5 h-1.5 bg-primary/20 rounded-full group-hover/link:bg-primary transition-colors" />
                           {item}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

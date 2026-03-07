@@ -82,33 +82,39 @@ const ScrollToTop = () => {
   );
 };
 
-const Index = () => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.8 }}
-    className="min-h-screen bg-[#080118] relative overflow-x-hidden noise-overlay"
-  >
-    <AntigravityBackground />
+const Index = () => {
+  const handleCollabClick = () => {
+    document.getElementById("client-collaborations")?.scrollIntoView({ behavior: "smooth" });
+  };
 
-    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none opacity-40">
-      <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-[150px]" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-purple-600/20 rounded-full blur-[150px]" />
-    </div >
-    <Navbar />
-    <HeroCarousel />
-    <ClientsLogoBar />
-    <ProductsSection />
-    <HomeImageSection />
-    <MySkillForgeSection />
-    <SemesterPrepSection />
-    <TrainingProgramsSection />
-    <TestPrepProSection />
-    <CollaborationsSection />
-    <Footer />
-    <WhatsAppButton />
-    <ScrollToTop />
-  </motion.div>
-);
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="min-h-screen bg-[#080118] relative overflow-x-hidden noise-overlay"
+    >
+      <AntigravityBackground />
+
+      <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none opacity-40">
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-primary/20 rounded-full blur-[150px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-purple-600/20 rounded-full blur-[150px]" />
+      </div >
+      <Navbar />
+      <HeroCarousel />
+      <ClientsLogoBar onLogoClick={handleCollabClick} />
+      <ProductsSection />
+      <HomeImageSection />
+      <MySkillForgeSection />
+      <SemesterPrepSection />
+      <TrainingProgramsSection />
+      <TestPrepProSection />
+      <CollaborationsSection id="client-collaborations" />
+      <Footer />
+      <WhatsAppButton />
+      <ScrollToTop />
+    </motion.div>
+  );
+};
 
 export default Index;

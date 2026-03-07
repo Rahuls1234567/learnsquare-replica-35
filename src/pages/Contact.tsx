@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import AntigravityBackground from "@/components/AntigravityBackground";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -93,13 +93,48 @@ const Contact = () => {
                             </div>
 
                             <div className="space-y-8">
-                                <div className="flex items-start gap-4">
-                                    <div className="mt-1 bg-white p-2 rounded-lg shadow-sm">
-                                        <MapPin className="w-5 h-5 text-slate-700" />
-                                    </div>
-                                    <p className="text-[#1a2b4b] font-medium text-[15px] leading-relaxed max-w-[280px]">
-                                        B- Block, Mayflower Heights, Mallapur, Nacharam, Hyderabad 500076
-                                    </p>
+                                <div className="space-y-4">
+                                    <a
+                                        href="https://maps.app.goo.gl/XetUsuvtNXGpzQqy7?g_st=ic"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-start gap-4 hover:opacity-80 transition-opacity"
+                                    >
+                                        <div className="mt-1 bg-white p-2 rounded-lg shadow-sm">
+                                            <MapPin className="w-5 h-5 text-slate-700" />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <p className="text-slate-900 font-black text-sm uppercase tracking-wider">LEARNSQUARE</p>
+                                            <p className="text-[#1a2b4b] font-medium text-[14px] leading-relaxed max-w-[320px]">
+                                                Office: 3rd Floor, Bhaswa Business Park, Greenlands, Adjacent Lane to Tourist Plaza Hotel, Begumpet.
+                                            </p>
+                                        </div>
+                                    </a>
+
+                                    {/* Small Map Thumbnail */}
+                                    <motion.a
+                                        href="https://maps.app.goo.gl/XetUsuvtNXGpzQqy7?g_st=ic"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        whileHover={{ scale: 1.02, y: -5 }}
+                                        viewport={{ once: true }}
+                                        className="block w-full max-w-[280px] h-32 ml-14 rounded-2xl overflow-hidden border border-slate-200 shadow-lg relative group"
+                                    >
+                                        <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 backdrop-blur-[2px]">
+                                            <span className="bg-white px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-[#1a2b4b] shadow-xl">Open In Maps</span>
+                                        </div>
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.452632283!2d78.4552467!3d17.437142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb90afd668a73d%3A0xad635ebc1c738e4a!2sGST%20Bhaswa%20Business%20Park!5e0!3m2!1sen!2sin!4v1710173661159!5m2!1sen!2sin"
+                                            width="100%"
+                                            height="100%"
+                                            style={{ border: 0 }}
+                                            allowFullScreen
+                                            loading="lazy"
+                                            className="grayscale-[30%] group-hover:grayscale-0 transition-all pointer-events-none"
+                                        ></iframe>
+                                    </motion.a>
                                 </div>
 
                                 <div className="flex items-center gap-4">
@@ -171,8 +206,10 @@ const Contact = () => {
                                 </Button>
                             </form>
                         </motion.div>
-                    </div>
-                </div>
+                    </div> {/* Close grid */}
+
+
+                </div> {/* Close container */}
             </main>
 
             <Footer />

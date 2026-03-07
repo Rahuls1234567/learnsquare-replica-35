@@ -10,6 +10,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogClose,
 } from "@/components/ui/dialog";
 
 const About = () => {
@@ -202,7 +203,11 @@ const About = () => {
                                             </motion.div>
                                         </DialogTrigger>
 
-                                        <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-3xl border-none shadow-2xl">
+                                        <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-[2rem] md:rounded-3xl border-none shadow-2xl bg-white max-h-[95vh] overflow-y-auto">
+                                            {/* Close Button for Mobile Accessibility */}
+                                            <DialogClose className="absolute right-4 top-4 z-[100] p-2.5 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-md text-white transition-all focus:outline-none border border-white/20">
+                                                <X className="w-6 h-6" />
+                                            </DialogClose>
                                             <div className="flex flex-col md:flex-row min-h-[500px]">
                                                 {/* Left Panel: Image */}
                                                 <div className="md:w-2/5 relative bg-[#f1f5f9]">
