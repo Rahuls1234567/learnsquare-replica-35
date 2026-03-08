@@ -1,0 +1,99 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Enrolment {
+  id           Int      @id @default(autoincrement())
+  firstName    String
+  lastName     String
+  mobileNumber String
+  email        String
+  course       String
+  program      String
+  branch       String
+  yearOfStudy  String
+  semester     String
+  createdAt    DateTime @default(now())
+}
+
+model TrainingRequest {
+  id          Int      @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  whatsappNo  String
+  email       String
+  collegeName String
+  message     String
+  createdAt   DateTime @default(now())
+}
+
+model Syntaxwork {
+  id         Int      @id @default(autoincrement())
+  firstName  String
+  lastName   String
+  whatsappNo String
+  email      String
+  message    String
+  createdAt  DateTime @default(now())
+}
+
+model Aicas {
+  id          Int      @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  whatsappNo  String
+  email       String
+  collegeName String
+  city        String
+  message     String
+  createdAt   DateTime @default(now())
+}
+
+model TestPrepPro {
+  id          Int      @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  whatsappNo  String
+  email       String
+  collegeName String
+  message     String
+  createdAt   DateTime @default(now())
+}
+
+model Contact {
+  id          Int      @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  whatsappNo  String
+  email       String
+  collegeName String
+  message     String
+  createdAt   DateTime @default(now())
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  name          String?
+  email         String   @unique
+  password      String
+  phoneNumber   String?
+  collegeCourse String?
+  branch        String?
+  year          String?
+  city          String?
+  address       String?  @db.Text
+  createdAt     DateTime @default(now())
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}

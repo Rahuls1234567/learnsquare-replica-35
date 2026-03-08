@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import {
     ClipboardCheck,
     ArrowRight,
@@ -16,7 +16,7 @@ import {
     Lock
 } from "lucide-react";
 
-const TESTPREPPRO_URL = "/testpreppro";
+const TESTPREPPRO_URL = "/test-prep-pro";
 
 const TestPrepProSection = () => {
     const features = [
@@ -87,7 +87,7 @@ const TestPrepProSection = () => {
 
                     {/* Left Column: Branding & Pitch (5/12 cols) */}
                     <div className="lg:col-span-5 space-y-10">
-                        <Link to={TESTPREPPRO_URL}>
+                        <Link href={TESTPREPPRO_URL}>
                             <motion.div
                                 initial={{ opacity: 0, x: -30 }}
                                 whileInView={{ opacity: 1, x: 0 }}
@@ -135,7 +135,7 @@ const TestPrepProSection = () => {
                             </motion.p>
                         </div>
 
-                        <Link to={TESTPREPPRO_URL}>
+                        <Link href={TESTPREPPRO_URL}>
                             <motion.button
                                 whileHover={{ scale: 1.05, boxShadow: "0 25px 50px -12px rgba(59,130,246,0.3)" }}
                                 whileTap={{ scale: 0.98 }}

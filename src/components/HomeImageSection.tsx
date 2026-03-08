@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronRight, Terminal, Binary, Monitor, Sparkles, Cpu, CheckCircle2, GraduationCap, Building2, FileCheck, Briefcase, Laptop, Library, Bus, BedDouble, Users, MessageSquare, BarChart3, Zap } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const HomeImageSection = () => {
-    const navigate = useNavigate();
+    const router = useRouter();
     const [activeTab, setActiveTab] = useState("Comprehensive");
 
     const tabs = [
@@ -63,7 +64,7 @@ const HomeImageSection = () => {
                 <div className="container relative z-10 px-4 md:px-6 mx-auto max-w-7xl">
                     {/* AICAS Central Premium Badge */}
                     <div className="flex justify-center mb-20 relative z-20">
-                        <Link to="/aicas">
+                        <Link href="/aicas" prefetch={false}>
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
@@ -115,7 +116,7 @@ const HomeImageSection = () => {
                                 transition={{ delay: 0.2 }}
                             >
                                 <motion.button
-                                    onClick={() => navigate('/aicas')}
+                                    onClick={() => router.push('/aicas')}
                                     whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(99,58,242,0.3)" }}
                                     whileTap={{ scale: 0.98 }}
                                     className="group flex items-center gap-4 bg-gradient-to-r from-[#633af2] to-[#4a26c9] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all shadow-xl shadow-indigo-500/20"
@@ -228,13 +229,9 @@ const HomeImageSection = () => {
 
             {/* SyntaxWorks Premium SaaS Section */}
             <section className="min-h-screen flex items-center py-20 relative bg-[#030014] overflow-hidden">
-                {/* Cinematic Dark Background Image */}
+                {/* Cinematic Dark Background */}
                 <div className="absolute inset-0 z-0 select-none pointer-events-none">
-                    <img
-                        src="/syntaxworks_premium_bg.png"
-                        alt="SyntaxWorks Dark Background"
-                        className="w-full h-full object-cover opacity-30"
-                    />
+                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/40 via-purple-950/20 to-[#030014] opacity-90" />
                     <div className="absolute inset-0 bg-gradient-to-r from-[#030014] via-transparent to-[#030014] opacity-90" />
                     <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-transparent to-[#030014] opacity-90" />
                 </div>
@@ -248,7 +245,7 @@ const HomeImageSection = () => {
 
                         {/* Left Column: Branding & Pitch (5/12 cols) */}
                         <div className="lg:col-span-5 space-y-10">
-                            <Link to="/syntaxworks">
+                            <Link href="/syntax-works" prefetch={false}>
                                 <motion.div
                                     initial={{ opacity: 0, x: -30 }}
                                     whileInView={{ opacity: 1, x: 0 }}
@@ -314,7 +311,7 @@ const HomeImageSection = () => {
                                 ))}
                             </div>
 
-                            <Link to="/syntaxworks">
+                            <Link href="/syntax-works" prefetch={false}>
                                 <motion.button
                                     whileHover={{ scale: 1.05, boxShadow: "0 25px 50px -12px rgba(99,58,242,0.4)" }}
                                     whileTap={{ scale: 0.98 }}

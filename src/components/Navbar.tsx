@@ -1,8 +1,12 @@
-import { useState, useEffect } from "react";
-import { Menu, X, ChevronRight } from "lucide-react";
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, ChevronRight, User, LayoutDashboard, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { getAuthFromCookie, clearAuthCookie } from "@/lib/auth";
+import { useRouter } from "next/navigation";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -13,16 +17,42 @@ const navLinks = [
 
 const products = [
   { title: "AICAS", href: "/aicas", external: false },
-  { title: "SyntaxWorks", href: "/syntaxworks", external: false },
+  { title: "SyntaxWorks", href: "/syntax-works", external: false },
   { title: "MySkillForge", href: "/myskillforge", external: false },
   { title: "SemesterPrep", href: "https://semesterprep.in/", external: true },
   { title: "Training Programs", href: "/training-programs", external: false },
-  { title: "Test Prep - Pro", href: "/testpreppro", external: false }
+  { title: "Test Prep - Pro", href: "/test-prep-pro", external: false }
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showProducts, setShowProducts] = useState(false);
+  const [auth, setAuth] = useState<ReturnType<typeof getAuthFromCookie>>(null);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    setAuth(getAuthFromCookie());
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
+  }, []);
+
+  const logout = () => {
+    clearAuthCookie();
+    setProfileOpen(false);
+    setOpen(false);
+    router.push("/login");
+  };
+
   return (
     <>
       <header
@@ -33,7 +63,7 @@ const Navbar = () => {
 
             {/* LEFT AREA: Logo Only (flex-1) */}
             <div className="flex-1 flex items-center h-full">
-              <Link to="/" className="flex-shrink-0 flex items-center group active:scale-95 z-[60]">
+              <Link href="/" className="flex-shrink-0 flex items-center group active:scale-95 z-[60]">
                 <div className="relative">
                   <div className="absolute inset-0 bg-primary/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <img
@@ -55,7 +85,7 @@ const Navbar = () => {
                   onMouseLeave={() => l.hasDropdown && setShowProducts(false)}
                 >
                   <Link
-                    to={l.href}
+                    href={l.href}
                     className="flex items-center gap-1.5 px-3 py-2.5 text-[12.5px] font-bold uppercase tracking-[0.05em] text-slate-700 hover:text-primary rounded-xl transition-all"
                   >
                     {l.label}
@@ -77,8 +107,9 @@ const Navbar = () => {
                               {products.map((p) => (
                                 <Link
                                   key={p.title}
-                                  to={p.href}
-                                  target={p.external ? (window.innerWidth < 768 ? "_self" : "_blank") : undefined}
+                                  href={p.href}
+                                  prefetch={false}
+                                  target={p.external ? (typeof window !== 'undefined' && window.innerWidth < 768 ? "_self" : "_blank") : undefined}
                                   rel={p.external ? "noopener noreferrer" : undefined}
                                   className="px-3 py-3 text-indigo-600 font-bold text-[12px] hover:text-primary hover:bg-indigo-50/50 rounded-xl transition-all flex items-center justify-between group border border-transparent hover:border-indigo-100"
                                 >
@@ -101,15 +132,58 @@ const Navbar = () => {
               ))}
             </nav>
 
-            {/* RIGHT AREA: Sign In & Mobile Toggle (flex-1) */}
+            {/* RIGHT AREA: Profile / Sign In & Mobile Toggle (flex-1) */}
             <div className="flex-1 flex items-center justify-end gap-3">
               <div className="hidden md:flex items-center">
-                <Link to="/login" className="relative group/login overflow-hidden px-8 py-3 rounded-xl transition-all">
-                  <div className="absolute inset-0 bg-slate-900 group-hover/login:bg-primary transition-colors duration-300" />
-                  <span className="relative z-10 text-[13px] font-black uppercase tracking-wider text-white">
-                    Sign in
-                  </span>
-                </Link>
+                {auth ? (
+                  <div className="relative" ref={profileRef}>
+                    <button
+                      onClick={() => setProfileOpen(!profileOpen)}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-primary transition-colors"
+                    >
+                      <User className="w-4 h-4 text-white" />
+                      <span className="text-[13px] font-bold text-white max-w-[120px] truncate">{auth.email}</span>
+                      <ChevronRight className={`w-4 h-4 text-white/70 transition-transform ${profileOpen ? "rotate-90" : ""}`} />
+                    </button>
+                    <AnimatePresence>
+                      {profileOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -8 }}
+                          className="absolute top-full right-0 mt-2 w-56 bg-white rounded-xl border border-slate-200 shadow-xl py-2 z-[100]"
+                        >
+                          <div className="px-4 py-2 border-b border-slate-100">
+                            <p className="text-xs text-slate-500">Logged in as</p>
+                            <p className="font-semibold text-slate-800 truncate">{auth.email}</p>
+                            {auth.isAdmin && <span className="text-[10px] text-amber-600 font-bold">ADMIN</span>}
+                          </div>
+                          <Link href="/profile" onClick={() => setProfileOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50">
+                            <User className="w-4 h-4" />
+                            Profile & Change Password
+                          </Link>
+                          {auth.isAdmin && (
+                            <Link href="/admin" onClick={() => setProfileOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50">
+                              <LayoutDashboard className="w-4 h-4" />
+                              Admin Reports
+                            </Link>
+                          )}
+                          <button onClick={logout} className="flex items-center gap-2 w-full px-4 py-2.5 text-sm text-red-600 hover:bg-red-50">
+                            <LogOut className="w-4 h-4" />
+                            Logout
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <Link href="/login" className="relative group/login overflow-hidden px-8 py-3 rounded-xl transition-all">
+                    <div className="absolute inset-0 bg-slate-900 group-hover/login:bg-primary transition-colors duration-300" />
+                    <span className="relative z-10 text-[13px] font-black uppercase tracking-wider text-white">
+                      Sign in
+                    </span>
+                  </Link>
+                )}
               </div>
               <button
                 className="lg:hidden flex items-center justify-center w-12 h-12 bg-slate-100 border border-slate-200 rounded-xl text-slate-900 shadow-sm active:scale-95 transition-all"
@@ -154,8 +228,9 @@ const Navbar = () => {
                               {products.map((p) => (
                                 <Link
                                   key={p.title}
-                                  to={p.href}
-                                  target={p.external ? (window.innerWidth < 768 ? "_self" : "_blank") : undefined}
+                                  href={p.href}
+                                  prefetch={false}
+                                  target={p.external ? (typeof window !== 'undefined' && window.innerWidth < 768 ? "_self" : "_blank") : undefined}
                                   rel={p.external ? "noopener noreferrer" : undefined}
                                   className="flex items-center gap-3 p-3 text-base font-bold text-slate-600 hover:text-primary transition-all"
                                   onClick={() => setOpen(false)}
@@ -170,7 +245,7 @@ const Navbar = () => {
                       </div>
                     ) : (
                       <Link
-                        to={l.href}
+                        href={l.href}
                         className="flex items-center justify-between p-3.5 text-base font-black text-slate-800 hover:bg-slate-50 rounded-xl transition-all"
                         onClick={() => setOpen(false)}
                       >
@@ -181,9 +256,17 @@ const Navbar = () => {
                   </div>
                 ))}
                 <div className="pt-6 border-t border-slate-100 space-y-4">
-                  <Link to="/login" onClick={() => setOpen(false)}>
-                    <Button className="w-full bg-[#0c051e] text-white font-black uppercase tracking-[0.2em] rounded-2xl py-8 h-16 text-sm">Sign in</Button>
-                  </Link>
+                  {auth ? (
+                    <>
+                      <Link href="/profile" onClick={() => setOpen(false)} className="block p-3 font-bold text-slate-800">Profile</Link>
+                      {auth.isAdmin && <Link href="/admin" onClick={() => setOpen(false)} className="block p-3 font-bold text-slate-800">Admin Reports</Link>}
+                      <button onClick={() => { logout(); setOpen(false); }} className="w-full p-3 text-left font-bold text-red-600">Logout</button>
+                    </>
+                  ) : (
+                    <Link href="/login" onClick={() => setOpen(false)}>
+                      <Button className="w-full bg-[#0c051e] text-white font-black uppercase tracking-[0.2em] rounded-2xl py-8 h-16 text-sm">Sign in</Button>
+                    </Link>
+                  )}
                 </div>
               </div>
             </motion.div>

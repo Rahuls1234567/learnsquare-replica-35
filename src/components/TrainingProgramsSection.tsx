@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import {
     Presentation,
     ArrowRight,
@@ -117,14 +117,16 @@ const TrainingProgramsSection = () => {
                         </div>
                     </div>
 
-                    <motion.button
-                        whileHover={{ scale: 1.05, boxShadow: "0 25px 50px rgba(99,102,241,0.2)" }}
-                        whileTap={{ scale: 0.98 }}
-                        className="group flex items-center gap-5 bg-slate-950 text-white px-12 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] shadow-2xl transition-all"
-                    >
-                        Explore Product
-                        <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
-                    </motion.button>
+                    <Link href="/training-programs">
+                        <motion.button
+                            whileHover={{ scale: 1.05, boxShadow: "0 25px 50px rgba(99,102,241,0.2)" }}
+                            whileTap={{ scale: 0.98 }}
+                            className="group flex items-center gap-5 bg-slate-950 text-white px-12 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] shadow-2xl transition-all"
+                        >
+                            Explore Product
+                            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
+                        </motion.button>
+                    </Link>
                 </div>
 
                 {/* SaaS Dynamic Grid - Vibrant Compact Cards */}

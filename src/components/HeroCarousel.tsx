@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Sparkles, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import AntigravityBackground from "./AntigravityBackground";
 
 const slides = [
@@ -30,7 +30,7 @@ const slides = [
     subtitle: "Master coding with our advanced development and testing environment.",
     image: "/images/hero-slide-2.png",
     bgImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=2070", // Pro Coding Setup
-    link: "/syntaxworks",
+    link: "/syntax-works",
     color: "from-purple-600 to-pink-600",
     cardTitle: "Modern Compiler",
     cardSubtitle: "Multi-Language Support",
@@ -237,7 +237,7 @@ const HeroCarousel = () => {
                         </div>
                       </a>
                     ) : (
-                      <Link to={slide.link} className="flex items-center gap-6 group">
+                      <Link href={slide.link} className="flex items-center gap-6 group">
                         <div className="relative">
                           <motion.div
                             animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.3, 0.1] }}

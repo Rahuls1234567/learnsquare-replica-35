@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Linkedin, Instagram, Youtube, ChevronRight, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -12,11 +12,11 @@ const companyLinks = [
 
 const productFooterLinks = [
   { name: "AICAS", href: "/aicas", external: false },
-  { name: "SyntaxWorks", href: "/syntaxworks", external: false },
+  { name: "SyntaxWorks", href: "/syntax-works", external: false },
   { name: "MySkillForge", href: "/myskillforge", external: false },
   { name: "SemesterPrep", href: "https://semesterprep.in/", external: true },
   { name: "Training Programs", href: "/training-programs", external: false },
-  { name: "Test Prep - Pro", href: "/testpreppro", external: false },
+  { name: "Test Prep - Pro", href: "/test-prep-pro", external: false },
 ];
 
 const trainingColumns = [
@@ -137,14 +137,26 @@ const Footer = () => (
               <ul className="space-y-4">
                 {productFooterLinks.map((l) => (
                   <li key={l.name}>
-                    <a
-                      href={l.href}
-                      className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-sm"
-                      {...(l.external ? { target: window.innerWidth < 768 ? "_self" : "_blank", rel: "noopener noreferrer" } : {})}
-                    >
-                      <ChevronRight className="w-3 h-3 text-primary opacity-0 -ml-4 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
-                      {l.name}
-                    </a>
+                    {l.external ? (
+                      <a
+                        href={l.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-sm"
+                      >
+                        <ChevronRight className="w-3 h-3 text-primary opacity-0 -ml-4 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
+                        {l.name}
+                      </a>
+                    ) : (
+                      <Link
+                        href={l.href}
+                        prefetch={false}
+                        className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-sm"
+                      >
+                        <ChevronRight className="w-3 h-3 text-primary opacity-0 -ml-4 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
+                        {l.name}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -159,7 +171,7 @@ const Footer = () => (
                   <ul key={idx} className="space-y-4">
                     {col.map((item) => (
                       <li key={item}>
-                        <Link to="/training-programs" className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-xs">
+                        <Link href="/training-programs" prefetch={false} className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-xs">
                           <span className="w-1.5 h-1.5 bg-primary/20 rounded-full group-hover/link:bg-primary transition-colors" />
                           {item}
                         </Link>
@@ -180,8 +192,8 @@ const Footer = () => (
             © 2024 <span className="text-slate-300 font-black tracking-tight">LEARNSQUARE</span> Technologies. All rights reserved.
           </p>
           <div className="flex gap-8 text-slate-500 text-[13px] font-bold">
-            <Link to="/privacy" className="hover:text-white transition-colors underline underline-offset-8 decoration-primary/30 hover:decoration-primary">Privacy</Link>
-            <Link to="/terms" className="hover:text-white transition-colors underline underline-offset-8 decoration-primary/30 hover:decoration-primary">Terms</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors underline underline-offset-8 decoration-primary/30 hover:decoration-primary">Privacy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors underline underline-offset-8 decoration-primary/30 hover:decoration-primary">Terms</Link>
           </div>
         </div>
 

@@ -1,7 +1,7 @@
 import { ArrowRight, Cpu, Code2, Gem, BookMarked, Presentation, ClipboardList, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import AntigravityBackground from "./AntigravityBackground";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const products = [
   {
@@ -18,7 +18,7 @@ const products = [
     title: "SyntaxWorks",
     description: "SyntaxWorks helps you master coding and prepare for technical recruitment with multi-language support, dynamic testing, and performance analytics for efficient project development.",
     icon: Code2,
-    link: "/syntaxworks",
+    link: "/syntax-works",
     external: false,
     badge: "Coding",
     color: "from-purple-500/10 to-fuchsia-500/10",
@@ -58,7 +58,7 @@ const products = [
     title: "Test Prep - Pro",
     description: "Our online programs, delivered through a dedicated platform featuring LMS, SyntaxWorks, and TestPrep Pro, offer flexibility with practical learning, enabling you to master technology.",
     icon: ClipboardList,
-    link: "/testpreppro",
+    link: "/test-prep-pro",
     external: false,
     badge: "Assessment",
     color: "from-cyan-500/10 to-blue-500/10",
@@ -119,7 +119,8 @@ const ProductsSection = () => {
 
                 <div className="pt-4 sm:pt-6 border-t border-white/[0.04] relative z-10">
                   <Link
-                    to={p.link}
+                    href={p.link}
+                    prefetch={false}
                     className="flex items-center gap-2 sm:gap-4 group/btn w-fit"
                   >
                     <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-white/[0.08] flex items-center justify-center group-hover/btn:bg-white group-hover/btn:border-white transition-all bg-white/[0.02]">

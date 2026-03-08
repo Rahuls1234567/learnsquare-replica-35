@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import {
     Rocket,
     ArrowRight,
@@ -39,7 +39,7 @@ const MySkillForgeSection = () => {
 
                     {/* Left Column: Product Branding & Narrative */}
                     <div className="space-y-12">
-                        <Link to="/myskillforge">
+                        <Link href="/myskillforge">
                             <motion.div
                                 initial={{ opacity: 0, y: -20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ const MySkillForgeSection = () => {
                         </div>
 
                         <div className="flex flex-wrap items-center gap-6">
-                            <Link to="/myskillforge">
+                            <Link href="/myskillforge">
                                 <motion.button
                                     whileHover={{ scale: 1.05, boxShadow: "0 25px 50px -12px rgba(99,102,241,0.25)" }}
                                     whileTap={{ scale: 0.98 }}
