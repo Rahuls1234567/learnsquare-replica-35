@@ -1,14 +1,18 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Input } from "@/src/components/ui/input";
 import { Button } from "@/src/components/ui/button";
 import { Checkbox } from "@/src/components/ui/checkbox";
-import { Lock, ChevronDown, Play, BookOpen, Bell, Briefcase, Trophy, Facebook, Instagram, Linkedin, Twitter, FileQuestion, Users, GraduationCap } from "lucide-react";
-import WhatsAppButton from "@/src/components/WhatsAppButton";
+import { ChevronDown, Play, BookOpen, Bell, Briefcase, Trophy, Facebook, Instagram, Linkedin, Twitter, FileQuestion, Users, GraduationCap, Rocket, ChevronRight } from "lucide-react";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import Navbar from "@/components/Navbar";
+import Footer from "@/src/components/Footer";
+import AntigravityBackground from "@/components/AntigravityBackground";
 import { toast } from "sonner";
+import { EditableContent } from "@/src/components/EditableContent";
 import { UNIVERSITY_DATA } from "@/src/data/universityData";
 import {
     Popover,
@@ -23,59 +27,41 @@ import {
     CommandItem,
     CommandList,
 } from "@/src/components/ui/command";
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-} from "@/src/components/ui/dialog";
-import { Textarea } from "@/src/components/ui/textarea";
 
-// Matching Navbar
-const SemesterPrepNavbar = () => {
-    const scrollToForm = () => {
-        document.getElementById('registration-form')?.scrollIntoView({ behavior: 'smooth' });
-        toast.info("Please complete the registration form below.");
-    };
 
-    return (
-        <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-xl py-3 border-b border-slate-100/50">
-            <div className="container flex items-center justify-between px-6 lg:px-12 mx-auto">
-                <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center">
-                    <img src="/images/semister/new-logo.png" alt="Semester Prep Logo" className="h-10 lg:h-12 w-auto transition-transform hover:scale-105" />
-                </Link>
-                <div className="hidden md:flex items-center gap-8">
-                    <Link href="/" className="text-[12px] font-black text-slate-800 hover:text-indigo-600 uppercase tracking-widest transition-colors">HOME</Link>
-                    <button onClick={scrollToForm} className="text-[12px] font-black text-slate-800 hover:text-indigo-600 uppercase tracking-widest transition-colors">LOGIN</button>
-                    <Link href="/contact" className="text-[12px] font-black text-slate-800 hover:text-indigo-600 uppercase tracking-widest transition-colors">CONTACT</Link>
-                    <Button
-                        onClick={scrollToForm}
-                        className="bg-[#6039f3] hover:bg-[#5230d1] text-white rounded-xl flex items-center gap-2 px-5 py-4 font-bold text-xs shadow-lg shadow-indigo-600/20 transition-all hover:scale-105 active:scale-95"
-                    >
-                        <Lock className="w-3.5 h-3.5 fill-white/20" />
-                        Login / Signup
-                    </Button>
-                </div>
-            </div>
-        </nav>
-    );
-};
-
-const ExtraEdgeFeatureCard = ({ number, title, desc, icon: Icon }: { number: number; title: string; desc: string; icon: React.ComponentType<{ className?: string }> }) => (
+const ExtraEdgeFeatureCard = ({ number, title, desc, icon: Icon, contentKey }: { number: number; title: string; desc: string; icon: React.ComponentType<{ className?: string }>; contentKey: string }) => (
     <motion.div
-        initial={{ opacity: 0, x: 12 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.3, delay: number * 0.08 }}
-        className="flex items-start gap-4 group p-2 transition-all duration-300"
+        transition={{ duration: 0.6, delay: number * 0.1, ease: "easeOut" }}
+        whileHover={{ y: -10, scale: 1.02 }}
+        className="relative group p-8 rounded-[2.5rem] bg-[#1e40af] shadow-[0_20px_50px_-12px_rgba(30,64,175,0.4)] hover:shadow-[0_40px_80px_-15px_rgba(30,64,175,0.5)] transition-all duration-500 overflow-hidden"
     >
-        <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-indigo-500/25 group-hover:scale-105 group-hover:shadow-indigo-500/30 transition-transform">
-            <Icon className="w-6 h-6" />
+        {/* Subtle white glow accent */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-150" />
+        
+        <div className="relative z-10 flex flex-col h-full">
+            <div className="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-6 shadow-inner backdrop-blur-md transition-all duration-500 group-hover:bg-white group-hover:text-[#1e40af] group-hover:scale-110">
+                <Icon className="w-7 h-7" />
+            </div>
+            
+            <div className="space-y-3">
+                <EditableContent 
+                    contentKey={`${contentKey}_content`}
+                    description={`Extra Edge Feature ${number}`}
+                    defaultContent={
+                        <>
+                            <h4 className="font-black text-white text-lg tracking-tight leading-tight uppercase drop-shadow-sm">{title}</h4>
+                            <p className="text-blue-100/90 text-[13px] leading-relaxed font-bold">{desc}</p>
+                        </>
+                    }
+                />
+            </div>
         </div>
-        <div className="min-w-0">
-            <h4 className="font-bold text-slate-800 text-base mb-1.5">{title}</h4>
-            <p className="text-slate-600 text-[13px] leading-relaxed">{desc}</p>
-        </div>
+
+        {/* Bottom shine effect */}
+        <div className="absolute inset-x-0 bottom-0 h-[3px] bg-gradient-to-r from-transparent via-white/30 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
     </motion.div>
 );
 
@@ -87,34 +73,72 @@ const WHY_CARD_STYLES: Record<string, { bg: string; iconBg: string; iconColor: s
     green: { bg: "bg-emerald-50/50", iconBg: "bg-emerald-50", iconColor: "text-emerald-600", dot: "bg-emerald-400" },
 };
 
-const WhyCard = ({ title, items, icon: Icon, color }: { title: string; items: string[]; icon: React.ComponentType<{ className?: string }>; color: keyof typeof WHY_CARD_STYLES }) => {
+const WhyCard = ({ title, items, icon: Icon, color, contentKey }: { title: string; items: string[]; icon: React.ComponentType<{ className?: string }>; color: keyof typeof WHY_CARD_STYLES; contentKey: string }) => {
     const s = WHY_CARD_STYLES[color] || WHY_CARD_STYLES.indigo;
     return (
         <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            whileHover={{ y: -6 }}
-            className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:border-slate-200/80 transition-all duration-300 relative overflow-hidden group h-full"
+            whileHover={{ y: -10 }}
+            className="group relative h-full bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] transition-all duration-500 overflow-hidden"
         >
-            <div className={`absolute top-0 right-0 w-28 h-28 ${s.bg} rounded-full -mr-14 -mt-14 transition-transform duration-300 group-hover:scale-150`} />
-            <div className={`w-12 h-12 rounded-xl ${s.iconBg} flex items-center justify-center mb-4 relative z-10`}>
-                <Icon className={`w-6 h-6 ${s.iconColor}`} />
+            {/* Background Accent */}
+            <div className={`absolute top-0 right-0 w-32 h-32 ${s.bg} rounded-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-150 opacity-40`} />
+            
+            <div className="relative z-10 flex flex-col h-full">
+                <div className={`w-14 h-14 rounded-2xl ${s.bg} ${s.iconColor} flex items-center justify-center mb-8 shadow-sm transition-all duration-500 group-hover:scale-110`}>
+                    <Icon className="w-7 h-7" />
+                </div>
+                
+                <EditableContent 
+                    contentKey={`${contentKey}_heading`}
+                    description={`Why Card Heading - ${title}`}
+                    defaultContent={<h4 className="font-black text-slate-900 text-xl mb-6 tracking-tight leading-tight uppercase transition-colors group-hover:text-slate-800">{title}</h4>}
+                />
+                
+                <ul className="space-y-4 flex-grow">
+                    {items.map((item: string, i: number) => (
+                        <li key={i} className="flex items-start gap-4 text-[14px] text-slate-500 font-bold leading-relaxed group-hover:text-slate-600 transition-colors">
+                            <div className={`w-2 h-2 rounded-full ${s.dot} mt-1.5 flex-shrink-0 animate-pulse`} />
+                            <EditableContent 
+                                contentKey={`${contentKey}_item_${i}`}
+                                description={`Why Card Item ${i + 1} - ${title}`}
+                                defaultContent={<span>{item}</span>}
+                            />
+                        </li>
+                    ))}
+                </ul>
+
+                {/* Bottom line accent */}
+                <div className={`absolute bottom-0 left-10 right-10 h-[2px] ${s.bg} bg-opacity-30 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500`} />
             </div>
-            <h4 className="font-bold text-slate-800 text-lg mb-4 relative z-10">{title}</h4>
-            <ul className="space-y-3 relative z-10">
-                {items.map((item: string, i: number) => (
-                    <li key={i} className="flex items-start gap-2.5 text-[13px] text-slate-600 leading-relaxed">
-                        <div className={`w-1.5 h-1.5 rounded-full ${s.dot} mt-1.5 flex-shrink-0`} />
-                        {item}
-                    </li>
-                ))}
-            </ul>
         </motion.div>
     );
 };
 
 const SemesterPrepPage = () => {
+    const [reviews, setReviews] = useState<any[]>([]);
+    const [loadingReviews, setLoadingReviews] = useState(true);
+
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const res = await fetch("/api/reviews?page=semester-prep");
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.length > 0) {
+                        setReviews(data);
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to fetch reviews:", error);
+            } finally {
+                setLoadingReviews(false);
+            }
+        };
+        fetchReviews();
+    }, []);
     const [formData, setFormData] = useState({
         name: "",
         university: "",
@@ -132,28 +156,10 @@ const SemesterPrepPage = () => {
 
     const [collegeDropdownOpen, setCollegeDropdownOpen] = useState(false);
 
-    const [branchModalOpen, setBranchModalOpen] = useState(false);
-    const [selectedBranch, setSelectedBranch] = useState("");
-    const [branchFormData, setBranchFormData] = useState({ name: "", email: "", message: "" });
 
-    const openBranchModal = (branchName: string) => {
-        setSelectedBranch(branchName);
-        setBranchFormData({ name: "", email: "", message: "" });
-        setBranchModalOpen(true);
-    };
+    const [submitting, setSubmitting] = useState(false);
 
-    const handleBranchFormSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!branchFormData.name || !branchFormData.email || !branchFormData.message) {
-            toast.error("Please fill in all fields.");
-            return;
-        }
-        toast.success(`Request to explore ${selectedBranch} submitted. We'll get back to you soon!`);
-        setBranchModalOpen(false);
-        setBranchFormData({ name: "", email: "", message: "" });
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         // Validation
@@ -170,16 +176,56 @@ const SemesterPrepPage = () => {
             return;
         }
 
-        toast.success(`Account created successfully for ${formData.name}! Welcome to SemesterPrep.`);
-        console.log("Form Submitted:", formData);
+        setSubmitting(true);
+        try {
+            const res = await fetch("/api/semester-prep", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            if (res.ok) {
+                toast.success(`Account created successfully for ${formData.name}! Welcome to SemesterPrep.`);
+                setFormData({
+                    name: "",
+                    university: "",
+                    college: "",
+                    email: "",
+                    password: "",
+                    confirmPassword: "",
+                    mobile: "",
+                    agree: false
+                });
+            } else {
+                const data = await res.json();
+                toast.error(data.error || "Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            toast.error("Failed to connect to the server.");
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     return (
-        <div className="min-h-screen bg-[#f8f7ff] relative overflow-x-hidden">
-            <SemesterPrepNavbar />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="min-h-screen bg-white relative overflow-x-hidden"
+        >
+
+            {/* Cinematic Background Blurs */}
+            <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none opacity-40">
+                <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-indigo-600/20 rounded-full blur-[150px]" />
+                <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-purple-600/20 rounded-full blur-[150px]" />
+            </div>
+
+            <Navbar />
 
             {/* Hero Section */}
-            <section className="relative pt-24 pb-16 overflow-hidden">
+            <section className="relative pt-24 pb-16 overflow-hidden bg-[#080118] text-white noise-overlay">
+                <AntigravityBackground />
                 <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]">
                     <svg viewBox="0 0 1440 800" className="w-full h-full">
                         <path fill="none" stroke="#4f46e5" strokeWidth="1" strokeDasharray="8 8" d="M-100,200 C200,100 500,300 800,200 C1100,100 1400,300 1700,200" />
@@ -189,25 +235,42 @@ const SemesterPrepPage = () => {
 
                 <div className="container mx-auto px-6 lg:px-12 relative z-10">
                     <div className="grid lg:grid-cols-12 gap-8 items-center max-w-7xl mx-auto">
-                        <div className="lg:col-span-12 xl:col-span-7 flex flex-col items-center text-center space-y-4">
-                            <div className="space-y-1">
-                                <h1 className="text-[1.6rem] sm:text-[2rem] md:text-3xl lg:text-[2.8rem] xl:text-[3.2rem] font-black leading-tight">
-                                    <span className="text-indigo-600">Learn Smart.</span>{" "}
-                                    <span className="text-purple-600">Learn Fast.</span>
-                                </h1>
-                                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-[2.2rem] xl:text-[2.5rem] font-bold text-slate-700">One Stop Solution</h2>
-                                <p className="text-sm md:text-base text-slate-500 font-medium whitespace-normal">for Your Semester Exam Preparation.</p>
-                            </div>
-
-                            <div className="relative w-full max-w-[360px] lg:max-w-[400px] xl:max-w-[440px]">
-                                <img src="/images/semester_prep_hero_v3.png" alt="Illustration" className="w-full h-auto" />
-                                <div className="flex justify-center gap-2 mt-2">
-                                    <div className="w-2.5 h-2.5 rounded-full bg-purple-300" />
-                                    <div className="w-2.5 h-2.5 rounded-full bg-blue-600" />
+                        <div className="lg:col-span-12 xl:col-span-7 flex flex-col items-center text-center space-y-6">
+                            <div className="space-y-3">
+                                {/* Shimmering Top Pill */}
+                                <div className="relative group cursor-default inline-block mb-8">
+                                    <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
+                                    <div className="relative bg-slate-900/80 border border-indigo-500/30 text-indigo-400 px-6 py-2 rounded-full font-black tracking-[0.2em] text-[10px] uppercase shadow-2xl flex items-center gap-2 overflow-hidden">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+                                        <span className="relative z-10">Semester Exam Pro</span>
+                                    </div>
                                 </div>
+
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.2 }}
+                                    className="inline-block px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold uppercase tracking-widest mb-4 hidden"
+                                >
+                                    The Ultimate Exam Companion
+                                </motion.div>
+                                <EditableContent 
+                                    contentKey="semesterprep_hero_content"
+                                    description="SemesterPrep Hero"
+                                    defaultContent={
+                                        <>
+                                            <h1 className="text-[2.8rem] sm:text-[3.5rem] md:text-6xl lg:text-[4.5rem] xl:text-[5.5rem] font-black leading-[1.05] tracking-tight">
+                                                <span className="text-white drop-shadow-2xl">Learn Smart.</span><br />
+                                                <span className="bg-gradient-to-r from-indigo-300 via-purple-400 to-indigo-300 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-x drop-shadow-[0_0_30px_rgba(139,92,246,0.3)]">Learn Fast.</span>
+                                            </h1>
+                                            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-300 mt-4">One Stop Solution</h2>
+                                            <p className="text-base md:text-lg text-slate-400 font-medium max-w-xl mx-auto">Your comprehensive platform for Semester Exam Preparation. Access the best resources, anytime, anywhere.</p>
+                                        </>
+                                    }
+                                />
                             </div>
 
-                            <div className="flex flex-wrap gap-3 justify-center pt-2">
+                            <div className="flex flex-wrap gap-3 justify-center pt-8">
                                 <img
                                     onClick={() => toast.info("SemesterPrep Mobile App for Android coming soon!")}
                                     src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
@@ -223,42 +286,50 @@ const SemesterPrepPage = () => {
                             </div>
                         </div>
 
-                        <div className="lg:col-span-12 xl:col-span-5 flex justify-center" id="registration-form">
-                            <div className="bg-white rounded-xl p-6 lg:p-8 shadow-[0_15px_50px_rgba(30,30,30,0.05)] border border-slate-100/80 w-full max-w-[520px]">
-                                <h3 className="text-lg font-bold text-center mb-6">
-                                    Register here to explore <span className="italic text-indigo-600 block mt-1 uppercase text-sm">FREE Content</span>
+                        <div className="lg:col-span-12 xl:col-span-5 flex justify-center mt-12 xl:mt-0" id="registration-form">
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.4 }}
+                                className="bg-white/5 backdrop-blur-2xl rounded-[2.5rem] p-8 md:p-10 border border-white/10 w-full max-w-[520px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden group"
+                            >
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-indigo-500/20 transition-colors" />
+                                <h3 className="text-xl font-bold text-center mb-8 text-white relative z-10">
+                                    Register here to explore <span className="italic bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent block mt-2 uppercase text-base tracking-widest font-black">FREE Content</span>
                                 </h3>
-                                <form className="space-y-2.5" onSubmit={handleSubmit}>
-                                    <Input
-                                        placeholder="YOUR NAME"
-                                        value={formData.name}
-                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        className="h-11 bg-white border-slate-200 rounded text-sm"
-                                    />
-                                    <div className="relative">
-                                        <select
-                                            value={formData.university}
-                                            onChange={(e) => setFormData({ ...formData, university: e.target.value, college: "" })}
-                                            className="w-full h-11 rounded border border-slate-200 bg-white px-4 text-sm text-slate-500 appearance-none focus:outline-none focus:ring-1 focus:ring-indigo-100"
-                                        >
-                                            <option value="">Select University</option>
-                                            {Object.keys(UNIVERSITY_DATA).map(uni => <option key={uni} value={uni}>{uni}</option>)}
-                                        </select>
-                                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-                                    </div>
-                                    <Popover open={collegeDropdownOpen} onOpenChange={setCollegeDropdownOpen}>
-                                        <PopoverTrigger asChild>
-                                            <button
-                                                type="button"
-                                                disabled={!formData.university}
-                                                className="w-full h-11 rounded border border-slate-200 bg-white px-4 text-sm text-left text-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-100 disabled:bg-slate-50 disabled:cursor-not-allowed flex items-center justify-between"
-                                            >
-                                                <span className={formData.college ? "text-slate-800 truncate" : ""}>
-                                                    {formData.college || "Select College"}
-                                                </span>
-                                                <ChevronDown className="w-4 h-4 text-slate-400 shrink-0 ml-2" />
-                                            </button>
-                                        </PopoverTrigger>
+                                <form className="space-y-4 relative z-10" onSubmit={handleSubmit} autoComplete="off">
+                                    <div className="grid grid-cols-1 gap-4">
+                                        <div className="space-y-4">
+                                            <Input
+                                                placeholder="YOUR NAME"
+                                                value={formData.name}
+                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                                className="h-14 bg-white/5 border-white/10 rounded-2xl text-sm focus:ring-2 focus:ring-indigo-500/50 text-white placeholder:text-slate-500 transition-all font-bold"
+                                            />
+                                            <div className="relative">
+                                                <select
+                                                    value={formData.university}
+                                                    onChange={(e) => setFormData({ ...formData, university: e.target.value, college: "" })}
+                                                    className="w-full h-14 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-slate-400 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all font-bold"
+                                                >
+                                                    <option value="" className="bg-slate-900">Select University</option>
+                                                    {Object.keys(UNIVERSITY_DATA).map(uni => <option key={uni} value={uni} className="bg-slate-900">{uni}</option>)}
+                                                </select>
+                                                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
+                                            </div>
+                                            <Popover open={collegeDropdownOpen} onOpenChange={setCollegeDropdownOpen}>
+                                                <PopoverTrigger asChild>
+                                                    <button
+                                                        type="button"
+                                                        disabled={!formData.university}
+                                                        className="w-full h-14 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-left text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 disabled:opacity-50 transition-all flex items-center justify-between font-bold"
+                                                    >
+                                                        <span className={formData.college ? "text-white truncate" : ""}>
+                                                            {formData.college || "Select College"}
+                                                        </span>
+                                                        <ChevronDown className="w-4 h-4 text-slate-500 shrink-0 ml-2" />
+                                                    </button>
+                                                </PopoverTrigger>
                                         <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0" align="start">
                                             <Command>
                                                 <CommandInput placeholder="Search college..." className="h-10 text-sm" />
@@ -283,129 +354,156 @@ const SemesterPrepPage = () => {
                                             </Command>
                                         </PopoverContent>
                                     </Popover>
-                                    <Input
-                                        placeholder="YOUR EMAIL"
-                                        type="email"
-                                        value={formData.email}
-                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        className="h-11 border-slate-200 rounded text-sm"
-                                    />
-                                    <Input
-                                        placeholder="ENTER PASSWORD"
-                                        type="password"
-                                        value={formData.password}
-                                        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                        className="h-11 border-slate-200 rounded text-sm"
-                                    />
-                                    <Input
-                                        placeholder="RE ENTER PASSWORD"
-                                        type="password"
-                                        value={formData.confirmPassword}
-                                        onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                                        className="h-11 border-slate-200 rounded text-sm"
-                                    />
-                                    <Input
-                                        placeholder="Enter Mobile Number"
-                                        value={formData.mobile}
-                                        onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                                        className="h-11 border-slate-200 rounded text-sm"
-                                    />
-                                    <div className="flex items-center gap-2 py-1">
+                                            <Input
+                                                placeholder="YOUR EMAIL"
+                                                type="email"
+                                                autoComplete="off"
+                                                value={formData.email}
+                                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                                className="h-14 bg-white/5 border-white/10 rounded-2xl text-sm text-white placeholder:text-slate-500 transition-all font-bold"
+                                            />
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <Input
+                                                    placeholder="PASSWORD"
+                                                    type="password"
+                                                    autoComplete="new-password"
+                                                    value={formData.password}
+                                                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                                                    className="h-14 bg-white/5 border-white/10 rounded-2xl text-sm text-white placeholder:text-slate-500 transition-all font-bold"
+                                                />
+                                                <Input
+                                                    placeholder="RE-ENTER"
+                                                    type="password"
+                                                    autoComplete="new-password"
+                                                    value={formData.confirmPassword}
+                                                    onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                                                    className="h-14 bg-white/5 border-white/10 rounded-2xl text-sm text-white placeholder:text-slate-500 transition-all font-bold"
+                                                />
+                                            </div>
+                                            <Input
+                                                placeholder="MOBILE NUMBER"
+                                                value={formData.mobile}
+                                                onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                                                className="h-14 bg-white/5 border-white/10 rounded-2xl text-sm text-white placeholder:text-slate-500 transition-all font-bold"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-2 py-2">
                                         <Checkbox
                                             id="terms"
                                             checked={formData.agree}
                                             onCheckedChange={(checked) => setFormData({ ...formData, agree: checked as boolean })}
-                                            className="rounded border-slate-300"
+                                            className="rounded-md border-white/20 data-[state=checked]:bg-indigo-500 data-[state=checked]:border-indigo-500"
                                         />
-                                        <label htmlFor="terms" className="text-[11px] font-bold text-slate-600 cursor-pointer">I agree to the Terms and Conditions</label>
+                                        <label htmlFor="terms" className="text-xs font-bold text-slate-400 cursor-pointer select-none">I agree to the Terms and Conditions</label>
                                     </div>
-                                    <Button type="submit" className="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded shadow-lg transition-all group">
-                                        <span className="mr-2">→</span> Create Account
+                                    <Button
+                                        type="submit"
+                                        disabled={submitting}
+                                        className="w-full h-14 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-black rounded-2xl shadow-xl shadow-indigo-600/25 transition-all active:scale-95 disabled:opacity-50 text-sm uppercase tracking-widest mt-4"
+                                    >
+                                        {submitting ? (
+                                            <span className="flex items-center gap-2">
+                                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                                Creating...
+                                            </span>
+                                        ) : "Create Free Account"}
                                     </Button>
-                                    <p onClick={() => toast.info("Login feature is currently in development.")} className="text-center text-[12px] font-bold text-slate-500 mt-2 cursor-pointer hover:text-indigo-600 transition-colors">Sign In</p>
+                                    <p onClick={() => toast.info("Login feature is currently in development.")} className="text-center text-[13px] font-bold text-slate-500 mt-6 cursor-pointer hover:text-indigo-400 transition-colors uppercase tracking-widest">Already have an account? <span className="text-indigo-400">Sign In</span></p>
                                 </form>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Extra Edge Section */}
-            <section className="py-24 relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-indigo-50/30">
+            <section id="extra-edge" className="py-32 relative overflow-hidden bg-white border-t border-slate-100">
                 <div className="absolute inset-0 z-0 pointer-events-none">
-                    <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-200/20 rounded-full blur-3xl" />
-                    <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-200/15 rounded-full blur-3xl" />
+                    <div className="absolute top-20 left-10 w-96 h-96 bg-indigo-50 rounded-full blur-3xl opacity-70" />
+                    <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-50 rounded-full blur-3xl opacity-70" />
                 </div>
                 <div className="container mx-auto px-6 max-w-7xl relative z-10">
-                    <div className="text-center mb-16">
-                        <motion.span
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full px-8 py-3.5 text-lg font-bold shadow-xl shadow-indigo-500/25"
-                        >
-                            Get an Extra Edge with <span className="font-black">SemesterPrep</span>
-                        </motion.span>
+                    <div className="relative text-center mb-24">
+                            <EditableContent 
+                                contentKey="semprep_excellence_heading"
+                                description="Semester Prep Excellence Heading"
+                                defaultContent={
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        className="inline-block relative"
+                                    >
+                                        <div className="absolute -inset-8 bg-indigo-100/40 blur-3xl rounded-full opacity-60" />
+                                        <motion.span
+                                            className="relative inline-block bg-white text-slate-900 rounded-full px-12 py-5 text-2xl font-black shadow-[0_10px_40px_-5px_rgba(0,0,0,0.1)] border border-slate-100 uppercase tracking-widest"
+                                        >
+                                            Extra Edge <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Excellence</span>
+                                        </motion.span>
+                                    </motion.div>
+                                }
+                            />
+                        <p className="mt-8 text-slate-500 text-lg max-w-2xl mx-auto font-bold tracking-tight">
+                            Elevate your preparation with our <span className="text-indigo-600">Premium Toolset</span> designed for university success.
+                        </p>
                     </div>
 
-                    <div className="grid lg:grid-cols-2 gap-16 items-center text-left">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4 }}
-                            className="relative order-2 lg:order-1"
-                        >
-                            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-slate-200/50 ring-1 ring-slate-100">
-                                <img
-                                    src="/images/semester_prep_education_icon.png"
-                                    alt="SemesterPrep"
-                                    className="w-full max-w-[560px] mx-auto object-contain"
-                                />
-                            </div>
-                        </motion.div>
-                        <div className="space-y-4 order-1 lg:order-2">
-                            <ExtraEdgeFeatureCard number={1} title="Univ. Sem Exam PYQ's & Answers" desc="10,000+ Univ. Sem Exam Prev. Year Questions & Answers Covering 120 + Subjects" icon={FileQuestion} />
-                            <ExtraEdgeFeatureCard number={2} title="Curated by Subject Experts" desc="Detailed Explanation of Answers from Top-Notch Subject Experts" icon={Users} />
-                            <ExtraEdgeFeatureCard number={3} title="Univ. Sem Exam PYQ.Papers" desc="Repository of Subject-wise Univ. Sem Exam Prev. Year Q.Papers" icon={BookOpen} />
-                            <ExtraEdgeFeatureCard number={4} title="University Updates" desc="One Stop Destination for all University Exam Updates." icon={Bell} />
-                            <ExtraEdgeFeatureCard number={5} title="Career Guidance" desc="Complete Guidance on Various Career Options after Graduation" icon={GraduationCap} />
-                        </div>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <ExtraEdgeFeatureCard contentKey="semprep_edge_1" number={1} title="Univ. Sem Exam PYQ's & Answers" desc="10,000+ Univ. Sem Exam Prev. Year Questions & Answers Covering 120 + Subjects" icon={FileQuestion} />
+                        <ExtraEdgeFeatureCard contentKey="semprep_edge_2" number={2} title="Curated by Subject Experts" desc="Detailed Explanation of Answers from Top-Notch Subject Experts" icon={Users} />
+                        <ExtraEdgeFeatureCard contentKey="semprep_edge_3" number={3} title="Univ. Sem Exam PYQ.Papers" desc="Repository of Subject-wise Univ. Sem Exam Prev. Year Q.Papers" icon={BookOpen} />
+                        <ExtraEdgeFeatureCard contentKey="semprep_edge_4" number={4} title="University Updates" desc="One Stop Destination for all University Exam Updates." icon={Bell} />
+                        <ExtraEdgeFeatureCard contentKey="semprep_edge_5" number={5} title="Career Guidance" desc="Complete Guidance on Various Career Options after Graduation" icon={GraduationCap} />
+                        
                     </div>
                 </div>
             </section>
 
             {/* Why SemesterPrep Section */}
-            <section className="py-24 relative overflow-hidden bg-gradient-to-b from-white via-[#f8f7ff] to-white">
-                <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-1/4 right-0 w-80 h-80 bg-indigo-100/30 rounded-full blur-3xl" />
-                    <div className="absolute bottom-1/4 left-0 w-72 h-72 bg-purple-100/20 rounded-full blur-3xl" />
+            <section className="py-32 relative overflow-hidden bg-white border-t border-slate-100">
+                <div className="absolute inset-0 pointer-events-none opacity-40">
+                    <div className="absolute top-1/4 left-10 w-96 h-96 bg-indigo-50 rounded-full blur-[120px]" />
+                    <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-purple-50 rounded-full blur-[120px]" />
                 </div>
                 <div className="container mx-auto px-6 max-w-7xl relative z-10">
-                    <motion.h3
-                        initial={{ opacity: 0, y: 8 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-3xl md:text-4xl font-black text-center text-slate-800 mb-4"
-                    >
-                        Why <span className="text-indigo-600">SemesterPrep?</span>
-                    </motion.h3>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        className="text-center text-slate-500 text-sm md:text-base max-w-2xl mx-auto mb-14"
-                    >
-                        One platform for videos, PYQs, updates, and career guidance—built for your semester success.
-                    </motion.p>
+                    <div className="text-center mb-24">
+                        <EditableContent 
+                            contentKey="semesterprep_why_header"
+                            description="Why SemesterPrep Section"
+                            defaultContent={
+                                <>
+                                    <motion.h3
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        className="text-4xl md:text-5xl lg:text-7xl font-black text-slate-900 mb-8"
+                                    >
+                                        Why <span className="inline-block pr-8 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent italic">SemesterPrep?</span>
+                                    </motion.h3>
+                                    <motion.p
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: 0.2 }}
+                                        className="text-slate-500 text-lg md:text-xl max-w-3xl mx-auto font-bold tracking-tight leading-relaxed"
+                                    >
+                                        The most trusted platform for university students. One destination for videos, PYQs, and everything you need to top your exams.
+                                    </motion.p>
+                                </>
+                            }
+                        />
+                    </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
                         <WhyCard
+                            contentKey="semprep_why_1"
                             color="indigo" icon={Play}
                             title="Watch anytime"
                             items={["Subject Videos by Expert Faculty", "Classes through Interactive LMS", "Detailed Class Notes of the Video"]}
                         />
                         <WhyCard
+                            contentKey="semprep_why_2"
                             color="purple" icon={BookOpen}
                             title="Learn from anywhere"
                             items={[
@@ -417,30 +515,20 @@ const SemesterPrepPage = () => {
                             ]}
                         />
                         <WhyCard
+                            contentKey="semprep_why_3"
                             color="blue" icon={Trophy}
                             title="Test & Analyse"
                             items={["Exhaustive Tests for Self-Practice", "Objective Type Ques for Mid Exam Preparation", "Interactive Quizzes"]}
                         />
                         <WhyCard
+                            contentKey="semprep_why_4"
                             color="amber" icon={Bell}
                             title="University Updates"
                             items={["Timely University Updates", "Semester Exam Syllabus, Timetables", "All Universities Student Notification", "Exam & Academic Calendars"]}
                         />
-                        <div className="lg:col-span-1 flex items-center justify-center p-4">
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                className="relative max-w-[280px] mx-auto"
-                            >
-                                <img
-                                    src="/images/semester_prep_education_icon.png"
-                                    alt="SemesterPrep"
-                                    className="w-full h-auto object-contain"
-                                />
-                            </motion.div>
-                        </div>
+                        <div className="lg:col-span-1" />
                         <WhyCard
+                            contentKey="semprep_why_5"
                             color="green" icon={Briefcase}
                             title="Career Opportunities"
                             items={["MNC's Placements Notifications", "PSU Job Notifications", "Higher Education Notifications", "Internships Updates"]}
@@ -450,200 +538,102 @@ const SemesterPrepPage = () => {
             </section>
 
             {/* Testimonials */}
-            <section className="py-24 bg-gradient-to-b from-[#6e45e2] to-[#88d3ce] text-white">
-                <div className="container mx-auto px-6 text-center">
-                    <h3 className="text-3xl font-black mb-16">Reviews By Our Success & Top Students</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8 max-w-6xl mx-auto">
-                        {[
+            <section className="py-32 relative overflow-hidden text-white bg-slate-950">
+                {/* Dynamic Background Elements */}
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px]" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[150px]" />
+                    <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]" />
+                </div>
+
+                <div className="container mx-auto px-6 max-w-7xl relative z-10">
+                    <div className="text-center mb-24">
+                            <EditableContent 
+                                contentKey="semprep_reviews_heading"
+                                description="Semester Prep Reviews Heading"
+                                defaultContent={
+                                    <div className="space-y-4">
+                                        <span className="text-indigo-400 font-black text-xs uppercase tracking-[0.3em]">Wall of Love</span>
+                                        <h3 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter">
+                                            Reviews By Our <span className="inline-block pr-4 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent italic">Top Students</span>
+                                        </h3>
+                                    </div>
+                                }
+                            />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
+                        {(reviews.length > 0 ? reviews : [
                             {
                                 name: "Rishab",
-                                year: "II Year CSE Student",
-                                img: "/images/semister/user1.jpeg",
+                                role: "II Year CSE Student",
+                                image: "/images/semister/user1.jpeg",
                                 text: "I am such a kind of Student who always do Last Minute Preparation. 😆. This App Really helped me alot where I found all Previous Year Question Papers and Answers. User Interface is Amazing. Most Importantly its Subscription Fee is Pocket Friendly 😂 😂"
                             },
                             {
                                 name: "Ashritha",
-                                year: "III Year ECE Student",
-                                img: "/images/semister/user2.jpeg",
+                                role: "III Year ECE Student",
+                                image: "/images/semister/user2.jpeg",
                                 text: "SemesterPrep is a New Platform where I Found my PYQs & Answers of my Semester End Examinations. This App Really helped me during my Final Examinations. Guys you have PYQs for all Universities 👍"
                             },
                             {
                                 name: "Yashwant",
-                                year: "IV Year IT student",
-                                img: "/images/semister/user3.jpeg",
+                                role: "IV Year IT student",
+                                image: "/images/semister/user3.jpeg",
                                 text: "Thanks for Putting all the PYQs at a Single Place. Its a Good App"
                             }
-                        ].map((rev, i) => (
-                            <motion.div key={i} whileHover={{ y: -10 }} className="bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-8 border border-white/20 text-left">
-                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4 sm:mb-6">
-                                    <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full border-2 border-white/30 overflow-hidden shadow-lg">
-                                        <img src={rev.img} alt={rev.name} className="w-full h-full object-cover" />
+                        ]).map((rev, i) => (
+                            <motion.div 
+                                key={i}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                whileHover={{ y: -12, scale: 1.02 }}
+                                className="relative group"
+                            >
+                                <div className="absolute -inset-0.5 bg-gradient-to-b from-white/20 to-transparent rounded-[2.5rem] blur opacity-0 group-hover:opacity-100 transition duration-500" />
+                                <div className="relative h-full bg-white/[0.03] backdrop-blur-2xl rounded-[2.5rem] p-10 border border-white/10 flex flex-col transition-all duration-500 hover:bg-white/[0.06] hover:border-white/20">
+                                    {/* Quote Icon */}
+                                    <div className="absolute top-8 right-10 text-white/5 group-hover:text-white/10 transition-colors">
+                                        <svg width="40" height="30" viewBox="0 0 40 30" fill="currentColor">
+                                            <path d="M0 18.2V0C5.3 1.1 9.4 4.5 9.4 10.3C9.4 12.8 8.6 14.8 7.1 16.3C5.6 17.8 3.6 18.6 1.1 18.6H0ZM19 18.2V0C24.3 1.1 28.4 4.5 28.4 10.3C28.4 12.8 27.6 14.8 26.1 16.3C24.6 17.8 22.6 18.6 20.1 18.6H19V18.2Z" transform="translate(5 5)" />
+                                        </svg>
                                     </div>
-                                    <div>
-                                        <h4 className="font-bold text-sm sm:text-lg">{rev.name}</h4>
-                                        <p className="text-white/70 text-[8px] sm:text-[10px] font-black uppercase tracking-widest">{rev.year}</p>
+
+                                    <div className="flex items-center gap-5 mb-8">
+                                        <div className="relative">
+                                            <div className="absolute -inset-1 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-full blur opacity-40" />
+                                            <div className="relative w-16 h-16 rounded-full border-2 border-white/20 overflow-hidden ring-4 ring-black/20">
+                                                <img src={rev.image || rev.img || "/images/user.png"} alt={rev.name} className="w-full h-full object-cover scale-110 group-hover:scale-125 transition-transform duration-700" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-extrabold text-lg text-white tracking-tight">{rev.name}</h4>
+                                            <p className="text-indigo-400 text-[10px] font-black uppercase tracking-widest">{rev.role || rev.year}</p>
+                                        </div>
                                     </div>
+                                    
+                                    <div className="relative">
+                                        <p className="text-white/80 text-[15px] leading-relaxed font-medium italic relative z-10">
+                                            "{rev.text}"
+                                        </p>
+                                    </div>
+
+                                    {/* Subtle decorative line */}
+                                    <div className="mt-8 pt-8 border-t border-white/5 w-12 h-px" />
                                 </div>
-                                <p className="text-[10px] sm:text-sm leading-relaxed text-white/90 italic line-clamp-4 sm:line-clamp-none">"{rev.text}"</p>
                             </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer className="relative bg-[#1a365d] text-white pt-0 pb-0">
-                <div className="footer-curve relative w-full overflow-hidden" style={{ marginTop: "-1px" }}>
-                    <svg className="w-full h-16 md:h-20 fill-[#1a365d]" viewBox="0 0 1440 80" preserveAspectRatio="none">
-                        <path d="M0,40 Q360,0 720,40 T1440,40 L1440,80 L0,80 Z" className="opacity-95" />
-                        <path d="M0,50 Q360,10 720,50 T1440,50 L1440,80 L0,80 Z" fill="#234876" />
-                        <path d="M0,58 Q360,22 720,58 T1440,58 L1440,80 L0,80 Z" fill="#2d5a87" />
-                    </svg>
-                </div>
+            <Footer />
 
-                <section className="footer pb-10">
-                    <div className="container mx-auto px-6 max-w-7xl">
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10">
-                            <div className="md:col-span-6">
-                                <h4 className="text-white font-black text-xl mb-4">About Us</h4>
-                                <p className="text-[13px] leading-relaxed text-white/90 font-bold">
-                                    SemesterPrep is a One Stop Solution...
-                                </p>
-                            </div>
-                            <div className="md:col-span-4">
-                                <h4 className="text-white font-black text-xl mb-4">Branches</h4>
-                                <div className="branch text-[12px] text-white/90 leading-relaxed space-y-1">
-                                    <button type="button" onClick={() => openBranchModal("EC")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">EC</button>
-                                    <span className="text-white/50 mx-1">|</span>
-                                    <button type="button" onClick={() => openBranchModal("EE")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">EE</button>
-                                    <span className="text-white/50 mx-1">|</span>
-                                    <button type="button" onClick={() => openBranchModal("ME")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">ME</button>
-                                    <br />
-                                    <button type="button" onClick={() => openBranchModal("CE")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">CE</button>
-                                    <span className="text-white/50 mx-1">|</span>
-                                    <button type="button" onClick={() => openBranchModal("AI")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">AI</button>
-                                    <span className="text-white/50 mx-1">|</span>
-                                    <button type="button" onClick={() => openBranchModal("IT")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">IT</button>
-                                    <br />
-                                    <button type="button" onClick={() => openBranchModal("CS")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">CS</button>
-                                    <span className="text-white/50 mx-1">|</span>
-                                    <button type="button" onClick={() => openBranchModal("DS")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">DS</button>
-                                    <span className="text-white/50 mx-1">|</span>
-                                    <button type="button" onClick={() => openBranchModal("AI & DS")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">AI & DS</button>
-                                    <br />
-                                    <button type="button" onClick={() => openBranchModal("Cyber Security")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">Cyber Security</button>
-                                    <br />
-                                    <button type="button" onClick={() => openBranchModal("IoT And Other Branches")} className="hover:text-white underline underline-offset-2 cursor-pointer bg-transparent border-none p-0">IoT And Other Branches..</button>
-                                </div>
-                            </div>
-                            <div className="md:col-span-2">
-                                <h4 className="text-white font-black text-xl mb-4">Email us</h4>
-                                <p className="mb-4 text-sm text-white/90">
-                                    <a href="mailto:info@semesterprep.in" className="text-white/90 hover:text-white transition-colors">info@semesterprep.in</a>
-                                </p>
-                                <h5 className="text-white font-black text-sm mb-3">Download SEMESTERPREP App Now!!</h5>
-                                <div className="flex flex-col gap-2">
-                                    <a href="https://play.google.com/store/apps/details?id=com.semesterprep_ap" target="_blank" rel="noopener noreferrer" className="inline-block">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get on Google Play" className="h-10 w-auto object-contain" />
-                                    </a>
-                                    <a href="https://apps.apple.com/in/app/semesterprep/id1671087835" target="_blank" rel="noopener noreferrer" className="inline-block">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on App Store" className="h-10 w-auto object-contain" />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr className="border-white/10 my-8" />
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                            <div>
-                                <h5 className="text-white font-black text-sm uppercase tracking-wider mb-3">Courses Available for</h5>
-                                <ul className="space-y-2 text-[12px] text-white/90">
-                                    <li><Link href="#" className="hover:text-white transition-colors">Anna University Chennai</Link></li>
-                                    <li><Link href="#" className="hover:text-white transition-colors">JNTU Anantapur</Link></li>
-                                    <li><Link href="#" className="hover:text-white transition-colors">JNTU Kakinada</Link></li>
-                                    <li><Link href="#" className="hover:text-white transition-colors">JNTU Hyderabad</Link></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 className="text-white font-black text-sm uppercase tracking-wider mb-3">Quick Links</h5>
-                                <ul className="space-y-2 text-[12px] text-white/90">
-                                    <li><Link href="#" className="hover:text-white transition-colors">FAQ</Link></li>
-                                    <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 className="text-white font-black text-sm uppercase tracking-wider mb-3">Our Courses</h5>
-                                <ul className="space-y-2 text-[12px] text-white/90">
-                                    <li><Link href="#" className="hover:text-white transition-colors">Engineering</Link></li>
-                                    <li><Link href="#" className="hover:text-white transition-colors">CRT</Link></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="footer-bottom border-t border-white/10 py-6">
-                    <div className="container mx-auto px-6 max-w-7xl">
-                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                            <p className="text-white/70 text-[11px] text-center sm:text-left">
-                                © 2026 Copyright <br className="sm:hidden" /> LEARNSQUARE TECHNOLOGIES (OPC) PRIVATE LIMITED
-                            </p>
-                            <ul className="flex gap-4 justify-center sm:justify-end">
-                                <li><a href="#" className="text-white hover:text-white/80 transition-colors"><Facebook className="w-5 h-5" /></a></li>
-                                <li><a href="#" className="text-white hover:text-white/80 transition-colors"><Twitter className="w-5 h-5" /></a></li>
-                                <li><a href="#" className="text-white hover:text-white/80 transition-colors"><Instagram className="w-5 h-5" /></a></li>
-                                <li><a href="#" className="text-white hover:text-white/80 transition-colors"><Linkedin className="w-5 h-5" /></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-            </footer>
-
-            <Dialog open={branchModalOpen} onOpenChange={setBranchModalOpen}>
-                <DialogContent className="sm:max-w-md rounded-xl border-slate-200 p-0 overflow-hidden">
-                    <div className="p-6">
-                        <DialogHeader>
-                            <DialogTitle className="text-center text-lg font-bold text-slate-800">
-                                The form for exploring this branch needs to be filled out
-                            </DialogTitle>
-                        </DialogHeader>
-                        <form onSubmit={handleBranchFormSubmit} className="mt-6 space-y-4">
-                            <Input
-                                placeholder="YOUR NAME"
-                                value={branchFormData.name}
-                                onChange={(e) => setBranchFormData({ ...branchFormData, name: e.target.value })}
-                                className="h-11 border-slate-200 rounded text-sm"
-                                required
-                            />
-                            <Input
-                                placeholder="YOUR EMAIL"
-                                type="email"
-                                value={branchFormData.email}
-                                onChange={(e) => setBranchFormData({ ...branchFormData, email: e.target.value })}
-                                className="h-11 border-slate-200 rounded text-sm"
-                                required
-                            />
-                            <Textarea
-                                placeholder="ENTER MESSAGE"
-                                value={branchFormData.message}
-                                onChange={(e) => setBranchFormData({ ...branchFormData, message: e.target.value })}
-                                className="min-h-[100px] resize-y rounded border-slate-200 text-sm"
-                                required
-                            />
-                            <Button
-                                type="submit"
-                                className="w-full h-12 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold rounded-lg shadow-lg"
-                            >
-                                Submit Request to Explore it
-                            </Button>
-                        </form>
-                    </div>
-                </DialogContent>
-            </Dialog>
 
             <WhatsAppButton />
-        </div>
+        </motion.div>
     );
 };
 

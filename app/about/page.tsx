@@ -7,40 +7,33 @@ import WhatsAppButton from "@/src/components/WhatsAppButton";
 import AntigravityBackground from "@/src/components/AntigravityBackground";
 import { motion } from "framer-motion";
 import { Sparkles, Monitor, BadgeCheck, Linkedin, X } from "lucide-react";
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-    DialogClose,
-} from "@/src/components/ui/dialog";
+import { EditableContent } from "@/src/components/EditableContent";
 
 const About = () => {
     const team = [
         {
             name: "Sandeep Bandari",
-            role: "Founder & Chief Executive Officer",
-            shortBio: "With over 17 years of Experience in the Ed-Tech Industry",
+            role: "Founder & CEO",
+            education: "EPBM - IIM K, M.TECH - JNTUH, B.TECH - JNTUH",
+            contact: "988 555 2350 | sandeep@learnsquare.co",
+            bio: "With over 18 years in the Ed-Tech industry, he is a passionate leader known for creating innovative learning solutions and building strategic partnerships with universities, government bodies, and channel partners nationwide. He has successfully launched and managed multiple Ed-Tech Products, LMS and CMS platforms, and led top educators across domains. A mentor to thousands of students through GATE, ESE, and competitive exam sessions, his expertise spans market research, product planning, implementation, budgeting, resource management, and team performance.",
             image: "/images/homeimage/sandeep bandari.jpg",
-            linkedin: "https://www.linkedin.com/in/sandeep-bandari-19b50170/",
-            education: "EPBM - IIM KOZHIKODE, M.TECH - JNTUH, B.TECH - JNTUH",
-            fullBio: [
-                "With over 17 years of Experience in the Ed-Tech Industry, Sandeep Bandari is a Passionate and Driven Leader who strives to create impactful and Innovative Management Solutions for Educational Institutions and Learning Solutions for Students. He worked as a Country Head for Multiple Renowned Ed-Techs in India and also built Strategic Partnerships with Universities, Colleges, Government Departments, and Channel Partners across the Country. Designing Customised Products that cater to the Market Needs and Demand is his Expertise.",
-                "He has Successfully Launched and Managed multiple Ed-Tech Products, including robust ERP, LMS and CMS Platforms, and also Managed Top-Tier Educators for Various Categories and Domains. He had also mentored Thousands of Students and Delivered interactive Classes & Seminars on GATE, ESE, UPSC and other Competitive Exams. His Expertise Lies in Market Research, Planning, Implementation, and Execution of End-to-End e-Learning Products."
-            ]
         },
         {
             name: "Alekya Avula",
             role: "Co-Founder & Director",
-            shortBio: "Alekya is Passionate about Driving impactful product development initiatives.",
+            education: "IPBA - IIM INDORE, M.TECH - JNTUH, B.TECH - JNTUH",
+            contact: "",
+            bio: "She is passionate about driving impactful product development through innovation and collaboration. With a strong foundation in business analytics and operational excellence, she leverages data-driven insights to optimize performance and achieve strategic goals. Known for leading cross-functional teams, she consistently delivers innovative solutions that exceed expectations.",
             image: "/images/homeimage/alekya-avula.png",
-            linkedin: "#",
-            education: "Professional in Product Development & Operations",
-            fullBio: [
-                "Alekya Avula serves as the Co-Founder & Director, bringing a wealth of passion and expertise in driving impactful product development initiatives. Her focus remains on creating seamless operational flows and ensuring that every educational tool developed is both user-centric and highly effective.",
-                "She plays a pivotal role in the strategic planning and execution of our core tech solutions, ensuring they align with the modern educational landscape and provide tangible value to both institutions and students alike."
-            ]
+        },
+        {
+            name: "Gopinath Puralachetty",
+            role: "Chief Marketing Officer",
+            education: "IRPM - Andhra University, M.Sc IT - Manipal University",
+            contact: "77 9493 1347 | gopinath.p@learnsquare.co",
+            bio: "He is a seasoned business leader with over 20 years of experience in education, business operations, and strategic planning. Holding a Master of Science in IT from Manipal University and a Degree in Industrial Relations from Andhra University, he has led key roles at T.I.M.E., CONDUIRA, FIITJEE, and APTECH. Known for his visionary leadership, strategic partnerships, and strong business acumen, he has consistently driven growth and delivered exceptional results across diverse markets.",
+            image: "/aboutimage.jpeg", // Placeholder until Whatsapp image is provided
         }
     ];
 
@@ -90,11 +83,19 @@ const About = () => {
                             transition={{ delay: 0.4 }}
                             className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-800 tracking-tight leading-[1.2] mb-10 max-w-5xl mx-auto px-4"
                         >
-                            To Revolutionise the Educational Landscape by Providing{" "}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-indigo-600 to-accent">
-                                AI Powered Tech Solutions
-                            </span>{" "}
-                            to Every Educational Institution.
+                            <EditableContent 
+                                contentKey="about_main_heading"
+                                description="About Page Heading"
+                                defaultContent={
+                                    <>
+                                        To Revolutionise the Educational Landscape by Providing{" "}
+                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-indigo-600 to-accent">
+                                            AI Powered Tech Solutions
+                                        </span>{" "}
+                                        to Every Educational Institution.
+                                    </>
+                                }
+                            />
                         </motion.h1>
 
                         <motion.div
@@ -103,161 +104,100 @@ const About = () => {
                             transition={{ delay: 0.6 }}
                             className="flex justify-center w-full"
                         >
-                            <p className="text-[13px] md:text-[15px] text-[#5e6282] font-semibold leading-relaxed max-w-4xl text-center px-4">
-                                In light of the National Education Policy's Emphasis on Modernising Educational Systems, the Demand for Streamlined Campus Automation Solutions is at an All-Time High. Our Campus Automation Solution addresses this need by offering Educational Institutions a Simple yet Powerful Platform to Manage Academics, Operations, Communication, and Data Effectively.
-                            </p>
+                            <EditableContent 
+                                contentKey="about_intro"
+                                description="About Page Intro Text"
+                                className="text-[13px] md:text-[15px] text-[#5e6282] font-semibold leading-relaxed max-w-4xl text-justify px-4"
+                                defaultContent={
+                                    <p>
+                                        In light of the National Education Policy's Emphasis on Modernising Educational Systems, the Demand for Streamlined Campus Automation Solutions is at an All-Time High. Our Campus Automation Solution addresses this need by offering Educational Institutions a Simple yet Powerful Platform to Manage Academics, Operations, Communication, and Data Effectively.
+                                    </p>
+                                }
+                            />
                         </motion.div>
 
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -z-10" />
                     </div>
                 </div>
 
-                <div className="mt-32 relative">
-                    <div className="absolute top-0 right-0 w-[70%] h-full bg-[#333d4d] -z-10 rounded-l-[4rem]" />
-
-                    <div className="container px-4 md:px-6">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-0">
-                            <motion.div
-                                initial={{ opacity: 0, x: -50 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                className="lg:col-span-5 bg-[#5e6c84] p-10 md:p-16 rounded-2xl shadow-2xl z-20"
-                            >
-                                <h2 className="text-2xl md:text-4xl font-bold text-white leading-tight mb-8">
-                                    To provide quality content to every student inorder to enhance their Learning outcomes
-                                </h2>
-                                <ul className="space-y-6 text-slate-100 text-[14px] md:text-[15px] leading-relaxed list-disc pl-5">
-                                    <li className="pl-2">
-                                        Empowering Students for Success through Comprehensive Semester Exam Preparation fostering a culture of Academic Excellence and Personal Growth through <a href="https://semesterprep.in/" target="_blank" rel="noopener noreferrer" className="font-bold underline hover:text-primary transition-colors">SemesterPrep</a>
-                                    </li>
-                                    <li className="pl-2">
-                                        Our vision is also to serve as the catalyst for holistic student development by offering a diverse range of High-Quality Training Programs within the College Environment. We aim to empower students with the knowledge, skills, and competencies needed to excel academically, professionally, and personally
-                                    </li>
-                                </ul>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                className="lg:col-span-7 flex justify-center p-12 lg:-ml-12"
-                            >
-                                <div className="bg-white p-6 rounded-[3rem] shadow-2xl relative overflow-hidden group border-8 border-white">
-                                    <div className="w-full h-full min-h-[350px] lg:min-h-[480px] relative rounded-[2rem] overflow-hidden">
-                                        <img
-                                            src="/aboutimage.jpeg"
-                                            alt="Students Learning AI"
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-accent/10 pointer-events-none" />
-                                    </div>
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none" />
-                                </div>
-                            </motion.div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="mt-16 pb-0">
-                    <div className="bg-[#f3f0ff] py-12 rounded-[4rem] relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
-
-                        <div className="container px-4 md:px-6 relative z-10 text-center">
-                            <motion.h2
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                className="text-3xl md:text-5xl font-black text-[#4338ca] mb-10 tracking-tight"
-                            >
-                                Our Team
-                            </motion.h2>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-8 max-w-6xl mx-auto">
-                                {team.map((m, idx) => (
-                                    <Dialog key={idx}>
-                                        <DialogTrigger asChild>
-                                            <motion.div
-                                                initial={{ opacity: 0, x: idx === 0 ? -30 : 30 }}
-                                                whileInView={{ opacity: 1, x: 0 }}
-                                                viewport={{ once: true }}
-                                                className="bg-white p-5 md:p-10 rounded-[2rem] md:rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.04)] flex flex-col md:flex-row items-center gap-5 md:gap-8 relative group hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 cursor-pointer"
-                                            >
-                                                <div className="absolute top-6 right-6 opacity-30 group-hover:opacity-100 transition-opacity">
-                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
-                                                </div>
-
-                                                <div className="w-24 h-24 md:w-36 md:h-36 shrink-0 rounded-full overflow-hidden border-4 border-slate-50 shadow-lg group-hover:border-primary/20 transition-colors">
-                                                    <img
-                                                        src={m.image}
-                                                        alt={m.name}
-                                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                                    />
-                                                </div>
-
-                                                <div className="text-center md:text-left space-y-1 md:space-y-2">
-                                                    <h3 className="text-xl md:text-2xl font-bold text-slate-800">{m.name}</h3>
-                                                    <p className="text-[#6366f1] text-[13px] md:text-[15px] font-bold">{m.role}</p>
-                                                    <p className="text-slate-600 font-medium text-[13px] md:text-[14px] leading-relaxed">
-                                                        {m.shortBio}
-                                                    </p>
-                                                </div>
-                                            </motion.div>
-                                        </DialogTrigger>
-
-                                        <DialogContent className="max-w-4xl p-0 overflow-hidden rounded-[2rem] md:rounded-3xl border-none shadow-2xl bg-white max-h-[95vh] overflow-y-auto">
-                                            <DialogClose className="absolute right-4 top-4 z-[100] p-2.5 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-md text-white transition-all focus:outline-none border border-white/20">
-                                                <X className="w-6 h-6" />
-                                            </DialogClose>
-                                            <div className="flex flex-col md:flex-row min-h-[500px]">
-                                                {/* Left Panel: Image */}
-                                                <div className="md:w-2/5 relative bg-[#f1f5f9]">
-                                                    <img
-                                                        src={m.image}
-                                                        alt={m.name}
-                                                        className="w-full h-full object-cover"
-                                                    />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden" />
-                                                    <div className="absolute bottom-6 left-6 text-white md:hidden">
-                                                        <h4 className="text-xl font-bold">{m.name}</h4>
-                                                    </div>
-                                                </div>
-
-                                                {/* Right Panel: Content */}
-                                                <div className="md:w-3/5 p-8 md:p-12 bg-white relative">
-                                                    <div className="space-y-6">
-                                                        <div className="flex items-center justify-between">
-                                                            <div>
-                                                                <h4 className="text-3xl font-black text-slate-900 flex items-center gap-4">
-                                                                    {m.name}
-                                                                    <a href={m.linkedin} target="_blank" rel="noopener noreferrer" className="text-[#0077b5] hover:scale-110 transition-transform">
-                                                                        <Linkedin className="w-8 h-8 fill-current" />
-                                                                    </a>
-                                                                </h4>
-                                                                <p className="text-[#6366f1] text-lg font-bold mt-1">{m.role}</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                                                            <p className="text-[#818cf8] font-bold text-xs uppercase tracking-widest mb-1">Education</p>
-                                                            <p className="text-slate-700 font-bold text-sm tracking-tight">{m.education}</p>
-                                                        </div>
-
-                                                        <div className="space-y-6 max-h-[300px] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-slate-200">
-                                                            {m.fullBio.map((p, i) => (
-                                                                <p key={i} className="text-slate-600 font-medium leading-[1.7] text-[15px]">
-                                                                    {p}
-                                                                </p>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
+                {/* Team Leadership Profiles */}
+                <div className="mt-20 relative px-4 md:px-6 container mx-auto flex flex-col gap-24">
+                    {team.map((t, idx) => (
+                        <div key={idx} className="relative z-10 group mt-12">
+                            {/* Decorative Background for Section */}
+                            <div className="absolute top-0 right-0 w-[80%] md:w-[60%] lg:w-[45%] h-full bg-[#333d4d]/5 rounded-3xl -z-10 group-hover:bg-[#333d4d]/10 transition-colors duration-500" />
+                            
+                            <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-16 relative">
+                                {/* Text Content */}
+                                <motion.div
+                                    initial={{ opacity: 0, x: -50 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, amount: 0.3 }}
+                                    className="lg:col-span-7 bg-white/70 backdrop-blur-xl p-8 md:p-12 rounded-[2rem] shadow-2xl z-20 border border-white/50 relative overflow-hidden"
+                                >
+                                    {/* Accent Line */}
+                                    <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-primary to-accent" />
+                                    
+                                    <EditableContent 
+                                        contentKey={`about_team_${idx}_header`}
+                                        description={`Team Member ${idx + 1} Header`}
+                                        defaultContent={
+                                            <>
+                                                <h2 className="text-3xl md:text-5xl font-black text-[#1e293b] leading-tight mb-2">
+                                                    {t.name}
+                                                </h2>
+                                                <h3 className="text-xl md:text-2xl font-bold text-primary mb-5 tracking-tight">
+                                                    {t.role}
+                                                </h3>
+                                            </>
+                                        }
+                                    />
+                                    
+                                    <EditableContent 
+                                        contentKey={`about_team_${idx}_meta`}
+                                        description={`Team Member ${idx + 1} Meta Info`}
+                                        defaultContent={
+                                            <div className="flex flex-wrap gap-2 mb-6">
+                                                <span className="bg-[#f1f5f9] text-[#475569] font-bold text-[11px] md:text-xs px-3 py-1.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                                                    {t.education}
+                                                </span>
+                                                {t.contact && (
+                                                    <span className="bg-primary/5 text-primary font-bold text-[11px] md:text-xs px-3 py-1.5 rounded-full border border-primary/10 tracking-widest">
+                                                        {t.contact}
+                                                    </span>
+                                                )}
                                             </div>
-                                        </DialogContent>
-                                    </Dialog>
-                                ))}
+                                        }
+                                    />
+                                    
+                                    <EditableContent 
+                                        contentKey={`about_team_${idx}_bio`}
+                                        description={`Team Member ${idx + 1} Bio`}
+                                        defaultContent={<p className="text-[#475569] text-[15px] md:text-[16px] leading-[1.8] font-medium text-justify">{t.bio}</p>}
+                                    />
+                                </motion.div>
+
+                                {/* Image Side (Right Side) */}
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9, x: 50 }}
+                                    whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                                    viewport={{ once: true, amount: 0.3 }}
+                                    className="lg:col-span-5 flex justify-center z-10"
+                                >
+                                    <div className="bg-white p-3 md:p-6 rounded-[2rem] md:rounded-[3rem] shadow-2xl relative overflow-hidden group-hover:-translate-y-2 transition-transform duration-500 border-4 border-white">
+                                        <div className="w-full aspect-square md:aspect-[4/5] relative rounded-2xl md:rounded-[2rem] overflow-hidden">
+                                            <img
+                                                src={t.image}
+                                                alt={t.name}
+                                                className="w-full h-full object-cover object-[center_top] filter contrast-125 transition-transform duration-700 group-hover:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#1e293b]/50 via-transparent to-transparent pointer-events-none" />
+                                        </div>
+                                    </div>
+                                </motion.div>
                             </div>
                         </div>
-                    </div>
+                    ))}
                 </div>
             </main>
 

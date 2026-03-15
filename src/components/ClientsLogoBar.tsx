@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { EditableContent } from "./EditableContent";
 
 const clientLogos = [
   { src: "/images/logo-1.png", name: "Modern Educational Society" },
@@ -42,15 +43,21 @@ const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
             </span>
           </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-            className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight"
-          >
-            Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-gradient-x">Partnerships</span>
-          </motion.h2>
+          <EditableContent 
+            contentKey="home_clients_heading"
+            description="Clients Logo Bar Heading"
+            defaultContent={
+                <motion.h2
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1, duration: 0.6 }}
+                    className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight"
+                >
+                    Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-gradient-x">Partnerships</span>
+                </motion.h2>
+            }
+          />
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronRight, Terminal, Binary, Monitor, Sparkles, Cpu, CheckCircle2, GraduationCap, Building2, FileCheck, Briefcase, Laptop, Library, Bus, BedDouble, Users, MessageSquare, BarChart3, Zap } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { EditableContent } from "./EditableContent";
 
 const HomeImageSection = () => {
     const router = useRouter();
@@ -63,20 +64,20 @@ const HomeImageSection = () => {
 
                 <div className="container relative z-10 px-4 md:px-6 mx-auto max-w-7xl">
                     {/* AICAS Central Premium Badge */}
-                    <div className="flex justify-center mb-20 relative z-20">
+                    <div className="flex justify-start mb-12 md:mb-16 relative z-20">
                         <Link href="/aicas" prefetch={false}>
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
-                                className="group flex flex-col sm:flex-row items-center gap-6 bg-white border border-indigo-50/80 px-10 py-5 rounded-[3rem] shadow-[0_15px_45px_rgba(99,58,242,0.05)] hover:shadow-[0_25px_60px_rgba(99,58,242,0.1)] hover:-translate-y-1 transition-all duration-500 cursor-pointer"
+                                className="group flex flex-col sm:flex-row items-center gap-6 bg-white border border-indigo-50/80 px-8 py-4 sm:px-10 sm:py-5 rounded-[3rem] shadow-[0_15px_45px_rgba(99,58,242,0.05)] hover:shadow-[0_25px_60px_rgba(99,58,242,0.1)] hover:-translate-y-1 transition-all duration-500 cursor-pointer"
                             >
-                                <div className="bg-gradient-to-br from-[#633af2] to-[#2b5ae9] p-4 rounded-2xl shadow-xl shadow-blue-500/20 group-hover:rotate-12 transition-transform duration-500">
-                                    <Cpu className="text-white w-8 h-8 shrink-0" strokeWidth={2.5} />
+                                <div className="bg-gradient-to-br from-[#633af2] to-[#2b5ae9] p-3 sm:p-4 rounded-2xl shadow-xl shadow-blue-500/20 group-hover:rotate-12 transition-transform duration-500">
+                                    <Cpu className="text-white w-6 h-6 sm:w-8 sm:h-8 shrink-0" strokeWidth={2.5} />
                                 </div>
                                 <div className="flex flex-col items-center sm:items-start">
-                                    <span className="text-3xl md:text-4xl font-black tracking-tight uppercase leading-none mb-1 text-slate-950">AICAS</span>
-                                    <span className="text-[10px] font-black text-transparent bg-clip-text bg-gradient-to-r from-[#633af2] to-[#2b5ae9] uppercase tracking-[0.4em]">AI Campus Automation</span>
+                                    <span className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight uppercase leading-none mb-1 text-slate-950">AICAS</span>
+                                    <span className="text-[8px] sm:text-[9px] font-black text-transparent bg-clip-text bg-gradient-to-r from-[#633af2] to-[#2b5ae9] uppercase tracking-[0.2em] sm:tracking-[0.3em]">AI Powered Campus Automation System</span>
                                 </div>
                             </motion.div>
                         </Link>
@@ -88,25 +89,37 @@ const HomeImageSection = () => {
                         <div className="lg:w-1/2 space-y-10">
                             <div className="space-y-6">
 
-                                <motion.h2
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-950 tracking-[-0.04em] leading-[1.05]"
-                                >
-                                    Transforming Campuses <br className="hidden md:block" />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 italic inline-block pr-6">with AI Brilliance</span>
-                                </motion.h2>
+                                <EditableContent 
+                                    contentKey="home_aicas_heading"
+                                    description="AICAS Home Heading"
+                                    defaultContent={
+                                        <motion.h2
+                                            initial={{ opacity: 0, y: 30 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-950 tracking-[-0.04em] leading-[1.05]"
+                                        >
+                                            Transforming Campuses <br className="hidden md:block" />
+                                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 italic inline-block pr-6">with AI Brilliance</span>
+                                        </motion.h2>
+                                    }
+                                />
 
-                                <motion.p
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.1 }}
-                                    className="text-lg text-slate-500 font-medium leading-relaxed max-w-xl"
-                                >
-                                    Our AI Powered Campus Automation Solution (ERP) streamlines administrative and academic processes, enhancing efficiency and accuracy in managing students, faculty, staff, and all stakeholders.
-                                </motion.p>
+                                <EditableContent 
+                                    contentKey="home_aicas_desc"
+                                    description="AICAS Home Description"
+                                    defaultContent={
+                                        <motion.p
+                                            initial={{ opacity: 0, y: 20 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: 0.1 }}
+                                            className="text-lg text-slate-500 font-medium leading-relaxed max-w-xl"
+                                        >
+                                            Our AI Powered Campus Automation Solution (ERP) streamlines administrative and academic processes, enhancing efficiency and accuracy in managing students, faculty, staff, and all stakeholders.
+                                        </motion.p>
+                                    }
+                                />
                             </div>
 
                             <motion.div
@@ -151,7 +164,11 @@ const HomeImageSection = () => {
                                     <div className="w-10 h-10 rounded-2xl bg-indigo-50 flex items-center justify-center shrink-0 group-hover:bg-gradient-to-br group-hover:from-[#633af2] group-hover:to-[#4a26c9] group-hover:shadow-lg group-hover:shadow-indigo-500/20 transition-all duration-500 relative z-20">
                                         <CheckCircle2 className="w-5 h-5 text-indigo-600 group-hover:text-white" />
                                     </div>
-                                    <span className="text-sm font-black text-slate-700 uppercase tracking-tight group-hover:text-indigo-900 transition-colors relative z-20">{item}</span>
+                                    <EditableContent 
+                                        contentKey={`home_aicas_check_${idx}`}
+                                        description={`AICAS Checklist Item ${idx + 1}`}
+                                        defaultContent={<span className="text-sm font-black text-slate-700 uppercase tracking-tight group-hover:text-indigo-900 transition-colors relative z-20">{item}</span>}
+                                    />
 
                                     {/* Micro-Interaction Highlight */}
                                     <div className="absolute left-0 w-1 h-0 group-hover:h-full bg-indigo-600 transition-all duration-500 rounded-full" />
@@ -162,16 +179,16 @@ const HomeImageSection = () => {
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-5">
                         {[
-                            { num: '01', title: 'PARENT MANAGEMENT', desc: 'Send Various Notifications to Parents, Fee Reminders, Send Attendance Information along with Several other Relevant College Updates', icon: Users, color: 'from-pink-500 to-rose-600', shadow: 'shadow-pink-500/20' },
-                            { num: '02', title: 'COMMUNICATION MANAGEMENT', desc: 'Stay Connected with Entire Campus and Send Various Information Via SMS, WhatsApp, Push Notifications & E-Mails', icon: MessageSquare, color: 'from-teal-500 to-emerald-600', shadow: 'shadow-teal-500/20' },
-                            { num: '03', title: 'ACADEMICS MANAGEMENT', desc: 'End to End Management of College Academics, Daily Classes, Students Progress, Communication to Faculty & Students and all Day to Day Activities', icon: GraduationCap, color: 'from-blue-500 to-indigo-600', shadow: 'shadow-blue-500/20' },
-                            { num: '04', title: 'ADMINISTRATION MANAGEMENT', desc: 'End-End Management of College Faculty, Students, Staff, Fee Payments, Daily Ops, Payrolls and Many More', icon: Building2, color: 'from-rose-500 to-pink-600', shadow: 'shadow-rose-500/20' },
-                            { num: '05', title: 'EXAMINATION MANAGEMENT', desc: 'Complete Examination Management which Covers Exam Schedule, Online Tests, Results & Analytics', icon: FileCheck, color: 'from-amber-500 to-orange-600', shadow: 'shadow-amber-500/20' },
-                            { num: '06', title: 'PLACEMENT MANAGEMENT', desc: 'End to End Management of Campus Placements from 1st Stage till Last Stage along with Historical Data Analyses', icon: Briefcase, color: 'from-emerald-500 to-teal-600', shadow: 'shadow-emerald-500/20' },
-                            { num: '07', title: 'LEARNING MANAGEMENT', desc: 'Interactive LMS with Various Content Types along with Online Tests, Coding Compiler and Several Other Functionalities', icon: Laptop, color: 'from-purple-500 to-fuchsia-600', shadow: 'shadow-purple-500/20' },
-                            { num: '08', title: 'LIBRARY MANAGEMENT', desc: 'Library Books and Asset Management Tracking, Book Issues/Returns and Reminders along with Several Other Functionalities', icon: Library, color: 'from-cyan-500 to-blue-600', shadow: 'shadow-cyan-500/20' },
-                            { num: '09', title: 'TRANSPORT MANAGEMENT', desc: 'LIVE Bus Tracking, Maintenance of Vehicle Documents & Records, Manage Drivers Payrolls & other Functionalities', icon: Bus, color: 'from-orange-500 to-red-600', shadow: 'shadow-orange-500/20' },
-                            { num: '10', title: 'HOSTEL MANAGEMENT', desc: 'Hostel Allotment, Live Tracking Students, Hostel Fee Management, Inventory, Due List & Reports', icon: BedDouble, color: 'from-indigo-500 to-violet-600', shadow: 'shadow-indigo-500/20' },
+                            { num: '01', title: 'ACADEMICS MANAGEMENT', desc: 'End to End Management of College Academics, Daily Classes, Students Progress, Communication to Faculty & Students and all Day to Day Activities', icon: GraduationCap, color: 'from-blue-500 to-indigo-600', shadow: 'shadow-blue-500/20' },
+                            { num: '02', title: 'ADMINISTRATION MANAGEMENT', desc: 'End-End Management of College Faculty, Students, Staff, Fee Payments, Daily Ops, Payrolls and Many More', icon: Building2, color: 'from-rose-500 to-pink-600', shadow: 'shadow-rose-500/20' },
+                            { num: '03', title: 'EXAMINATION MANAGEMENT', desc: 'Complete Examination Management which Covers Exam Schedule, Online Tests, Results & Analytics', icon: FileCheck, color: 'from-amber-500 to-orange-600', shadow: 'shadow-amber-500/20' },
+                            { num: '04', title: 'PLACEMENT MANAGEMENT', desc: 'End to End Management of Campus Placements from 1st Stage till Last Stage along with Historical Data Analyses', icon: Briefcase, color: 'from-emerald-500 to-teal-600', shadow: 'shadow-emerald-500/20' },
+                            { num: '05', title: 'LEARNING MANAGEMENT', desc: 'Interactive LMS with Various Content Types along with Online Tests, Coding Compiler and Several Other Functionalities', icon: Laptop, color: 'from-purple-500 to-fuchsia-600', shadow: 'shadow-purple-500/20' },
+                            { num: '06', title: 'LIBRARY MANAGEMENT', desc: 'Library Books and Asset Management Tracking, Book Issues/Returns and Reminders along with Several Other Functionalities', icon: Library, color: 'from-cyan-500 to-blue-600', shadow: 'shadow-cyan-500/20' },
+                            { num: '07', title: 'TRANSPORT MANAGEMENT', desc: 'LIVE Bus Tracking, Maintenance of Vehicle Documents & Records, Manage Drivers Payrolls & other Functionalities', icon: Bus, color: 'from-orange-500 to-red-600', shadow: 'shadow-orange-500/20' },
+                            { num: '08', title: 'HOSTEL MANAGEMENT', desc: 'Hostel Allotment, Live Tracking Students, Hostel Fee Management, Inventory, Due List & Reports', icon: BedDouble, color: 'from-indigo-500 to-violet-600', shadow: 'shadow-indigo-500/20' },
+                            { num: '09', title: 'PARENT MANAGEMENT', desc: 'Send Various Notifications to Parents, Fee Reminders, Send Attendance Information along with Several other Relevant College Updates', icon: Users, color: 'from-pink-500 to-rose-600', shadow: 'shadow-pink-500/20' },
+                            { num: '10', title: 'COMMUNICATION MANAGEMENT', desc: 'Stay Connected with Entire Campus and Send Various Information Via SMS, WhatsApp, Push Notifications & E-Mails', icon: MessageSquare, color: 'from-teal-500 to-emerald-600', shadow: 'shadow-teal-500/20' },
                         ].map((management, i) => (
                             <motion.div
                                 key={management.num}
@@ -208,15 +225,23 @@ const HomeImageSection = () => {
                                 </div>
 
                                 <div className="space-y-2 sm:space-y-4 relative z-10 flex-grow">
-                                    <h4 className="text-[10px] sm:text-sm md:text-base font-black uppercase tracking-tight leading-[1.1]">
-                                        {management.title.split(' ').map((word, idx) => (
-                                            <span key={idx} className="block">{word}</span>
-                                        ))}
-                                    </h4>
-                                    <div className="w-6 h-[2px] bg-white/20 group-hover:w-full transition-all duration-700 rounded-full" />
-                                    <p className="text-[9px] sm:text-[11px] text-white/70 font-medium leading-relaxed group-hover:text-white transition-colors line-clamp-3 sm:line-clamp-4">
-                                        {management.desc}
-                                    </p>
+                                    <EditableContent 
+                                        contentKey={`home_mgmt_card_${management.num}`}
+                                        description={`Management Card ${management.num}`}
+                                        defaultContent={
+                                            <>
+                                                <h4 className="text-[10px] sm:text-sm md:text-base font-black uppercase tracking-tight leading-[1.1]">
+                                                    {management.title.split(' ').map((word: string, idx: number) => (
+                                                        <span key={idx} className="block">{word}</span>
+                                                    ))}
+                                                </h4>
+                                                <div className="w-6 h-[2px] bg-white/20 group-hover:w-full transition-all duration-700 rounded-full" />
+                                                <p className="text-[9px] sm:text-[11px] text-white/70 font-medium leading-relaxed group-hover:text-white transition-colors line-clamp-3 sm:line-clamp-4">
+                                                    {management.desc}
+                                                </p>
+                                            </>
+                                        }
+                                    />
                                 </div>
 
                                 {/* Interactive Shimmer Sweep */}
@@ -269,10 +294,16 @@ const HomeImageSection = () => {
                                     viewport={{ once: true }}
                                     className="space-y-4"
                                 >
-                                    <h2 className="text-3xl sm:text-5xl xl:text-6xl font-black text-white tracking-[-0.05em] leading-[1.05]">
-                                        The Next Gen <br />
-                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 italic inline-block pr-8">Coding Compiler</span>
-                                    </h2>
+                                    <EditableContent 
+                                        contentKey="home_syntax_heading"
+                                        description="SyntaxWorks Home Heading"
+                                        defaultContent={
+                                            <h2 className="text-3xl sm:text-5xl xl:text-6xl font-black text-white tracking-[-0.05em] leading-[1.05]">
+                                                The Next Gen <br />
+                                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 italic inline-block pr-8">Coding Compiler</span>
+                                            </h2>
+                                        }
+                                    />
                                     <div className="flex items-center gap-4">
                                         <div className="h-[2px] w-12 bg-indigo-500 rounded-full" />
                                         <p className="text-sm font-black text-indigo-400 uppercase tracking-[0.3em]">
@@ -281,19 +312,25 @@ const HomeImageSection = () => {
                                     </div>
                                 </motion.div>
 
-                                <motion.p
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.1 }}
-                                    className="text-lg text-slate-400 font-medium leading-relaxed max-w-lg"
-                                >
-                                    Designed to revolutionize development for students preparing for recruitments with world-class toolsets and real-time execution.
-                                </motion.p>
+                                <EditableContent 
+                                    contentKey="home_syntax_desc"
+                                    description="SyntaxWorks Home Description"
+                                    defaultContent={
+                                        <motion.p
+                                            initial={{ opacity: 0, y: 30 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: 0.1 }}
+                                            className="text-lg text-slate-400 font-medium leading-relaxed max-w-lg"
+                                        >
+                                            Designed to revolutionize development for students preparing for recruitments with world-class toolsets and real-time execution.
+                                        </motion.p>
+                                    }
+                                />
                             </div>
 
                             {/* Bullet Features */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-2 pb-6">
                                 {bulletPoints.map((point, i) => (
                                     <motion.div
                                         key={i}
@@ -301,24 +338,26 @@ const HomeImageSection = () => {
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: 0.1 * i }}
-                                        className="flex items-center gap-4 group"
+                                        className="flex items-center gap-3 group"
                                     >
-                                        <div className="w-6 h-6 rounded-full bg-indigo-500/10 flex items-center justify-center shrink-0 border border-indigo-500/20 group-hover:bg-indigo-600 transition-colors">
-                                            <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400 group-hover:text-white" />
+                                        <div className="w-[18px] h-[18px] rounded-full bg-indigo-500/10 flex items-center justify-center shrink-0 border border-indigo-500/20 group-hover:bg-indigo-600 transition-colors">
+                                            <div className="w-[10px] h-[10px] rounded-full border-[1.5px] border-indigo-400 group-hover:border-white flex items-center justify-center">
+                                                <div className="w-[3px] h-[3px] rounded-full bg-indigo-400 group-hover:bg-white transition-colors" />
+                                            </div>
                                         </div>
-                                        <span className="text-[11px] font-black uppercase tracking-wider text-slate-300 group-hover:text-white transition-colors">{point}</span>
+                                        <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-slate-300 group-hover:text-white transition-colors leading-[1.2]">{point}</span>
                                     </motion.div>
                                 ))}
                             </div>
 
-                            <Link href="/syntax-works" prefetch={false}>
+                            <Link href="/syntax-works" prefetch={false} className="inline-block mt-4">
                                 <motion.button
                                     whileHover={{ scale: 1.05, boxShadow: "0 25px 50px -12px rgba(99,58,242,0.4)" }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="group flex items-center gap-4 bg-indigo-600 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-xl shadow-indigo-500/25"
+                                    className="group flex items-center justify-center gap-4 bg-[#5046e6] text-white px-8 py-4 rounded-xl font-black uppercase tracking-widest text-[11px] transition-all shadow-xl shadow-indigo-500/25 w-[240px]"
                                 >
                                     Explore Product
-                                    <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
+                                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
                                 </motion.button>
                             </Link>
                         </div>

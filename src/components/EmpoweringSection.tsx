@@ -1,4 +1,5 @@
 import { Settings, Code, ClipboardCheck, BookOpen, Monitor, ShieldCheck } from "lucide-react";
+import { EditableContent } from "./EditableContent";
 
 const items = [
   { icon: Settings, label: "AICAS - ERP (AI Powered Campus Automation Sol.)" },
@@ -12,16 +13,38 @@ const items = [
 const EmpoweringSection = () => (
   <section className="py-12 md:py-16 bg-background">
     <div className="container flex flex-col items-center text-center space-y-4 max-w-3xl">
-      <h2 className="text-2xl md:text-3xl font-bold text-hero-orange">
-        Empowering Education
-      </h2>
-      <h3 className="text-xl md:text-2xl font-bold text-accent">Transforming Futures</h3>
-      <p className="text-hero-blue font-semibold text-sm md:text-base leading-relaxed">
-        The Idea : Everything University need to Manage, Engage, and Elevate their Educational Experience within a Single Platform.
-      </p>
-      <p className="text-foreground">
-        Our <strong>One-Stop Solution</strong> integrates
-      </p>
+      <EditableContent 
+        contentKey="home_empowering_heading"
+        description="Empowering Heading"
+        defaultContent={
+          <h2 className="text-2xl md:text-3xl font-bold text-hero-orange">
+            Empowering Education
+          </h2>
+        }
+      />
+      <EditableContent 
+        contentKey="home_empowering_subheading"
+        description="Transforming Subheading"
+        defaultContent={<h3 className="text-xl md:text-2xl font-bold text-accent">Transforming Futures</h3>}
+      />
+      <EditableContent 
+        contentKey="home_empowering_desc"
+        description="Empowering Description"
+        defaultContent={
+          <p className="text-hero-blue font-semibold text-sm md:text-base leading-relaxed">
+            The Idea : Everything University need to Manage, Engage, and Elevate their Educational Experience within a Single Platform.
+          </p>
+        }
+      />
+      <EditableContent 
+        contentKey="home_empowering_extra"
+        description="Empowering Extra Info"
+        defaultContent={
+          <p className="text-foreground">
+            Our <strong>One-Stop Solution</strong> integrates
+          </p>
+        }
+      />
       <ul className="space-y-2 text-left">
         {items.map((item, i) => (
           <li key={i} className="flex items-center gap-3 text-sm text-foreground">

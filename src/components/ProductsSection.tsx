@@ -2,9 +2,11 @@ import { ArrowRight, Cpu, Code2, Gem, BookMarked, Presentation, ClipboardList, Z
 import { motion } from "framer-motion";
 import AntigravityBackground from "./AntigravityBackground";
 import Link from "next/link";
+import { EditableContent } from "./EditableContent";
 
 const products = [
   {
+    key: "product_aicas",
     title: "AICAS",
     description: "Helps you streamline Administration, enhance Efficiency, and improve Data Accuracy. The two layer AI Engine empowers you to optimize education and transform operations effortlessly.",
     icon: Cpu,
@@ -15,6 +17,7 @@ const products = [
     iconColor: "text-blue-600"
   },
   {
+    key: "product_syntaxworks",
     title: "SyntaxWorks",
     description: "SyntaxWorks helps you master coding and prepare for technical recruitment with multi-language support, dynamic testing, and performance analytics for efficient project development.",
     icon: Code2,
@@ -25,6 +28,7 @@ const products = [
     iconColor: "text-purple-600"
   },
   {
+    key: "product_myskillforge",
     title: "MySkillForge",
     description: "MySkillForge is a three-phase employability program designed to equip students with advanced technical skills and essential problem-solving, communication, and career-readiness abilities.",
     icon: Gem,
@@ -35,6 +39,7 @@ const products = [
     iconColor: "text-emerald-600"
   },
   {
+    key: "product_semesterprep",
     title: "SemesterPrep",
     description: "SemesterPrep is your all-in-one solution for semester exam success, offering expert-curated materials, past papers, placement prep, and real-time updates—all accessible on any device.",
     icon: BookMarked,
@@ -45,6 +50,7 @@ const products = [
     iconColor: "text-orange-600"
   },
   {
+    key: "product_training",
     title: "Training Programs",
     description: "Our programs provide you with hands-on, immersive training in recruitment preparation and emerging technologies, guiding you from foundational learning to full-scale project implementation.",
     icon: Presentation,
@@ -55,6 +61,7 @@ const products = [
     iconColor: "text-pink-600"
   },
   {
+    key: "product_testpreppro",
     title: "Test Prep - Pro",
     description: "Our online programs, delivered through a dedicated platform featuring LMS, SyntaxWorks, and TestPrep Pro, offer flexibility with practical learning, enabling you to master technology.",
     icon: ClipboardList,
@@ -79,8 +86,16 @@ const ProductsSection = () => {
             viewport={{ once: true }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tighter"
           >
-            <span className="text-white block">Empowering</span>
-            <span className="text-blue-500 block">Excellence.</span>
+            <EditableContent 
+              contentKey="products_heading" 
+              description="Products Section Heading"
+              defaultContent={
+                <>
+                  <span className="text-white block">Empowering</span>
+                  <span className="text-blue-500 block">Excellence.</span>
+                </>
+              }
+            />
           </motion.h2>
         </div>
 
@@ -92,13 +107,13 @@ const ProductsSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="relative flex flex-col items-center group"
+              className="relative flex flex-col items-center group/card"
             >
 
               {/* The Card */}
               <div className="relative z-10 w-full p-4 sm:p-8 md:p-10 rounded-2xl md:rounded-[2rem] bg-[#171523] border border-white/[0.04] flex flex-col h-full transition-all duration-300 hover:border-white/10 hover:bg-[#1C1A29]">
                 <div className="flex flex-col sm:flex-row justify-between items-start gap-3 sm:gap-0 mb-4 sm:mb-8">
-                  <div className={`w-10 h-10 sm:w-16 sm:h-16 rounded-lg sm:rounded-2xl bg-black/30 border border-white/[0.06] flex items-center justify-center p-2 sm:p-3.5 transition-transform duration-500 group-hover:scale-105`}>
+                  <div className={`w-10 h-10 sm:w-16 sm:h-16 rounded-lg sm:rounded-2xl bg-black/30 border border-white/[0.06] flex items-center justify-center p-2 sm:p-3.5 transition-transform duration-500 group-hover/card:scale-105`}>
                     <p.icon className={`w-full h-full ${p.iconColor} transition-colors`} />
                   </div>
                   <div
@@ -109,12 +124,20 @@ const ProductsSection = () => {
                 </div>
 
                 <div className="space-y-2 sm:space-y-4 mb-4 sm:mb-12 flex-grow relative z-10">
-                  <h4 className="text-lg sm:text-3xl font-black italic tracking-tight text-white/95 leading-tight">
-                    {p.title}
-                  </h4>
-                  <p className="text-white/40 font-bold text-[10px] sm:text-[13px] leading-[1.4] sm:leading-[1.8] line-clamp-3 sm:line-clamp-none">
-                    {p.description}
-                  </p>
+                  <EditableContent 
+                    contentKey={p.key}
+                    description={`${p.title} Content`}
+                    defaultContent={
+                      <>
+                        <h4 className="text-lg sm:text-3xl font-black italic tracking-tight text-white/95 leading-tight">
+                          {p.title}
+                        </h4>
+                        <p className="text-white/40 font-bold text-[10px] sm:text-[13px] leading-[1.4] sm:leading-[1.8] line-clamp-3 sm:line-clamp-none">
+                          {p.description}
+                        </p>
+                      </>
+                    }
+                  />
                 </div>
 
                 <div className="pt-4 sm:pt-6 border-t border-white/[0.04] relative z-10">

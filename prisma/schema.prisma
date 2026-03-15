@@ -97,3 +97,32 @@ model Admin {
   password  String
   createdAt DateTime @default(now())
 }
+model WebsiteContent {
+  id          Int      @id @default(autoincrement())
+  contentKey  String   @unique
+  pageName    String
+  htmlContent String   @db.Text
+  updatedAt   DateTime @updatedAt
+}
+
+model SemesterPrep {
+  id         Int      @id @default(autoincrement())
+  name       String
+  university String
+  college    String
+  email      String
+  password   String
+  mobile     String
+  createdAt  DateTime @default(now())
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  name      String
+  role      String   // e.g. "II Year CSE Student" or "Final Year Student, SVIT"
+  text      String   @db.Text
+  image     String?  // Optional image path/url for semester-prep
+  rating    Int?     @default(5) // For collaborations section
+  page      String   // "home" or "semester-prep"
+  createdAt DateTime @default(now())
+}

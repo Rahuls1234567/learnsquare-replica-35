@@ -22,8 +22,9 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { toast } from "sonner";
+import { EditableContent } from "@/components/EditableContent";
 
-const FeatureCard = ({ title, desc, img, reverse = false, icon: Icon, details }: any) => {
+const FeatureCard = ({ title, desc, img, reverse = false, icon: Icon, details, contentKey }: any) => {
     return (
         <Dialog>
             <motion.div
@@ -73,15 +74,23 @@ const FeatureCard = ({ title, desc, img, reverse = false, icon: Icon, details }:
                             <div className="h-px w-24 bg-gradient-to-r from-indigo-500 to-transparent" />
                         </div>
 
-                        <h3 className="text-xl md:text-3xl font-black text-white leading-tight tracking-tighter">
-                            {title.split('<br />').map((part: string, i: number) => (
-                                <span key={i} className="block">{part.trim()}</span>
-                            ))}
-                        </h3>
+                        <EditableContent 
+                            contentKey={`${contentKey}_heading_desc`}
+                            description={`Feature ${title} Heading & Description`}
+                            defaultContent={
+                                <>
+                                    <h3 className="text-xl md:text-3xl font-black text-white leading-tight tracking-tighter">
+                                        {title.split('<br />').map((part: string, i: number) => (
+                                            <span key={i} className="block">{part.trim()}</span>
+                                        ))}
+                                    </h3>
 
-                        <p className="text-slate-400 text-sm md:text-base font-bold leading-relaxed">
-                            {desc}
-                        </p>
+                                    <p className="text-slate-400 text-sm md:text-base font-bold leading-relaxed">
+                                        {desc}
+                                    </p>
+                                </>
+                            }
+                        />
 
                         <DialogTrigger asChild>
                             <Button
@@ -139,7 +148,11 @@ const FeatureCard = ({ title, desc, img, reverse = false, icon: Icon, details }:
                                         <div className="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center shrink-0">
                                             <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400" strokeWidth={3} />
                                         </div>
-                                        <span className="text-slate-300 font-bold leading-relaxed">{item}</span>
+                                        <EditableContent 
+                                            contentKey={`${contentKey}_item_${idx}`}
+                                            description={`Feature ${title} Item ${idx + 1}`}
+                                            defaultContent={<span className="text-slate-300 font-bold leading-relaxed">{item}</span>}
+                                        />
                                     </motion.div>
                                 ))}
                             </div>
@@ -223,13 +236,25 @@ const SyntaxWorksPage = () => {
                                         <span>AI-POWERED PLATFORM</span>
                                     </motion.div>
 
-                                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight tracking-tighter py-2">
-                                        Syntax <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 italic pr-8 inline-block">Works</span>
-                                    </h1>
+                                    <EditableContent 
+                                        contentKey="syntax_hero_heading"
+                                        description="SyntaxWorks Hero Heading"
+                                        defaultContent={
+                                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight tracking-tighter py-2">
+                                                Syntax <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 italic pr-8 inline-block">Works</span>
+                                            </h1>
+                                        }
+                                    />
 
-                                    <p className="text-lg md:text-xl text-slate-400 font-bold leading-relaxed max-w-xl">
-                                        Empowering the next generation of developers with an intelligent coding environment and seamless multi-language support.
-                                    </p>
+                                    <EditableContent 
+                                        contentKey="syntax_hero_desc"
+                                        description="SyntaxWorks Hero Description"
+                                        defaultContent={
+                                            <p className="text-lg md:text-xl text-slate-400 font-bold leading-relaxed max-w-xl">
+                                                Empowering the next generation of developers with an intelligent coding environment and seamless multi-language support.
+                                            </p>
+                                        }
+                                    />
                                 </div>
 
                                 <div className="grid sm:grid-cols-2 gap-x-12 gap-y-8 pt-4 border-t border-white/5">
@@ -237,14 +262,14 @@ const SyntaxWorksPage = () => {
                                         { icon: Shield, title: "Secure Platform", desc: "Enterprise-grade safety" },
                                         { icon: Rocket, title: "Fast Execution", desc: "Real-time compiling" },
                                         { icon: Globe, title: "Multi-language", desc: "Support for 50+ languages" },
-                                        { icon: Code2, title: "Smart IDE", desc: "AI-assisted coding" }
+                                        { icon: Code2, title: "Smart\u00A0\u00A0IDE", desc: "AI-assisted coding" }
                                     ].map((item, i) => (
                                         <motion.div key={i} className="flex gap-5 items-start group">
                                             <div className="mt-1 p-3 rounded-xl bg-white/5 border border-white/10 group-hover:bg-indigo-600 group-hover:border-transparent transition-all duration-500">
                                                 <item.icon className="w-5 h-5 text-indigo-400 group-hover:text-white" strokeWidth={2.5} />
                                             </div>
                                             <div>
-                                                <h4 className="font-black text-white text-base mb-1 uppercase tracking-tight">{item.title}</h4>
+                                                <h4 className="font-black text-white text-base mb-1 uppercase tracking-tight whitespace-pre">{item.title}</h4>
                                                 <p className="text-sm text-slate-500 font-bold leading-tight">{item.desc}</p>
                                             </div>
                                         </motion.div>
@@ -304,9 +329,15 @@ const SyntaxWorksPage = () => {
                             >
                                 Product Architecture
                             </motion.div>
-                            <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-white tracking-tighter leading-none">
-                                Specialized <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 italic">Capabilities</span>
-                            </h2>
+                            <EditableContent 
+                                contentKey="syntax_product_heading"
+                                description="SyntaxWorks Specialized Heading"
+                                defaultContent={
+                                    <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-white tracking-tighter leading-none">
+                                        Specialized <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 italic">Capabilities</span>
+                                    </h2>
+                                }
+                            />
                             <p className="text-slate-500 text-xl font-bold max-w-2xl mx-auto leading-relaxed">
                                 Explore the premium features that drive efficiency across all engineering stakeholders.
                             </p>
@@ -315,6 +346,7 @@ const SyntaxWorksPage = () => {
                         <div className="max-w-7xl mx-auto space-y-16">
                             <FeatureCard
                                 icon={Layout}
+                                contentKey="syntax_feature_1"
                                 title="Comprehensive <br /> Practice Test Series"
                                 desc="Boost your learning with our meticulously designed Practice Test Series, crafted to help you assess your knowledge and achieve mastery in world-class coding assessments."
                                 img="/images/syntaxworks/practice_test_premium.png"
@@ -328,6 +360,7 @@ const SyntaxWorksPage = () => {
 
                             <FeatureCard
                                 icon={Code2}
+                                contentKey="syntax_feature_2"
                                 title="Practice Multiple <br /> Programming Languages"
                                 desc="Our cross-language platform allows you to switch between environments seamlessly, supporting every standard protocol with zero latency."
                                 img="/images/syntaxworks/programming_lang_premium.png"
@@ -342,6 +375,7 @@ const SyntaxWorksPage = () => {
 
                             <FeatureCard
                                 icon={Monitor}
+                                contentKey="syntax_feature_3"
                                 title="Integrated <br /> Environment (IDE)"
                                 desc="Our platform offers a state-of-the-art IDE designed to streamline your coding experience, enable you to write, test, and debug code all in one place."
                                 img="/images/syntaxworks/ide_premium.png"
@@ -355,6 +389,7 @@ const SyntaxWorksPage = () => {
 
                             <FeatureCard
                                 icon={Bug}
+                                contentKey="syntax_feature_4"
                                 title="Error Detection and <br /> Debugging Tools"
                                 desc="Advanced debugging support for various languages, with detailed error messages and solutions across different coding environments."
                                 img="/images/syntaxworks/debugging_premium.png"

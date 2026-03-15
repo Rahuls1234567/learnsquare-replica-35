@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { toast } from "sonner";
+import { EditableContent } from "@/src/components/EditableContent";
 
 
 const AndroidAppleIcon = ({ size = 24 }: { size?: number }) => (
@@ -218,70 +219,6 @@ const features = [
 ];
 
 const coreModulesData = [
-    {
-        pillText: "Core Module",
-        titlePrefix: "Parent",
-        titleHighlight: "Management",
-        gradientText: "from-pink-600 to-rose-600",
-        theme: {
-            pillBg: "bg-pink-50 border-pink-100",
-            pillDot: "bg-pink-500 shadow-[0_0_10px_rgba(236,72,153,0.4)]",
-            pillText: "text-pink-600",
-            glow1: "bg-pink-300/20",
-            glow2: "bg-rose-300/20",
-            iconBg: "bg-pink-50",
-            iconBgHover: "group-hover/item:bg-pink-500",
-            iconBorder: "border-pink-100",
-            iconBorderHover: "group-hover/item:border-pink-500",
-            iconText: "text-pink-500",
-            imageGlow: "from-pink-400/10 to-rose-400/10",
-            imageBacking: "from-pink-400/15 to-rose-400/15"
-        },
-        imageSrc: "/images/homeimage/parent_mgmt_premium.png",
-        imageAlt: "Parent Management Dashboard",
-        isImageRight: true,
-        listItems: [
-            "Send Instant Notifications to Parents via App, SMS & WhatsApp",
-            "Automated Fee Reminders & Payment Status Updates",
-            "Real-time Attendance Alerts & Monthly Progress Reports",
-            "Performance Analytics & Exam Result Notifications",
-            "Virtual Parent-Teacher Meeting (PTM) Scheduling",
-            "Digital Consent Forms & Survey Participations",
-            "Track Child's Academic Journey & Campus Activities"
-        ]
-    },
-    {
-        pillText: "Core Module",
-        titlePrefix: "Communication",
-        titleHighlight: "Management",
-        gradientText: "from-teal-600 to-emerald-600",
-        theme: {
-            pillBg: "bg-teal-50 border-teal-100",
-            pillDot: "bg-teal-500 shadow-[0_0_10px_rgba(20,184,166,0.4)]",
-            pillText: "text-teal-600",
-            glow1: "bg-teal-300/20",
-            glow2: "bg-emerald-300/20",
-            iconBg: "bg-teal-50",
-            iconBgHover: "group-hover/item:bg-teal-500",
-            iconBorder: "border-teal-100",
-            iconBorderHover: "group-hover/item:border-teal-500",
-            iconText: "text-teal-500",
-            imageGlow: "from-teal-400/10 to-emerald-400/10",
-            imageBacking: "from-teal-400/15 to-emerald-400/15"
-        },
-        imageSrc: "/images/homeimage/comm_mgmt_premium.png",
-        imageAlt: "Communication Management Dashboard",
-        isImageRight: false,
-        listItems: [
-            "Centralized Multi-Channel Alert System (SMS, WhatsApp, Email, Push)",
-            "Automated Circular Distribution to Campus Stakeholders",
-            "Emergency Alerts & Real-time Update Broadcasting",
-            "Scheduled Notifications & Reminders",
-            "Two-way Communication Stream for Faculty and Students",
-            "AI-Powered Auto Responders for Common Queries",
-            "In-depth Delivery Reports & Analytics"
-        ]
-    },
     {
         pillText: "Integrated Module",
         titlePrefix: "Academic",
@@ -528,6 +465,70 @@ const coreModulesData = [
             "Inventory & Asset Tracking",
             "Digital Room Transfer Requests"
         ]
+    },
+    {
+        pillText: "Core Module",
+        titlePrefix: "Parent",
+        titleHighlight: "Management",
+        gradientText: "from-pink-600 to-rose-600",
+        theme: {
+            pillBg: "bg-pink-50 border-pink-100",
+            pillDot: "bg-pink-500 shadow-[0_0_10px_rgba(236,72,153,0.4)]",
+            pillText: "text-pink-600",
+            glow1: "bg-pink-300/20",
+            glow2: "bg-rose-300/20",
+            iconBg: "bg-pink-50",
+            iconBgHover: "group-hover/item:bg-pink-500",
+            iconBorder: "border-pink-100",
+            iconBorderHover: "group-hover/item:border-pink-500",
+            iconText: "text-pink-500",
+            imageGlow: "from-pink-400/10 to-rose-400/10",
+            imageBacking: "from-pink-400/15 to-rose-400/15"
+        },
+        imageSrc: "/images/homeimage/parent_mgmt_premium.png",
+        imageAlt: "Parent Management Dashboard",
+        isImageRight: true,
+        listItems: [
+            "Send Instant Notifications to Parents via App, SMS & WhatsApp",
+            "Automated Fee Reminders & Payment Status Updates",
+            "Real-time Attendance Alerts & Monthly Progress Reports",
+            "Performance Analytics & Exam Result Notifications",
+            "Virtual Parent-Teacher Meeting (PTM) Scheduling",
+            "Digital Consent Forms & Survey Participations",
+            "Track Child's Academic Journey & Campus Activities"
+        ]
+    },
+    {
+        pillText: "Core Module",
+        titlePrefix: "Communication",
+        titleHighlight: "Management",
+        gradientText: "from-teal-600 to-emerald-600",
+        theme: {
+            pillBg: "bg-teal-50 border-teal-100",
+            pillDot: "bg-teal-500 shadow-[0_0_10px_rgba(20,184,166,0.4)]",
+            pillText: "text-teal-600",
+            glow1: "bg-teal-300/20",
+            glow2: "bg-emerald-300/20",
+            iconBg: "bg-teal-50",
+            iconBgHover: "group-hover/item:bg-teal-500",
+            iconBorder: "border-teal-100",
+            iconBorderHover: "group-hover/item:border-teal-500",
+            iconText: "text-teal-500",
+            imageGlow: "from-teal-400/10 to-emerald-400/10",
+            imageBacking: "from-teal-400/15 to-emerald-400/15"
+        },
+        imageSrc: "/images/homeimage/comm_mgmt_premium.png",
+        imageAlt: "Communication Management Dashboard",
+        isImageRight: false,
+        listItems: [
+            "Centralized Multi-Channel Alert System (SMS, WhatsApp, Email, Push)",
+            "Automated Circular Distribution to Campus Stakeholders",
+            "Emergency Alerts & Real-time Update Broadcasting",
+            "Scheduled Notifications & Reminders",
+            "Two-way Communication Stream for Faculty and Students",
+            "AI-Powered Auto Responders for Common Queries",
+            "In-depth Delivery Reports & Analytics"
+        ]
     }
 ];
 
@@ -609,34 +610,48 @@ export default function Aicas() {
                             <div className="relative group cursor-default inline-block">
                                 <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
                                 <div className="relative bg-slate-900/80 border border-indigo-500/30 text-indigo-400 px-6 py-2.5 rounded-full font-black tracking-[0.2em] text-[10px] uppercase shadow-2xl flex items-center gap-2 overflow-hidden">
-                                    <span className="relative z-10">AI Powered AICAS</span>
+                                    <span className="relative z-10">AICAS</span>
                                 </div>
                             </div>
 
-                            <h2 className="text-4xl sm:text-6xl lg:text-[5.5rem] font-black tracking-[-0.04em] leading-[0.9] flex flex-col items-start">
-                                <span className="text-white drop-shadow-[0_10px_30px_rgba(255,255,255,0.1)]">Campus</span>
-                                <span className="text-slate-300 italic">Automation</span>
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">Solution</span>
-                            </h2>
+                            <EditableContent 
+                                contentKey="aicas_hero_content"
+                                description="AICAS Hero Heading & Subtitle"
+                                defaultContent={
+                                    <>
+                                        <h2 className="font-black tracking-tight flex flex-col items-start drop-shadow-xl w-full">
+                                            <span className="text-5xl sm:text-6xl md:text-7xl lg:text-[4.5rem] xl:text-[5.5rem] 2xl:text-[6rem] text-slate-100 mb-2 lg:mb-4 leading-none">AI Powered</span>
+                                            <span className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem] 2xl:text-[4.5rem] text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-400 pb-1 whitespace-normal xl:whitespace-nowrap leading-[1.1]">Campus Automation</span>
+                                            <span className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem] 2xl:text-[4.5rem] text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-400 pb-2 leading-[1.1]">System</span>
+                                        </h2>
 
-                            <div className="space-y-6">
-                                <p className="text-xl md:text-2xl text-slate-300 font-bold max-w-xl leading-relaxed tracking-tight">
-                                    Transforming Campuses with <span className="text-indigo-400 italic">AI Brilliance</span>
-                                </p>
-                                <div className="h-1.5 w-32 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full shadow-[0_0_20px_rgba(99,102,241,0.8)]" />
-                            </div>
+                                        <div className="space-y-6">
+                                            <p className="text-xl md:text-2xl text-slate-300 font-bold max-w-xl leading-relaxed tracking-tight">
+                                                Transforming Campuses with <span className="text-indigo-400 italic">AI Brilliance</span>
+                                            </p>
+                                            <div className="h-1.5 w-32 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full shadow-[0_0_20px_rgba(99,102,241,0.8)]" />
+                                        </div>
+                                    </>
+                                }
+                            />
 
-                            <div className="pt-4 flex gap-6">
-                                <div className="flex flex-col">
-                                    <span className="text-3xl font-black text-white">40%</span>
-                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Efficiency Boost</span>
-                                </div>
-                                <div className="w-[1px] bg-slate-800 h-10 self-center" />
-                                <div className="flex flex-col">
-                                    <span className="text-3xl font-black text-white">100%</span>
-                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Digital Inclusion</span>
-                                </div>
-                            </div>
+                            <EditableContent 
+                                contentKey="aicas_hero_stats"
+                                description="AICAS Hero Stats"
+                                defaultContent={
+                                    <div className="pt-4 flex gap-6">
+                                        <div className="flex flex-col">
+                                            <span className="text-3xl font-black text-white">40%</span>
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Efficiency Boost</span>
+                                        </div>
+                                        <div className="w-[1px] bg-slate-800 h-10 self-center" />
+                                        <div className="flex flex-col">
+                                            <span className="text-3xl font-black text-white">100%</span>
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Digital Inclusion</span>
+                                        </div>
+                                    </div>
+                                }
+                            />
                         </motion.div>
 
                         {/* Right Column: Premium Dark Contact Form */}
@@ -799,14 +814,24 @@ export default function Aicas() {
                         className="mb-14"
                     >
                         <div className="flex flex-col gap-2">
-                            <span className="text-indigo-400 font-bold tracking-[0.4em] uppercase text-xs">Why Choose AICAS</span>
+                            <EditableContent 
+                                contentKey="aicas_features_badge"
+                                description="AICAS Features Badge"
+                                defaultContent={<span className="text-indigo-400 font-bold tracking-[0.4em] uppercase text-xs">Why Choose AICAS</span>}
+                            />
                             <div className="relative">
                                 <span className="absolute -top-10 -left-4 text-7xl md:text-9xl font-black text-white/5 uppercase select-none pointer-events-none tracking-tighter">
                                     FEATURES
                                 </span>
-                                <h2 className="text-4xl lg:text-5xl font-black text-white tracking-tight relative z-10">
-                                    Unlock Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500 italic">Extra Edge</span>
-                                </h2>
+                                <EditableContent 
+                                    contentKey="aicas_features_heading"
+                                    description="AICAS Features Heading"
+                                    defaultContent={
+                                        <h2 className="text-4xl lg:text-5xl font-black text-white tracking-tight relative z-10">
+                                            Unlock Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500 italic">Extra Edge</span>
+                                        </h2>
+                                    }
+                                />
                             </div>
                         </div>
                     </motion.div>
@@ -829,12 +854,20 @@ export default function Aicas() {
                                 </div>
 
                                 <div className="relative z-10 flex-grow space-y-3 md:space-y-4">
-                                    <h3 className="text-xl md:text-2xl font-black text-white tracking-tight leading-tight group-hover/feature:text-indigo-400 transition-colors">
-                                        {feature.title}
-                                    </h3>
-                                    <p className="text-slate-400 font-bold leading-relaxed transition-all duration-500 group-hover/feature:text-slate-200 text-sm md:text-base">
-                                        {feature.text}
-                                    </p>
+                                    <EditableContent 
+                                        contentKey={`aicas_feature_${idx}`}
+                                        description={`AICAS Feature ${idx + 1}`}
+                                        defaultContent={
+                                            <>
+                                                <h3 className="text-xl md:text-2xl font-black text-white tracking-tight leading-tight group-hover/feature:text-indigo-400 transition-colors">
+                                                    {feature.title}
+                                                </h3>
+                                                <p className="text-slate-400 font-bold leading-relaxed transition-all duration-500 group-hover/feature:text-slate-200 text-sm md:text-base">
+                                                    {feature.text}
+                                                </p>
+                                            </>
+                                        }
+                                    />
                                 </div>
 
                                 <div className="absolute bottom-10 left-10 h-1.5 w-10 bg-white/5 rounded-full group-hover/feature:w-24 group-hover/feature:bg-indigo-500 transition-all duration-700" />
@@ -880,19 +913,29 @@ export default function Aicas() {
                                         className={`inline-flex items-center gap-3 px-6 py-2.5 rounded-2xl bg-white/5 border border-white/10 shadow-sm`}
                                     >
                                         <span className={`w-2.5 h-2.5 rounded-full ${module.theme.pillDot}`} />
-                                        <span className={`text-xs font-black tracking-[0.4em] text-white uppercase`}>{module.pillText}</span>
+                                        <EditableContent 
+                                            contentKey={`aicas_module_${idx}_pill`}
+                                            description={`AICAS Module ${idx + 1} Pill Text`}
+                                            defaultContent={<span className={`text-xs font-black tracking-[0.4em] text-white uppercase`}>{module.pillText}</span>}
+                                        />
                                     </motion.div>
 
                                     <div className="relative">
                                         <span className="absolute -top-12 -left-4 text-8xl md:text-[10rem] font-black text-white/5 uppercase select-none pointer-events-none tracking-tighter">
                                             {module.titlePrefix.substring(0, 5)}
                                         </span>
-                                        <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[0.9] relative z-10">
-                                            {module.titlePrefix}
-                                            <span className={`block text-transparent bg-clip-text bg-gradient-to-r ${module.gradientText} italic mt-2 drop-shadow-2xl`}>
-                                                {module.titleHighlight}
-                                            </span>
-                                        </h2>
+                                        <EditableContent 
+                                            contentKey={`aicas_module_${idx}_heading`}
+                                            description={`AICAS Module ${idx + 1} Heading`}
+                                            defaultContent={
+                                                <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[0.9] relative z-10 py-1 overflow-visible">
+                                                    {module.titlePrefix}
+                                                    <span className={`inline-block text-transparent bg-clip-text bg-gradient-to-r ${module.gradientText} italic mt-2 pb-4 pr-6 drop-shadow-2xl`}>
+                                                        {module.titleHighlight}
+                                                    </span>
+                                                </h2>
+                                            }
+                                        />
                                     </div>
                                 </div>
 
@@ -909,9 +952,11 @@ export default function Aicas() {
                                             <div className={`mt-1 w-7 h-7 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover/item:bg-gradient-to-br ${module.gradientText} group-hover/item:border-transparent transition-all duration-500 shadow-lg`}>
                                                 <Check className={`w-4 h-4 text-white group-hover/item:text-white transition-colors`} strokeWidth={4} />
                                             </div>
-                                            <span className="text-base font-bold text-slate-400 group-hover/item:text-white transition-colors leading-snug py-0.5">
-                                                {item}
-                                            </span>
+                                            <EditableContent 
+                                                contentKey={`aicas_module_${idx}_item_${i}`}
+                                                description={`AICAS Module ${idx + 1} Item ${i + 1}`}
+                                                defaultContent={<span className="text-base font-bold text-slate-400 group-hover/item:text-white transition-colors leading-snug py-0.5">{item}</span>}
+                                            />
                                         </motion.div>
                                     ))}
                                 </div>

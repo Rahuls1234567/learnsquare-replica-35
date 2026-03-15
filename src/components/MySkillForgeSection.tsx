@@ -10,6 +10,7 @@ import {
     LayoutDashboard,
     Award
 } from "lucide-react";
+import { EditableContent } from "./EditableContent";
 
 const MySkillForgeSection = () => {
     const features = [
@@ -63,25 +64,37 @@ const MySkillForgeSection = () => {
                                 viewport={{ once: true }}
                                 className="space-y-6"
                             >
-                                <h1 className="text-3xl sm:text-6xl xl:text-8xl font-black text-slate-950 tracking-[-0.05em] leading-[0.9] inline-block">
-                                    Unleash Your <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-500 italic pr-6 inline-block">Potential</span>
-                                </h1>
+                                <EditableContent 
+                                    contentKey="home_myskillforge_heading"
+                                    description="MySkillForge Heading"
+                                    defaultContent={
+                                        <h1 className="text-3xl sm:text-6xl xl:text-8xl font-black text-slate-950 tracking-[-0.05em] leading-[0.9] inline-block">
+                                            Unleash Your <br />
+                                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-500 italic pr-6 inline-block">Potential</span>
+                                        </h1>
+                                    }
+                                />
                                 <div className="flex items-center gap-4 group">
                                     <div className="h-px w-10 bg-indigo-200 group-hover:w-16 transition-all duration-500" />
                                     <span className="text-[11px] font-black text-slate-500 uppercase tracking-[0.4em]">Advanced Career Readiness</span>
                                 </div>
                             </motion.div>
 
-                            <motion.p
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.1 }}
-                                className="text-xl text-slate-600 font-medium leading-relaxed max-w-xl"
-                            >
-                                Skyrocket your employability by <span className="text-slate-900 font-bold">5x</span> with our 3-phase immersive program. Gain 11 professional certificates and real-world virtual experience.
-                            </motion.p>
+                            <EditableContent 
+                                contentKey="home_myskillforge_desc"
+                                description="MySkillForge Description"
+                                defaultContent={
+                                    <motion.p
+                                        initial={{ opacity: 0, y: 30 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: 0.1 }}
+                                        className="text-xl text-slate-600 font-medium leading-relaxed max-w-xl"
+                                    >
+                                        Skyrocket your employability by <span className="text-slate-900 font-bold">5x</span> with our 3-phase immersive program. Gain 11 professional certificates and real-world virtual experience.
+                                    </motion.p>
+                                }
+                            />
                         </div>
 
                         <div className="flex flex-wrap items-center gap-6">
@@ -151,9 +164,15 @@ const MySkillForgeSection = () => {
                             <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-blue-400/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
 
                             <Sparkles className="text-indigo-300 w-8 h-8 mb-6 relative z-10 animate-pulse" />
-                            <p className="text-lg md:text-xl font-bold italic leading-relaxed tracking-tight relative z-10 text-indigo-50">
-                                "MySkillForge is a three-phase employability program designed to equip students with advanced technical skills and essential problem solving, communication, and career-readiness abilities."
-                            </p>
+                            <EditableContent 
+                                contentKey="home_myskillforge_vision"
+                                description="MySkillForge Vision Statement"
+                                defaultContent={
+                                    <p className="text-lg md:text-xl font-bold italic leading-relaxed tracking-tight relative z-10 text-indigo-50">
+                                        "MySkillForge is a three-phase employability program designed to equip students with advanced technical skills and essential problem solving, communication, and career-readiness abilities."
+                                    </p>
+                                }
+                            />
                             <div className="mt-8 flex items-center gap-4 relative z-10">
                                 <div className="h-px w-12 bg-indigo-300/30" />
                                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-200">AICAS Vision 2026</span>

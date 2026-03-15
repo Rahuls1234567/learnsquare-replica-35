@@ -18,6 +18,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { toast } from "sonner";
+import { EditableContent } from "@/components/EditableContent";
 
 const FeatureCard = ({ title, desc, img, reverse = false, icon: Icon, color }: any) => {
     return (
@@ -224,7 +225,7 @@ const MySkillForgePage = () => {
                                 initial={{ opacity: 0, x: -50 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 1, delay: 0.2 }}
-                                className="text-white space-y-8"
+                                className="text-white space-y-8 w-full lg:max-w-xl"
                             >
                                 <div className="space-y-10">
                                     <motion.div
@@ -233,22 +234,35 @@ const MySkillForgePage = () => {
                                         transition={{ duration: 0.8 }}
                                         className="relative"
                                     >
-                                        <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter text-[#FF1493] drop-shadow-[0_10px_40px_rgba(255,20,147,0.4)] text-center lg:text-left">
-                                            MySkillForge
-                                        </h2>
+                                        <EditableContent 
+                                            contentKey="msf_hero_heading"
+                                            description="MSF Hero Heading"
+                                            defaultContent={
+                                                <h2 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter text-[#FF1493] drop-shadow-[0_10px_40px_rgba(255,20,147,0.4)] text-center lg:text-left">
+                                                    MySkillForge
+                                                </h2>
+                                            }
+                                        />
                                     </motion.div>
 
                                     <motion.div
                                         initial={{ opacity: 0, x: -30 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ duration: 0.8, delay: 0.2 }}
-                                        className="inline-flex bg-[#3c379a] border border-white/20 px-6 sm:px-8 py-4 sm:py-5 rounded-[2rem] sm:rounded-[2.5rem] shadow-[0_25px_60px_rgba(60,55,154,0.3)] relative overflow-hidden mx-auto lg:mx-0"
                                     >
-                                        <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-50" />
-                                        <span className="relative z-10 text-white font-black text-lg md:text-2xl leading-[1.1] tracking-tight">
-                                            Pre-Internship Program & <br />
-                                            <span className="text-blue-200">6 Weeks Virtual Internship</span>
-                                        </span>
+                                        <EditableContent 
+                                            contentKey="msf_hero_subtitle"
+                                            description="MSF Hero Subtitle"
+                                            defaultContent={
+                                                <div className="inline-flex bg-[#3c379a] border border-white/20 px-6 sm:px-8 py-4 sm:py-5 rounded-[2rem] sm:rounded-[2.5rem] shadow-[0_25px_60px_rgba(60,55,154,0.3)] relative overflow-hidden mx-auto lg:mx-0">
+                                                    <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-50" />
+                                                    <span className="relative z-10 text-white font-black text-sm md:text-lg xl:text-xl leading-[1.1] tracking-tight whitespace-nowrap">
+                                                        Pre-Internship Program & 
+                                                        <span className="text-blue-200"> 6 Weeks Virtual Internship</span>
+                                                    </span>
+                                                </div>
+                                            }
+                                        />
                                     </motion.div>
 
                                     <motion.div
@@ -258,11 +272,17 @@ const MySkillForgePage = () => {
                                         className="space-y-6 max-w-2xl"
                                     >
                                         <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl">
-                                            <p className="text-white text-lg sm:text-xl md:text-2xl font-bold leading-relaxed text-center lg:text-left">
-                                                Increase Employability Skills by
-                                                <span className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#FF1493] text-white font-black mx-2 sm:mx-3 shadow-[0_0_20px_rgba(255,20,147,0.5)] text-base sm:text-lg">5x</span>
-                                                with our <span className="text-blue-400">3-Phase Program</span>, 11 Certifications & 6-Week Internship.
-                                            </p>
+                                            <EditableContent 
+                                                contentKey="msf_hero_desc"
+                                                description="MSF Hero Description"
+                                                defaultContent={
+                                                    <p className="text-white text-lg sm:text-xl md:text-2xl font-bold leading-relaxed text-center lg:text-left">
+                                                        Increase Employability Skills by
+                                                        <span className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#FF1493] text-white font-black mx-2 sm:mx-3 shadow-[0_0_20px_rgba(255,20,147,0.5)] text-base sm:text-lg">5x</span>
+                                                        with our <span className="text-blue-400">3-Phase Program</span>, 11 Certifications & 6-Week Internship.
+                                                    </p>
+                                                }
+                                            />
                                         </div>
                                     </motion.div>
                                 </div>
@@ -281,9 +301,9 @@ const MySkillForgePage = () => {
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.8, delay: 0.5 }}
-                                className="relative"
+                                className="relative w-full max-w-lg lg:ml-auto ml-0"
                             >
-                                <div className="glass-chrome rounded-[2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-12 border border-white/20 shadow-2xl relative z-10">
+                                <div className="bg-slate-900/40 backdrop-blur-2xl rounded-[2rem] md:rounded-[3rem] p-6 sm:p-8 md:p-12 border border-white/20 shadow-2xl relative z-10">
                                     <h3 className="text-xl md:text-2xl font-black text-white text-center mb-6 md:mb-8 tracking-tight">Fill in your Details to Enrol !!</h3>
 
                                     <form className="space-y-4" onSubmit={handleSubmit(onEnrolSubmit)}>
@@ -453,38 +473,65 @@ const MySkillForgePage = () => {
                             <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
 
                             <div className="relative z-10 flex flex-col items-center">
-                                <span className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-black text-[10px] uppercase tracking-[0.3em] shadow-xl mb-10 inline-block">
-                                    Limited Slots Only
-                                </span>
-                                <h3 className="text-2xl sm:text-5xl md:text-7xl font-black text-slate-900 mb-8 sm:mb-16 tracking-tighter">
-                                    Next Batch <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF1493] to-purple-600">Update!</span>
-                                </h3>
+                                <EditableContent 
+                                    contentKey="msf_nextbatch_slots_badge"
+                                    description="Next Batch Slots Badge"
+                                    defaultContent={
+                                        <span className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white font-black text-[10px] uppercase tracking-[0.3em] shadow-xl mb-10 inline-block">
+                                            Limited Slots Only
+                                        </span>
+                                    }
+                                />
+                                <EditableContent 
+                                    contentKey="msf_nextbatch_heading"
+                                    description="MSF Next Batch Heading"
+                                    defaultContent={
+                                        <h3 className="text-2xl sm:text-5xl md:text-7xl font-black text-slate-900 mb-8 sm:mb-16 tracking-tighter">
+                                            Next Batch <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF1493] to-purple-600">Update!</span>
+                                        </h3>
+                                    }
+                                />
 
                                 <div className="grid grid-cols-3 gap-1 sm:gap-12 w-full mb-12 sm:mb-16">
                                     {[
-                                        { label: "DEADLINE", val: "25th Dec", icon: Star, color: "#f59e0b" },
-                                        { label: "ORIENTATION", val: "2nd Jan", icon: BookOpen, color: "#6366f1" },
-                                        { label: "KICK-OFF", val: "3rd Jan", icon: Rocket, color: "#ec4899" }
+                                        { key: "deadline", label: "DEADLINE", val: "25th Dec", icon: Star, color: "#f59e0b" },
+                                        { key: "orientation", label: "ORIENTATION", val: "2nd Jan", icon: BookOpen, color: "#6366f1" },
+                                        { key: "kickoff", label: "KICK-OFF", val: "3rd Jan", icon: Rocket, color: "#ec4899" }
                                     ].map((item, idx) => (
-                                        <div key={idx} className="flex flex-col items-center text-center space-y-2 sm:space-y-4 bg-slate-50/50 sm:bg-transparent py-3 px-1 sm:p-0 rounded-xl sm:rounded-none">
-                                            <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white sm:bg-slate-50 flex items-center justify-center text-slate-400 group-hover:scale-110 transition-transform flex-shrink-0">
-                                                <item.icon className="w-4 h-4 sm:w-6 sm:h-6" style={{ color: item.color }} />
-                                            </div>
-                                            <div className="space-y-0.5 sm:space-y-1">
-                                                <p className="text-[7px] sm:text-[10px] font-black text-slate-400 uppercase tracking-tighter sm:tracking-[0.2em]">{item.label}</p>
-                                                <p className="text-[10px] sm:text-xl md:text-2xl font-black text-slate-900 tracking-tight">{item.val}</p>
-                                            </div>
-                                        </div>
+                                        <EditableContent 
+                                            key={idx}
+                                            contentKey={`msf_nextbatch_item_${item.key}`}
+                                            description={`MSF Next Batch ${item.label}`}
+                                            className="w-full"
+                                            defaultContent={
+                                                <div className="flex flex-col items-center text-center space-y-2 sm:space-y-4 bg-slate-50/50 sm:bg-transparent py-3 px-1 sm:p-0 rounded-xl sm:rounded-none">
+                                                    <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white sm:bg-slate-50 flex items-center justify-center text-slate-400 group-hover:scale-110 transition-transform flex-shrink-0">
+                                                        <item.icon className="w-4 h-4 sm:w-6 sm:h-6" style={{ color: item.color }} />
+                                                    </div>
+                                                    <div className="space-y-0.5 sm:space-y-1">
+                                                        <p className="text-[7px] sm:text-[10px] font-black text-slate-400 uppercase tracking-tighter sm:tracking-[0.2em]">{item.label}</p>
+                                                        <p className="text-[10px] sm:text-xl md:text-2xl font-black text-slate-900 tracking-tight">{item.val}</p>
+                                                    </div>
+                                                </div>
+                                            }
+                                        />
                                     ))}
                                 </div>
 
-                                <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-12 border-t border-slate-100 w-full">
-                                    <span className="text-xl md:text-2xl font-black text-slate-400 tracking-tight">Program Fee:</span>
-                                    <div className="flex items-baseline gap-2">
-                                        <span className="text-4xl sm:text-6xl md:text-7xl font-black text-slate-900 tracking-tighter">Γé╣235/-</span>
-                                        <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">(Incl. of GST)</span>
-                                    </div>
-                                </div>
+                                <EditableContent 
+                                    contentKey="msf_nextbatch_fee_section"
+                                    description="Next Batch Fee Section"
+                                    className="w-full"
+                                    defaultContent={
+                                        <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-12 border-t border-slate-100 w-full">
+                                            <span className="text-xl md:text-2xl font-black text-slate-400 tracking-tight">Program Fee:</span>
+                                            <div className="flex items-baseline gap-2">
+                                                <span className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tighter">₹235/-</span>
+                                                <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">(Incl. of GST)</span>
+                                            </div>
+                                        </div>
+                                    }
+                                />
                             </div>
                         </motion.div>
                     </div>
@@ -494,10 +541,22 @@ const MySkillForgePage = () => {
                     {/* Salient Features Section */}
                     <div className="mt-20">
                         <div className="text-center mb-16">
-                            <span className="px-6 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-[#3c379a] font-black text-xs uppercase tracking-[0.2em] mb-4 inline-block">
-                                Why Choose Us
-                            </span>
-                            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 tracking-tight mt-4">Salient Features</h2>
+                            <EditableContent 
+                                contentKey="msf_salient_badge"
+                                description="MSF Salient Badge"
+                                defaultContent={
+                                    <span className="px-6 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-[#3c379a] font-black text-xs uppercase tracking-[0.2em] mb-4 inline-block">
+                                        Why Choose Us
+                                    </span>
+                                }
+                            />
+                            <EditableContent 
+                                contentKey="msf_salient_heading"
+                                description="MSF Salient Heading"
+                                defaultContent={
+                                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 tracking-tight mt-4">Salient Features</h2>
+                                }
+                            />
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                             {[
@@ -556,8 +615,16 @@ const MySkillForgePage = () => {
                                             <img src={feature.img} alt={feature.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                                         </div>
                                         <div className="space-y-3 sm:space-y-4">
-                                            <h3 className="text-2xl sm:text-3xl font-black text-slate-800 leading-tight tracking-tight">{feature.title}</h3>
-                                            <p className="text-slate-500 font-bold text-sm sm:text-base leading-relaxed">{feature.desc}</p>
+                                            <EditableContent 
+                                                contentKey={`msf_feature_${idx}`}
+                                                description={`MSF Feature ${idx + 1}`}
+                                                defaultContent={
+                                                    <>
+                                                        <h3 className="text-2xl sm:text-3xl font-black text-slate-800 leading-tight tracking-tight">{feature.title}</h3>
+                                                        <p className="text-slate-500 font-bold text-sm sm:text-base leading-relaxed">{feature.desc}</p>
+                                                    </>
+                                                }
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -571,10 +638,16 @@ const MySkillForgePage = () => {
                         <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-100/50 rounded-full blur-[80px] pointer-events-none" />
 
                         <div className="relative z-10">
-                            <h2 className="text-sm font-black text-slate-400 uppercase tracking-[0.4em] mb-12 flex items-center gap-4">
-                                <span className="w-12 h-px bg-slate-200" />
-                                COURSE STRUCTURE
-                            </h2>
+                            <EditableContent 
+                                contentKey="msf_structure_heading"
+                                description="MSF Structure Heading"
+                                defaultContent={
+                                    <h2 className="text-sm font-black text-slate-400 uppercase tracking-[0.4em] mb-12 flex items-center gap-4">
+                                        <span className="w-12 h-px bg-slate-200" />
+                                        COURSE STRUCTURE
+                                    </h2>
+                                }
+                            />
 
                             <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
                                 {/* Side Tabs - Horizontal Scroll on Mobile */}
@@ -588,8 +661,16 @@ const MySkillForgePage = () => {
                                                 : "text-slate-400 bg-white/30 lg:bg-transparent hover:bg-white/50"
                                                 }`}
                                         >
-                                            <span className="text-[10px] uppercase tracking-widest opacity-60 block mb-1">Phase 0{idx + 1}</span>
-                                            <span className="text-sm lg:text-base">{phase.title.split(':')[0]}</span>
+                                            <EditableContent 
+                                                contentKey={`msf_phase_tab_${idx}`}
+                                                description={`MSF Phase ${idx + 1} Tab`}
+                                                defaultContent={
+                                                    <>
+                                                        <span className="text-[10px] uppercase tracking-widest opacity-60 block mb-1">Phase 0{idx + 1}</span>
+                                                        <span className="text-sm lg:text-base">{phase.title.split(':')[0]}</span>
+                                                    </>
+                                                }
+                                            />
                                         </button>
                                     ))}
                                 </div>
@@ -603,10 +684,18 @@ const MySkillForgePage = () => {
                                         className="space-y-10"
                                     >
                                         <div className="space-y-4">
-                                            <h4 className="text-slate-900 font-black text-3xl md:text-4xl leading-tight">{phases[activePhase].subtitle.replace(':', '')}</h4>
-                                            <p className="text-slate-500 font-bold text-base leading-relaxed max-w-2xl">
-                                                {phases[activePhase].description}
-                                            </p>
+                                            <EditableContent 
+                                                contentKey={`msf_active_phase_${activePhase}_content`}
+                                                description={`MSF Active Phase Content`}
+                                                defaultContent={
+                                                    <>
+                                                        <h4 className="text-slate-900 font-black text-3xl md:text-4xl leading-tight">{phases[activePhase].subtitle.replace(':', '')}</h4>
+                                                        <p className="text-slate-500 font-bold text-base leading-relaxed max-w-2xl">
+                                                            {phases[activePhase].description}
+                                                        </p>
+                                                    </>
+                                                }
+                                            />
                                         </div>
 
                                         <div className="grid md:grid-cols-2 gap-8">
@@ -616,10 +705,16 @@ const MySkillForgePage = () => {
                                                         <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 text-xs font-black group-hover/item:bg-indigo-600 group-hover/item:text-white transition-all">
                                                             {idx + 1}
                                                         </div>
-                                                        <div className="space-y-1">
-                                                            <p className="text-slate-900 font-black text-[15px] leading-tight">{item.label}</p>
-                                                            {item.desc && <p className="text-slate-400 font-bold text-xs leading-relaxed">{item.desc}</p>}
-                                                        </div>
+                                                        <EditableContent 
+                                                            contentKey={`msf_phase_${activePhase}_item_${idx}`}
+                                                            description={`MSF Phase ${activePhase + 1} Item ${idx + 1}`}
+                                                            defaultContent={
+                                                                <div className="space-y-1">
+                                                                    <p className="text-slate-900 font-black text-[15px] leading-tight">{item.label}</p>
+                                                                    {item.desc && <p className="text-slate-400 font-bold text-xs leading-relaxed">{item.desc}</p>}
+                                                                </div>
+                                                            }
+                                                        />
                                                     </li>
                                                 ))}
                                             </ul>
@@ -645,10 +740,20 @@ const MySkillForgePage = () => {
                 {/* Detailed Curriculum Sections */}
                 <div className="container mx-auto px-4 md:px-6 mt-32 space-y-20 pb-20">
                     <div className="text-center mb-16">
-                        <span className="px-6 py-2 rounded-full bg-slate-100 border border-slate-200 text-slate-600 font-black text-xs uppercase tracking-[0.2em] mb-4 inline-block">
-                            Curriculum Depth
-                        </span>
-                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 tracking-tight mt-4">In-Depth Learning Path</h2>
+                        <EditableContent 
+                            contentKey="msf_curriculum_badge"
+                            description="MSF Curriculum Badge"
+                            defaultContent={
+                                <span className="px-6 py-2 rounded-full bg-slate-100 border border-slate-200 text-slate-600 font-black text-xs uppercase tracking-[0.2em] mb-4 inline-block">
+                                    Curriculum Depth
+                                </span>
+                            }
+                        />
+                        <EditableContent 
+                            contentKey="msf_curriculum_heading"
+                            description="MSF Curriculum Heading"
+                            defaultContent={<h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 tracking-tight mt-4">In-Depth Learning Path</h2>}
+                        />
                     </div>
 
                     {/* Phase I */}
@@ -657,12 +762,26 @@ const MySkillForgePage = () => {
                         <div className="relative z-10 space-y-8 md:space-y-12">
                             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                                 <div>
-                                    <span className="text-purple-400 font-black text-[10px] md:text-xs uppercase tracking-[0.3em]">PHASE I</span>
-                                    <h2 className="text-3xl md:text-5xl font-black tracking-tight mt-2 md:mt-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">Foundational Programs</h2>
+                                    <EditableContent 
+                                        contentKey="msf_phase_1_badge"
+                                        description="MSF Phase 1 Badge"
+                                        defaultContent={<span className="text-purple-400 font-black text-[10px] md:text-xs uppercase tracking-[0.3em]">PHASE I</span>}
+                                    />
+                                    <EditableContent 
+                                        contentKey="msf_phase_1_heading"
+                                        description="MSF Phase 1 Heading"
+                                        defaultContent={<h2 className="text-3xl md:text-5xl font-black tracking-tight mt-2 md:mt-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">Foundational Programs</h2>}
+                                    />
                                 </div>
-                                <div className="px-5 py-1.5 md:px-6 md:py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white/80 font-bold text-xs md:text-sm inline-block w-fit">
-                                    Core Tech & Soft Skills
-                                </div>
+                                <EditableContent 
+                                    contentKey="msf_phase_1_type"
+                                    description="MSF Phase 1 Type"
+                                    defaultContent={
+                                        <div className="px-5 py-1.5 md:px-6 md:py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-white/80 font-bold text-xs md:text-sm inline-block w-fit">
+                                            Core Tech & Soft Skills
+                                        </div>
+                                    }
+                                />
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                                 {[
@@ -704,12 +823,26 @@ const MySkillForgePage = () => {
                         <div className="relative z-10 space-y-8 md:space-y-12">
                             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                                 <div>
-                                    <span className="text-orange-600 font-black text-[10px] md:text-xs uppercase tracking-[0.3em]">PHASE II</span>
-                                    <h2 className="text-3xl md:text-5xl font-black tracking-tight mt-2 md:mt-4">Advanced Technical Skills</h2>
+                                    <EditableContent 
+                                        contentKey="msf_phase_2_badge"
+                                        description="MSF Phase 2 Badge"
+                                        defaultContent={<span className="text-orange-600 font-black text-[10px] md:text-xs uppercase tracking-[0.3em]">PHASE II</span>}
+                                    />
+                                    <EditableContent 
+                                        contentKey="msf_phase_2_heading"
+                                        description="MSF Phase 2 Heading"
+                                        defaultContent={<h2 className="text-3xl md:text-5xl font-black tracking-tight mt-2 md:mt-4">Advanced Technical Skills</h2>}
+                                    />
                                 </div>
-                                <div className="px-5 py-1.5 md:px-6 md:py-2 rounded-full bg-orange-50 border border-orange-100 text-orange-600 font-bold text-xs md:text-sm inline-block w-fit">
-                                    DSA & Emerging Tech
-                                </div>
+                                <EditableContent 
+                                    contentKey="msf_phase_2_type"
+                                    description="MSF Phase 2 Type"
+                                    defaultContent={
+                                        <div className="px-5 py-1.5 md:px-6 md:py-2 rounded-full bg-orange-50 border border-orange-100 text-orange-600 font-bold text-xs md:text-sm inline-block w-fit">
+                                            DSA & Emerging Tech
+                                        </div>
+                                    }
+                                />
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                                 {[
@@ -751,14 +884,28 @@ const MySkillForgePage = () => {
                         <div className="relative z-10">
                             <div className="max-w-4xl space-y-8 md:space-y-10">
                                 <div className="space-y-4">
-                                    <span className="text-indigo-300 font-black text-[10px] md:text-xs uppercase tracking-[0.3em]">PHASE III</span>
-                                    <h2 className="text-2xl sm:text-4xl md:text-6xl font-black tracking-tight">Hackathon-Style Internship</h2>
+                                    <EditableContent 
+                                        contentKey="msf_phase_3_badge"
+                                        description="MSF Phase 3 Badge"
+                                        defaultContent={<span className="text-indigo-300 font-black text-[10px] md:text-xs uppercase tracking-[0.3em]">PHASE III</span>}
+                                    />
+                                    <EditableContent 
+                                        contentKey="msf_phase_3_heading"
+                                        description="MSF Phase 3 Heading"
+                                        defaultContent={<h2 className="text-2xl sm:text-4xl md:text-6xl font-black tracking-tight">Hackathon-Style Internship</h2>}
+                                    />
                                 </div>
                                 <div className="bg-white/10 backdrop-blur-xl border border-white/10 p-6 sm:p-10 md:p-12 rounded-[2rem] md:rounded-[3.5rem] relative">
                                     <div className="absolute -top-10 -right-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-3xl" />
-                                    <p className="text-white/80 font-bold leading-relaxed text-base md:text-xl">
-                                        In this final phase, students participate in a 6-week hackathon-style internship. Working in teams, they apply their technical skills in Java and React to develop real-world projects, simulating an industry environment. Guided by mentors, students tackle problem-solving challenges, collaborate on innovative solutions, and present their projects to a panel of experts.
-                                    </p>
+                                        <EditableContent 
+                                            contentKey="msf_phase_3_desc"
+                                            description="MSF Phase 3 Description"
+                                            defaultContent={
+                                                <p className="text-white/80 font-bold leading-relaxed text-base md:text-xl">
+                                                    In this final phase, students participate in a 6-week hackathon-style internship. Working in teams, they apply their technical skills in Java and React to develop real-world projects, simulating an industry environment. Guided by mentors, students tackle problem-solving challenges, collaborate on innovative solutions, and present their projects to a panel of experts.
+                                                </p>
+                                            }
+                                        />
                                     <div className="flex flex-wrap gap-4 md:gap-6 mt-8 md:mt-10">
                                         {["Real-world Projects", "Industry Mentors", "Professional Presentation", "Team Collaboration"].map((item, idx) => (
                                             <div key={idx} className="flex items-center gap-3">

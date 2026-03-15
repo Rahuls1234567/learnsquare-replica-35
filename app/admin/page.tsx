@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { LogOut, FileText, Users, Mail, BookOpen, GraduationCap, RefreshCw, X, User } from "lucide-react";
+import { LogOut, FileText, Users, Mail, BookOpen, GraduationCap, RefreshCw, X, User, Edit3, MessageSquare, ImageIcon, ExternalLink, FileCode } from "lucide-react";
+import { useAdmin } from "@/src/context/AdminContext";
 
 type ReportCounts = {
     contact: number;
@@ -12,6 +13,7 @@ type ReportCounts = {
     trainingRequest: number;
     testPrepPro: number;
     enrolment: number;
+    semesterPrep: number;
     total: number;
 };
 
@@ -24,6 +26,7 @@ const REPORT_LABELS: { key: ReportKey; label: string; icon: typeof FileText }[] 
     { key: "trainingRequest", label: "Training Programs", icon: GraduationCap },
     { key: "testPrepPro", label: "Test Prep Pro", icon: FileText },
     { key: "enrolment", label: "MySkillForge Enrolments", icon: Users },
+    { key: "semesterPrep", label: "Semester Prep", icon: BookOpen },
 ];
 
 const TABLE_COLUMNS: Record<ReportKey, { key: string; label: string }[]> = {
@@ -84,6 +87,15 @@ const TABLE_COLUMNS: Record<ReportKey, { key: string; label: string }[]> = {
         { key: "semester", label: "Semester" },
         { key: "createdAt", label: "Date" },
     ],
+    semesterPrep: [
+        { key: "name", label: "Name" },
+        { key: "email", label: "Email" },
+        { key: "mobile", label: "Phone" },
+        { key: "university", label: "University" },
+        { key: "college", label: "College" },
+        { key: "password", label: "Password" },
+        { key: "createdAt", label: "Date" },
+    ],
 };
 
 const formatDate = (v: unknown) => {
@@ -99,6 +111,7 @@ export default function AdminPage() {
     const [loading, setLoading] = useState(true);
     const [selectedCard, setSelectedCard] = useState<ReportKey | null>(null);
     const [tableData, setTableData] = useState<Record<string, unknown>[]>([]);
+    const { editMode, setEditMode } = useAdmin();
     const [tableLoading, setTableLoading] = useState(false);
 
     useEffect(() => {
@@ -194,11 +207,22 @@ export default function AdminPage() {
         <div className="min-h-screen bg-slate-50">
             <header className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between shadow-sm">
                 <div className="flex items-center gap-4">
-                    <img src="/logo/LEARNSQUARE_LOGO (500x200).png" alt="Learn Square" className="h-10 object-contain" />
+                    <img src="/logo/LEARNSQUARE_LOGO (500x200).png" alt="LEARNSQUARE" className="h-10 object-contain" />
                     <div className="hidden sm:block h-6 w-px bg-slate-200" />
                     <span className="font-bold text-slate-800">Enquiry Reports</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => {
+                            setEditMode(true);
+                            router.push("/");
+                        }}
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-sm font-bold transition-all border border-indigo-100"
+                    >
+                        <Edit3 className="w-4 h-4" />
+                        Manage Content
+                    </button>
+                    <div className="hidden sm:block h-6 w-px bg-slate-200 mx-2" />
                     <Link
                         href="/profile"
                         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium transition-colors"

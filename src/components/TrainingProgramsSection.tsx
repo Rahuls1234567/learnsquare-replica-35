@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { EditableContent } from "./EditableContent";
 import Link from "next/link";
 import {
     Presentation,
@@ -90,14 +91,20 @@ const TrainingProgramsSection = () => {
                             </div>
                         </motion.div>
 
-                        <motion.h2
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] leading-[1.1] text-slate-950"
-                        >
-                            Tailored <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 italic inline-block pr-4">Offline Training</span>
-                        </motion.h2>
+                        <EditableContent 
+                            contentKey="home_training_heading"
+                            description="Training Programs Heading"
+                            defaultContent={
+                                <motion.h2
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-[-0.05em] leading-[1.1] text-slate-950 py-2"
+                                >
+                                    Tailored <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 italic inline-block pr-4 pb-4">Offline Training</span>
+                                </motion.h2>
+                            }
+                        />
 
                         <div className="flex flex-wrap gap-x-12 gap-y-4 pt-4">
                             {mainFeatures.map((text, i) => (
@@ -186,9 +193,15 @@ const TrainingProgramsSection = () => {
                         <div className="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 group-hover:scale-110 transition-transform">
                             <Sparkles className="text-indigo-600 w-6 h-6" />
                         </div>
-                        <p className="text-base md:text-xl text-slate-600 font-bold italic leading-relaxed">
-                            "Our mission is to foster a real-world learning environment that propels every student toward excellence."
-                        </p>
+                        <EditableContent 
+                            contentKey="home_training_vision"
+                            description="Training Programs Vision"
+                            defaultContent={
+                                <p className="text-base md:text-xl text-slate-600 font-bold italic leading-relaxed">
+                                    "Our mission is to foster a real-world learning environment that propels every student toward excellence."
+                                </p>
+                            }
+                        />
                     </div>
                     <div className="shrink-0 flex items-center gap-4 relative z-10">
                         <div className="h-px w-10 bg-indigo-500/20" />

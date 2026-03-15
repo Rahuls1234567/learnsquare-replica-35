@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Linkedin, Instagram, Youtube, ChevronRight, Apple, Play } from "lucide-react";
+import { ChevronRight, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
+import { EditableContent } from "./EditableContent";
 
 const companyLinks = [
   { label: "Home", href: "#" },
@@ -41,6 +42,38 @@ const trainingColumns = [
   ]
 ];
 
+const InstagramBrandIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+    <defs>
+      <linearGradient id="ig-grad" x1="20%" y1="100%" x2="80%" y2="0%">
+        <stop offset="0%" stopColor="#fdf497" />
+        <stop offset="5%" stopColor="#fdf497" />
+        <stop offset="45%" stopColor="#fd5949" />
+        <stop offset="60%" stopColor="#d6249f" />
+        <stop offset="90%" stopColor="#285AEB" />
+      </linearGradient>
+    </defs>
+    <rect width="24" height="24" rx="5.5" fill="url(#ig-grad)" />
+    <rect x="5.5" y="5.5" width="13" height="13" rx="3.5" stroke="white" strokeWidth="1.5" fill="none" />
+    <circle cx="12" cy="12" r="3" stroke="white" strokeWidth="1.5" fill="none" />
+    <circle cx="16" cy="8" r="1.2" fill="white" />
+  </svg>
+);
+
+const LinkedInBrandIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+    <rect width="24" height="24" rx="3.5" fill="#0A66C2" />
+    <path d="M7.5 17V10H5V17H7.5ZM6.2 8.8C7.1 8.8 7.7 8.2 7.7 7.4C7.6 6.6 7.1 6 6.2 6C5.3 6 4.8 6.6 4.8 7.4C4.8 8.2 5.3 8.8 6.2 8.8ZM19.5 17H17V13.3C17 12.4 16.6 11.8 15.8 11.8C15.2 11.8 14.8 12.2 14.6 12.6C14.6 12.8 14.6 13 14.6 13.3V17H12.1C12.1 17 12.1 10.7 12.1 10H14.6V11.1C15 10.5 15.7 10 16.6 10C18.4 10 19.5 11.2 19.5 13.5V17Z" fill="white" />
+  </svg>
+);
+
+const YouTubeBrandIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+    <path d="M21.6 7.6C21.4 6.7 20.6 6 19.7 5.7C18 5.3 12 5.3 12 5.3s-6 0-7.7.4c-1 .3-1.7 1-1.9 1.9C2 9.3 2 12 2 12s0 2.7.4 4.4c.2.9 1 1.6 1.9 1.9 1.7.4 7.7.4 7.7.4s6 0 7.7-.4c1-.3 1.7-1 1.9-1.9.4-1.7.4-4.4.4-4.4s0-2.7-.4-4.4z" fill="#FF0000" />
+    <path d="M10 15L15 12L10 9V15Z" fill="white" />
+  </svg>
+);
+
 const Footer = () => (
   <footer className="bg-[#080111] text-white pt-24 pb-12 relative overflow-hidden font-sans">
     {/* Cinematic Premium Background Elements */}
@@ -63,16 +96,22 @@ const Footer = () => (
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <img
-                  src="/logo/LEARNSQUARE_LOGO (750x300).png"
+                  src="/logo/LST Logo_B&W_No Background_.png"
                   alt="LEARNSQUARE"
                   className="h-16 md:h-20 w-auto object-contain transition-all duration-500 group-hover:scale-105"
                 />
               </div>
             </a>
 
-            <p className="text-slate-400 text-lg leading-relaxed font-medium max-w-sm">
-              Revolutionizing the educational landscape through cutting-edge <span className="text-white font-bold">AI technology</span> and industry-aligned programs.
-            </p>
+            <EditableContent 
+                contentKey="footer_brand_desc"
+                description="Footer Brand Description"
+                defaultContent={
+                    <p className="text-slate-400 text-lg leading-relaxed font-medium max-w-sm">
+                        Revolutionizing the educational landscape through cutting-edge <span className="text-white font-bold">AI Technology</span> and industry-aligned programs.
+                    </p>
+                }
+            />
 
             {/* Premium App Badges */}
             <div className="flex flex-wrap gap-4 pt-2">
@@ -189,7 +228,7 @@ const Footer = () => (
       <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10">
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-10">
           <p className="text-slate-500 text-sm font-medium">
-            © 2024 <span className="text-slate-300 font-black tracking-tight">LEARNSQUARE</span> Technologies. All rights reserved.
+            © 2026 <span className="text-slate-300 font-black tracking-tight">LEARNSQUARE</span> Technologies. All rights reserved.
           </p>
           <div className="flex gap-8 text-slate-500 text-[13px] font-bold">
             <Link href="/privacy" className="hover:text-white transition-colors underline underline-offset-8 decoration-primary/30 hover:decoration-primary">Privacy</Link>
@@ -197,37 +236,36 @@ const Footer = () => (
           </div>
         </div>
 
-        {/* Social: Instagram, LinkedIn, YouTube only */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-6 md:gap-8">
           <motion.a
-            whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.1)' }}
+            whileHover={{ y: -4, scale: 1.15 }}
             href="https://www.instagram.com/learn_square/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-primary/50 transition-all group/social"
+            className="group/social"
             aria-label="Instagram"
           >
-            <Instagram className="w-5 h-5 text-slate-400 group-hover/social:text-white transition-colors" />
+            <InstagramBrandIcon className="w-9 h-9 md:w-11 md:h-11 shadow-[0_4px_10px_rgba(0,0,0,0.3)] group-hover/social:shadow-[0_8px_20px_rgba(238,42,123,0.4)] rounded-xl transition-all" />
           </motion.a>
           <motion.a
-            whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.1)' }}
+            whileHover={{ y: -4, scale: 1.15 }}
             href="https://www.linkedin.com/company/learnsquaretechnologies/?viewAsMember=true"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-primary/50 transition-all group/social"
+            className="group/social"
             aria-label="LinkedIn"
           >
-            <Linkedin className="w-5 h-5 text-slate-400 group-hover/social:text-white transition-colors" />
+            <LinkedInBrandIcon className="w-9 h-9 md:w-11 md:h-11 shadow-[0_4px_10px_rgba(0,0,0,0.3)] group-hover/social:shadow-[0_8px_20px_rgba(10,102,194,0.4)] rounded-xl transition-all" />
           </motion.a>
           <motion.a
-            whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.1)' }}
+            whileHover={{ y: -4, scale: 1.15 }}
             href="https://www.youtube.com/@learnsquaretech"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-primary/50 transition-all group/social"
+            className="group/social"
             aria-label="YouTube"
           >
-            <Youtube className="w-5 h-5 text-slate-400 group-hover/social:text-white transition-colors" />
+            <YouTubeBrandIcon className="w-10 h-10 md:w-[3.2rem] md:h-[3.2rem] drop-shadow-[0_4px_10px_rgba(0,0,0,0.3)] group-hover/social:drop-shadow-[0_8px_20px_rgba(255,0,0,0.4)] transition-all" />
           </motion.a>
         </div>
       </div>

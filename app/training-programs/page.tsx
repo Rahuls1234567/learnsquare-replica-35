@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { toast } from "sonner";
+import { EditableContent } from "@/components/EditableContent";
 
 type TrainingRequestFormData = {
     firstName: string;
@@ -670,154 +671,216 @@ const TrainingProgramsPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="min-h-screen bg-[#f8fafc] relative overflow-x-hidden"
+            className="min-h-screen bg-[#020617] relative overflow-x-hidden"
         >
             <Navbar />
 
-            <main className="relative pt-24 pb-20 overflow-hidden">
-                {/* Cinematic Background System */}
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-white" />
-                    <div className="absolute inset-0 opacity-[0.4] mix-blend-multiply">
-                        <img src="/images/premium_light_tech_bg.png" className="w-full h-full object-cover" alt="" />
+            <main className="relative pt-24 pb-20">
+                {/* Cinematic Dark Background System */}
+                <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none bg-[#020617]">
+                    {/* Dark Premium Background Image */}
+                    <div className="absolute inset-0 opacity-[0.6] mix-blend-screen">
+                        <img
+                            src="/images/aicas_dark_bg.png"
+                            className="w-full h-full object-cover scale-100"
+                            alt=""
+                        />
                     </div>
-                    {/* Animated Technical Grids */}
-                    <div className="absolute inset-0 opacity-[0.03]"
-                        style={{
-                            backgroundImage: `radial-gradient(circle at 1px 1px, #4f46e5 1px, transparent 0)`,
-                            backgroundSize: '40px 40px'
-                        }}
-                    />
-                    <div className="absolute inset-0 opacity-10"
-                        style={{
-                            backgroundImage: `linear-gradient(#f1f5f9 1px, transparent 1px), linear-gradient(90deg, #f1f5f9 1px, transparent 1px)`,
-                            backgroundSize: '100px 100px'
-                        }}
-                    />
 
-                    {/* Cinematic Glows */}
-                    <motion.div
-                        animate={{
-                            scale: [1, 1.2, 1],
-                            opacity: [0.05, 0.1, 0.05]
-                        }}
-                        transition={{ duration: 10, repeat: Infinity }}
-                        className="absolute top-[-10%] left-[-10%] w-[1000px] h-[1000px] bg-indigo-600/10 rounded-full blur-[160px]"
-                    />
-                    <motion.div
-                        animate={{
-                            scale: [1.2, 1, 1.2],
-                            opacity: [0.03, 0.08, 0.03]
-                        }}
-                        transition={{ duration: 8, repeat: Infinity }}
-                        className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[140px]"
-                    />
+                    {/* Dark Mode Glows */}
+                    <div className="absolute top-[-10%] right-[-10%] w-[1000px] h-[1000px] bg-indigo-600/20 rounded-full blur-[160px]" />
+                    <div className="absolute bottom-[-10%] left-[-10%] w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[140px]" />
+
+                    {/* Subtle Overlay to ensure readability */}
+                    <div className="absolute inset-0 bg-slate-950/40" />
                 </div>
 
-                <div className="container relative z-10 mx-auto px-4 md:px-6">
-                    {/* Top Center Product Name - Purple Background, White Letters */}
-                    <div className="flex justify-center pt-12 mb-8">
+                <div className="container relative z-10 flex flex-col items-center mx-auto px-4 md:px-6">
+                    {/* Top Center Product Name - Glow */}
+                    <div className="flex justify-center mb-8 w-full mt-4">
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="px-10 py-3.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black text-xs tracking-[0.5em] uppercase shadow-[0_10px_30px_rgba(124,102,220,0.3)] border border-white/20"
+                            className="relative group cursor-default inline-block"
                         >
-                            Training Programs
+                            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
+                            <div className="relative bg-slate-900/80 border border-indigo-500/30 text-indigo-400 px-6 py-2.5 rounded-full font-black tracking-[0.2em] text-[10px] uppercase shadow-2xl flex items-center gap-2 overflow-hidden">
+                                <span className="relative z-10">TRAINING PROGRAMS</span>
+                            </div>
                         </motion.div>
                     </div>
 
-                    <div className="grid lg:grid-cols-2 gap-16 items-center min-h-[90vh]">
+                    <div className="grid lg:grid-cols-2 gap-12 w-full items-center max-w-7xl mx-auto py-12">
                         {/* Left Side: Cinematic Content */}
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 1, delay: 0.2 }}
-                            className="text-slate-950 space-y-12"
+                            transition={{ duration: 0.8 }}
+                            className="flex flex-col items-start text-left space-y-8"
                         >
-                            <div className="space-y-6">
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="inline-flex items-center gap-3 px-6 py-2.5 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600 text-[10px] font-black tracking-[0.4em] uppercase"
-                                >
+                            <div className="relative group cursor-default inline-block">
+                                <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
+                                <div className="relative bg-slate-900/80 border border-indigo-500/30 text-indigo-400 px-6 py-2.5 rounded-full font-black tracking-[0.2em] text-[10px] uppercase shadow-2xl flex items-center gap-2 overflow-hidden">
                                     <div className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
-                                    <span>EXPERT-LED TRAINING</span>
-                                </motion.div>
-
-                                <h1 className="text-3xl sm:text-5xl md:text-6xl font-black leading-normal tracking-tighter pt-2 pb-6">
-                                    Unlock Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 italic inline-block pr-8 pb-1">Potential</span>
-                                </h1>
-
-                                <p className="text-lg md:text-xl text-slate-600 font-bold leading-relaxed max-w-xl">
-                                    Advanced skill development for the next generation of engineers. Stay ahead with our comprehensive curriculum.
-                                </p>
+                                    <span className="relative z-10">EXPERT-LED TRAINING</span>
+                                </div>
                             </div>
 
-                            {/* Premium Mockup Display */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9, y: 30 }}
-                                animate={{ opacity: 1, scale: 1, y: 0 }}
-                                transition={{ duration: 1, delay: 0.4 }}
-                                className="relative group"
-                            >
-                                <div className="absolute -inset-4 bg-indigo-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                                <div className="relative rounded-[2rem] overflow-hidden border-2 border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] bg-white aspect-video max-w-md">
-                                    <img
-                                        src="/images/training_programs_premium.png"
-                                        alt="Training Dashboard"
-                                        className="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-white/10 pointer-events-none" />
-                                </div>
+                            <EditableContent 
+                                contentKey="training_hero_heading"
+                                description="Training Programs Hero Heading"
+                                defaultContent={
+                                    <h2 className="font-black tracking-tight flex flex-col items-start drop-shadow-xl w-full">
+                                        <span className="text-5xl sm:text-6xl md:text-7xl lg:text-[4.5rem] xl:text-[5.5rem] 2xl:text-[6rem] text-slate-100 mb-2 lg:mb-4 leading-none">Unlock Your</span>
+                                        <span className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem] 2xl:text-[4.5rem] text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-400 pb-2 pr-6 leading-[1.1] italic">Potential</span>
+                                    </h2>
+                                }
+                            />
 
+                            <EditableContent 
+                                contentKey="training_hero_desc"
+                                description="Training Programs Hero Description"
+                                defaultContent={
+                                    <div className="space-y-6">
+                                        <p className="text-xl md:text-2xl text-slate-300 font-bold max-w-xl leading-relaxed tracking-tight">
+                                            Advanced skill development for the next generation of engineers. Stay ahead with our comprehensive curriculum.
+                                        </p>
+                                        <div className="h-1.5 w-32 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full shadow-[0_0_20px_rgba(99,102,241,0.8)]" />
+                                    </div>
+                                }
+                            />
 
-                            </motion.div>
+                            <EditableContent 
+                                contentKey="training_hero_stats"
+                                description="Training Programs Hero Stats"
+                                defaultContent={
+                                    <div className="pt-4 flex gap-6">
+                                        <div className="flex flex-col">
+                                            <span className="text-3xl font-black text-white">12+</span>
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Industry Modules</span>
+                                        </div>
+                                        <div className="w-[1px] bg-slate-800 h-10 self-center" />
+                                        <div className="flex flex-col">
+                                            <span className="text-3xl font-black text-white">100%</span>
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Placement Focus</span>
+                                        </div>
+                                    </div>
+                                }
+                            />
+
                         </motion.div>
 
-                        {/* Right Content: Contact Form */}
+                        {/* Right Content: Premium Contact Form */}
                         <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="bg-white/80 backdrop-blur-3xl rounded-[3rem] p-8 md:p-10 border border-indigo-50 shadow-[0_40px_100px_rgba(99,102,241,0.08)] relative group max-w-lg lg:ml-auto"
+                            initial={{ opacity: 0, x: 50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="relative group h-full max-w-lg lg:ml-auto w-full ml-0"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent pointer-events-none" />
+                            {/* Card Glow Background */}
+                            <div className="absolute -inset-1 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-[2.5rem] blur-3xl opacity-20 group-hover:opacity-40 transition duration-1000" />
 
-                            <div className="text-center mb-8">
-                                <h2 className="text-3xl font-black text-slate-900 tracking-tight leading-none mb-3">Request Access</h2>
+                            <div className="relative bg-slate-900/40 backdrop-blur-2xl rounded-[2.5rem] p-8 md:p-10 shadow-2xl border border-white/10 flex flex-col h-full overflow-hidden">
+                                {/* Form Background Dark Theme Layer */}
+                                <div className="absolute inset-0 z-0 opacity-[0.4] mix-blend-overlay pointer-events-none">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-transparent" />
+                                </div>
+
+                                <div className="relative z-10 mb-8 text-center">
+                                    <h3 className="text-3xl font-black text-white tracking-tight leading-none mb-3">
+                                        Request Access
+                                    </h3>
+                                    <div className="h-1 w-12 bg-indigo-500 rounded-full mx-auto shadow-[0_0_15px_rgba(99,102,241,0.8)]" />
+                                </div>
+
+                                <form className="space-y-5 relative z-10 flex-grow" onSubmit={handleSubmit(onRequestSubmit)}>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        <div className="space-y-2">
+                                            <Input
+                                                {...register("firstName", { required: true })}
+                                                placeholder="First Name*"
+                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.firstName ? 'border-red-500/50' : ''}`}
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Input
+                                                {...register("lastName", { required: true })}
+                                                placeholder="Last Name*"
+                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.lastName ? 'border-red-500/50' : ''}`}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        <div className="space-y-2">
+                                            <Input
+                                                {...register("whatsappNo", { required: true })}
+                                                placeholder="Whatsapp No.*"
+                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.whatsappNo ? 'border-red-500/50' : ''}`}
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Input
+                                                {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+                                                placeholder="Email*"
+                                                type="email"
+                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.email ? 'border-red-500/50' : ''}`}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Input
+                                            {...register("collegeName", { required: true })}
+                                            placeholder="College Name*"
+                                            className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.collegeName ? 'border-red-500/50' : ''}`}
+                                        />
+                                    </div>
+                                    
+                                    <div className="space-y-2">
+                                        <Textarea 
+                                            {...register("message", { required: true })} 
+                                            placeholder="Tell us what you're looking for..." 
+                                            className={`min-h-[100px] bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold p-5 resize-none text-sm shadow-inner flex pt-4 items-center justify-start ${errors.message ? 'border-red-500/50' : ''}`} 
+                                        />
+                                    </div>
+
+                                    <div className="pt-4 mt-auto">
+                                        <div className="relative group">
+                                            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-70 transition duration-1000"></div>
+                                            <Button
+                                                type="submit"
+                                                disabled={mutation.isPending}
+                                                className="w-full relative bg-indigo-600 hover:bg-indigo-500 text-white font-black h-14 rounded-2xl transition-all uppercase tracking-widest text-[13px] shadow-lg flex items-center justify-center gap-3 overflow-hidden"
+                                            >
+                                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                                                {mutation.isPending ? (
+                                                    <Loader2 className="w-5 h-5 animate-spin" />
+                                                ) : (
+                                                    <span className="flex items-center gap-2">Get Started Now <Rocket className="w-5 h-5" /></span>
+                                                )}
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-
-                            <form className="space-y-5" onSubmit={handleSubmit(onRequestSubmit)}>
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <Input {...register("firstName", { required: true })} placeholder="First Name*" className={`h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-indigo-500/20 transition-all text-sm ${errors.firstName ? 'border-red-500/50' : ''}`} />
-                                    <Input {...register("lastName", { required: true })} placeholder="Last Name*" className={`h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-indigo-500/20 transition-all text-sm ${errors.lastName ? 'border-red-500/50' : ''}`} />
-                                </div>
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <Input {...register("whatsappNo", { required: true })} placeholder="Whatsapp No.*" className={`h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-indigo-500/20 transition-all text-sm ${errors.whatsappNo ? 'border-red-500/50' : ''}`} />
-                                    <Input {...register("email", { required: true, pattern: /^\S+@\S+$/i })} type="email" placeholder="Email*" className={`h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-indigo-500/20 transition-all text-sm ${errors.email ? 'border-red-500/50' : ''}`} />
-                                </div>
-                                <Input {...register("collegeName", { required: true })} placeholder="College Name*" className={`h-12 rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold px-5 focus:ring-2 focus:ring-indigo-500/20 transition-all text-sm ${errors.collegeName ? 'border-red-500/50' : ''}`} />
-                                <Textarea {...register("message", { required: true })} placeholder="Tell us what you're looking for..." className={`min-h-[100px] rounded-xl border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 font-bold p-5 focus:ring-2 focus:ring-indigo-500/20 transition-all resize-none text-sm ${errors.message ? 'border-red-500/50' : ''}`} />
-
-                                <div className="flex justify-center mt-6">
-                                    <Button type="submit" disabled={mutation.isPending} className="px-10 h-12 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black text-sm hover:shadow-[0_15px_30px_-10px_rgba(37,99,235,0.4)] hover:scale-[1.02] transition-all group/btn disabled:opacity-70 disabled:cursor-not-allowed gap-2">
-                                        {mutation.isPending && <Loader2 className="w-4 h-4 animate-spin" />}
-                                        {mutation.isPending ? "Submitting..." : "Get Started Now"}
-                                        <Rocket className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                                    </Button>
-                                </div>
-                            </form>
                         </motion.div>
                     </div>
 
                     {/* Our Training Programs Section */}
-                    <div className="mt-48 space-y-20">
-                        <div className="text-center space-y-4">
-                            <span className="text-indigo-600 font-black text-sm uppercase tracking-[0.4em]">Expert Led</span>
-                            <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 leading-[1.2] pb-4">
-                                Our Core Modules
-                            </h2>
-                        </div>
+                    <div className="mt-48 space-y-20 relative z-10">
+                        <EditableContent 
+                            contentKey="training_modules_heading"
+                            description="Training Programs Modules Heading"
+                            defaultContent={
+                                <div className="text-center space-y-4">
+                                    <span className="text-indigo-400 font-black text-sm uppercase tracking-[0.4em]">Expert Led</span>
+                                    <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-400 leading-[1.2] pb-4">
+                                        Our Core Modules
+                                    </h2>
+                                </div>
+                            }
+                        />
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                             {programs.map((prog, i) => (
@@ -827,7 +890,7 @@ const TrainingProgramsPage = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.05 }}
-                                    className="group relative bg-slate-50/50 rounded-[2.5rem] p-8 border border-indigo-100 hover:border-indigo-400/30 transition-all duration-500 overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(99,102,241,0.08)]"
+                                    className="group relative bg-slate-900/40 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/10 hover:border-indigo-500/30 transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-[0_20px_40px_rgba(99,102,241,0.2)]"
                                 >
                                     {/* Texture & Glow */}
                                     <div className="absolute inset-0 z-0 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -836,30 +899,38 @@ const TrainingProgramsPage = () => {
                                     <div className="absolute -top-24 -right-24 w-48 h-48 bg-purple-600/10 rounded-full blur-[80px] group-hover:bg-purple-600/30 transition-all duration-500" />
 
                                     <div className="relative z-10 h-full flex flex-col">
-                                        <div className="relative overflow-hidden rounded-[2rem] aspect-[16/10] mb-8 bg-slate-50">
+                                        <div className="relative overflow-hidden rounded-[2rem] aspect-[16/10] mb-8 bg-slate-900">
                                             <img
                                                 src={prog.img}
                                                 alt={prog.title}
                                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-60" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
                                         </div>
 
                                         <div className="space-y-4 flex-grow">
-                                            <h3 className="text-2xl font-black text-indigo-600 tracking-tight">{prog.title}</h3>
-                                            <p className="text-slate-600 font-bold text-sm leading-relaxed line-clamp-2 italic">
-                                                {prog.desc}
-                                            </p>
+                                            <EditableContent 
+                                                contentKey={`training_prog_${prog.id}`}
+                                                description={`Training Program ${prog.title}`}
+                                                defaultContent={
+                                                    <>
+                                                        <h3 className="text-2xl font-black text-indigo-300 tracking-tight">{prog.title}</h3>
+                                                        <p className="text-slate-300 font-bold text-sm leading-relaxed line-clamp-2 italic">
+                                                            {prog.desc}
+                                                        </p>
+                                                    </>
+                                                }
+                                            />
                                         </div>
 
-                                        <div className="flex items-center gap-4 mt-8 pt-8 border-t border-slate-100">
+                                        <div className="flex items-center gap-4 mt-8 pt-8 border-t border-white/10">
                                             <Button
                                                 onClick={() => setSelectedProgram(prog)}
-                                                className="flex-grow h-12 rounded-full bg-blue-600 text-white font-black text-xs uppercase tracking-widest hover:bg-blue-700 hover:text-white transition-all shadow-lg active:scale-95 border-none"
+                                                className="flex-grow h-12 rounded-full bg-indigo-600 text-white font-black text-xs uppercase tracking-widest hover:bg-indigo-500 transition-all shadow-[0_0_15px_rgba(79,70,229,0.4)] active:scale-95 border-none"
                                             >
                                                 Curriculum Details
                                             </Button>
-                                            <button className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-900 hover:text-white transition-all text-slate-900">
+                                            <button className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-white/40 text-white transition-all backdrop-blur-sm">
                                                 <Zap className="w-4 h-4 fill-current" />
                                             </button>
                                         </div>
@@ -871,11 +942,11 @@ const TrainingProgramsPage = () => {
 
                     {/* Program Details Modal */}
                     <Dialog open={!!selectedProgram} onOpenChange={(open) => !open && setSelectedProgram(null)}>
-                        <DialogContent className="max-w-5xl p-0 overflow-hidden border-none rounded-2xl">
+                        <DialogContent className="max-w-5xl p-0 overflow-hidden border border-white/10 bg-slate-900/95 backdrop-blur-2xl rounded-2xl shadow-2xl">
                             {selectedProgram && (
                                 <div className="flex flex-col md:flex-row min-h-[500px] max-h-[90vh] overflow-y-auto md:overflow-hidden">
                                     {/* Left Side: Image */}
-                                    <div className="md:w-1/2 bg-slate-900 relative p-4 flex items-center justify-center min-h-[300px] md:min-h-full">
+                                    <div className="md:w-1/2 bg-slate-950 relative p-4 flex items-center justify-center min-h-[300px] md:min-h-full">
                                         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-500/20" />
                                         <img
                                             src={selectedProgram.img}
@@ -885,27 +956,27 @@ const TrainingProgramsPage = () => {
                                     </div>
 
                                     {/* Right Side: Content */}
-                                    <div className="md:w-1/2 p-8 md:p-12 bg-white relative overflow-y-auto">
+                                    <div className="md:w-1/2 p-8 md:p-12 relative overflow-y-auto text-white">
                                         <button
                                             onClick={() => setSelectedProgram(null)}
-                                            className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 transition-all text-slate-400 hover:text-slate-600 z-20"
+                                            className="absolute top-6 right-6 p-2 rounded-full hover:bg-white/10 transition-all text-slate-400 hover:text-white z-20"
                                         >
                                             <X className="w-6 h-6" />
                                         </button>
 
                                         <div className="space-y-8">
                                             <div>
-                                                <h2 className="text-3xl font-black text-slate-900 mb-2">{selectedProgram.title}</h2>
+                                                <h2 className="text-3xl font-black text-indigo-100 mb-2">{selectedProgram.title}</h2>
                                             </div>
 
                                             <div className="space-y-8">
                                                 {selectedProgram.details.map((section: any, sIdx: number) => (
                                                     <div key={sIdx}>
-                                                        <h3 className="text-xl font-black text-slate-800 mb-4">{section.subtitle}</h3>
+                                                        <h3 className="text-xl font-black text-indigo-300 mb-4">{section.subtitle}</h3>
                                                         <ul className="space-y-2">
                                                             {section.items.map((item: string, iIdx: number) => (
-                                                                <li key={iIdx} className="flex items-start gap-2 text-slate-600 font-bold text-sm">
-                                                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-900 mt-2 shrink-0" />
+                                                                <li key={iIdx} className="flex items-start gap-2 text-slate-300 font-bold text-sm">
+                                                                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(99,102,241,0.8)]" />
                                                                     {item}
                                                                 </li>
                                                             ))}

@@ -16,4 +16,5 @@ export const prisma =
     globalForPrisma.prisma ||
     createPrismaClient()
 
+// Forced refresh: 2026-03-14T17:15:00Z
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma

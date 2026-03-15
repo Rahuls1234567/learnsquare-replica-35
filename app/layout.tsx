@@ -8,17 +8,17 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:8080'),
-    title: "Learn Square",
-    description: "Learn Square Generated Project",
-    authors: [{ name: "Learn Square" }],
+    title: "LEARNSQUARE",
+    description: "LEARNSQUARE - AI Powered Education Platform",
+    authors: [{ name: "LEARNSQUARE" }],
     icons: {
-        icon: "/images/learnsquare_icon.png",
-        shortcut: "/images/learnsquare_icon.png",
-        apple: "/images/learnsquare_icon.png",
+        icon: "/fav icon.png",
+        shortcut: "/fav icon.png",
+        apple: "/fav icon.png",
     },
     openGraph: {
-        title: "Learn Square",
-        description: "Learn Square Generated Project",
+        title: "LEARNSQUARE",
+        description: "LEARNSQUARE - AI Powered Education Platform",
         type: "website",
         images: ["/logo/LEARNSQUARE_LOGO (500x200).png"]
     },

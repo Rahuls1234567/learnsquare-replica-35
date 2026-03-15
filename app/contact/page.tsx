@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { toast } from "sonner";
+import { EditableContent } from "@/src/components/EditableContent";
 
 const Contact = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
@@ -90,21 +91,33 @@ const Contact = () => {
                         transition={{ delay: 0.2, duration: 0.8 }}
                         className="text-4xl md:text-6xl text-slate-700 leading-tight tracking-tight max-w-5xl mx-auto mb-8"
                     >
-                        Connect with Us to Explore{" "}
-                        <span className="font-bold text-slate-800 tracking-tighter">
-                            Innovative Tech Solutions
-                        </span>{" "}
-                        <span className="font-bold text-slate-800 tracking-tighter block md:inline md:ml-2">for a Smarter Future</span>
+                        <EditableContent 
+                            contentKey="contact_heading"
+                            description="Contact Page Heading"
+                            defaultContent={
+                                <>
+                                    Connect with Us to Explore{" "}
+                                    <span className="font-bold text-slate-800 tracking-tighter">
+                                        Innovative Tech Solutions
+                                    </span>{" "}
+                                    <span className="font-bold text-slate-800 tracking-tighter block md:inline md:ml-2">for a Smarter Future</span>
+                                </>
+                            }
+                        />
                     </motion.h1>
 
-                    <motion.p
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4, duration: 0.6 }}
                         className="text-[#5e6282] font-semibold text-sm md:text-base tracking-wide"
                     >
-                        Empowering Institutions to Deliver Excellence with Cutting-Edge Technology
-                    </motion.p>
+                        <EditableContent 
+                            contentKey="contact_intro"
+                            description="Contact Page Intro"
+                            defaultContent={<p className="text-[#5e6282] font-semibold text-sm md:text-base tracking-wide">Empowering Institutions to Deliver Excellence with Cutting-Edge Technology</p>}
+                        />
+                    </motion.div>
                 </div>
 
                 <div className="container mt-40 mx-auto px-4">
@@ -117,10 +130,20 @@ const Contact = () => {
                             className="space-y-10"
                         >
                             <div className="space-y-4">
-                                <h2 className="text-4xl font-bold text-[#1a2b4b]">Contact us</h2>
-                                <p className="text-[#5e6282] text-lg font-medium leading-relaxed max-w-md">
-                                    Questions, comments, or suggestions? Simply fill in the form and we'll be in touch shortly.
-                                </p>
+                                <EditableContent
+                                    contentKey="contact_section_heading"
+                                    description="Contact Section Heading"
+                                    defaultContent={<h2 className="text-4xl font-bold text-[#1a2b4b]">Contact us</h2>}
+                                />
+                                <EditableContent
+                                    contentKey="contact_section_desc"
+                                    description="Contact Section Description"
+                                    defaultContent={
+                                        <p className="text-[#5e6282] text-lg font-medium leading-relaxed max-w-md">
+                                            Questions, comments, or suggestions? Simply fill in the form and we'll be in touch shortly.
+                                        </p>
+                                    }
+                                />
                             </div>
 
                             <div className="space-y-8">
@@ -134,12 +157,18 @@ const Contact = () => {
                                         <div className="mt-1 bg-white p-2 rounded-lg shadow-sm">
                                             <MapPin className="w-5 h-5 text-slate-700" />
                                         </div>
-                                        <div className="space-y-1">
-                                            <p className="text-slate-900 font-black text-sm uppercase tracking-wider">LEARNSQUARE</p>
-                                            <p className="text-[#1a2b4b] font-medium text-[14px] leading-relaxed max-w-[320px]">
-                                                Office: 3rd Floor, Bhaswa Business Park, Greenlands, Adjacent Lane to Tourist Plaza Hotel, Begumpet.
-                                            </p>
-                                        </div>
+                                        <EditableContent
+                                            contentKey="contact_address"
+                                            description="Contact Address"
+                                            defaultContent={
+                                                <div className="space-y-1">
+                                                    <p className="text-slate-900 font-black text-sm uppercase tracking-wider">LEARNSQUARE</p>
+                                                    <p className="text-[#1a2b4b] font-medium text-[14px] leading-relaxed max-w-[320px]">
+                                                        Office: 3rd Floor, Bhaswa Business Park, Greenlands, Adjacent Lane to Tourist Plaza Hotel, Begumpet,Hyderabad, Telangana. 500016.
+                                                    </p>
+                                                </div>
+                                            }
+                                        />
                                     </a>
 
                                     {/* Small Map Thumbnail */}
@@ -172,14 +201,22 @@ const Contact = () => {
                                     <div className="bg-white p-2 rounded-lg shadow-sm">
                                         <Phone className="w-5 h-5 text-slate-700" />
                                     </div>
-                                    <p className="text-[#1a2b4b] font-medium text-[15px]">9000177063</p>
+                                    <EditableContent
+                                        contentKey="contact_phone"
+                                        description="Contact Phone Number"
+                                        defaultContent={<p className="text-[#1a2b4b] font-medium text-[15px]">9000177063</p>}
+                                    />
                                 </div>
 
                                 <div className="flex items-center gap-4">
                                     <div className="bg-white p-2 rounded-lg shadow-sm">
                                         <Mail className="w-5 h-5 text-slate-700" />
                                     </div>
-                                    <p className="text-[#1a2b4b] font-medium text-[15px]">hello@learnsquare.co</p>
+                                    <EditableContent
+                                        contentKey="contact_email"
+                                        description="Contact Email"
+                                        defaultContent={<p className="text-[#1a2b4b] font-medium text-[15px]">hello@learnsquare.co</p>}
+                                    />
                                 </div>
                             </div>
                         </motion.div>

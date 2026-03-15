@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 const TESTPREPPRO_URL = "/test-prep-pro";
+import { EditableContent } from "./EditableContent";
 
 const TestPrepProSection = () => {
     const features = [
@@ -112,10 +113,16 @@ const TestPrepProSection = () => {
                                 viewport={{ once: true }}
                                 className="space-y-4"
                             >
-                                <h2 className="text-3xl sm:text-5xl xl:text-7xl font-black text-white tracking-[-0.05em] leading-[1.05]">
-                                    Elevate Academic <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">Excellence</span>
-                                </h2>
+                                <EditableContent 
+                                    contentKey="home_testprep_heading"
+                                    description="Test Prep Pro Heading"
+                                    defaultContent={
+                                        <h2 className="text-3xl sm:text-5xl xl:text-7xl font-black text-white tracking-[-0.05em] leading-[1.05]">
+                                            Elevate Academic <br />
+                                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">Excellence</span>
+                                        </h2>
+                                    }
+                                />
                                 <div className="flex items-center gap-4">
                                     <div className="h-[2px] w-12 bg-blue-500 rounded-full" />
                                     <p className="text-sm font-black text-blue-400 uppercase tracking-[0.3em]">
@@ -124,15 +131,21 @@ const TestPrepProSection = () => {
                                 </div>
                             </motion.div>
 
-                            <motion.p
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.1 }}
-                                className="text-lg text-slate-400 font-medium leading-relaxed max-w-lg"
-                            >
-                                Test Prep Pro is a high-performance assessment platform designed to elevate the way students prepare for competitive exams and recruitment.
-                            </motion.p>
+                            <EditableContent 
+                                contentKey="home_testprep_desc"
+                                description="Test Prep Pro Description"
+                                defaultContent={
+                                    <motion.p
+                                        initial={{ opacity: 0, y: 30 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: 0.1 }}
+                                        className="text-lg text-slate-400 font-medium leading-relaxed max-w-lg"
+                                    >
+                                        Test Prep Pro is a high-performance assessment platform designed to elevate the way students prepare for competitive exams and recruitment.
+                                    </motion.p>
+                                }
+                            />
                         </div>
 
                         <Link href={TESTPREPPRO_URL}>

@@ -12,6 +12,7 @@ import {
   LayoutDashboard,
   CheckCircle2
 } from "lucide-react";
+import { EditableContent } from "./EditableContent";
 
 const SEMESTERPREP_URL = "https://semesterprep.in/";
 
@@ -109,10 +110,16 @@ const SemesterPrepSection = () => {
                 viewport={{ once: true }}
                 className="space-y-4"
               >
-                <h2 className="text-3xl sm:text-5xl xl:text-7xl font-black text-white tracking-[-0.05em] leading-[1.05]">
-                  Ace Your <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400">Semesters</span>
-                </h2>
+                <EditableContent 
+                  contentKey="home_semesterprep_heading"
+                  description="SemesterPrep Heading"
+                  defaultContent={
+                    <h2 className="text-3xl sm:text-5xl xl:text-7xl font-black text-white tracking-[-0.05em] leading-[1.05]">
+                      Ace Your <br />
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400">Semesters</span>
+                    </h2>
+                  }
+                />
                 <div className="flex items-center gap-4">
                   <div className="h-[2px] w-12 bg-purple-500 rounded-full" />
                   <p className="text-sm font-black text-purple-400 uppercase tracking-[0.3em]">
@@ -121,15 +128,21 @@ const SemesterPrepSection = () => {
                 </div>
               </motion.div>
 
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="text-lg text-slate-400 font-medium leading-relaxed max-w-lg"
-              >
-                The definitive platform for university exam success, providing deep archives of solved questions and real-time institutional guidance.
-              </motion.p>
+              <EditableContent 
+                contentKey="home_semesterprep_desc"
+                description="SemesterPrep Description"
+                defaultContent={
+                  <motion.p
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                    className="text-lg text-slate-400 font-medium leading-relaxed max-w-lg"
+                  >
+                    The definitive platform for university exam success, providing deep archives of solved questions and real-time institutional guidance.
+                  </motion.p>
+                }
+              />
             </div>
 
             <a href={SEMESTERPREP_URL} target={typeof window !== 'undefined' && window.innerWidth < 768 ? "_self" : "_blank"} rel="noopener noreferrer">
