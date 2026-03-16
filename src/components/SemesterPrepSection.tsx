@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import {
   FileText,
   Users,
@@ -17,6 +18,18 @@ import { EditableContent } from "./EditableContent";
 const SEMESTERPREP_URL = "https://semesterprep.in/";
 
 const SemesterPrepSection = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const features = [
     {
       title: "10,000+ PYQ’s & Answers",
@@ -85,7 +98,7 @@ const SemesterPrepSection = () => {
 
           {/* Left Column: Branding & Pitch (5/12 cols) */}
           <div className="lg:col-span-5 space-y-10">
-            <a href={SEMESTERPREP_URL} target={typeof window !== 'undefined' && window.innerWidth < 768 ? "_self" : "_blank"} rel="noopener noreferrer">
+            <a href={SEMESTERPREP_URL} target={isMobile ? "_self" : "_blank"} rel="noopener noreferrer">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -145,7 +158,7 @@ const SemesterPrepSection = () => {
               />
             </div>
 
-            <a href={SEMESTERPREP_URL} target={typeof window !== 'undefined' && window.innerWidth < 768 ? "_self" : "_blank"} rel="noopener noreferrer">
+            <a href={SEMESTERPREP_URL} target={isMobile ? "_self" : "_blank"} rel="noopener noreferrer">
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0 25px 50px -12px rgba(139,92,246,0.5)" }}
                 whileTap={{ scale: 0.98 }}

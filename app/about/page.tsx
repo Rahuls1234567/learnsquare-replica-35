@@ -25,7 +25,7 @@ const About = () => {
             education: "IPBA - IIM INDORE, M.TECH - JNTUH, B.TECH - JNTUH",
             contact: "",
             bio: "She is passionate about driving impactful product development through innovation and collaboration. With a strong foundation in business analytics and operational excellence, she leverages data-driven insights to optimize performance and achieve strategic goals. Known for leading cross-functional teams, she consistently delivers innovative solutions that exceed expectations.",
-            image: "/images/homeimage/alekya-avula.png",
+            image: "/alekya mam.jpeg",
         },
         {
             name: "Gopinath Puralachetty",
@@ -33,7 +33,7 @@ const About = () => {
             education: "IRPM - Andhra University, M.Sc IT - Manipal University",
             contact: "77 9493 1347 | gopinath.p@learnsquare.co",
             bio: "He is a seasoned business leader with over 20 years of experience in education, business operations, and strategic planning. Holding a Master of Science in IT from Manipal University and a Degree in Industrial Relations from Andhra University, he has led key roles at T.I.M.E., CONDUIRA, FIITJEE, and APTECH. Known for his visionary leadership, strategic partnerships, and strong business acumen, he has consistently driven growth and delivered exceptional results across diverse markets.",
-            image: "/aboutimage.jpeg", // Placeholder until Whatsapp image is provided
+            image: "/sir.jpeg",
         }
     ];
 

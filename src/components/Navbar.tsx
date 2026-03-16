@@ -54,6 +54,15 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
@@ -126,7 +135,7 @@ const Navbar = () => {
                                   key={p.title}
                                   href={p.href}
                                   prefetch={false}
-                                  target={p.external ? (typeof window !== 'undefined' && window.innerWidth < 768 ? "_self" : "_blank") : undefined}
+                                  target={p.external ? (isMobile ? "_self" : "_blank") : undefined}
                                   rel={p.external ? "noopener noreferrer" : undefined}
                                   className="px-3 py-3 text-indigo-600 font-bold text-[12px] hover:text-primary hover:bg-indigo-50/50 rounded-xl transition-all flex items-center justify-between group border border-transparent hover:border-indigo-100"
                                 >
@@ -291,7 +300,7 @@ const Navbar = () => {
                                   key={p.title}
                                   href={p.href}
                                   prefetch={false}
-                                  target={p.external ? (typeof window !== 'undefined' && window.innerWidth < 768 ? "_self" : "_blank") : undefined}
+                                  target={p.external ? (isMobile ? "_self" : "_blank") : undefined}
                                   rel={p.external ? "noopener noreferrer" : undefined}
                                   className="flex items-center gap-3 p-3 text-base font-bold text-slate-600 hover:text-primary transition-all"
                                   onClick={() => setOpen(false)}
