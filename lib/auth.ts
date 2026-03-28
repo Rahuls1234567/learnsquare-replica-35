@@ -5,7 +5,7 @@ export function getAuthFromCookie(): AuthSession | null {
     const match = document.cookie.match(/auth=([^;]+)/);
     if (!match) return null;
     try {
-        return JSON.parse(atob(match[1])) as AuthSession;
+        return JSON.parse(atob(decodeURIComponent(match[1]))) as AuthSession;
     } catch {
         return null;
     }

@@ -1,23 +1,29 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import { sanitizeHtml } from "@/lib/sanitize";
 
-function getAdminFromRequest(request: Request): { email: string; isAdmin: boolean } | null {
-    const cookie = request.headers.get("cookie") || "";
-    const match = cookie.match(/auth=([^;]+)/);
-    if (!match) return null;
+async function getAdminFromRequest(): Promise<{ email: string; isAdmin: boolean } | null> {
     try {
-        const decoded = JSON.parse(atob(match[1]));
+        const cookieStore = await cookies();
+        const authCookie = cookieStore.get("auth");
+        
+        if (!authCookie?.value) return null;
+        
+        // Use decodeURIComponent then atob to decode the Base64 session string
+        const decoded = JSON.parse(atob(decodeURIComponent(authCookie.value)));
+        
         if (decoded?.isAdmin) return decoded;
         return null;
-    } catch {
+    } catch (err) {
+        console.error("Session decode error:", err);
         return null;
     }
 }
 
 export async function POST(request: Request) {
     try {
-        const auth = getAdminFromRequest(request);
+        const auth = await getAdminFromRequest();
         if (!auth) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }

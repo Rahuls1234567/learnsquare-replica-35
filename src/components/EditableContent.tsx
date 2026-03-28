@@ -64,6 +64,7 @@ export const EditableContent = ({
             const res = await fetch("/api/admin/content/update", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                credentials: 'include',
                 body: JSON.stringify({
                     content_key: contentKey,
                     html_content: tempHtml,

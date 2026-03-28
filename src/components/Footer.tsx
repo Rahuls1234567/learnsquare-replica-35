@@ -96,7 +96,7 @@ const Footer = () => (
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <img
-                  src="/logo/LST Logo_B&W_No Background_.png"
+                  src="/logo/LST%20Logo_B%26W_No%20Background.png"
                   alt="LEARNSQUARE"
                   className="h-16 md:h-20 w-auto object-contain transition-all duration-500 group-hover:scale-105"
                 />
