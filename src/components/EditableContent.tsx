@@ -24,13 +24,16 @@ interface EditableContentProps {
     description?: string;
     className?: string;
     defaultContent: React.ReactNode;
+    /** When the inline edit dialog opens or closes (e.g. pause hero carousel) */
+    onEditOpenChange?: (open: boolean) => void;
 }
 
 export const EditableContent = ({
     contentKey,
     description,
     className,
-    defaultContent
+    defaultContent,
+    onEditOpenChange,
 }: EditableContentProps) => {
     const { isAdmin, editMode } = useAdmin();
     const [htmlContent, setHtmlContent] = useState<string | null>(null);
@@ -74,6 +77,7 @@ export const EditableContent = ({
             if (res.ok) {
                 setHtmlContent(tempHtml);
                 setIsEditing(false);
+                onEditOpenChange?.(false);
                 toast.success("Content updated successfully!");
             } else {
                 toast.error("Failed to update content.");
@@ -91,6 +95,7 @@ export const EditableContent = ({
             setTempHtml(contentRef.current.innerHTML.trim());
         }
         setIsEditing(open);
+        onEditOpenChange?.(open);
     };
 
     if (loading) {
@@ -167,7 +172,10 @@ export const EditableContent = ({
                     <DialogFooter className="gap-2">
                         <Button 
                             variant="ghost" 
-                            onClick={() => setIsEditing(false)}
+                            onClick={() => {
+                                setIsEditing(false);
+                                onEditOpenChange?.(false);
+                            }}
                             className="text-slate-400 hover:text-white hover:bg-white/5"
                         >
                             Cancel

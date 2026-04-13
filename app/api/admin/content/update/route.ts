@@ -45,7 +45,16 @@ export async function POST(request: Request) {
 
         return NextResponse.json(updated);
     } catch (error) {
-        console.error("Content update error:", error);
-        return NextResponse.json({ error: "Failed to update content" }, { status: 500 });
+        const message = error instanceof Error ? error.message : String(error);
+        const code = error && typeof error === "object" && "code" in error ? String((error as { code: unknown }).code) : undefined;
+        console.error("Content update error:", message, code ?? "", error);
+        const exposeDetail = process.env.NODE_ENV !== "production" || process.env.CMS_DEBUG === "1";
+        return NextResponse.json(
+            {
+                error: "Failed to update content",
+                ...(exposeDetail ? { detail: message, code } : {}),
+            },
+            { status: 500 }
+        );
     }
 }

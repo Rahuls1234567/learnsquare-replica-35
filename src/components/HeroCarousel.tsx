@@ -89,6 +89,8 @@ const slides = [
 const HeroCarousel = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
+  /** Pause autoplay & block slide changes while an inline edit dialog is open (avoids unmount closing the editor). */
+  const [heroEditDialogOpen, setHeroEditDialogOpen] = useState(false);
 
   // Use MotionValues for parallax to avoid re-rendering on mousemove
   const mouseX = useMotionValue(0);
@@ -124,9 +126,29 @@ const HeroCarousel = () => {
   }, []);
 
   useEffect(() => {
+    if (heroEditDialogOpen) return;
     const id = setInterval(next, 8000);
     return () => clearInterval(id);
-  }, [next]);
+  }, [next, heroEditDialogOpen]);
+
+  const goNext = useCallback(() => {
+    if (heroEditDialogOpen) return;
+    next();
+  }, [heroEditDialogOpen, next]);
+
+  const goPrev = useCallback(() => {
+    if (heroEditDialogOpen) return;
+    prev();
+  }, [heroEditDialogOpen, prev]);
+
+  const goToSlide = useCallback(
+    (i: number) => {
+      if (heroEditDialogOpen) return;
+      setDirection(i > current ? 1 : -1);
+      setCurrent(i);
+    },
+    [heroEditDialogOpen, current]
+  );
 
   const slide = slides[current];
 
@@ -165,6 +187,7 @@ const HeroCarousel = () => {
                     <EditableContent 
                         contentKey={`hero_slide_${current}_label`}
                         description={`Hero Slide ${current} Label`}
+                        onEditOpenChange={setHeroEditDialogOpen}
                         defaultContent={
                             <span className="text-primary font-black tracking-[0.2em] md:tracking-[0.4em] uppercase text-[10px] md:text-xs">
                                 {slide.topLabel}
@@ -179,6 +202,7 @@ const HeroCarousel = () => {
                     <EditableContent 
                         contentKey={`hero_slide_${current}_title`}
                         description={`Hero Slide ${current} Title`}
+                        onEditOpenChange={setHeroEditDialogOpen}
                         defaultContent={
                             <motion.h1
                               style={{
@@ -213,6 +237,7 @@ const HeroCarousel = () => {
                     <EditableContent 
                         contentKey={`hero_slide_${current}_subtitle`}
                         description={`Hero Slide ${current} Subtitle`}
+                        onEditOpenChange={setHeroEditDialogOpen}
                         defaultContent={
                             <p className="text-lg md:text-xl text-slate-200 font-medium leading-[1.5] border-l-2 border-indigo-400 pl-6 drop-shadow-md">
                                 {slide.subtitle}
@@ -299,6 +324,7 @@ const HeroCarousel = () => {
                       <EditableContent 
                         contentKey={`hero_slide_${current}_card_subtitle`}
                         description={`Hero Slide ${current} Card Subtitle`}
+                        onEditOpenChange={setHeroEditDialogOpen}
                         defaultContent={
                             <span className={`font-semibold text-xs md:text-sm uppercase tracking-widest px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-slate-300 shadow-xl`}>
                                 {slide.cardSubtitle}
@@ -309,6 +335,7 @@ const HeroCarousel = () => {
                     <EditableContent 
                         contentKey={`hero_slide_${current}_card_title`}
                         description={`Hero Slide ${current} Card Title`}
+                        onEditOpenChange={setHeroEditDialogOpen}
                         defaultContent={
                             <motion.h3
                               initial={{ opacity: 0, y: 10 }}
@@ -363,7 +390,7 @@ const HeroCarousel = () => {
 
       {/* Extreme Navigation */}
       <div className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-6 md:gap-12 z-50">
-        <button onClick={prev} className="group p-2 md:p-4 hover:scale-125 transition-transform" aria-label="Previous slide">
+        <button onClick={goPrev} className="group p-2 md:p-4 hover:scale-125 transition-transform" aria-label="Previous slide">
           <ChevronLeft className="w-8 h-8 md:w-10 md:h-10 text-slate-300 group-hover:text-primary transition-colors" />
         </button>
 
@@ -371,14 +398,14 @@ const HeroCarousel = () => {
           {slides.map((_, i) => (
             <button
               key={i}
-              onClick={() => setCurrent(i)}
+              onClick={() => goToSlide(i)}
               className={`h-1 md:h-1.5 transition-all duration-500 rounded-full ${i === current ? 'w-12 md:w-24 bg-primary shadow-[0_0_20px_rgba(99,102,241,0.3)]' : 'bg-slate-200 w-2 md:w-4'}`}
               aria-label={`Go to slide ${i + 1}`}
             />
           ))}
         </div>
 
-        <button onClick={next} className="group p-2 md:p-4 hover:scale-125 transition-transform" aria-label="Next slide">
+        <button onClick={goNext} className="group p-2 md:p-4 hover:scale-125 transition-transform" aria-label="Next slide">
           <ChevronRight className="w-8 h-8 md:w-10 md:h-10 text-slate-300 group-hover:text-primary transition-colors" />
         </button>
       </div>
