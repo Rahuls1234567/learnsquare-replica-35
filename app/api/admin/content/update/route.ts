@@ -28,7 +28,12 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        const body = await request.json();
+        let body: { content_key?: unknown; html_content?: unknown; page_name?: unknown };
+        try {
+            body = await request.json();
+        } catch {
+            return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+        }
         const { content_key, html_content, page_name } = body;
 
         if (!content_key || typeof content_key !== "string") {
