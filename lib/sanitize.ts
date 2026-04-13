@@ -11,7 +11,7 @@ const PURIFY_OPTIONS = {
         "sub", "sup", "mark", "small", "del", "ins"
     ],
     ALLOWED_ATTR: ["href", "src", "alt", "title", "class", "target", "rel"],
-} as const;
+};
 
 /** Fallback if isomorphic-dompurify fails in some Node / hosting environments */
 function sanitizeHtmlFallback(html: string): string {
