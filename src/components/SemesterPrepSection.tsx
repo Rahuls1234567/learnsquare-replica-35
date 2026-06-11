@@ -81,15 +81,11 @@ const SemesterPrepSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-transparent to-[#0a0a0f] opacity-80" />
 
         {/* Animated Glows */}
-        <motion.div
-          animate={{ opacity: [0.1, 0.3, 0.1], scale: [1, 1.2, 1] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute top-1/2 -left-20 w-[600px] h-[600px] bg-purple-600/20 blur-[140px] rounded-full"
+        <div
+          className="absolute top-1/2 -left-20 w-[600px] h-[600px] bg-purple-600/20 blur-[140px] rounded-full opacity-20"
         />
-        <motion.div
-          animate={{ opacity: [0.1, 0.2, 0.1], scale: [1, 1.1, 1] }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-indigo-600/20 blur-[120px] rounded-full"
+        <div
+          className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-indigo-600/20 blur-[120px] rounded-full opacity-15"
         />
       </div>
 
@@ -103,7 +99,7 @@ const SemesterPrepSection = () => {
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="inline-flex items-center gap-5 bg-white/5 backdrop-blur-3xl border border-white/10 px-8 py-4 rounded-[2rem] shadow-2xl group hover:scale-[1.03] transition-all duration-500"
+                className="inline-flex items-center gap-5 bg-white/10 border border-white/10 px-8 py-4 rounded-[2rem] shadow-2xl group hover:scale-[1.03] transition-all duration-500"
               >
                 <div className="bg-gradient-to-br from-[#8b5cf6] to-[#6366f1] p-3.5 rounded-2xl shadow-lg shadow-purple-500/20 group-hover:rotate-12 transition-transform duration-500">
                   <GraduationCap className="text-white w-7 h-7" strokeWidth={2.5} />
@@ -180,7 +176,7 @@ const SemesterPrepSection = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 * i, duration: 0.6 }}
                 whileHover={{ x: -10, scale: 1.02 }}
-                className="p-3 sm:p-4 md:p-6 rounded-[1.5rem] md:rounded-[2.5rem] bg-white/5 backdrop-blur-2xl border border-white/10 group hover:bg-white/[0.08] hover:border-purple-500/30 hover:shadow-[0_20px_50px_rgba(139,92,246,0.15)] transition-all duration-500 flex flex-col sm:flex-row items-center sm:items-center gap-3 md:gap-8 relative overflow-hidden"
+                className="p-3 sm:p-4 md:p-6 rounded-[1.5rem] md:rounded-[2.5rem] bg-white/10 border border-white/10 group hover:bg-white/20 hover:border-purple-500/30 hover:shadow-[0_20px_50px_rgba(139,92,246,0.15)] transition-all duration-500 flex flex-col sm:flex-row items-center sm:items-center gap-3 md:gap-8 relative overflow-hidden"
               >
                 {/* Floating Glow Fragment */}
                 <div className={`absolute -right-10 -top-10 w-32 h-32 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-700 blur-3xl`} />
@@ -220,7 +216,7 @@ const SemesterPrepSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="p-5 flex flex-col md:flex-row items-center justify-between gap-4 rounded-[2rem] bg-gradient-to-r from-purple-900/20 to-indigo-900/20 backdrop-blur-3xl border border-white/10 text-white/70 px-6 md:px-10 shadow-2xl"
+              className="p-5 flex flex-col md:flex-row items-center justify-between gap-4 rounded-[2rem] bg-gradient-to-r from-purple-900/40 to-indigo-900/40 border border-white/10 text-white/70 px-6 md:px-10 shadow-2xl"
             >
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center">
@@ -230,7 +226,7 @@ const SemesterPrepSection = () => {
               </div>
               <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-xl border border-white/5">
                 <span className="text-[10px] font-black text-purple-400 uppercase tracking-widest">System Active</span>
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+                <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
               </div>
             </motion.div>
           </div>

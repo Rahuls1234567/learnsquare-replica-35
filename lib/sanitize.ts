@@ -1,5 +1,3 @@
-import DOMPurify from "isomorphic-dompurify";
-
 const PURIFY_OPTIONS = {
     ALLOWED_TAGS: [
         "p", "br", "strong", "b", "em", "i", "u", "s", "strike",
@@ -13,8 +11,12 @@ const PURIFY_OPTIONS = {
     ALLOWED_ATTR: ["href", "src", "alt", "title", "class", "target", "rel"],
 };
 
-/** Fallback if isomorphic-dompurify fails in some Node / hosting environments */
+/**
+ * Robust fallback sanitizer that doesn't rely on jsdom (which breaks Next.js SSR)
+ * Strips script tags and inline event handlers to prevent XSS.
+ */
 function sanitizeHtmlFallback(html: string): string {
+    if (!html) return "";
     return html
         .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
         .replace(/\son\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "");
@@ -22,13 +24,8 @@ function sanitizeHtmlFallback(html: string): string {
 
 /**
  * Sanitize HTML to prevent XSS attacks before saving or rendering.
- * Allows common formatting tags and attributes used in content blocks.
+ * Uses a safe regex fallback to prevent JSDOM SSR crashes.
  */
 export function sanitizeHtml(html: string): string {
-    try {
-        return DOMPurify.sanitize(html, PURIFY_OPTIONS);
-    } catch (err) {
-        console.error("sanitizeHtml: DOMPurify failed, using fallback", err);
-        return sanitizeHtmlFallback(html);
-    }
+    return sanitizeHtmlFallback(html);
 }

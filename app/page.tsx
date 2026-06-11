@@ -97,7 +97,7 @@ export default function Home() {
 
     return (
         <motion.div
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
             className="min-h-screen bg-[#080118] relative overflow-x-hidden noise-overlay"

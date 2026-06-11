@@ -8,6 +8,8 @@ import AntigravityBackground from "@/src/components/AntigravityBackground";
 import { motion } from "framer-motion";
 import { Sparkles, Monitor, BadgeCheck, Linkedin, X } from "lucide-react";
 import { EditableContent } from "@/src/components/EditableContent";
+import { EditableImage } from "@/src/components/EditableImage";
+import TeamCardsSection from "@/src/components/TeamCardsSection";
 
 const About = () => {
     const team = [
@@ -186,12 +188,13 @@ const About = () => {
                                 >
                                     <div className="bg-white p-3 md:p-6 rounded-[2rem] md:rounded-[3rem] shadow-2xl relative overflow-hidden group-hover:-translate-y-2 transition-transform duration-500 border-4 border-white">
                                         <div className="w-full aspect-square md:aspect-[4/5] relative rounded-2xl md:rounded-[2rem] overflow-hidden">
-                                            <img
-                                                src={t.image}
+                                            <EditableImage
+                                                contentKey={`about_team_${idx}_photo`}
+                                                defaultImage={t.image}
                                                 alt={t.name}
                                                 className="w-full h-full object-cover object-[center_top] filter contrast-125 transition-transform duration-700 group-hover:scale-105"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-[#1e293b]/50 via-transparent to-transparent pointer-events-none" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#1e293b]/50 via-transparent to-transparent pointer-events-none pointer-events-none" />
                                         </div>
                                     </div>
                                 </motion.div>
@@ -199,6 +202,9 @@ const About = () => {
                         </div>
                     ))}
                 </div>
+
+                {/* Dynamic Team Cards added by Admin */}
+                <TeamCardsSection />
             </main>
 
             <Footer />

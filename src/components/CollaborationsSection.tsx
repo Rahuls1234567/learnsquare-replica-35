@@ -48,13 +48,13 @@ const CollaborationsSection = ({ id }: CollaborationsSectionProps) => {
         setReviews(data || []);
       }
     } catch (error) {
-      console.error("Failed to fetch reviews:", error);
+      console.warn("Failed to fetch reviews:", error);
     }
   };
 
   const fetchCollabs = async () => {
     try {
-      const res = await fetch("/api/content/home_collaborations_json");
+      const res = await fetch("/api/content/client_collaborations_json");
       if (res.ok) {
         const data = await res.json();
         if (data.htmlContent) {
@@ -112,7 +112,7 @@ const CollaborationsSection = ({ id }: CollaborationsSectionProps) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          content_key: "home_collaborations_json",
+          content_key: "client_collaborations_json",
           html_content: JSON.stringify(newList),
         }),
       });
@@ -266,7 +266,7 @@ const CollaborationsSection = ({ id }: CollaborationsSectionProps) => {
         {/* Dual Photo Display Grid */}
         <div className="max-w-4xl mx-auto px-4 md:px-0 mb-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 min-h-[300px]">
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               {[0, 1].map((offset) => {
                 const item = collabList[(currentIndex + offset) % collabList.length];
                 if (!item) return null;
@@ -449,7 +449,7 @@ const CollaborationsSection = ({ id }: CollaborationsSectionProps) => {
                   />
                 </div>
                 <Input 
-                  value={reviewForm.image} 
+                  value={reviewForm.image || ""} 
                   onChange={e => setReviewForm({...reviewForm, image: e.target.value})} 
                   placeholder="Or paste Image URL here..." 
                   className="text-xs"
@@ -457,16 +457,16 @@ const CollaborationsSection = ({ id }: CollaborationsSectionProps) => {
              </div>
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-500 uppercase">Student Name</label>
-                <Input value={reviewForm.name} onChange={e => setReviewForm({ ...reviewForm, name: e.target.value })} placeholder="e.g. Rahul Sharma" className="rounded-xl" />
+                <Input value={reviewForm.name || ""} onChange={e => setReviewForm({ ...reviewForm, name: e.target.value })} placeholder="e.g. Rahul Sharma" className="rounded-xl" />
               </div>
             </div>
             <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-500 uppercase">Role / College</label>
-                <Input value={reviewForm.role} onChange={e => setReviewForm({ ...reviewForm, role: e.target.value })} placeholder="e.g. Final Year, SVIT" className="rounded-xl" />
+                <Input value={reviewForm.role || ""} onChange={e => setReviewForm({ ...reviewForm, role: e.target.value })} placeholder="e.g. Final Year, SVIT" className="rounded-xl" />
               </div>
             <div className="space-y-2">
               <label className="text-sm font-bold text-slate-500 uppercase">Review Text</label>
-              <Textarea value={reviewForm.text} onChange={e => setReviewForm({ ...reviewForm, text: e.target.value })} placeholder="What did the student say?" className="min-h-[100px] rounded-xl" />
+              <Textarea value={reviewForm.text || ""} onChange={e => setReviewForm({ ...reviewForm, text: e.target.value })} placeholder="What did the student say?" className="min-h-[100px] rounded-xl" />
             </div>
           </div>
           <DialogFooter className="gap-2">
@@ -527,7 +527,7 @@ const CollaborationsSection = ({ id }: CollaborationsSectionProps) => {
              </div>
              <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-500 uppercase">Image Title / MoU Info</label>
-                <Input value={collabForm.title} onChange={e => setCollabForm({ ...collabForm, title: e.target.value })} placeholder="e.g. MoU with GPREC" className="rounded-xl" />
+                <Input value={collabForm.title || ""} onChange={e => setCollabForm({ ...collabForm, title: e.target.value })} placeholder="e.g. MoU with GPREC" className="rounded-xl" />
              </div>
           </div>
           <DialogFooter className="gap-2">

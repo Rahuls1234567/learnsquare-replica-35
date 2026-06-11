@@ -126,3 +126,15 @@ model Review {
   page      String   // "home" or "semester-prep"
   createdAt DateTime @default(now())
 }
+
+model Notice {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String   @db.Text
+  image     String?
+  isActive  Boolean  @default(true)
+  startDate DateTime
+  endDate   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
