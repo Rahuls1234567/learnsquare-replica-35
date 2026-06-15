@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useAdmin } from "@/src/context/AdminContext";
-import { Edit3, Save, X } from "lucide-react";
+import { Edit3 } from "lucide-react";
 import {
     Dialog,
     DialogContent,
@@ -18,6 +18,7 @@ import Editor from 'react-simple-code-editor';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-markup';
 import 'prismjs/themes/prism-tomorrow.css';
+import { fetchContent, invalidateContent } from "@/lib/contentCache";
 
 interface EditableContentProps {
     contentKey: string;
@@ -44,21 +45,12 @@ export const EditableContent = ({
     const contentRef = React.useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const fetchContent = async () => {
-            try {
-                const res = await fetch(`/api/content/${contentKey}`);
-                if (res.ok) {
-                    const data = await res.json();
-                    setHtmlContent(data.htmlContent);
-                    setTempHtml(data.htmlContent);
-                }
-            } catch (error) {
-                console.error(`Failed to fetch content for ${contentKey}:`, error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchContent();
+        // Uses the batch cache — all EditableContent on the page share ONE API call
+        fetchContent(contentKey, (html) => {
+            setHtmlContent(html || "");
+            setTempHtml(html || "");
+            setLoading(false);
+        });
     }, [contentKey]);
 
     const handleSave = async () => {
@@ -75,6 +67,8 @@ export const EditableContent = ({
             });
 
             if (res.ok) {
+                // Invalidate this key in the cache so next load gets fresh data
+                invalidateContent(contentKey);
                 setHtmlContent(tempHtml);
                 setIsEditing(false);
                 onEditOpenChange?.(false);

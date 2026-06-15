@@ -4,12 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev -p 8080 --turbopack",
+    "dev": "next dev -p 8080 --webpack",
     "dev:webpack": "next dev -p 8080 --webpack",
     "build": "next build",
     "start": "next start -p 8080",
     "lint": "next lint",
     "db:seed": "npx tsx prisma/seed.ts",
+    "db:push": "prisma db push",
     "postinstall": "prisma generate"
   },
   "prisma": {

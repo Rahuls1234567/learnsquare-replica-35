@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { LogOut, FileText, Users, Mail, BookOpen, GraduationCap, RefreshCw, X, User, Edit3, MessageSquare, ImageIcon, ExternalLink, FileCode } from "lucide-react";
+import TeamCardsSection from "@/src/components/TeamCardsSection";
+import TeamCardsAdmin from "@/src/components/TeamCardsAdmin"; // Trigger recompile
+import ClientPartnershipsAdmin from "@/src/components/ClientPartnershipsAdmin";
+import NoticeBoardAdmin from "@/src/components/NoticeBoardAdmin";
 import { useAdmin } from "@/src/context/AdminContext";
 
 type ReportCounts = {
@@ -112,6 +116,9 @@ export default function AdminPage() {
     const [selectedCard, setSelectedCard] = useState<ReportKey | null>(null);
     const [tableData, setTableData] = useState<Record<string, unknown>[]>([]);
     const { editMode, setEditMode } = useAdmin();
+    const [showTeamManager, setShowTeamManager] = useState(false);
+    const [showPartnershipsManager, setShowPartnershipsManager] = useState(false);
+    const [showNoticeManager, setShowNoticeManager] = useState(false);
     const [tableLoading, setTableLoading] = useState(false);
 
     useEffect(() => {
@@ -222,7 +229,29 @@ export default function AdminPage() {
                         <Edit3 className="w-4 h-4" />
                         Manage Content
                     </button>
+                    <button
+                        onClick={() => setShowTeamManager(prev => !prev)}
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-sm font-bold transition-all border border-indigo-100"
+                    >
+                        <Users className="w-4 h-4" />
+                        Add About Teams
+                    </button>
+                    <button
+                        onClick={() => setShowPartnershipsManager(prev => !prev)}
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-sm font-bold transition-all border border-emerald-100"
+                    >
+                        <ExternalLink className="w-4 h-4" />
+                        Client Partnerships
+                    </button>
+                    <button
+                        onClick={() => setShowNoticeManager(prev => !prev)}
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-50 text-amber-700 hover:bg-amber-100 text-sm font-bold transition-all border border-amber-100"
+                    >
+                        <MessageSquare className="w-4 h-4" />
+                        Notice Board
+                    </button>
                     <div className="hidden sm:block h-6 w-px bg-slate-200 mx-2" />
+
                     <Link
                         href="/profile"
                         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium transition-colors"
@@ -240,6 +269,9 @@ export default function AdminPage() {
                 </div>
             </header>
             <main className="p-6 lg:p-8">
+                {showTeamManager && <TeamCardsAdmin />}
+                {showPartnershipsManager && <ClientPartnershipsAdmin />}
+                {showNoticeManager && <NoticeBoardAdmin onClose={() => setShowNoticeManager(false)} />}
                 <div className="max-w-6xl mx-auto">
                     {/* Report Header */}
                     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-8">
@@ -363,6 +395,8 @@ export default function AdminPage() {
 
                 </div>
             </main>
+            {showTeamManager && <TeamCardsAdmin />}
+            {showPartnershipsManager && <ClientPartnershipsAdmin />}
         </div>
     );
 }

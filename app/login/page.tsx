@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Navbar from "@/src/components/Navbar";
@@ -28,9 +28,14 @@ type LoginFormData = { email: string; password: string };
 const LoginPage = () => {
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
-    const [captcha, setCaptcha] = useState(() => generateCaptcha());
+    const [captcha, setCaptcha] = useState("");
     const [captchaInput, setCaptchaInput] = useState("");
+    const [mounted, setMounted] = useState(false);
 
+    useEffect(() => {
+        setCaptcha(generateCaptcha());
+        setMounted(true);
+    }, []);
     const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>({
         defaultValues: { email: "", password: "" },
     });

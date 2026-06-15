@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import DevWarmup from "@/components/DevWarmup";
-
+import NoticeBoard from "@/src/components/NoticeBoard";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -37,8 +36,8 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <Providers>
-                    <DevWarmup />
                     {children}
+                    <NoticeBoard />
                 </Providers>
 
                 {/* SVG Filter to remove white backgrounds from logos */}
