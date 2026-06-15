@@ -44,55 +44,68 @@ export default function NoticeBoard() {
     return (
         <AnimatePresence>
             {isVisible && notice && (
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95, y: -20, x: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
-                    exit={{ opacity: 0, scale: 0.95, y: -20, x: 20 }}
-                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    className="fixed top-24 right-6 z-[100] w-[calc(100%-3rem)] sm:w-[28rem] shadow-2xl"
-                >
-                    <div className="bg-white/95 backdrop-blur-xl border border-slate-200/60 shadow-2xl rounded-2xl overflow-hidden relative group max-h-[calc(100vh-8rem)] flex flex-col">
-                        {/* Decorative Top Border */}
-                        <div className="h-1.5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex-shrink-0"></div>
-                        
-                        <button
-                            onClick={handleClose}
-                            className="absolute top-4 right-4 p-1.5 bg-white/80 hover:bg-slate-100 text-slate-500 hover:text-slate-800 rounded-full transition-colors z-10 backdrop-blur-md shadow-sm border border-slate-200"
-                            aria-label="Close Notice"
-                        >
-                            <X className="w-4 h-4" />
-                        </button>
+                <>
+                    {/* Backdrop */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 z-[99] bg-black/50 backdrop-blur-sm"
+                        onClick={handleClose}
+                    />
 
-                        <div className="overflow-y-auto custom-scrollbar flex-1">
-                            {notice.image && notice.image.trim().length > 0 && (
-                                <div className="w-full h-48 sm:h-56 overflow-hidden bg-slate-100 relative">
-                                    <img
-                                        src={notice.image}
-                                        alt="Announcement"
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                        onError={(e) => {
-                                            (e.target as HTMLImageElement).style.display = 'none';
-                                            (e.target as HTMLImageElement).parentElement!.style.display = 'none';
-                                        }}
-                                    />
-                                </div>
-                            )}
+                    {/* Centered Modal */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.88, y: 40 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.88, y: 40 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 pointer-events-none"
+                    >
+                        <div className="bg-white border border-slate-200 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.35)] rounded-2xl overflow-hidden relative group max-h-[85vh] w-full sm:w-[32rem] flex flex-col pointer-events-auto">
+                            {/* Decorative Top Border */}
+                            <div className="h-1.5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex-shrink-0"></div>
 
-                            <div className="p-6 sm:p-8">
-                                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-                                    <Megaphone className="w-3.5 h-3.5" />
-                                    Announcement
-                                </div>
-                                <h3 className="text-2xl font-black text-slate-900 mb-3 leading-tight tracking-tight">
-                                    {notice.title}
-                                </h3>
-                                <div className="text-slate-600 text-[15px] leading-relaxed whitespace-pre-wrap font-medium">
-                                    {notice.content}
+                            <button
+                                onClick={handleClose}
+                                className="absolute top-4 right-4 p-1.5 bg-white hover:bg-slate-100 text-slate-500 hover:text-slate-800 rounded-full transition-colors z-10 shadow-md border border-slate-200"
+                                aria-label="Close Notice"
+                            >
+                                <X className="w-4 h-4" />
+                            </button>
+
+                            <div className="overflow-y-auto custom-scrollbar flex-1">
+                                {notice.image && notice.image.trim().length > 0 && (
+                                    <div className="w-full h-48 sm:h-56 overflow-hidden bg-slate-100 relative">
+                                        <img
+                                            src={notice.image}
+                                            alt="Announcement"
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                            onError={(e) => {
+                                                (e.target as HTMLImageElement).style.display = 'none';
+                                                (e.target as HTMLImageElement).parentElement!.style.display = 'none';
+                                            }}
+                                        />
+                                    </div>
+                                )}
+
+                                <div className="p-6 sm:p-8">
+                                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-100 border border-indigo-200 text-indigo-700 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+                                        <Megaphone className="w-3.5 h-3.5" />
+                                        Announcement
+                                    </div>
+                                    <h3 className="text-2xl font-black text-slate-900 mb-3 leading-tight tracking-tight">
+                                        {notice.title}
+                                    </h3>
+                                    <div className="text-slate-700 text-[15px] leading-relaxed whitespace-pre-wrap font-medium">
+                                        {notice.content}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                </>
             )}
         </AnimatePresence>
     );

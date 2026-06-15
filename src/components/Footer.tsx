@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight, Apple, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { EditableContent } from "./EditableContent";
@@ -95,22 +96,25 @@ const Footer = () => (
             <a href="/" className="inline-block group transition-all duration-500">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <img
-                  src="/logo/LST%20Logo_B%26W_No%20Background.png"
+                <Image
+                  src="/logo/loogooo.png"
                   alt="LEARNSQUARE"
-                  className="h-16 md:h-20 w-auto object-contain transition-all duration-500 group-hover:scale-105"
+                  width={240}
+                  height={96}
+                  className="h-16 md:h-20 w-auto object-contain transition-all duration-500 group-hover:scale-105 rounded-xl"
+                  priority
                 />
               </div>
             </a>
 
-            <EditableContent 
-                contentKey="footer_brand_desc"
-                description="Footer Brand Description"
-                defaultContent={
-                    <p className="text-slate-400 text-lg leading-relaxed font-medium max-w-sm">
-                        Revolutionizing the educational landscape through cutting-edge <span className="text-white font-bold">AI Technology</span> and industry-aligned programs.
-                    </p>
-                }
+            <EditableContent
+              contentKey="footer_brand_desc"
+              description="Footer Brand Description"
+              defaultContent={
+                <p className="text-slate-400 text-lg leading-relaxed font-medium max-w-sm">
+                  Revolutionizing the educational landscape through cutting-edge <span className="text-white font-bold">AI Technology</span> and industry-aligned programs.
+                </p>
+              }
             />
 
             {/* Premium App Badges */}
