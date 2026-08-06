@@ -15,6 +15,11 @@ dist-ssr
 # Next.js
 .next
 out
+*.tsbuildinfo
+
+# Uploaded media (served from disk via /api/media, tracked in the Media DB table)
+/media
+/public/uploads
 
 # Environment
 .env

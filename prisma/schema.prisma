@@ -50,6 +50,7 @@ model Aicas {
   whatsappNo  String
   email       String
   collegeName String
+  designation String   @default("")
   city        String
   message     String
   createdAt   DateTime @default(now())
@@ -125,4 +126,19 @@ model Review {
   rating    Int?     @default(5) // For collaborations section
   page      String   // "home" or "semester-prep"
   createdAt DateTime @default(now())
+}
+
+// Catalog of every file uploaded through the admin Image Manager. Files live
+// on disk under the top-level `media/` directory (outside `public/`, so
+// uploads never show up as changes in `public/`) and are served through
+// /api/media/[...path]. `path` is the location relative to that directory.
+model Media {
+  id         Int      @id @default(autoincrement())
+  filename   String
+  folder     String   @default("")
+  path       String   @unique
+  url        String
+  mimeType   String
+  size       Int
+  uploadedAt DateTime @default(now())
 }

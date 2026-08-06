@@ -11,7 +11,8 @@ import {
     Brain, BookOpen, Award, Shield,
     LayoutDashboard, CreditCard, FileText, Video,
     Code, Briefcase, MonitorPlay, Users,
-    ClipboardList, Bell, Check, Rocket, Loader2
+    ClipboardList, Bell, Check, Rocket, Loader2,
+    User, Phone, Mail, Building2, MapPin, IdCard, MessageSquare
 } from 'lucide-react';
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
@@ -540,13 +541,16 @@ export default function Aicas() {
             whatsappNo: '',
             email: '',
             collegeName: '',
+            designation: '',
             city: '',
             message: ''
         }
     });
 
+    type AicasFormValues = { firstName: string; lastName: string; whatsappNo: string; email: string; collegeName: string; designation: string; city: string; message: string };
+
     const mutation = useMutation({
-        mutationFn: async (data: { firstName: string; lastName: string; whatsappNo: string; email: string; collegeName: string; city: string; message: string }) => {
+        mutationFn: async (data: AicasFormValues) => {
             return apiClient.post('/aicas', data);
         },
         onSuccess: () => {
@@ -562,7 +566,7 @@ export default function Aicas() {
         }
     });
 
-    const onSubmit = (data: { firstName: string; lastName: string; whatsappNo: string; email: string; collegeName: string; city: string; message: string }) => {
+    const onSubmit = (data: AicasFormValues) => {
         mutation.mutate(data);
     };
 
@@ -604,7 +608,7 @@ export default function Aicas() {
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="flex flex-col items-start text-left space-y-8"
+                            className="flex flex-col items-start text-left space-y-8 min-w-0 overflow-hidden"
                         >
                             {/* Shimmering Top Pill */}
                             <div className="relative group cursor-default inline-block">
@@ -621,7 +625,7 @@ export default function Aicas() {
                                     <>
                                         <h2 className="font-black tracking-tight flex flex-col items-start drop-shadow-xl w-full">
                                             <span className="text-5xl sm:text-6xl md:text-7xl lg:text-[4.5rem] xl:text-[5.5rem] 2xl:text-[6rem] text-slate-100 mb-2 lg:mb-4 leading-none">AI Powered</span>
-                                            <span className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem] 2xl:text-[4.5rem] text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-400 pb-1 whitespace-normal xl:whitespace-nowrap leading-[1.1]">Campus Automation</span>
+                                            <span className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem] 2xl:text-[4.5rem] text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-400 pb-1 leading-[1.1]">Campus Automation</span>
                                             <span className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem] 2xl:text-[4.5rem] text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-400 pb-2 leading-[1.1]">System</span>
                                         </h2>
 
@@ -656,10 +660,11 @@ export default function Aicas() {
 
                         {/* Right Column: Premium Dark Contact Form */}
                         <motion.div
+                            id="enquiry"
                             initial={{ opacity: 0, x: 50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="relative group h-full"
+                            className="relative group h-full scroll-mt-28"
                         >
                             {/* Card Glow Background */}
                             <div className="absolute -inset-1 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-[2.5rem] blur-3xl opacity-20 group-hover:opacity-40 transition duration-1000" />
@@ -680,61 +685,94 @@ export default function Aicas() {
                                 <form className="space-y-5 relative z-10 flex-grow" onSubmit={handleSubmit(onSubmit)}>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div className="space-y-2">
-                                            <Input
-                                                {...register("firstName", { required: true })}
-                                                placeholder="First Name*"
-                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.firstName ? 'border-red-500/50' : ''}`}
-                                            />
+                                            <div className="relative">
+                                                <User className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                                                <Input
+                                                    {...register("firstName", { required: true })}
+                                                    placeholder="First Name*"
+                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.firstName ? 'border-red-500/50' : ''}`}
+                                                />
+                                            </div>
                                         </div>
                                         <div className="space-y-2">
-                                            <Input
-                                                {...register("lastName", { required: true })}
-                                                placeholder="Last Name*"
-                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.lastName ? 'border-red-500/50' : ''}`}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                        <div className="space-y-2">
-                                            <Input
-                                                {...register("whatsappNo", { required: true })}
-                                                placeholder="Whatsapp No.*"
-                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.whatsappNo ? 'border-red-500/50' : ''}`}
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <Input
-                                                {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-                                                placeholder="Email*"
-                                                type="email"
-                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.email ? 'border-red-500/50' : ''}`}
-                                            />
+                                            <div className="relative">
+                                                <User className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                                                <Input
+                                                    {...register("lastName", { required: true })}
+                                                    placeholder="Last Name*"
+                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.lastName ? 'border-red-500/50' : ''}`}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div className="space-y-2">
-                                            <Input
-                                                {...register("collegeName", { required: true })}
-                                                placeholder="College Name*"
-                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.collegeName ? 'border-red-500/50' : ''}`}
-                                            />
+                                            <div className="relative">
+                                                <Phone className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                                                <Input
+                                                    {...register("whatsappNo", { required: true })}
+                                                    placeholder="Whatsapp No.*"
+                                                    type="tel"
+                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.whatsappNo ? 'border-red-500/50' : ''}`}
+                                                />
+                                            </div>
                                         </div>
                                         <div className="space-y-2">
+                                            <div className="relative">
+                                                <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                                                <Input
+                                                    {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+                                                    placeholder="Email*"
+                                                    type="email"
+                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.email ? 'border-red-500/50' : ''}`}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        <div className="space-y-2">
+                                            <div className="relative">
+                                                <Building2 className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                                                <Input
+                                                    {...register("collegeName", { required: true })}
+                                                    placeholder="Institution / Organization*"
+                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.collegeName ? 'border-red-500/50' : ''}`}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <div className="relative">
+                                                <IdCard className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                                                <Input
+                                                    {...register("designation", { required: true })}
+                                                    placeholder="Designation*"
+                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.designation ? 'border-red-500/50' : ''}`}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <div className="relative">
+                                            <MapPin className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                                             <Input
                                                 {...register("city", { required: true })}
                                                 placeholder="City*"
-                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.city ? 'border-red-500/50' : ''}`}
+                                                className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.city ? 'border-red-500/50' : ''}`}
                                             />
                                         </div>
                                     </div>
 
-                                    <Textarea
-                                        {...register("message", { required: true })}
-                                        placeholder="Message*"
-                                        className={`min-h-[120px] bg-white/5 border-white/10 rounded-[1.5rem] focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 resize-none pt-5 px-6 font-bold text-sm shadow-inner ${errors.message ? 'border-red-500/50' : ''}`}
-                                    />
+                                    <div className="relative">
+                                        <MessageSquare className="absolute left-6 top-5 w-4 h-4 text-slate-500" />
+                                        <Textarea
+                                            {...register("message", { required: true })}
+                                            placeholder="Message*"
+                                            className={`min-h-[120px] bg-white/5 border-white/10 rounded-[1.5rem] focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 resize-none pt-5 pl-12 pr-6 font-bold text-sm shadow-inner ${errors.message ? 'border-red-500/50' : ''}`}
+                                        />
+                                    </div>
 
                                     <div className="pt-6">
                                         <button

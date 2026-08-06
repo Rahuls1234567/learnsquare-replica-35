@@ -14,10 +14,6 @@ import {
 import { Button } from "@/src/components/ui/button";
 import { sanitizeHtml } from "@/lib/sanitize";
 import { toast } from "sonner";
-import Editor from 'react-simple-code-editor';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-markup';
-import 'prismjs/themes/prism-tomorrow.css';
 
 interface EditableContentProps {
     contentKey: string;
@@ -141,23 +137,13 @@ export const EditableContent = ({
                     <div className="py-4 space-y-4">
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-slate-400">HTML Content</label>
-                            <div className="rounded-xl overflow-hidden border border-white/10 bg-black/40 min-h-[300px] max-h-[500px] overflow-auto custom-scrollbar">
-                                <Editor
-                                    value={tempHtml}
-                                    onValueChange={code => setTempHtml(code)}
-                                    highlight={code => Prism.highlight(code, Prism.languages.markup, 'markup')}
-                                    padding={20}
-                                    className="font-mono text-xs focus:outline-none"
-                                    style={{
-                                        fontFamily: '"Fira code", "Fira Mono", monospace',
-                                        fontSize: 12,
-                                        minHeight: '300px',
-                                        color: '#fff',
-                                        whiteSpace: 'pre-wrap',
-                                        wordBreak: 'break-word'
-                                    }}
-                                />
-                            </div>
+                            <textarea
+                                value={tempHtml}
+                                onChange={e => setTempHtml(e.target.value)}
+                                spellCheck={false}
+                                className="w-full min-h-[300px] max-h-[500px] rounded-xl border border-white/10 bg-black/40 p-5 font-mono text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/50 resize-y custom-scrollbar"
+                                style={{ fontFamily: '"Fira code", "Fira Mono", monospace' }}
+                            />
                         </div>
                         
                         <div className="p-4 rounded-xl bg-white/5 border border-white/10">

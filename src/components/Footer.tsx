@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ChevronRight, Apple, Play } from "lucide-react";
-import { motion } from "framer-motion";
 import { EditableContent } from "./EditableContent";
 
 const companyLinks = [
@@ -79,25 +78,24 @@ const Footer = () => (
     {/* Cinematic Premium Background Elements */}
     <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.05)_0%,transparent_70%)] pointer-events-none" />
-    <div className="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
-    <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse" style={{ animationDelay: '2s' }} />
+    <div className="absolute top-[-10%] right-[-5%] w-[320px] h-[320px] bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="absolute bottom-[-10%] left-[-5%] w-[320px] h-[320px] bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
 
     <div className="container relative z-10">
       <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-20">
         {/* Brand & App Showcase Section */}
         <div className="lg:col-span-4 space-y-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
+          <div className="space-y-8">
             <a href="/" className="inline-block group transition-all duration-500">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <img
-                  src="/logo/LST%20Logo_B%26W_No%20Background.png"
+                  src="/logo/learnsquare-footer-black.png"
                   alt="LEARNSQUARE"
+                  width={640}
+                  height={320}
+                  loading="lazy"
+                  decoding="async"
                   className="h-16 md:h-20 w-auto object-contain transition-all duration-500 group-hover:scale-105"
                 />
               </div>
@@ -115,12 +113,11 @@ const Footer = () => (
 
             {/* Premium App Badges */}
             <div className="flex flex-wrap gap-4 pt-2">
-              <motion.a
-                whileHover={{ y: -5, scale: 1.02 }}
+              <a
                 href="https://play.google.com/store/apps/details?id=com.semesterprep_ap"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/50 transition-all group/app shadow-2xl"
+                className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/50 hover:-translate-y-1 hover:scale-[1.02] transition-all group/app shadow-2xl"
               >
                 <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center border border-white/10 group-hover/app:border-primary/50">
                   <Play className="w-4 h-4 text-white fill-current" />
@@ -129,14 +126,13 @@ const Footer = () => (
                   <p className="text-[10px] uppercase font-black tracking-widest text-slate-500 leading-none mb-1">Get it on</p>
                   <p className="text-sm font-black text-white leading-none">Google Play</p>
                 </div>
-              </motion.a>
+              </a>
 
-              <motion.a
-                whileHover={{ y: -5, scale: 1.02 }}
+              <a
                 href="https://apps.apple.com/in/app/learnsquare/id1671087835"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/50 transition-all group/app shadow-2xl"
+                className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/50 hover:-translate-y-1 hover:scale-[1.02] transition-all group/app shadow-2xl"
               >
                 <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center border border-white/10 group-hover/app:border-primary/50 text-white">
                   <Apple className="w-5 h-5" />
@@ -145,9 +141,9 @@ const Footer = () => (
                   <p className="text-[10px] uppercase font-black tracking-widest text-slate-500 leading-none mb-1">Download on</p>
                   <p className="text-sm font-black text-white leading-none">App Store</p>
                 </div>
-              </motion.a>
+              </a>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Navigation Grid */}
@@ -237,36 +233,33 @@ const Footer = () => (
         </div>
 
         <div className="flex items-center gap-6 md:gap-8">
-          <motion.a
-            whileHover={{ y: -4, scale: 1.15 }}
+          <a
             href="https://www.instagram.com/learn_square/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group/social"
+            className="group/social transition-transform hover:-translate-y-1 hover:scale-110"
             aria-label="Instagram"
           >
             <InstagramBrandIcon className="w-9 h-9 md:w-11 md:h-11 shadow-[0_4px_10px_rgba(0,0,0,0.3)] group-hover/social:shadow-[0_8px_20px_rgba(238,42,123,0.4)] rounded-xl transition-all" />
-          </motion.a>
-          <motion.a
-            whileHover={{ y: -4, scale: 1.15 }}
+          </a>
+          <a
             href="https://www.linkedin.com/company/learnsquaretechnologies/?viewAsMember=true"
             target="_blank"
             rel="noopener noreferrer"
-            className="group/social"
+            className="group/social transition-transform hover:-translate-y-1 hover:scale-110"
             aria-label="LinkedIn"
           >
             <LinkedInBrandIcon className="w-9 h-9 md:w-11 md:h-11 shadow-[0_4px_10px_rgba(0,0,0,0.3)] group-hover/social:shadow-[0_8px_20px_rgba(10,102,194,0.4)] rounded-xl transition-all" />
-          </motion.a>
-          <motion.a
-            whileHover={{ y: -4, scale: 1.15 }}
+          </a>
+          <a
             href="https://www.youtube.com/@learnsquaretech"
             target="_blank"
             rel="noopener noreferrer"
-            className="group/social"
+            className="group/social transition-transform hover:-translate-y-1 hover:scale-110"
             aria-label="YouTube"
           >
             <YouTubeBrandIcon className="w-10 h-10 md:w-[3.2rem] md:h-[3.2rem] drop-shadow-[0_4px_10px_rgba(0,0,0,0.3)] group-hover/social:drop-shadow-[0_8px_20px_rgba(255,0,0,0.4)] transition-all" />
-          </motion.a>
+          </a>
         </div>
       </div>
     </div>
