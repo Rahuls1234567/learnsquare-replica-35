@@ -80,7 +80,7 @@ const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
 
       {/* Colorful Ambient Grid & Glows for Maximum Pop */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f472b610_1px,transparent_1px),linear-gradient(to_bottom,#818cf810_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
-      <div className="absolute -top-40 -left-20 w-[600px] h-[600px] bg-pink-400/20 rounded-full blur-[120px] mix-blend-multiply pointer-events-none animate-pulse-slow" />
+      <div className="absolute -top-40 -left-20 w-[600px] h-[600px] bg-pink-400/20 rounded-full blur-[120px] mix-blend-multiply pointer-events-none" />
       <div className="absolute top-20 -right-20 w-[600px] h-[600px] bg-indigo-400/20 rounded-full blur-[120px] mix-blend-multiply pointer-events-none" />
 
       <div className="container px-4 mx-auto relative z-10">
@@ -156,7 +156,7 @@ const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
                 : { duration: 35, ease: "linear", repeat: Infinity }
             }
           >
-            {[...clientLogos, ...clientLogos].map((logo, idx) => (
+            {[...logos, ...logos].map((logo, idx) => (
               <div
                 key={idx}
                 className="px-5 md:px-7 shrink-0 relative group"
@@ -165,11 +165,10 @@ const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
                 {/* Colorful shadow that blooms on hover */}
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-indigo-400 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500" />
 
-                <div className="relative flex items-center justify-center w-[110px] h-[110px] sm:w-[140px] sm:h-[140px] md:w-[170px] md:h-[170px] bg-white/95 backdrop-blur-md rounded-2xl md:rounded-3xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1),0_0_0_1px_rgba(255,255,255,1)] transition-all duration-300 hover:scale-[1.12] hover:-translate-y-2 cursor-pointer z-10">
+                <div className="relative flex items-center justify-center w-[110px] h-[110px] sm:w-[140px] sm:h-[140px] md:w-[170px] md:h-[170px] bg-white/95 rounded-2xl md:rounded-3xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1),0_0_0_1px_rgba(255,255,255,1)] transition-all duration-300 hover:scale-[1.12] hover:-translate-y-2 cursor-pointer z-10">
                   <img
                     src={logo.src}
                     alt={logo.name}
-                    loading="lazy"
                     className="max-w-[75%] max-h-[75%] object-contain relative z-10 transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
@@ -218,3 +217,4 @@ const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
 };
 
 export default ClientsLogoBar;
+

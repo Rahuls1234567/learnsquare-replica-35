@@ -22,11 +22,15 @@ export async function GET(
         });
 
         if (!entry) {
-            return NextResponse.json({ htmlContent: "" });
+            return NextResponse.json({ htmlContent: "" }, {
+                headers: { 'Cache-Control': 'public, max-age=60, stale-while-revalidate=300' }
+            });
         }
 
         const sanitized = sanitizeHtml(entry.htmlContent);
-        return NextResponse.json({ htmlContent: sanitized });
+        return NextResponse.json({ htmlContent: sanitized }, {
+            headers: { 'Cache-Control': 'public, max-age=60, stale-while-revalidate=300' }
+        });
     } catch (error) {
         console.error("Public content fetch error:", error);
         return NextResponse.json({ htmlContent: "" });

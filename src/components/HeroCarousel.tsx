@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
-import { ChevronLeft, ChevronRight, Sparkles, CheckCircle2 } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
-import AntigravityBackground from "./AntigravityBackground";
-import ParticlesBackground from "./ParticlesBackground";
+import dynamic from "next/dynamic";
 import { EditableContent } from "./EditableContent";
+
+const ParticlesBackground = dynamic(() => import("./ParticlesBackground"), { ssr: false, loading: () => null });
 
 const slides = [
   {
@@ -156,8 +157,8 @@ const HeroCarousel = () => {
     <section className="relative bg-transparent overflow-hidden min-h-screen flex items-center pt-24 perspective-[2000px]">
       {/* SaaS Mesh Gradient Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/20 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/20 rounded-full blur-[120px]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.05)_0%,transparent_70%)]" />
       </div>
 
@@ -299,12 +300,7 @@ const HeroCarousel = () => {
               <div className="lg:col-span-5 relative h-full flex items-center justify-center">
                 {/* Central AI Core Glowing Background */}
                 <motion.div
-                  animate={{
-                    rotate: 360,
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                  className="absolute w-[120%] aspect-square bg-gradient-to-tr from-indigo-500/10 via-purple-500/5 to-transparent animate-liquid blur-[100px]"
+                  className="absolute w-[120%] aspect-square bg-gradient-to-tr from-indigo-500/10 via-purple-500/5 to-transparent blur-[100px]"
                 />
 
                 <motion.div
@@ -373,13 +369,11 @@ const HeroCarousel = () => {
 
                 {/* Orbiting Fragments */}
                 <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
                   className="absolute inset-0 pointer-events-none"
                 >
                   <div className="absolute top-10 left-10 w-6 h-6 bg-white/10 border border-white/20 rotate-45 backdrop-blur-sm" />
                   <div className="absolute bottom-1/4 right-0 w-8 h-8 rounded-full border border-indigo-400/30 flex items-center justify-center backdrop-blur-sm">
-                    <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-pulse" />
+                    <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full" />
                   </div>
                 </motion.div>
               </div>

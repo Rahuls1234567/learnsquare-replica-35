@@ -62,8 +62,12 @@ function sanitizeHtmlInBrowser(html: string): string {
     return template.innerHTML;
 }
 
-/** Fallback if isomorphic-dompurify fails in some Node / hosting environments */
+/**
+ * Robust fallback sanitizer that doesn't rely on jsdom (which breaks Next.js SSR)
+ * Strips script tags and inline event handlers to prevent XSS.
+ */
 function sanitizeHtmlFallback(html: string): string {
+    if (!html) return "";
     return html
         .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
         .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
@@ -74,7 +78,7 @@ function sanitizeHtmlFallback(html: string): string {
 
 /**
  * Sanitize HTML to prevent XSS attacks before saving or rendering.
- * Allows common formatting tags and attributes used in content blocks.
+ * Uses a safe regex fallback to prevent JSDOM SSR crashes.
  */
 export function sanitizeHtml(html: string): string {
     if (!html) return "";

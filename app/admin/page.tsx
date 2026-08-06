@@ -113,6 +113,9 @@ export default function AdminPage() {
     const [selectedCard, setSelectedCard] = useState<ReportKey | null>(null);
     const [tableData, setTableData] = useState<Record<string, unknown>[]>([]);
     const { editMode, setEditMode } = useAdmin();
+    const [showTeamManager, setShowTeamManager] = useState(false);
+    const [showPartnershipsManager, setShowPartnershipsManager] = useState(false);
+    const [showNoticeManager, setShowNoticeManager] = useState(false);
     const [tableLoading, setTableLoading] = useState(false);
 
     useEffect(() => {
@@ -264,6 +267,9 @@ export default function AdminPage() {
                 </div>
             </header>
             <main className="p-6 lg:p-8">
+                {showTeamManager && <TeamCardsAdmin />}
+                {showPartnershipsManager && <ClientPartnershipsAdmin />}
+                {showNoticeManager && <NoticeBoardAdmin onClose={() => setShowNoticeManager(false)} />}
                 <div className="max-w-6xl mx-auto">
                     {/* Report Header */}
                     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-8">
@@ -387,6 +393,8 @@ export default function AdminPage() {
 
                 </div>
             </main>
+            {showTeamManager && <TeamCardsAdmin />}
+            {showPartnershipsManager && <ClientPartnershipsAdmin />}
         </div>
     );
 }

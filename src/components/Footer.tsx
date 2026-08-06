@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight, Apple, Play } from "lucide-react";
 import { EditableContent } from "./EditableContent";
 
@@ -101,14 +102,14 @@ const Footer = () => (
               </div>
             </a>
 
-            <EditableContent 
-                contentKey="footer_brand_desc"
-                description="Footer Brand Description"
-                defaultContent={
-                    <p className="text-slate-400 text-lg leading-relaxed font-medium max-w-sm">
-                        Revolutionizing the educational landscape through cutting-edge <span className="text-white font-bold">AI Technology</span> and industry-aligned programs.
-                    </p>
-                }
+            <EditableContent
+              contentKey="footer_brand_desc"
+              description="Footer Brand Description"
+              defaultContent={
+                <p className="text-slate-400 text-lg leading-relaxed font-medium max-w-sm">
+                  Revolutionizing the educational landscape through cutting-edge <span className="text-white font-bold">AI Technology</span> and industry-aligned programs.
+                </p>
+              }
             />
 
             {/* Premium App Badges */}
