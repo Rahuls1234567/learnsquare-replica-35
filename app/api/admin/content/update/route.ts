@@ -40,14 +40,23 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "content_key required" }, { status: 400 });
         }
 
-        const htmlContent = typeof html_content === "string" ? html_content : "";
-        const pageName = typeof page_name === "string" ? page_name : "";
-        const sanitized = sanitizeHtml(htmlContent);
+        if (html_content !== undefined && typeof html_content !== "string") {
+            return NextResponse.json({ error: "html_content must be a string" }, { status: 400 });
+        }
+
+        if (page_name !== undefined && typeof page_name !== "string") {
+            return NextResponse.json({ error: "page_name must be a string" }, { status: 400 });
+        }
+
+        const htmlContentStr: string = typeof html_content === "string" ? html_content : "";
+        const pageNameStr: string | undefined = typeof page_name === "string" ? page_name : undefined;
+
+        const sanitized = sanitizeHtml(htmlContentStr);
 
         const updated = await prisma.websiteContent.upsert({
             where: { contentKey: content_key },
-            create: { contentKey: content_key, pageName, htmlContent: sanitized },
-            update: { htmlContent: sanitized, ...(typeof page_name === "string" && { pageName }) },
+            create: { contentKey: content_key, pageName: pageNameStr ?? "", htmlContent: sanitized },
+            update: { htmlContent: sanitized, ...(pageNameStr !== undefined && { pageName: pageNameStr }) },
         });
 
         return NextResponse.json(updated);

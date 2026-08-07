@@ -147,6 +147,18 @@ model Review {
   createdAt DateTime @default(now())
 }
 
+model Notice {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  image     String?
+  isActive  Boolean  @default(true)
+  startDate DateTime
+  endDate   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 // Catalog of every file uploaded through the admin Image Manager. Files live
 // on disk under the top-level `media/` directory (outside `public/`, so
 // uploads never show up as changes in `public/`) and are served through

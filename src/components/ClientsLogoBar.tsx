@@ -217,4 +217,3 @@ const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
 };
 
 export default ClientsLogoBar;
-
