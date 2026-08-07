@@ -13,6 +13,7 @@ import {
 } from "@/src/components/ui/dialog";
 import { Button } from "@/src/components/ui/button";
 import { sanitizeHtml } from "@/lib/sanitize";
+import { fetchContent, invalidateContent } from "@/lib/contentCache";
 import { toast } from "sonner";
 
 interface EditableContentProps {
@@ -22,6 +23,12 @@ interface EditableContentProps {
     defaultContent: React.ReactNode;
     /** When the inline edit dialog opens or closes (e.g. pause hero carousel) */
     onEditOpenChange?: (open: boolean) => void;
+    /** Edit the content as plain text instead of raw HTML */
+    plainText?: boolean;
+    /** Notified with the latest saved content and loading state, so a parent can react (e.g. hide itself when empty) */
+    onContentChange?: (content: string, loading: boolean) => void;
+    /** Disable the inline pencil editor even for admins in edit mode (e.g. when editing happens elsewhere, like an admin dashboard) */
+    readOnly?: boolean;
 }
 
 export const EditableContent = ({
@@ -30,6 +37,9 @@ export const EditableContent = ({
     className,
     defaultContent,
     onEditOpenChange,
+    plainText = false,
+    onContentChange,
+    readOnly = false,
 }: EditableContentProps) => {
     const { isAdmin, editMode } = useAdmin();
     const [htmlContent, setHtmlContent] = useState<string | null>(null);
@@ -44,8 +54,10 @@ export const EditableContent = ({
         fetchContent(contentKey, (html) => {
             setHtmlContent(html || "");
             setTempHtml(html || "");
+            onContentChange?.(html || "", false);
             setLoading(false);
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [contentKey]);
 
     const handleSave = async () => {
@@ -65,6 +77,7 @@ export const EditableContent = ({
                 // Invalidate this key in the cache so next load gets fresh data
                 invalidateContent(contentKey);
                 setHtmlContent(tempHtml);
+                onContentChange?.(tempHtml, false);
                 setIsEditing(false);
                 onEditOpenChange?.(false);
                 toast.success("Content updated successfully!");
@@ -92,12 +105,16 @@ export const EditableContent = ({
     }
 
     const displayContent = htmlContent ? (
-        <div 
-            dangerouslySetInnerHTML={{ __html: sanitizeHtml(htmlContent) }} 
-        />
+        plainText ? (
+            <p className="whitespace-pre-wrap">{htmlContent}</p>
+        ) : (
+            <div
+                dangerouslySetInnerHTML={{ __html: sanitizeHtml(htmlContent) }}
+            />
+        )
     ) : defaultContent;
 
-    if (!isAdmin || !editMode) {
+    if (readOnly || !isAdmin || !editMode) {
         return <div className={className}>{displayContent}</div>;
     }
 
@@ -129,22 +146,28 @@ export const EditableContent = ({
                     
                     <div className="py-4 space-y-4">
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-slate-400">HTML Content</label>
+                            <label className="text-sm font-medium text-slate-400">
+                                {plainText ? "Content" : "HTML Content"}
+                            </label>
                             <textarea
                                 value={tempHtml}
                                 onChange={e => setTempHtml(e.target.value)}
-                                spellCheck={false}
-                                className="w-full min-h-[300px] max-h-[500px] rounded-xl border border-white/10 bg-black/40 p-5 font-mono text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/50 resize-y custom-scrollbar"
-                                style={{ fontFamily: '"Fira code", "Fira Mono", monospace' }}
+                                spellCheck={plainText}
+                                className={`w-full min-h-[300px] max-h-[500px] rounded-xl border border-white/10 bg-black/40 p-5 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/50 resize-y custom-scrollbar ${plainText ? "font-sans text-sm" : "font-mono"}`}
+                                style={plainText ? undefined : { fontFamily: '"Fira code", "Fira Mono", monospace' }}
                             />
                         </div>
-                        
+
                         <div className="p-4 rounded-xl bg-white/5 border border-white/10">
                             <label className="text-xs font-bold text-slate-500 uppercase tracking-widest block mb-2">Live Preview</label>
-                            <div 
-                                className="cms-content max-h-[200px] overflow-auto text-sm"
-                                dangerouslySetInnerHTML={{ __html: sanitizeHtml(tempHtml) }}
-                            />
+                            {plainText ? (
+                                <p className="max-h-[200px] overflow-auto text-sm whitespace-pre-wrap">{tempHtml}</p>
+                            ) : (
+                                <div
+                                    className="cms-content max-h-[200px] overflow-auto text-sm"
+                                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(tempHtml) }}
+                                />
+                            )}
                         </div>
                     </div>
 

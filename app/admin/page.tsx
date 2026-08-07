@@ -5,6 +5,16 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { LogOut, FileText, Users, Mail, BookOpen, GraduationCap, RefreshCw, X, User, Edit3, MessageSquare, ExternalLink } from "lucide-react";
 import { useAdmin } from "@/src/context/AdminContext";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
+} from "@/src/components/ui/dialog";
+import { Button } from "@/src/components/ui/button";
+import { Switch } from "@/src/components/ui/switch";
+import { toast } from "sonner";
 
 type ReportCounts = {
     contact: number;
@@ -113,10 +123,12 @@ export default function AdminPage() {
     const [selectedCard, setSelectedCard] = useState<ReportKey | null>(null);
     const [tableData, setTableData] = useState<Record<string, unknown>[]>([]);
     const { editMode, setEditMode } = useAdmin();
-    const [showTeamManager, setShowTeamManager] = useState(false);
-    const [showPartnershipsManager, setShowPartnershipsManager] = useState(false);
-    const [showNoticeManager, setShowNoticeManager] = useState(false);
     const [tableLoading, setTableLoading] = useState(false);
+    const [noticeBoardOpen, setNoticeBoardOpen] = useState(false);
+    const [noticeBoardText, setNoticeBoardText] = useState("");
+    const [noticeBoardEnabled, setNoticeBoardEnabled] = useState(false);
+    const [noticeBoardLoading, setNoticeBoardLoading] = useState(false);
+    const [noticeBoardSaving, setNoticeBoardSaving] = useState(false);
 
     useEffect(() => {
         setMounted(true);
@@ -193,6 +205,59 @@ export default function AdminPage() {
         router.push(path);
     };
 
+    const openNoticeBoard = async () => {
+        setNoticeBoardOpen(true);
+        setNoticeBoardLoading(true);
+        try {
+            const [contentRes, enabledRes] = await Promise.all([
+                fetch("/api/content/home_notice_board"),
+                fetch("/api/content/home_notice_board_enabled"),
+            ]);
+            if (contentRes.ok) {
+                const data = await contentRes.json();
+                setNoticeBoardText(data.htmlContent || "");
+            }
+            if (enabledRes.ok) {
+                const data = await enabledRes.json();
+                setNoticeBoardEnabled(data.htmlContent === "true");
+            }
+        } catch {
+            setNoticeBoardText("");
+            setNoticeBoardEnabled(false);
+        } finally {
+            setNoticeBoardLoading(false);
+        }
+    };
+
+    const saveNoticeBoard = async () => {
+        setNoticeBoardSaving(true);
+        try {
+            const postContent = (content_key: string, html_content: string) =>
+                fetch("/api/admin/content/update", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify({ content_key, html_content }),
+                });
+
+            const [contentRes, enabledRes] = await Promise.all([
+                postContent("home_notice_board", noticeBoardText),
+                postContent("home_notice_board_enabled", noticeBoardEnabled ? "true" : "false"),
+            ]);
+
+            if (contentRes.ok && enabledRes.ok) {
+                setNoticeBoardOpen(false);
+                toast.success("Notice board updated successfully!");
+            } else {
+                toast.error("Failed to update notice board.");
+            }
+        } catch {
+            toast.error("An error occurred while saving.");
+        } finally {
+            setNoticeBoardSaving(false);
+        }
+    };
+
     const logout = () => {
         document.cookie = "auth=; path=/; max-age=0";
         router.replace("/login");
@@ -243,7 +308,7 @@ export default function AdminPage() {
                         Client Partnerships
                     </Link>
                     <button
-                        onClick={() => openInEditMode("/")}
+                        onClick={openNoticeBoard}
                         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-50 text-amber-700 hover:bg-amber-100 text-sm font-bold transition-all border border-amber-100"
                     >
                         <MessageSquare className="w-4 h-4" />
@@ -267,9 +332,6 @@ export default function AdminPage() {
                 </div>
             </header>
             <main className="p-6 lg:p-8">
-                {showTeamManager && <TeamCardsAdmin />}
-                {showPartnershipsManager && <ClientPartnershipsAdmin />}
-                {showNoticeManager && <NoticeBoardAdmin onClose={() => setShowNoticeManager(false)} />}
                 <div className="max-w-6xl mx-auto">
                     {/* Report Header */}
                     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-8">
@@ -393,8 +455,59 @@ export default function AdminPage() {
 
                 </div>
             </main>
-            {showTeamManager && <TeamCardsAdmin />}
-            {showPartnershipsManager && <ClientPartnershipsAdmin />}
+
+            <Dialog open={noticeBoardOpen} onOpenChange={setNoticeBoardOpen}>
+                <DialogContent className="sm:max-w-[600px] bg-white text-slate-900">
+                    <DialogHeader>
+                        <DialogTitle className="text-xl font-bold flex items-center gap-2">
+                            <MessageSquare className="w-5 h-5 text-amber-600" />
+                            Home Notice Board
+                        </DialogTitle>
+                    </DialogHeader>
+
+                    <div className="py-4 space-y-4">
+                        <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+                            <div>
+                                <p className="text-sm font-semibold text-slate-800">Show on homepage</p>
+                                <p className="text-xs text-slate-500">Off by default. Turn on to display the notice board to visitors.</p>
+                            </div>
+                            <Switch
+                                checked={noticeBoardEnabled}
+                                onCheckedChange={setNoticeBoardEnabled}
+                                disabled={noticeBoardLoading}
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-slate-500">Content</label>
+                            <textarea
+                                value={noticeBoardText}
+                                onChange={(e) => setNoticeBoardText(e.target.value)}
+                                disabled={noticeBoardLoading}
+                                placeholder="Leave blank to hide the notice board on the homepage"
+                                className="w-full min-h-[140px] rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-amber-500/50 resize-y"
+                            />
+                        </div>
+                    </div>
+
+                    <DialogFooter className="gap-2">
+                        <Button
+                            variant="ghost"
+                            onClick={() => setNoticeBoardOpen(false)}
+                            className="text-slate-500 hover:text-slate-900 hover:bg-slate-100"
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            onClick={saveNoticeBoard}
+                            disabled={noticeBoardSaving || noticeBoardLoading}
+                            className="bg-amber-600 hover:bg-amber-700 text-white px-8"
+                        >
+                            {noticeBoardSaving ? "Saving..." : "Save Changes"}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }

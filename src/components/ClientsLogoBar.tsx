@@ -156,7 +156,7 @@ const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
                 : { duration: 35, ease: "linear", repeat: Infinity }
             }
           >
-            {[...logos, ...logos].map((logo, idx) => (
+            {[...clientLogos, ...clientLogos].map((logo, idx) => (
               <div
                 key={idx}
                 className="px-5 md:px-7 shrink-0 relative group"
