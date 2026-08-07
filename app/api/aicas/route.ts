@@ -4,9 +4,9 @@ import { prisma } from '@/lib/prisma';
 export async function POST(request: Request) {
     try {
         const data = await request.json();
-        const { firstName, lastName, whatsappNo, email, collegeName, city, message } = data;
+        const { firstName, lastName, whatsappNo, email, collegeName, designation, city, message } = data;
 
-        if (!firstName || !lastName || !whatsappNo || !email || !collegeName || !city || !message) {
+        if (!firstName || !lastName || !whatsappNo || !email || !collegeName || !designation || !city || !message) {
             return NextResponse.json(
                 { error: 'All fields are required' },
                 { status: 400 }
@@ -20,6 +20,7 @@ export async function POST(request: Request) {
                 whatsappNo: String(whatsappNo),
                 email,
                 collegeName,
+                designation,
                 city,
                 message,
             },

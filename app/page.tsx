@@ -10,6 +10,7 @@ import TestPrepProSection from "@/components/TestPrepProSection";
 import CollaborationsSection from "@/components/CollaborationsSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import NoticeBoard from "@/components/NoticeBoard";
 import AntigravityBackground from "@/components/AntigravityBackground";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { ChevronUp } from "lucide-react";
@@ -109,6 +110,7 @@ export default function Home() {
                 <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-purple-600/20 rounded-full blur-[150px]" />
             </div >
             <Navbar />
+            <NoticeBoard />
             <HeroCarousel />
             <ClientsLogoBar onLogoClick={handleCollabClick} />
             <ProductsSection />

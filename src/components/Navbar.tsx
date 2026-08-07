@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronRight, User, LayoutDashboard, LogOut, LogIn } from "lucide-react";
+import { Menu, X, ChevronRight, User, LayoutDashboard, LogOut, LogIn, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -15,6 +15,7 @@ const navLinks = [
   { label: "About Us", href: "/about" },
   { label: "Our Products", href: "#products", hasDropdown: true },
   { label: "Contact us", href: "/contact" },
+  { label: "ERP Enquiry", href: "/aicas#enquiry", highlight: true },
 ];
 
 const products = [
@@ -110,13 +111,27 @@ const Navbar = () => {
                   onMouseEnter={() => l.hasDropdown && setShowProducts(true)}
                   onMouseLeave={() => l.hasDropdown && setShowProducts(false)}
                 >
-                  <Link
-                    href={l.href}
-                    className={`flex items-center gap-1.5 px-3 py-2.5 text-[12.5px] font-bold uppercase tracking-[0.05em] rounded-xl transition-all ${isTransparent ? 'text-slate-200 hover:text-white hover:bg-white/10' : 'text-slate-700 hover:text-primary hover:bg-slate-50'}`}
-                  >
-                    {l.label}
-                    {l.hasDropdown && <ChevronRight className={`w-3.5 h-3.5 transition-transform ${isTransparent ? 'text-slate-300' : 'text-slate-400'} ${showProducts ? 'rotate-90' : ''}`} />}
-                  </Link>
+                  {l.highlight ? (
+                    <Link
+                      href={l.href}
+                      className="relative mx-1 flex items-center gap-1.5 px-4 py-2.5 text-[12px] font-black uppercase tracking-[0.05em] rounded-full text-white overflow-hidden group/erp shadow-[0_4px_18px_-4px_rgba(99,102,241,0.6)] hover:shadow-[0_6px_24px_-4px_rgba(99,102,241,0.8)] hover:-translate-y-0.5 transition-all duration-300"
+                    >
+                      <span
+                        className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500"
+                        style={{ backgroundSize: '200% 100%', animation: 'gradient-x 3s linear infinite' }}
+                      />
+                      <Sparkles className="relative z-10 w-3.5 h-3.5" />
+                      <span className="relative z-10">{l.label}</span>
+                    </Link>
+                  ) : (
+                    <Link
+                      href={l.href}
+                      className={`flex items-center gap-1.5 px-3 py-2.5 text-[12.5px] font-bold uppercase tracking-[0.05em] rounded-xl transition-all ${isTransparent ? 'text-slate-200 hover:text-white hover:bg-white/10' : 'text-slate-700 hover:text-primary hover:bg-slate-50'}`}
+                    >
+                      {l.label}
+                      {l.hasDropdown && <ChevronRight className={`w-3.5 h-3.5 transition-transform ${isTransparent ? 'text-slate-300' : 'text-slate-400'} ${showProducts ? 'rotate-90' : ''}`} />}
+                    </Link>
+                  )}
 
                   {/* Dropdown */}
                   {l.hasDropdown && (
@@ -313,6 +328,19 @@ const Navbar = () => {
                           )}
                         </AnimatePresence>
                       </div>
+                    ) : l.highlight ? (
+                      <Link
+                        href={l.href}
+                        className="relative flex items-center justify-center gap-2 p-3.5 my-1 text-base font-black uppercase tracking-wide text-white rounded-xl overflow-hidden shadow-[0_4px_18px_-4px_rgba(99,102,241,0.6)]"
+                        onClick={() => setOpen(false)}
+                      >
+                        <span
+                          className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500"
+                          style={{ backgroundSize: '200% 100%', animation: 'gradient-x 3s linear infinite' }}
+                        />
+                        <Sparkles className="relative z-10 w-4 h-4" />
+                        <span className="relative z-10">{l.label}</span>
+                      </Link>
                     ) : (
                       <Link
                         href={l.href}

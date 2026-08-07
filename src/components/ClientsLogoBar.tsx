@@ -3,55 +3,80 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { EditableContent } from "./EditableContent";
-
-const defaultLogos = [
-  { src: "/images/logo-1.png", name: "Modern Educational Society" },
-  { src: "/images/logo-2.png", name: "Shree Ramachandra College of Engineering" },
-  { src: "/images/logo-3.png", name: "SHADAN" },
-  { src: "/images/logo-4.png", name: "GPREC" },
-  { src: "/images/logo-5.png", name: "SVIT" },
-  { src: "/images/logo-6.png", name: "City Chalapathi" },
-  { src: "/images/logo-7.png", name: "Malla Reddy University" },
-  { src: "/images/logo-8.png", name: "Institution 8" },
-  { src: "/images/logo-9.png", name: "Institution 9" },
-  { src: "/images/logo-10.png", name: "Institution 10" },
-];
+import { PartnerLogosEditor } from "./PartnerLogosEditor";
+import { useAdmin } from "@/src/context/AdminContext";
+import { DEFAULT_PARTNERS, type Partner } from "@/lib/partners";
+import { Images, Save } from "lucide-react";
+import { toast } from "sonner";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/src/components/ui/dialog";
+import { Button } from "@/src/components/ui/button";
 
 interface ClientsLogoBarProps {
   onLogoClick?: (institution: string) => void;
 }
 
 const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
-  const [logos, setLogos] = useState(defaultLogos);
+  const { isAdmin, editMode } = useAdmin();
+  const [clientLogos, setClientLogos] = useState<Partner[]>(DEFAULT_PARTNERS);
+  const [isEditing, setIsEditing] = useState(false);
+  const [draft, setDraft] = useState<Partner[]>([]);
+  const [saving, setSaving] = useState(false);
 
-  // Fetch dynamic partnerships from DB
   useEffect(() => {
-    const fetchLogos = async () => {
-      try {
-        const res = await fetch("/api/content/client_partnerships_json");
-        if (res.ok) {
-          const data = await res.json();
-          if (data.htmlContent) {
-            const list = JSON.parse(data.htmlContent);
-            if (Array.isArray(list) && list.length > 0) {
-              // Map DB entries (image/title) to logo format (src/name)
-              const dbLogos = list.map((item: any) => ({
-                src: item.image,
-                name: item.title,
-              }));
-              setLogos(dbLogos);
-            }
-          }
-        }
-      } catch (e) {
-        console.warn("Failed to fetch client partnerships:", e);
-      }
+    let cancelled = false;
+    fetch("/api/partners")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!cancelled && Array.isArray(data)) setClientLogos(data);
+      })
+      .catch(() => {
+        /* keep the seed list on failure */
+      });
+    return () => {
+      cancelled = true;
     };
-    fetchLogos();
   }, []);
 
+  const openEditor = () => {
+    setDraft(clientLogos.map((p) => ({ ...p })));
+    setIsEditing(true);
+  };
+
+  const saveDraft = async () => {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/admin/partners", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ partners: draft }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setClientLogos(data.partners ?? draft);
+        setIsEditing(false);
+        toast.success("Client Partnerships updated!");
+      } else {
+        const err = await res.json().catch(() => ({}));
+        toast.error(err.error || "Failed to save partners.");
+      }
+    } catch {
+      toast.error("An error occurred while saving.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const canEdit = isAdmin && editMode;
+
   return (
-    <section className="py-24 relative overflow-hidden bg-white">
+    <section id="client-partnerships" className="py-24 relative overflow-hidden bg-white">
 
       {/* Colorful Ambient Grid & Glows for Maximum Pop */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f472b610_1px,transparent_1px),linear-gradient(to_bottom,#818cf810_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
@@ -89,6 +114,17 @@ const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
                 </motion.h2>
             }
           />
+
+          {canEdit && (
+            <button
+              type="button"
+              onClick={openEditor}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold shadow-lg shadow-indigo-500/30 transition-all hover:scale-105 active:scale-95"
+            >
+              <Images className="w-4 h-4" />
+              Manage Logos ({clientLogos.length})
+            </button>
+          )}
         </div>
       </div>
 
@@ -113,12 +149,12 @@ const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
         <div className="relative z-10 flex overflow-visible w-full items-center py-12">
           <motion.div
             className="flex w-max shrink-0 items-center"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              duration: 35,
-              ease: "linear",
-              repeat: Infinity,
-            }}
+            animate={isEditing ? { x: "0%" } : { x: ["0%", "-50%"] }}
+            transition={
+              isEditing
+                ? { duration: 0 }
+                : { duration: 35, ease: "linear", repeat: Infinity }
+            }
           >
             {[...logos, ...logos].map((logo, idx) => (
               <div
@@ -141,6 +177,41 @@ const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
           </motion.div>
         </div>
       </div>
+
+      {canEdit && (
+        <Dialog open={isEditing} onOpenChange={setIsEditing}>
+          <DialogContent className="sm:max-w-[820px] bg-[#171523] border-white/10 text-white">
+            <DialogHeader>
+              <DialogTitle className="text-xl font-bold flex items-center gap-2">
+                <Images className="w-5 h-5 text-indigo-400" />
+                Edit Client Partnerships
+              </DialogTitle>
+            </DialogHeader>
+
+            <div className="py-2 max-h-[60vh] overflow-auto custom-scrollbar pr-1">
+              <PartnerLogosEditor partners={draft} onChange={setDraft} theme="dark" />
+            </div>
+
+            <DialogFooter className="gap-2">
+              <Button
+                variant="ghost"
+                onClick={() => setIsEditing(false)}
+                className="text-slate-400 hover:text-white hover:bg-white/5"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={saveDraft}
+                disabled={saving}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-8"
+              >
+                <Save className="w-4 h-4 mr-2" />
+                {saving ? "Saving..." : "Save Changes"}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
     </section>
   );
 };

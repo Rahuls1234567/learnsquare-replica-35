@@ -255,7 +255,7 @@ export default function AdminImagesPage() {
                 {/* Page Title */}
                 <div className="mb-8">
                     <h1 className="text-3xl font-black text-slate-800 tracking-tight">Image Manager</h1>
-                    <p className="text-slate-500 mt-1">Upload, browse, and manage all website images. Uploaded images are stored in <code className="bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600 text-xs font-mono">/public/uploads/</code></p>
+                    <p className="text-slate-500 mt-1">Upload, browse, and manage all website images. Uploads are stored outside <code className="bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600 text-xs font-mono">/public</code> and tracked in the media library.</p>
                 </div>
 
                 {/* Upload Zone */}
@@ -302,7 +302,7 @@ export default function AdminImagesPage() {
                                 {dragOver ? "Drop images here!" : "Click or drag & drop images"}
                             </p>
                             <p className="text-slate-400 text-sm">Supports JPG, PNG, GIF, WebP, SVG, AVIF • Max 10MB per file • Up to 10 files at once</p>
-                            <p className="mt-3 text-xs text-slate-400 font-semibold uppercase tracking-wider">Images will be saved to <span className="text-indigo-500">/public/uploads/</span></p>
+                            <p className="mt-3 text-xs text-slate-400 font-semibold uppercase tracking-wider">Images are stored in the media library, not <span className="text-indigo-500">/public</span></p>
                         </>
                     )}
                 </div>
@@ -438,7 +438,7 @@ export default function AdminImagesPage() {
                                             <><Copy className="w-3 h-3" /> Copy URL</>
                                         )}
                                     </button>
-                                    {img.url.startsWith("/uploads/") && (
+                                    {img.url.startsWith("/api/media/") && (
                                         <button
                                             onClick={() => setDeleteConfirm(img.url)}
                                             className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-red-600/90 text-white text-[10px] font-bold hover:bg-red-600 transition-colors w-full"
@@ -458,7 +458,7 @@ export default function AdminImagesPage() {
                                 </div>
 
                                 {/* Locked badge for non-upload images */}
-                                {!img.url.startsWith("/uploads/") && (
+                                {!img.url.startsWith("/api/media/") && (
                                     <div className="absolute top-2 left-2 bg-slate-800/80 text-white text-[8px] font-black px-1.5 py-0.5 rounded-md uppercase tracking-wide backdrop-blur-sm">
                                         Site Image
                                     </div>
@@ -538,7 +538,7 @@ export default function AdminImagesPage() {
                                     <ExternalLink className="w-3.5 h-3.5" />
                                     Open
                                 </a>
-                                {previewImage.url.startsWith("/uploads/") && (
+                                {previewImage.url.startsWith("/api/media/") && (
                                     <button
                                         onClick={() => { setDeleteConfirm(previewImage.url); setPreviewImage(null); }}
                                         className="flex items-center gap-2 px-3 py-2 rounded-xl bg-red-50 text-red-600 text-xs font-bold hover:bg-red-100 transition-colors"

@@ -14,15 +14,9 @@ const ROUTES_TO_PREFETCH = [
     "/register",
 ];
 
+// Only routes that accept GET belong here — POST-only routes always 405 on
+// warmup and just spam the console without adding any real compile benefit.
 const API_ROUTES_TO_WARM = [
-    "/api/contact",
-    "/api/syntaxwork",
-    "/api/aicas",
-    "/api/enrol",
-    "/api/training-request",
-    "/api/test-prep-pro",
-    "/api/login",
-    "/api/register",
     "/api/admin/reports",
 ];
 

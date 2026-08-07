@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeFile, readdir, stat, unlink } from "fs/promises";
 import { join } from "path";
 import { existsSync, mkdirSync } from "fs";
+import { prisma } from "@/lib/prisma";
+import { MEDIA_DIR, ALLOWED_IMAGE_EXTS, mimeForExt } from "@/lib/media";
 
 function getAdminFromRequest(request: Request): { email: string; isAdmin: boolean } | null {
     const cookie = request.headers.get("cookie") || "";
@@ -16,15 +18,13 @@ function getAdminFromRequest(request: Request): { email: string; isAdmin: boolea
     }
 }
 
-const UPLOAD_DIR = join(process.cwd(), "public", "uploads");
-
-function ensureUploadDir() {
-    if (!existsSync(UPLOAD_DIR)) {
-        mkdirSync(UPLOAD_DIR, { recursive: true });
+function ensureMediaDir() {
+    if (!existsSync(MEDIA_DIR)) {
+        mkdirSync(MEDIA_DIR, { recursive: true });
     }
 }
 
-// GET - List all images
+// GET - List all images (uploaded media from the DB + built-in /public/images assets)
 export async function GET(request: NextRequest) {
     const auth = getAdminFromRequest(request);
     if (!auth) {
@@ -32,18 +32,24 @@ export async function GET(request: NextRequest) {
     }
 
     try {
-        ensureUploadDir();
+        const media = await prisma.media.findMany({ orderBy: { uploadedAt: "desc" } });
+        const allImages: { name: string; url: string; path: string; size: number; folder: string }[] =
+            media.map((m) => ({
+                name: m.filename,
+                url: m.url,
+                path: m.path,
+                size: m.size,
+                folder: m.folder || "uploads",
+            }));
 
-        // Scan both /public/uploads and /public/images for all image files
-        const allImages: { name: string; url: string; path: string; size: number; folder: string }[] = [];
-
+        // Built-in site images (bundled assets, not user uploads) stay read-only.
         const scanDir = async (dir: string, urlPrefix: string, folderLabel: string) => {
             try {
                 const files = await readdir(dir, { withFileTypes: true });
                 for (const file of files) {
                     if (file.isFile()) {
                         const ext = file.name.split(".").pop()?.toLowerCase();
-                        if (["jpg", "jpeg", "png", "gif", "webp", "svg", "avif"].includes(ext || "")) {
+                        if (ALLOWED_IMAGE_EXTS.includes(ext || "")) {
                             const filePath = join(dir, file.name);
                             const fileStat = await stat(filePath);
                             allImages.push({
@@ -63,7 +69,6 @@ export async function GET(request: NextRequest) {
             }
         };
 
-        await scanDir(UPLOAD_DIR, "/uploads", "uploads");
         await scanDir(join(process.cwd(), "public", "images"), "/images", "images");
 
         return NextResponse.json(allImages);
@@ -81,7 +86,7 @@ export async function POST(request: NextRequest) {
     }
 
     try {
-        ensureUploadDir();
+        ensureMediaDir();
 
         const formData = await request.formData();
         const file = formData.get("file") as File | null;
@@ -92,7 +97,7 @@ export async function POST(request: NextRequest) {
         }
 
         const ext = file.name.split(".").pop()?.toLowerCase();
-        if (!["jpg", "jpeg", "png", "gif", "webp", "svg", "avif"].includes(ext || "")) {
+        if (!ALLOWED_IMAGE_EXTS.includes(ext || "")) {
             return NextResponse.json({ error: "Invalid file type. Only images allowed." }, { status: 400 });
         }
 
@@ -101,9 +106,8 @@ export async function POST(request: NextRequest) {
         const timestamp = Date.now();
         const fileName = `${timestamp}_${safeName}`;
 
-        const targetDir = subfolder
-            ? join(UPLOAD_DIR, subfolder.replace(/[^a-zA-Z0-9_-]/g, ""))
-            : UPLOAD_DIR;
+        const cleanSubfolder = subfolder.replace(/[^a-zA-Z0-9_-]/g, "");
+        const targetDir = cleanSubfolder ? join(MEDIA_DIR, cleanSubfolder) : MEDIA_DIR;
 
         if (!existsSync(targetDir)) {
             mkdirSync(targetDir, { recursive: true });
@@ -113,11 +117,23 @@ export async function POST(request: NextRequest) {
         const bytes = await file.arrayBuffer();
         await writeFile(filePath, Buffer.from(bytes));
 
-        const relPath = subfolder ? `/uploads/${subfolder}/${fileName}` : `/uploads/${fileName}`;
+        const relPath = cleanSubfolder ? `${cleanSubfolder}/${fileName}` : fileName;
+        const url = `/api/media/${relPath}`;
+
+        await prisma.media.create({
+            data: {
+                filename: fileName,
+                folder: cleanSubfolder || "uploads",
+                path: relPath,
+                url,
+                mimeType: file.type || mimeForExt(ext || ""),
+                size: file.size,
+            },
+        });
 
         return NextResponse.json({
             success: true,
-            url: relPath,
+            url,
             name: fileName,
             size: file.size,
         });
@@ -140,24 +156,28 @@ export async function DELETE(request: NextRequest) {
             return NextResponse.json({ error: "No URL provided" }, { status: 400 });
         }
 
-        // Only allow deleting from /uploads folder for safety
-        if (!url.startsWith("/uploads/")) {
-            return NextResponse.json({ error: "Can only delete images from the uploads folder" }, { status: 403 });
+        // Only allow deleting uploaded media (tracked in the DB), never built-in site images.
+        if (!url.startsWith("/api/media/")) {
+            return NextResponse.json({ error: "Can only delete uploaded media" }, { status: 403 });
         }
 
-        const relativePath = url.replace("/uploads/", "");
-        const filePath = join(UPLOAD_DIR, relativePath);
-
-        // Ensure the path is within UPLOAD_DIR (security check)
-        if (!filePath.startsWith(UPLOAD_DIR)) {
-            return NextResponse.json({ error: "Invalid path" }, { status: 403 });
-        }
-
-        if (!existsSync(filePath)) {
+        const media = await prisma.media.findFirst({ where: { url } });
+        if (!media) {
             return NextResponse.json({ error: "File not found" }, { status: 404 });
         }
 
-        await unlink(filePath);
+        const filePath = join(MEDIA_DIR, media.path);
+
+        // Security check: resolved path must stay within MEDIA_DIR.
+        if (!filePath.startsWith(MEDIA_DIR)) {
+            return NextResponse.json({ error: "Invalid path" }, { status: 403 });
+        }
+
+        if (existsSync(filePath)) {
+            await unlink(filePath);
+        }
+
+        await prisma.media.delete({ where: { id: media.id } });
 
         return NextResponse.json({ success: true });
     } catch (error) {

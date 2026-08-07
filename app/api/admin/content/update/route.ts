@@ -40,12 +40,14 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "content_key required" }, { status: 400 });
         }
 
-        const sanitized = sanitizeHtml(html_content ?? "");
+        const htmlContent = typeof html_content === "string" ? html_content : "";
+        const pageName = typeof page_name === "string" ? page_name : "";
+        const sanitized = sanitizeHtml(htmlContent);
 
         const updated = await prisma.websiteContent.upsert({
             where: { contentKey: content_key },
-            create: { contentKey: content_key, pageName: page_name ?? "", htmlContent: sanitized },
-            update: { htmlContent: sanitized, ...(page_name !== undefined && { pageName: page_name }) },
+            create: { contentKey: content_key, pageName, htmlContent: sanitized },
+            update: { htmlContent: sanitized, ...(typeof page_name === "string" && { pageName }) },
         });
 
         return NextResponse.json(updated);

@@ -3,11 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { LogOut, FileText, Users, Mail, BookOpen, GraduationCap, RefreshCw, X, User, Edit3, MessageSquare, ImageIcon, ExternalLink, FileCode } from "lucide-react";
-import TeamCardsSection from "@/src/components/TeamCardsSection";
-import TeamCardsAdmin from "@/src/components/TeamCardsAdmin"; // Trigger recompile
-import ClientPartnershipsAdmin from "@/src/components/ClientPartnershipsAdmin";
-import NoticeBoardAdmin from "@/src/components/NoticeBoardAdmin";
+import { LogOut, FileText, Users, Mail, BookOpen, GraduationCap, RefreshCw, X, User, Edit3, MessageSquare, ExternalLink } from "lucide-react";
 import { useAdmin } from "@/src/context/AdminContext";
 
 type ReportCounts = {
@@ -56,7 +52,8 @@ const TABLE_COLUMNS: Record<ReportKey, { key: string; label: string }[]> = {
         { key: "lastName", label: "Last Name" },
         { key: "email", label: "Email" },
         { key: "whatsappNo", label: "Phone" },
-        { key: "collegeName", label: "College" },
+        { key: "collegeName", label: "Institution" },
+        { key: "designation", label: "Designation" },
         { key: "city", label: "City" },
         { key: "message", label: "Message" },
         { key: "createdAt", label: "Date" },
@@ -191,6 +188,11 @@ export default function AdminPage() {
         setTableData([]);
     };
 
+    const openInEditMode = (path: string) => {
+        setEditMode(true);
+        router.push(path);
+    };
+
     const logout = () => {
         document.cookie = "auth=; path=/; max-age=0";
         router.replace("/login");
@@ -218,40 +220,36 @@ export default function AdminPage() {
                     <div className="hidden sm:block h-6 w-px bg-slate-200" />
                     <span className="font-bold text-slate-800">Enquiry Reports</span>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center justify-end gap-2 lg:gap-3">
                     <button
-                        onClick={() => {
-                            setEditMode(true);
-                            router.push("/");
-                        }}
+                        onClick={() => openInEditMode("/")}
                         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-sm font-bold transition-all border border-indigo-100"
                     >
                         <Edit3 className="w-4 h-4" />
                         Manage Content
                     </button>
-                    <button
-                        onClick={() => setShowTeamManager(prev => !prev)}
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-sm font-bold transition-all border border-indigo-100"
+                    <Link
+                        href="/admin/about-teams"
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 text-sm font-bold transition-all border border-blue-100"
                     >
                         <Users className="w-4 h-4" />
                         Add About Teams
-                    </button>
-                    <button
-                        onClick={() => setShowPartnershipsManager(prev => !prev)}
+                    </Link>
+                    <Link
+                        href="/admin/client-partnerships"
                         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-sm font-bold transition-all border border-emerald-100"
                     >
                         <ExternalLink className="w-4 h-4" />
                         Client Partnerships
-                    </button>
+                    </Link>
                     <button
-                        onClick={() => setShowNoticeManager(prev => !prev)}
+                        onClick={() => openInEditMode("/")}
                         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-50 text-amber-700 hover:bg-amber-100 text-sm font-bold transition-all border border-amber-100"
                     >
                         <MessageSquare className="w-4 h-4" />
                         Notice Board
                     </button>
-                    <div className="hidden sm:block h-6 w-px bg-slate-200 mx-2" />
-
+                    <div className="hidden sm:block h-6 w-px bg-slate-200 mx-1" />
                     <Link
                         href="/profile"
                         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium transition-colors"

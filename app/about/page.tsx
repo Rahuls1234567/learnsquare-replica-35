@@ -1,43 +1,80 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "@/src/components/Navbar";
 import Footer from "@/src/components/Footer";
 import WhatsAppButton from "@/src/components/WhatsAppButton";
 import AntigravityBackground from "@/src/components/AntigravityBackground";
 import { motion } from "framer-motion";
-import { Sparkles, Monitor, BadgeCheck, Linkedin, X } from "lucide-react";
+import { Sparkles, Monitor, BadgeCheck, Linkedin, X, Users, Save } from "lucide-react";
 import { EditableContent } from "@/src/components/EditableContent";
-import { EditableImage } from "@/src/components/EditableImage";
-import TeamCardsSection from "@/src/components/TeamCardsSection";
+import { TeamCardsEditor } from "@/src/components/TeamCardsEditor";
+import TeamGridSection from "@/src/components/TeamGridSection";
+import { useAdmin } from "@/src/context/AdminContext";
+import { DEFAULT_TEAM, type TeamMember } from "@/lib/team";
+import { toast } from "sonner";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
+} from "@/src/components/ui/dialog";
+import { Button } from "@/src/components/ui/button";
 
 const About = () => {
-    const team = [
-        {
-            name: "Sandeep Bandari",
-            role: "Founder & CEO",
-            education: "EPBM - IIM K, M.TECH - JNTUH, B.TECH - JNTUH",
-            contact: "988 555 2350 | sandeep@learnsquare.co",
-            bio: "With over 18 years in the Ed-Tech industry, he is a passionate leader known for creating innovative learning solutions and building strategic partnerships with universities, government bodies, and channel partners nationwide. He has successfully launched and managed multiple Ed-Tech Products, LMS and CMS platforms, and led top educators across domains. A mentor to thousands of students through GATE, ESE, and competitive exam sessions, his expertise spans market research, product planning, implementation, budgeting, resource management, and team performance.",
-            image: "/images/homeimage/sandeep bandari.jpg",
-        },
-        {
-            name: "Alekya Avula",
-            role: "Co-Founder & Director",
-            education: "IPBA - IIM INDORE, M.TECH - JNTUH, B.TECH - JNTUH",
-            contact: "",
-            bio: "She is passionate about driving impactful product development through innovation and collaboration. With a strong foundation in business analytics and operational excellence, she leverages data-driven insights to optimize performance and achieve strategic goals. Known for leading cross-functional teams, she consistently delivers innovative solutions that exceed expectations.",
-            image: "/alekya mam.jpeg",
-        },
-        {
-            name: "Gopinath Puralachetty",
-            role: "Chief Marketing Officer",
-            education: "IRPM - Andhra University, M.Sc IT - Manipal University",
-            contact: "77 9493 1347 | gopinath.p@learnsquare.co",
-            bio: "He is a seasoned business leader with over 20 years of experience in education, business operations, and strategic planning. Holding a Master of Science in IT from Manipal University and a Degree in Industrial Relations from Andhra University, he has led key roles at T.I.M.E., CONDUIRA, FIITJEE, and APTECH. Known for his visionary leadership, strategic partnerships, and strong business acumen, he has consistently driven growth and delivered exceptional results across diverse markets.",
-            image: "/sir.jpeg",
+    const { isAdmin, editMode } = useAdmin();
+    const [team, setTeam] = useState<TeamMember[]>(DEFAULT_TEAM);
+    const [isEditing, setIsEditing] = useState(false);
+    const [draft, setDraft] = useState<TeamMember[]>([]);
+    const [saving, setSaving] = useState(false);
+
+    useEffect(() => {
+        let cancelled = false;
+        fetch("/api/team")
+            .then((res) => (res.ok ? res.json() : null))
+            .then((data) => {
+                if (!cancelled && Array.isArray(data)) setTeam(data);
+            })
+            .catch(() => {
+                /* keep the seed team on failure */
+            });
+        return () => {
+            cancelled = true;
+        };
+    }, []);
+
+    const openEditor = () => {
+        setDraft(team.map((m) => ({ ...m })));
+        setIsEditing(true);
+    };
+
+    const saveDraft = async () => {
+        setSaving(true);
+        try {
+            const res = await fetch("/api/admin/team", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ team: draft }),
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setTeam(data.team ?? draft);
+                setIsEditing(false);
+                toast.success("Team updated!");
+            } else {
+                const err = await res.json().catch(() => ({}));
+                toast.error(err.error || "Failed to save team.");
+            }
+        } catch {
+            toast.error("An error occurred while saving.");
+        } finally {
+            setSaving(false);
         }
-    ];
+    };
+
+    const canEdit = isAdmin && editMode;
 
     return (
         <motion.div
@@ -123,9 +160,22 @@ const About = () => {
                 </div>
 
                 {/* Team Leadership Profiles */}
-                <div className="mt-20 relative px-4 md:px-6 container mx-auto flex flex-col gap-24">
-                    {team.map((t, idx) => (
-                        <div key={idx} className="relative z-10 group mt-12">
+                {canEdit && (
+                    <div className="mt-16 flex justify-center">
+                        <button
+                            type="button"
+                            onClick={openEditor}
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold shadow-lg shadow-indigo-500/30 transition-all hover:scale-105 active:scale-95"
+                        >
+                            <Users className="w-4 h-4" />
+                            Manage Team Cards ({team.length})
+                        </button>
+                    </div>
+                )}
+
+                <div id="team" className="mt-20 relative px-4 md:px-6 container mx-auto flex flex-col gap-24">
+                    {team.map((t) => (
+                        <div key={t.id} className="relative z-10 group mt-12">
                             {/* Decorative Background for Section */}
                             <div className="absolute top-0 right-0 w-[80%] md:w-[60%] lg:w-[45%] h-full bg-[#333d4d]/5 rounded-3xl -z-10 group-hover:bg-[#333d4d]/10 transition-colors duration-500" />
                             
@@ -140,43 +190,31 @@ const About = () => {
                                     {/* Accent Line */}
                                     <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-primary to-accent" />
                                     
-                                    <EditableContent 
-                                        contentKey={`about_team_${idx}_header`}
-                                        description={`Team Member ${idx + 1} Header`}
-                                        defaultContent={
-                                            <>
-                                                <h2 className="text-3xl md:text-5xl font-black text-[#1e293b] leading-tight mb-2">
-                                                    {t.name}
-                                                </h2>
-                                                <h3 className="text-xl md:text-2xl font-bold text-primary mb-5 tracking-tight">
-                                                    {t.role}
-                                                </h3>
-                                            </>
-                                        }
-                                    />
-                                    
-                                    <EditableContent 
-                                        contentKey={`about_team_${idx}_meta`}
-                                        description={`Team Member ${idx + 1} Meta Info`}
-                                        defaultContent={
-                                            <div className="flex flex-wrap gap-2 mb-6">
-                                                <span className="bg-[#f1f5f9] text-[#475569] font-bold text-[11px] md:text-xs px-3 py-1.5 rounded-full border border-slate-200 uppercase tracking-wider">
-                                                    {t.education}
-                                                </span>
-                                                {t.contact && (
-                                                    <span className="bg-primary/5 text-primary font-bold text-[11px] md:text-xs px-3 py-1.5 rounded-full border border-primary/10 tracking-widest">
-                                                        {t.contact}
-                                                    </span>
-                                                )}
-                                            </div>
-                                        }
-                                    />
-                                    
-                                    <EditableContent 
-                                        contentKey={`about_team_${idx}_bio`}
-                                        description={`Team Member ${idx + 1} Bio`}
-                                        defaultContent={<p className="text-[#475569] text-[15px] md:text-[16px] leading-[1.8] font-medium text-justify">{t.bio}</p>}
-                                    />
+                                    {/* Team card fields are structured data — edit them via
+                                        "Manage Team Cards" (Live Edit) or /admin/about-teams. */}
+                                    <h2 className="text-3xl md:text-5xl font-black text-[#1e293b] leading-tight mb-2">
+                                        {t.name}
+                                    </h2>
+                                    <h3 className="text-xl md:text-2xl font-bold text-primary mb-5 tracking-tight">
+                                        {t.role}
+                                    </h3>
+
+                                    <div className="flex flex-wrap gap-2 mb-6">
+                                        {t.education && (
+                                            <span className="bg-[#f1f5f9] text-[#475569] font-bold text-[11px] md:text-xs px-3 py-1.5 rounded-full border border-slate-200 uppercase tracking-wider">
+                                                {t.education}
+                                            </span>
+                                        )}
+                                        {t.contact && (
+                                            <span className="bg-primary/5 text-primary font-bold text-[11px] md:text-xs px-3 py-1.5 rounded-full border border-primary/10 tracking-widest">
+                                                {t.contact}
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    <p className="text-[#475569] text-[15px] md:text-[16px] leading-[1.8] font-medium text-justify">
+                                        {t.bio}
+                                    </p>
                                 </motion.div>
 
                                 {/* Image Side (Right Side) */}
@@ -188,13 +226,18 @@ const About = () => {
                                 >
                                     <div className="bg-white p-3 md:p-6 rounded-[2rem] md:rounded-[3rem] shadow-2xl relative overflow-hidden group-hover:-translate-y-2 transition-transform duration-500 border-4 border-white">
                                         <div className="w-full aspect-square md:aspect-[4/5] relative rounded-2xl md:rounded-[2rem] overflow-hidden">
-                                            <EditableImage
-                                                contentKey={`about_team_${idx}_photo`}
-                                                defaultImage={t.image}
-                                                alt={t.name}
-                                                className="w-full h-full object-cover object-[center_top] filter contrast-125 transition-transform duration-700 group-hover:scale-105"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-[#1e293b]/50 via-transparent to-transparent pointer-events-none pointer-events-none" />
+                                            {t.image ? (
+                                                <img
+                                                    src={t.image}
+                                                    alt={t.name}
+                                                    className="w-full h-full object-cover object-[center_top] filter contrast-125 transition-transform duration-700 group-hover:scale-105"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-full bg-slate-100 flex items-center justify-center">
+                                                    <Users className="w-12 h-12 text-slate-300" />
+                                                </div>
+                                            )}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#1e293b]/50 via-transparent to-transparent pointer-events-none" />
                                         </div>
                                     </div>
                                 </motion.div>
@@ -203,9 +246,44 @@ const About = () => {
                     ))}
                 </div>
 
-                {/* Dynamic Team Cards added by Admin */}
-                <TeamCardsSection />
+                {/* "Our Team" compact card grid — separate list from the profiles above */}
+                <TeamGridSection />
             </main>
+
+            {canEdit && (
+                <Dialog open={isEditing} onOpenChange={setIsEditing}>
+                    <DialogContent className="sm:max-w-[880px] bg-[#171523] border-white/10 text-white">
+                        <DialogHeader>
+                            <DialogTitle className="text-xl font-bold flex items-center gap-2">
+                                <Users className="w-5 h-5 text-indigo-400" />
+                                Manage Team Cards
+                            </DialogTitle>
+                        </DialogHeader>
+
+                        <div className="py-2 max-h-[62vh] overflow-auto custom-scrollbar pr-1">
+                            <TeamCardsEditor team={draft} onChange={setDraft} theme="dark" />
+                        </div>
+
+                        <DialogFooter className="gap-2">
+                            <Button
+                                variant="ghost"
+                                onClick={() => setIsEditing(false)}
+                                className="text-slate-400 hover:text-white hover:bg-white/5"
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                onClick={saveDraft}
+                                disabled={saving}
+                                className="bg-indigo-600 hover:bg-indigo-700 text-white px-8"
+                            >
+                                <Save className="w-4 h-4 mr-2" />
+                                {saving ? "Saving..." : "Save Changes"}
+                            </Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
+            )}
 
             <Footer />
             <WhatsAppButton />
