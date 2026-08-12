@@ -6,11 +6,18 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+*_debug.txt
+*_error.txt
+*_error_cmd.txt
 
 node_modules
 dist
 dist-ssr
 *.local
+coverage
+.nyc_output
+.cache
+.turbo
 
 # Next.js
 .next
@@ -27,6 +34,7 @@ out
 .env.development.local
 .env.test.local
 .env.production.local
+.env.*.local
 
 # Editor directories and files
 .vscode/*
@@ -38,3 +46,8 @@ out
 *.njsproj
 *.sln
 *.sw?
+
+# Local tooling/runtime state
+.pm2/
+.vercel/
+.netlify/
