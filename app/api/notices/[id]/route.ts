@@ -2,6 +2,19 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
+function getAdminFromRequest(request: Request): { email: string; isAdmin: boolean } | null {
+  const cookie = request.headers.get('cookie') || '';
+  const match = cookie.match(/auth=([^;]+)/);
+  if (!match) return null;
+  try {
+    const decoded = JSON.parse(atob(decodeURIComponent(match[1])));
+    if (decoded?.isAdmin) return decoded;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 const noticeUpdateSchema = z.object({
   title: z.string().min(1).optional(),
   content: z.string().min(1).optional(),
@@ -11,8 +24,11 @@ const noticeUpdateSchema = z.object({
   endDate: z.string().or(z.date()).optional(),
 });
 
-export async function PUT(request: Request, context: { params: Promise<{ id: string }> | { id: string } }) {
+export async function PUT(request: Request, context: { params: Promise<{ id: string }> }) {
   try {
+    if (!getAdminFromRequest(request)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
     const params = await context.params;
     const id = parseInt(params.id, 10);
     if (isNaN(id)) {
@@ -42,8 +58,11 @@ export async function PUT(request: Request, context: { params: Promise<{ id: str
   }
 }
 
-export async function DELETE(request: Request, context: { params: Promise<{ id: string }> | { id: string } }) {
+export async function DELETE(request: Request, context: { params: Promise<{ id: string }> }) {
   try {
+    if (!getAdminFromRequest(request)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
     const params = await context.params;
     const id = parseInt(params.id, 10);
     if (isNaN(id)) {
