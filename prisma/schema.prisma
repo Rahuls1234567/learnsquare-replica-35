@@ -19,6 +19,7 @@ model Enrolment {
   branch       String
   yearOfStudy  String
   semester     String
+  remarks      String?  @db.Text
   createdAt    DateTime @default(now())
 }
 
@@ -30,6 +31,7 @@ model TrainingRequest {
   email       String
   collegeName String
   message     String
+  remarks     String?  @db.Text
   createdAt   DateTime @default(now())
 }
 
@@ -40,6 +42,7 @@ model Syntaxwork {
   whatsappNo String
   email      String
   message    String
+  remarks    String?  @db.Text
   createdAt  DateTime @default(now())
 }
 
@@ -53,6 +56,7 @@ model Aicas {
   designation String   @default("")
   city        String
   message     String
+  remarks     String?  @db.Text
   createdAt   DateTime @default(now())
 }
 
@@ -64,6 +68,7 @@ model TestPrepPro {
   email       String
   collegeName String
   message     String
+  remarks     String?  @db.Text
   createdAt   DateTime @default(now())
 }
 
@@ -75,6 +80,7 @@ model Contact {
   email       String
   collegeName String
   message     String
+  remarks     String?  @db.Text
   createdAt   DateTime @default(now())
 }
 
@@ -106,6 +112,18 @@ model WebsiteContent {
   updatedAt   DateTime @updatedAt
 }
 
+model Notice {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  image     String?
+  isActive  Boolean  @default(true)
+  startDate DateTime
+  endDate   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model SemesterPrep {
   id         Int      @id @default(autoincrement())
   name       String
@@ -114,6 +132,7 @@ model SemesterPrep {
   email      String
   password   String
   mobile     String
+  remarks    String?  @db.Text
   createdAt  DateTime @default(now())
 }
 

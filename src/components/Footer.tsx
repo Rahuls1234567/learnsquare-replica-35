@@ -4,11 +4,11 @@ import { ChevronRight, Apple, Play } from "lucide-react";
 import { EditableContent } from "./EditableContent";
 
 const companyLinks = [
-  { label: "Home", href: "#" },
-  { label: "About Us", href: "#about" },
-  { label: "Our Products", href: "#products" },
-  { label: "Contact us", href: "#contact" },
-  { label: "Login", href: "#" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Our Products", href: "/#products" },
+  { label: "Contact us", href: "/contact" },
+  { label: "Admin Login", href: "/admin" },
 ];
 
 const productFooterLinks = [
@@ -157,10 +157,10 @@ const Footer = () => (
               <ul className="space-y-4">
                 {companyLinks.map((l) => (
                   <li key={l.label}>
-                    <a href={l.href} className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-sm">
+                    <Link href={l.href} prefetch={false} className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-sm">
                       <ChevronRight className="w-3 h-3 text-primary opacity-0 -ml-4 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
                       {l.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

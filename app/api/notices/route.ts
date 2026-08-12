@@ -2,6 +2,19 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
+function getAdminFromRequest(request: Request): { email: string; isAdmin: boolean } | null {
+  const cookie = request.headers.get('cookie') || '';
+  const match = cookie.match(/auth=([^;]+)/);
+  if (!match) return null;
+  try {
+    const decoded = JSON.parse(atob(decodeURIComponent(match[1])));
+    if (decoded?.isAdmin) return decoded;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 const noticeSchema = z.object({
   title: z.string().min(1),
   content: z.string().min(1),
@@ -17,7 +30,9 @@ export async function GET(request: Request) {
 
   try {
     if (isAdmin) {
-      // Check auth if needed, but for simplicity let's return all
+      if (!getAdminFromRequest(request)) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
       const notices = await prisma.notice.findMany({
         orderBy: { createdAt: 'desc' },
       });
@@ -42,6 +57,9 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    if (!getAdminFromRequest(request)) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
     const body = await request.json();
     const parsed = noticeSchema.parse(body);
 

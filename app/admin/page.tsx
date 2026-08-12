@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { LogOut, FileText, Users, Mail, BookOpen, GraduationCap, RefreshCw, X, User, Edit3, MessageSquare, ExternalLink } from "lucide-react";
+import { LogOut, FileText, Users, Mail, BookOpen, GraduationCap, RefreshCw, X, User, Edit3, MessageSquare, ExternalLink, Eye, Save } from "lucide-react";
 import { useAdmin } from "@/src/context/AdminContext";
 import {
     Dialog,
@@ -13,8 +13,9 @@ import {
     DialogFooter,
 } from "@/src/components/ui/dialog";
 import { Button } from "@/src/components/ui/button";
-import { Switch } from "@/src/components/ui/switch";
+import { Textarea } from "@/src/components/ui/textarea";
 import { toast } from "sonner";
+import NoticeBoardAdmin from "@/src/components/NoticeBoardAdmin";
 
 type ReportCounts = {
     contact: number;
@@ -125,10 +126,9 @@ export default function AdminPage() {
     const { editMode, setEditMode } = useAdmin();
     const [tableLoading, setTableLoading] = useState(false);
     const [noticeBoardOpen, setNoticeBoardOpen] = useState(false);
-    const [noticeBoardText, setNoticeBoardText] = useState("");
-    const [noticeBoardEnabled, setNoticeBoardEnabled] = useState(false);
-    const [noticeBoardLoading, setNoticeBoardLoading] = useState(false);
-    const [noticeBoardSaving, setNoticeBoardSaving] = useState(false);
+    const [viewRow, setViewRow] = useState<Record<string, unknown> | null>(null);
+    const [remarksDraft, setRemarksDraft] = useState("");
+    const [remarksSaving, setRemarksSaving] = useState(false);
 
     useEffect(() => {
         setMounted(true);
@@ -200,62 +200,47 @@ export default function AdminPage() {
         setTableData([]);
     };
 
+    const openView = (row: Record<string, unknown>) => {
+        setViewRow(row);
+        setRemarksDraft(typeof row.remarks === "string" ? row.remarks : "");
+    };
+
+    const closeView = () => {
+        if (remarksSaving) return;
+        setViewRow(null);
+        setRemarksDraft("");
+    };
+
+    const saveRemarks = async () => {
+        if (!viewRow || !selectedCard) return;
+        setRemarksSaving(true);
+        try {
+            const res = await fetch("/api/admin/reports", {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ type: selectedCard, id: viewRow.id, remarks: remarksDraft }),
+            });
+            if (res.ok) {
+                const updated = await res.json();
+                setTableData((prev) =>
+                    prev.map((r) => (r.id === viewRow.id ? { ...r, remarks: updated.remarks } : r))
+                );
+                setViewRow((prev) => (prev ? { ...prev, remarks: updated.remarks } : prev));
+                toast.success("Remarks saved.");
+            } else {
+                toast.error("Failed to save remarks.");
+            }
+        } catch {
+            toast.error("An error occurred while saving remarks.");
+        } finally {
+            setRemarksSaving(false);
+        }
+    };
+
     const openInEditMode = (path: string) => {
         setEditMode(true);
         router.push(path);
-    };
-
-    const openNoticeBoard = async () => {
-        setNoticeBoardOpen(true);
-        setNoticeBoardLoading(true);
-        try {
-            const [contentRes, enabledRes] = await Promise.all([
-                fetch("/api/content/home_notice_board"),
-                fetch("/api/content/home_notice_board_enabled"),
-            ]);
-            if (contentRes.ok) {
-                const data = await contentRes.json();
-                setNoticeBoardText(data.htmlContent || "");
-            }
-            if (enabledRes.ok) {
-                const data = await enabledRes.json();
-                setNoticeBoardEnabled(data.htmlContent === "true");
-            }
-        } catch {
-            setNoticeBoardText("");
-            setNoticeBoardEnabled(false);
-        } finally {
-            setNoticeBoardLoading(false);
-        }
-    };
-
-    const saveNoticeBoard = async () => {
-        setNoticeBoardSaving(true);
-        try {
-            const postContent = (content_key: string, html_content: string) =>
-                fetch("/api/admin/content/update", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                    body: JSON.stringify({ content_key, html_content }),
-                });
-
-            const [contentRes, enabledRes] = await Promise.all([
-                postContent("home_notice_board", noticeBoardText),
-                postContent("home_notice_board_enabled", noticeBoardEnabled ? "true" : "false"),
-            ]);
-
-            if (contentRes.ok && enabledRes.ok) {
-                setNoticeBoardOpen(false);
-                toast.success("Notice board updated successfully!");
-            } else {
-                toast.error("Failed to update notice board.");
-            }
-        } catch {
-            toast.error("An error occurred while saving.");
-        } finally {
-            setNoticeBoardSaving(false);
-        }
     };
 
     const logout = () => {
@@ -281,7 +266,9 @@ export default function AdminPage() {
         <div className="min-h-screen bg-slate-50">
             <header className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between shadow-sm">
                 <div className="flex items-center gap-4">
-                    <img src="/logo/LEARNSQUARE_LOGO (500x200).png" alt="LEARNSQUARE" className="h-10 object-contain" />
+                    <Link href="/">
+                        <img src="/logo/LEARNSQUARE_LOGO (500x200).png" alt="LEARNSQUARE" className="h-10 object-contain" />
+                    </Link>
                     <div className="hidden sm:block h-6 w-px bg-slate-200" />
                     <span className="font-bold text-slate-800">Enquiry Reports</span>
                 </div>
@@ -308,7 +295,7 @@ export default function AdminPage() {
                         Client Partnerships
                     </Link>
                     <button
-                        onClick={openNoticeBoard}
+                        onClick={() => setNoticeBoardOpen(true)}
                         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-50 text-amber-700 hover:bg-amber-100 text-sm font-bold transition-all border border-amber-100"
                     >
                         <MessageSquare className="w-4 h-4" />
@@ -418,10 +405,14 @@ export default function AdminPage() {
                                                                 {col.label}
                                                             </th>
                                                         ))}
+                                                        <th className="px-5 py-4 text-left font-bold text-slate-600 text-xs uppercase tracking-wider whitespace-nowrap border-b-2 border-slate-200">Remarks</th>
+                                                        <th className="px-5 py-4 text-right font-bold text-slate-600 text-xs uppercase tracking-wider whitespace-nowrap border-b-2 border-slate-200">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {tableData.map((row, i) => (
+                                                    {tableData.map((row, i) => {
+                                                        const rowRemarks = typeof row.remarks === "string" ? row.remarks : "";
+                                                        return (
                                                         <tr
                                                             key={i}
                                                             className={`border-b border-slate-100 transition-colors hover:bg-indigo-50/50 ${i % 2 === 0 ? "bg-white" : "bg-slate-50/50"}`}
@@ -430,18 +421,37 @@ export default function AdminPage() {
                                                             {TABLE_COLUMNS[selectedCard].map((col) => {
                                                                 const val = col.key === "createdAt" ? formatDate(row[col.key]) : String(row[col.key] ?? "-");
                                                                 const isEmail = col.key === "email";
+                                                                const isMessage = col.key === "message";
                                                                 return (
                                                                     <td
                                                                         key={col.key}
-                                                                        className={`px-5 py-4 max-w-[220px] truncate ${isEmail ? "text-indigo-600 font-medium" : "text-slate-700"}`}
+                                                                        className={`px-5 py-4 ${isMessage ? "max-w-[260px]" : "max-w-[220px]"} truncate ${isEmail ? "text-indigo-600 font-medium" : "text-slate-700"}`}
                                                                         title={val.length > 30 ? val : undefined}
                                                                     >
                                                                         {val}
                                                                     </td>
                                                                 );
                                                             })}
+                                                            <td className="px-5 py-4 max-w-[200px] truncate text-slate-500" title={rowRemarks || undefined}>
+                                                                {rowRemarks ? (
+                                                                    rowRemarks
+                                                                ) : (
+                                                                    <span className="text-slate-300 italic">None</span>
+                                                                )}
+                                                            </td>
+                                                            <td className="px-5 py-4 text-right">
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => openView(row)}
+                                                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-xs font-semibold transition-colors border border-indigo-100"
+                                                                >
+                                                                    <Eye className="w-3.5 h-3.5" />
+                                                                    View
+                                                                </button>
+                                                            </td>
                                                         </tr>
-                                                    ))}
+                                                        );
+                                                    })}
                                                 </tbody>
                                             </table>
                                         )}
@@ -456,54 +466,76 @@ export default function AdminPage() {
                 </div>
             </main>
 
-            <Dialog open={noticeBoardOpen} onOpenChange={setNoticeBoardOpen}>
-                <DialogContent className="sm:max-w-[600px] bg-white text-slate-900">
+            {noticeBoardOpen && <NoticeBoardAdmin onClose={() => setNoticeBoardOpen(false)} />}
+
+            <Dialog open={!!viewRow} onOpenChange={(open) => { if (!open) closeView(); }}>
+                <DialogContent className="sm:max-w-[620px] bg-white text-slate-900 max-h-[85vh] overflow-y-auto">
                     <DialogHeader>
                         <DialogTitle className="text-xl font-bold flex items-center gap-2">
-                            <MessageSquare className="w-5 h-5 text-amber-600" />
-                            Home Notice Board
+                            <Eye className="w-5 h-5 text-indigo-600" />
+                            {selectedLabel} – Enquiry Details
                         </DialogTitle>
                     </DialogHeader>
 
-                    <div className="py-4 space-y-4">
-                        <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-                            <div>
-                                <p className="text-sm font-semibold text-slate-800">Show on homepage</p>
-                                <p className="text-xs text-slate-500">Off by default. Turn on to display the notice board to visitors.</p>
+                    {viewRow && selectedCard && (
+                        <div className="py-2 space-y-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {TABLE_COLUMNS[selectedCard]
+                                    .filter((col) => col.key !== "message")
+                                    .map((col) => {
+                                        const val = col.key === "createdAt" ? formatDate(viewRow[col.key]) : String(viewRow[col.key] ?? "-");
+                                        return (
+                                            <div key={col.key} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5">
+                                                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{col.label}</p>
+                                                <p className={`text-sm font-medium mt-0.5 break-words ${col.key === "email" ? "text-indigo-600" : "text-slate-800"}`}>
+                                                    {val}
+                                                </p>
+                                            </div>
+                                        );
+                                    })}
                             </div>
-                            <Switch
-                                checked={noticeBoardEnabled}
-                                onCheckedChange={setNoticeBoardEnabled}
-                                disabled={noticeBoardLoading}
-                            />
-                        </div>
 
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium text-slate-500">Content</label>
-                            <textarea
-                                value={noticeBoardText}
-                                onChange={(e) => setNoticeBoardText(e.target.value)}
-                                disabled={noticeBoardLoading}
-                                placeholder="Leave blank to hide the notice board on the homepage"
-                                className="w-full min-h-[140px] rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-amber-500/50 resize-y"
-                            />
+                            {TABLE_COLUMNS[selectedCard].some((c) => c.key === "message") && (
+                                <div className="space-y-1.5">
+                                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Message</label>
+                                    <div className="w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800 whitespace-pre-wrap break-words max-h-48 overflow-y-auto">
+                                        {String(viewRow.message ?? "-")}
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className="space-y-1.5">
+                                <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                                    <MessageSquare className="w-3.5 h-3.5" />
+                                    Admin Remarks
+                                </label>
+                                <Textarea
+                                    value={remarksDraft}
+                                    onChange={(e) => setRemarksDraft(e.target.value)}
+                                    disabled={remarksSaving}
+                                    placeholder="Add internal notes about this enquiry (not visible to the others)..."
+                                    className="w-full min-h-[100px] rounded-xl border-slate-200 bg-white text-sm text-slate-900 placeholder:text-slate-400 resize-y"
+                                />
+                            </div>
                         </div>
-                    </div>
+                    )}
 
                     <DialogFooter className="gap-2">
                         <Button
                             variant="ghost"
-                            onClick={() => setNoticeBoardOpen(false)}
+                            onClick={closeView}
+                            disabled={remarksSaving}
                             className="text-slate-500 hover:text-slate-900 hover:bg-slate-100"
                         >
-                            Cancel
+                            Close
                         </Button>
                         <Button
-                            onClick={saveNoticeBoard}
-                            disabled={noticeBoardSaving || noticeBoardLoading}
-                            className="bg-amber-600 hover:bg-amber-700 text-white px-8"
+                            onClick={saveRemarks}
+                            disabled={remarksSaving}
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 flex items-center gap-2"
                         >
-                            {noticeBoardSaving ? "Saving..." : "Save Changes"}
+                            <Save className="w-4 h-4" />
+                            {remarksSaving ? "Saving..." : "Save Remarks"}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

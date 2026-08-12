@@ -1,7 +1,24 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 
 const LIST_TYPES = ['contact', 'syntaxwork', 'aicas', 'trainingRequest', 'testPrepPro', 'enrolment', 'semesterPrep'] as const;
+
+async function getAdminFromRequest(): Promise<{ email: string; isAdmin: boolean } | null> {
+    try {
+        const cookieStore = await cookies();
+        const authCookie = cookieStore.get('auth');
+
+        if (!authCookie?.value) return null;
+
+        const decoded = JSON.parse(atob(decodeURIComponent(authCookie.value)));
+
+        if (decoded?.isAdmin) return decoded;
+        return null;
+    } catch {
+        return null;
+    }
+}
 
 export async function GET(request: Request) {
     try {
@@ -64,5 +81,62 @@ export async function GET(request: Request) {
     } catch (error) {
         console.error('Reports error:', error);
         return NextResponse.json({ error: 'Failed to fetch reports' }, { status: 500 });
+    }
+}
+
+export async function PATCH(request: Request) {
+    try {
+        const auth = await getAdminFromRequest();
+        if (!auth) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        let body: { type?: unknown; id?: unknown; remarks?: unknown };
+        try {
+            body = await request.json();
+        } catch {
+            return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+        }
+
+        const { type, id, remarks } = body;
+
+        if (typeof type !== 'string' || !LIST_TYPES.includes(type as (typeof LIST_TYPES)[number])) {
+            return NextResponse.json({ error: 'Invalid type' }, { status: 400 });
+        }
+        const recordId = Number(id);
+        if (!Number.isInteger(recordId)) {
+            return NextResponse.json({ error: 'Invalid id' }, { status: 400 });
+        }
+        const remarksValue = typeof remarks === 'string' ? remarks : '';
+
+        let updated;
+        switch (type as (typeof LIST_TYPES)[number]) {
+            case 'contact':
+                updated = await prisma.contact.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                break;
+            case 'syntaxwork':
+                updated = await prisma.syntaxwork.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                break;
+            case 'aicas':
+                updated = await prisma.aicas.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                break;
+            case 'trainingRequest':
+                updated = await prisma.trainingRequest.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                break;
+            case 'testPrepPro':
+                updated = await prisma.testPrepPro.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                break;
+            case 'enrolment':
+                updated = await prisma.enrolment.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                break;
+            case 'semesterPrep':
+                updated = await prisma.semesterPrep.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                break;
+        }
+
+        return NextResponse.json(updated);
+    } catch (error) {
+        console.error('Remarks update error:', error);
+        return NextResponse.json({ error: 'Failed to update remarks' }, { status: 500 });
     }
 }
