@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { sendEnquiryNotification } from '@/lib/mail';
 
 export async function POST(request: Request) {
     try {
@@ -21,6 +22,17 @@ export async function POST(request: Request) {
                 email,
                 collegeName,
                 message,
+            },
+        });
+
+        await sendEnquiryNotification({
+            product: 'Training Programs (LMS)',
+            fields: {
+                Name: `${firstName} ${lastName}`,
+                Whatsapp: String(whatsappNo),
+                Email: email,
+                College: collegeName,
+                Message: message,
             },
         });
 

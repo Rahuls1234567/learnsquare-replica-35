@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import Navbar from "@/src/components/Navbar";
 import Footer from "@/src/components/Footer";
 import WhatsAppButton from "@/src/components/WhatsAppButton";
@@ -17,6 +18,7 @@ import { toast } from "sonner";
 import { EditableContent } from "@/src/components/EditableContent";
 
 const Contact = () => {
+    const router = useRouter();
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
         defaultValues: {
             firstName: '',
@@ -37,6 +39,7 @@ const Contact = () => {
                 description: "We've received your inquiry and will get back to you soon. 🚀",
             });
             reset();
+            router.push('/');
         },
         onError: () => {
             toast.error("Failed to send message", {

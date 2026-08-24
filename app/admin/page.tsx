@@ -203,6 +203,24 @@ export default function AdminPage() {
     const openView = (row: Record<string, unknown>) => {
         setViewRow(row);
         setRemarksDraft(typeof row.remarks === "string" ? row.remarks : "");
+
+        if (!row.isRead && selectedCard) {
+            const type = selectedCard;
+            const id = row.id;
+            fetch("/api/admin/reports", {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ type, id, isRead: true }),
+            })
+                .then((res) => (res.ok ? res.json() : null))
+                .then((updated) => {
+                    if (!updated) return;
+                    setTableData((prev) => prev.map((r) => (r.id === id ? { ...r, isRead: true } : r)));
+                    setViewRow((prev) => (prev && prev.id === id ? { ...prev, isRead: true } : prev));
+                })
+                .catch(() => {});
+        }
     };
 
     const closeView = () => {
@@ -324,7 +342,7 @@ export default function AdminPage() {
                     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-8">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                             <div>
-                                <h1 className="text-2xl font-black text-slate-800 tracking-tight">Student Enquiry Report</h1>
+                                <h1 className="text-2xl font-black text-slate-800 tracking-tight">Enquiry Report</h1>
                                 <p className="text-slate-500 text-sm mt-1">Generated on {reportDate}</p>
                             </div>
                             <button
@@ -412,12 +430,25 @@ export default function AdminPage() {
                                                 <tbody>
                                                     {tableData.map((row, i) => {
                                                         const rowRemarks = typeof row.remarks === "string" ? row.remarks : "";
+                                                        const isUnread = !row.isRead;
                                                         return (
                                                         <tr
                                                             key={i}
-                                                            className={`border-b border-slate-100 transition-colors hover:bg-indigo-50/50 ${i % 2 === 0 ? "bg-white" : "bg-slate-50/50"}`}
+                                                            className={`border-b transition-colors hover:bg-indigo-50/50 ${
+                                                                isUnread
+                                                                    ? "bg-indigo-50/60 border-indigo-100"
+                                                                    : `border-slate-100 ${i % 2 === 0 ? "bg-white" : "bg-slate-50/50"}`
+                                                            }`}
                                                         >
-                                                            <td className="px-5 py-4 text-slate-400 font-mono text-xs font-semibold">{i + 1}</td>
+                                                            <td className="px-5 py-4 text-slate-400 font-mono text-xs font-semibold">
+                                                                <span className="inline-flex items-center gap-2">
+                                                                    <span
+                                                                        className={`w-2 h-2 rounded-full flex-shrink-0 ${isUnread ? "bg-indigo-500" : "bg-transparent"}`}
+                                                                        aria-hidden="true"
+                                                                    />
+                                                                    {i + 1}
+                                                                </span>
+                                                            </td>
                                                             {TABLE_COLUMNS[selectedCard].map((col) => {
                                                                 const val = col.key === "createdAt" ? formatDate(row[col.key]) : String(row[col.key] ?? "-");
                                                                 const isEmail = col.key === "email";
@@ -425,7 +456,7 @@ export default function AdminPage() {
                                                                 return (
                                                                     <td
                                                                         key={col.key}
-                                                                        className={`px-5 py-4 ${isMessage ? "max-w-[260px]" : "max-w-[220px]"} truncate ${isEmail ? "text-indigo-600 font-medium" : "text-slate-700"}`}
+                                                                        className={`px-5 py-4 ${isMessage ? "max-w-[260px]" : "max-w-[220px]"} truncate ${isEmail ? "text-indigo-600 font-medium" : isUnread ? "text-slate-900 font-semibold" : "text-slate-700"}`}
                                                                         title={val.length > 30 ? val : undefined}
                                                                     >
                                                                         {val}
@@ -440,14 +471,25 @@ export default function AdminPage() {
                                                                 )}
                                                             </td>
                                                             <td className="px-5 py-4 text-right">
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() => openView(row)}
-                                                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-xs font-semibold transition-colors border border-indigo-100"
-                                                                >
-                                                                    <Eye className="w-3.5 h-3.5" />
-                                                                    View
-                                                                </button>
+                                                                <div className="flex items-center justify-end gap-2">
+                                                                    {isUnread ? (
+                                                                        <span className="px-2 py-0.5 rounded-full bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-wider">
+                                                                            New
+                                                                        </span>
+                                                                    ) : (
+                                                                        <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-400 text-[10px] font-bold uppercase tracking-wider">
+                                                                            Seen
+                                                                        </span>
+                                                                    )}
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => openView(row)}
+                                                                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-xs font-semibold transition-colors border border-indigo-100"
+                                                                    >
+                                                                        <Eye className="w-3.5 h-3.5" />
+                                                                        View
+                                                                    </button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         );
