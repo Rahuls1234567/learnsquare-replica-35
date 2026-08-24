@@ -91,14 +91,14 @@ export async function PATCH(request: Request) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        let body: { type?: unknown; id?: unknown; remarks?: unknown };
+        let body: { type?: unknown; id?: unknown; remarks?: unknown; isRead?: unknown };
         try {
             body = await request.json();
         } catch {
             return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
         }
 
-        const { type, id, remarks } = body;
+        const { type, id, remarks, isRead } = body;
 
         if (typeof type !== 'string' || !LIST_TYPES.includes(type as (typeof LIST_TYPES)[number])) {
             return NextResponse.json({ error: 'Invalid type' }, { status: 400 });
@@ -107,30 +107,33 @@ export async function PATCH(request: Request) {
         if (!Number.isInteger(recordId)) {
             return NextResponse.json({ error: 'Invalid id' }, { status: 400 });
         }
-        const remarksValue = typeof remarks === 'string' ? remarks : '';
+
+        const data: { remarks?: string; isRead?: boolean } = {};
+        if (typeof remarks === 'string') data.remarks = remarks;
+        if (typeof isRead === 'boolean') data.isRead = isRead;
 
         let updated;
         switch (type as (typeof LIST_TYPES)[number]) {
             case 'contact':
-                updated = await prisma.contact.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                updated = await prisma.contact.update({ where: { id: recordId }, data });
                 break;
             case 'syntaxwork':
-                updated = await prisma.syntaxwork.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                updated = await prisma.syntaxwork.update({ where: { id: recordId }, data });
                 break;
             case 'aicas':
-                updated = await prisma.aicas.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                updated = await prisma.aicas.update({ where: { id: recordId }, data });
                 break;
             case 'trainingRequest':
-                updated = await prisma.trainingRequest.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                updated = await prisma.trainingRequest.update({ where: { id: recordId }, data });
                 break;
             case 'testPrepPro':
-                updated = await prisma.testPrepPro.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                updated = await prisma.testPrepPro.update({ where: { id: recordId }, data });
                 break;
             case 'enrolment':
-                updated = await prisma.enrolment.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                updated = await prisma.enrolment.update({ where: { id: recordId }, data });
                 break;
             case 'semesterPrep':
-                updated = await prisma.semesterPrep.update({ where: { id: recordId }, data: { remarks: remarksValue } });
+                updated = await prisma.semesterPrep.update({ where: { id: recordId }, data });
                 break;
         }
 

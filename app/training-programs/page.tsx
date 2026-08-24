@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -30,6 +31,7 @@ type TrainingRequestFormData = {
 };
 
 const TrainingProgramsPage = () => {
+    const router = useRouter();
     const [selectedProgram, setSelectedProgram] = useState<any>(null);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<TrainingRequestFormData>({
@@ -52,6 +54,7 @@ const TrainingProgramsPage = () => {
                 description: "We've received your request and will contact you shortly.",
             });
             reset();
+            router.push('/');
         },
         onError: () => {
             toast.error("Failed to submit request", {

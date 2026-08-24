@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Navbar from "@/src/components/Navbar";
 import Footer from "@/src/components/Footer";
 import WhatsAppButton from "@/src/components/WhatsAppButton";
@@ -534,6 +535,7 @@ const coreModulesData = [
 ];
 
 export default function Aicas() {
+    const router = useRouter();
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
         defaultValues: {
             firstName: '',
@@ -558,6 +560,7 @@ export default function Aicas() {
                 description: "We've received your request and will contact you shortly. 🚀",
             });
             reset();
+            router.push('/');
         },
         onError: () => {
             toast.error("Failed to send inquiry", {
