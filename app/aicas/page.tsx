@@ -13,13 +13,15 @@ import {
     LayoutDashboard, CreditCard, FileText, Video,
     Code, Briefcase, MonitorPlay, Users,
     ClipboardList, Bell, Check, Rocket, Loader2,
-    User, Phone, Mail, Building2, MapPin, IdCard, MessageSquare
+    User, Phone, Mail, Building2, MapPin, IdCard, MessageSquare,
+    ShieldCheck, Ticket, Bot
 } from 'lucide-react';
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { toast } from "sonner";
 import { EditableContent } from "@/src/components/EditableContent";
+import AicasNewModules from "@/src/components/AicasNewModules";
 
 
 const AndroidAppleIcon = ({ size = 24 }: { size?: number }) => (
@@ -218,6 +220,9 @@ const features = [
     { title: "Wall - Facebook of the College", text: "Exclusive Inbuilt Social Media Platform for College to share your thoughts with the Entire Campus.", icon: Users },
     { title: "Dedicated Test Engine", text: "Integrated Test Engine to conduct Various Online Assessment Tests with detailed Result Analyses", icon: ClipboardList },
     { title: "Effective Communication", text: "Stay connected with entire Campus Stakeholders through Timely Alerts, Circulars, and updates", icon: Bell },
+    { title: "Accreditation Management", text: "Stay Inspection-Ready All Year with Centralized NAAC, NBA, OBE & NIRF Documentation and Outcome-Based Reports", icon: ShieldCheck },
+    { title: "Ticketing Management", text: "Raise, Assign & Track Academic, Administrative and Technical Issues with Priorities, Auto-Escalation and 48-Hour Resolution Monitoring", icon: Ticket },
+    { title: "LIA - AI Assistant", text: "Ask AICAS in Plain Language and Get Instant Answers, Insights and Guided Navigation Across Every ERP Module", icon: Bot },
 ];
 
 const coreModulesData = [
@@ -595,8 +600,8 @@ export default function Aicas() {
                     </div>
 
                     {/* Dark Mode Glows */}
-                    <div className="absolute top-[-10%] right-[-10%] w-[1000px] h-[1000px] bg-indigo-600/20 rounded-full blur-[160px]" />
-                    <div className="absolute bottom-[-10%] left-[-10%] w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[140px]" />
+                    <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] md:w-[1000px] md:h-[1000px] bg-indigo-600/20 rounded-full blur-[100px] md:blur-[160px]" />
+                    <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] md:w-[800px] md:h-[800px] bg-purple-600/10 rounded-full blur-[90px] md:blur-[140px]" />
 
                     {/* Subtle Overlay to ensure readability */}
                     <div className="absolute inset-0 bg-slate-950/40" />
@@ -659,6 +664,7 @@ export default function Aicas() {
                                     </div>
                                 }
                             />
+
                         </motion.div>
 
                         {/* Right Column: Premium Dark Contact Form */}
@@ -693,7 +699,7 @@ export default function Aicas() {
                                                 <Input
                                                     {...register("firstName", { required: true })}
                                                     placeholder="First Name*"
-                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.firstName ? 'border-red-500/50' : ''}`}
+                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.firstName ? 'border-red-500/50' : ''}`}
                                                 />
                                             </div>
                                         </div>
@@ -703,7 +709,7 @@ export default function Aicas() {
                                                 <Input
                                                     {...register("lastName", { required: true })}
                                                     placeholder="Last Name*"
-                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.lastName ? 'border-red-500/50' : ''}`}
+                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.lastName ? 'border-red-500/50' : ''}`}
                                                 />
                                             </div>
                                         </div>
@@ -717,7 +723,7 @@ export default function Aicas() {
                                                     {...register("whatsappNo", { required: true })}
                                                     placeholder="Whatsapp No.*"
                                                     type="tel"
-                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.whatsappNo ? 'border-red-500/50' : ''}`}
+                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.whatsappNo ? 'border-red-500/50' : ''}`}
                                                 />
                                             </div>
                                         </div>
@@ -728,7 +734,7 @@ export default function Aicas() {
                                                     {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
                                                     placeholder="Email*"
                                                     type="email"
-                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.email ? 'border-red-500/50' : ''}`}
+                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.email ? 'border-red-500/50' : ''}`}
                                                 />
                                             </div>
                                         </div>
@@ -741,7 +747,7 @@ export default function Aicas() {
                                                 <Input
                                                     {...register("collegeName", { required: true })}
                                                     placeholder="Institution / Organization*"
-                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.collegeName ? 'border-red-500/50' : ''}`}
+                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.collegeName ? 'border-red-500/50' : ''}`}
                                                 />
                                             </div>
                                         </div>
@@ -751,7 +757,7 @@ export default function Aicas() {
                                                 <Input
                                                     {...register("designation", { required: true })}
                                                     placeholder="Designation*"
-                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.designation ? 'border-red-500/50' : ''}`}
+                                                    className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.designation ? 'border-red-500/50' : ''}`}
                                                 />
                                             </div>
                                         </div>
@@ -763,7 +769,7 @@ export default function Aicas() {
                                             <Input
                                                 {...register("city", { required: true })}
                                                 placeholder="City*"
-                                                className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.city ? 'border-red-500/50' : ''}`}
+                                                className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.city ? 'border-red-500/50' : ''}`}
                                             />
                                         </div>
                                     </div>
@@ -773,7 +779,7 @@ export default function Aicas() {
                                         <Textarea
                                             {...register("message", { required: true })}
                                             placeholder="Message*"
-                                            className={`min-h-[120px] bg-white/5 border-white/10 rounded-[1.5rem] focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 resize-none pt-5 pl-12 pr-6 font-bold text-sm shadow-inner ${errors.message ? 'border-red-500/50' : ''}`}
+                                            className={`min-h-[120px] bg-white/5 border-white/10 rounded-[1.5rem] focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 resize-none pt-5 pl-12 pr-6 font-bold text-base md:text-sm shadow-inner ${errors.message ? 'border-red-500/50' : ''}`}
                                         />
                                     </div>
 
@@ -861,7 +867,7 @@ export default function Aicas() {
                                 defaultContent={<span className="text-indigo-400 font-bold tracking-[0.4em] uppercase text-xs">Why Choose AICAS</span>}
                             />
                             <div className="relative">
-                                <span className="absolute -top-10 -left-4 text-7xl md:text-9xl font-black text-white/5 uppercase select-none pointer-events-none tracking-tighter">
+                                <span className="absolute -top-6 md:-top-10 -left-2 md:-left-4 text-6xl md:text-9xl font-black text-white/5 uppercase select-none pointer-events-none tracking-tighter">
                                     FEATURES
                                 </span>
                                 <EditableContent 
@@ -877,7 +883,7 @@ export default function Aicas() {
                         </div>
                     </motion.div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                         {features.map((feature, idx) => (
                             <motion.div
                                 key={idx}
@@ -885,16 +891,16 @@ export default function Aicas() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.6, delay: (idx % 3) * 0.1 }}
-                                className="group/feature relative p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] bg-slate-900/60 border border-white/5 shadow-2xl transition-all duration-700 hover:border-indigo-500/30 hover:-translate-y-3 overflow-hidden flex flex-col items-start"
+                                className="group/feature relative p-6 pb-12 md:p-10 md:pb-16 rounded-[2rem] md:rounded-[3rem] bg-slate-900/60 border border-white/5 shadow-2xl transition-all duration-700 hover:border-indigo-500/30 md:hover:-translate-y-3 overflow-hidden flex flex-col items-start"
                             >
                                 {/* Decorative Glow Accent */}
                                 <div className="absolute -inset-10 bg-gradient-to-br from-indigo-500/10 to-transparent opacity-0 group-hover/feature:opacity-100 blur-[80px] transition-all duration-1000" />
 
-                                <div className="relative z-10 w-12 h-12 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 md:mb-10 group-hover/feature:bg-indigo-600 group-hover/feature:scale-110 transition-all duration-500 shadow-2xl">
+                                <div className="relative z-10 w-12 h-12 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 md:mb-10 group-hover/feature:bg-indigo-600 group-hover/feature:scale-110 transition-all duration-500 shadow-2xl">
                                     <feature.icon className="w-6 h-6 md:w-10 md:h-10 text-indigo-400 group-hover/feature:text-white transition-colors duration-500" />
                                 </div>
 
-                                <div className="relative z-10 flex-grow space-y-3 md:space-y-4">
+                                <div className="relative z-10 flex-grow w-full space-y-2 md:space-y-4 text-left">
                                     <EditableContent 
                                         contentKey={`aicas_feature_${idx}`}
                                         description={`AICAS Feature ${idx + 1}`}
@@ -903,7 +909,7 @@ export default function Aicas() {
                                                 <h3 className="text-xl md:text-2xl font-black text-white tracking-tight leading-tight group-hover/feature:text-indigo-400 transition-colors">
                                                     {feature.title}
                                                 </h3>
-                                                <p className="text-slate-400 font-bold leading-relaxed transition-all duration-500 group-hover/feature:text-slate-200 text-sm md:text-base">
+                                                <p className="text-slate-400 font-medium md:font-bold leading-relaxed transition-all duration-500 group-hover/feature:text-slate-200 text-sm md:text-base">
                                                     {feature.text}
                                                 </p>
                                             </>
@@ -911,7 +917,7 @@ export default function Aicas() {
                                     />
                                 </div>
 
-                                <div className="absolute bottom-10 left-10 h-1.5 w-10 bg-white/5 rounded-full group-hover/feature:w-24 group-hover/feature:bg-indigo-500 transition-all duration-700" />
+                                <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 h-1.5 w-10 bg-white/5 rounded-full group-hover/feature:w-24 group-hover/feature:bg-indigo-500 transition-all duration-700" />
                             </motion.div>
                         ))}
                     </div>
@@ -931,7 +937,7 @@ export default function Aicas() {
                         {/* kinetic Technical Background */}
                         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-40">
                             {/* Theme-colored Glow */}
-                            <div className={`absolute top-1/2 ${module.isImageRight ? 'left-[10%]' : 'right-[10%]'} w-[800px] h-[800px] ${module.theme.glow1} rounded-full blur-[160px] -translate-y-1/2 opacity-[0.06]`} />
+                            <div className={`absolute top-1/2 ${module.isImageRight ? 'left-[10%]' : 'right-[10%]'} w-[400px] h-[400px] md:w-[800px] md:h-[800px] ${module.theme.glow1} rounded-full blur-[100px] md:blur-[160px] -translate-y-1/2 opacity-[0.06]`} />
 
                             {/* Technical Grid/Dots */}
                             <div className={`absolute inset-y-0 ${module.isImageRight ? 'left-0 w-1/2' : 'right-0 w-1/2'} bg-[radial-gradient(#ffffff05_1.5px,transparent_1.5px)] [background-size:60px_60px] opacity-100`} />
@@ -971,7 +977,7 @@ export default function Aicas() {
                                             defaultContent={
                                                 <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-white tracking-tight leading-[0.9] relative z-10 py-1 overflow-visible">
                                                     {module.titlePrefix}
-                                                    <span className={`inline-block text-transparent bg-clip-text bg-gradient-to-r ${module.gradientText} italic mt-2 pb-4 pr-6 drop-shadow-2xl`}>
+                                                    <span className={`inline-block text-transparent bg-clip-text bg-gradient-to-r ${module.gradientText} italic mt-2 pb-4 pr-6`}>
                                                         {module.titleHighlight}
                                                     </span>
                                                 </h2>
@@ -1012,12 +1018,14 @@ export default function Aicas() {
                                 className="lg:w-1/2 w-full relative group"
                             >
                                 {/* Magnetic Glow */}
-                                <div className={`absolute -inset-16 bg-gradient-to-br ${module.gradientText} opacity-0 blur-[120px] rounded-full group-hover:opacity-[0.15] transition-all duration-1000`} />
+                                <div className={`absolute -inset-16 bg-gradient-to-br ${module.gradientText} opacity-0 blur-[60px] md:blur-[120px] rounded-full md:group-hover:opacity-[0.15] transition-all duration-1000`} />
 
-                                <div className="relative rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden bg-slate-900 border border-white/10 shadow-[0_60px_120px_rgba(0,0,0,0.6)] transform group-hover:scale-[1.02] transition-all duration-[1.2s] ease-out">
+                                <div className="relative rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden isolate transform-gpu bg-slate-900 border border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.6)] md:shadow-[0_60px_120px_rgba(0,0,0,0.6)] md:group-hover:scale-[1.02] transition-all duration-[1.2s] ease-out">
                                     <img
                                         src={module.imageSrc}
                                         alt={module.imageAlt}
+                                        loading="lazy"
+                                        decoding="async"
                                         className="w-full h-auto object-cover"
                                     />
                                     {/* Glass Overlay for Premium Feel */}
@@ -1028,6 +1036,9 @@ export default function Aicas() {
                     </section>
                 ))}
             </div>
+
+            {/* Accreditation, CRM, Ticketing & LIA Modules */}
+            <AicasNewModules />
 
             <Footer />
             <WhatsAppButton />
