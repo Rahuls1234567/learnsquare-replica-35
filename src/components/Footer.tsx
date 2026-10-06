@@ -86,8 +86,8 @@ const Footer = () => (
       <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 mb-20">
         {/* Brand & App Showcase Section */}
         <div className="lg:col-span-4 space-y-10">
-          <div className="space-y-8">
-            <a href="/" className="inline-block group transition-all duration-500">
+          <div className="space-y-6 md:space-y-8">
+            <a href="/" className="block w-fit mx-auto md:mx-0 group transition-all duration-500">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <img
@@ -106,19 +106,19 @@ const Footer = () => (
               contentKey="footer_brand_desc"
               description="Footer Brand Description"
               defaultContent={
-                <p className="text-slate-400 text-lg leading-relaxed font-medium max-w-sm">
+                <p className="text-slate-400 text-base md:text-lg leading-relaxed font-medium max-w-sm">
                   Revolutionizing the educational landscape through cutting-edge <span className="text-white font-bold">AI Technology</span> and industry-aligned programs.
                 </p>
               }
             />
 
             {/* Premium App Badges */}
-            <div className="flex flex-wrap gap-4 pt-2">
+            <div className="flex flex-wrap gap-3 md:gap-4 pt-2">
               <a
                 href="https://play.google.com/store/apps/details?id=com.semesterprep_ap"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/50 hover:-translate-y-1 hover:scale-[1.02] transition-all group/app shadow-2xl"
+                className="flex flex-1 sm:flex-none min-w-[140px] items-center gap-3 px-4 md:px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/50 hover:-translate-y-1 hover:scale-[1.02] transition-all group/app shadow-2xl"
               >
                 <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center border border-white/10 group-hover/app:border-primary/50">
                   <Play className="w-4 h-4 text-white fill-current" />
@@ -133,7 +133,7 @@ const Footer = () => (
                 href="https://apps.apple.com/in/app/learnsquare/id1671087835"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/50 hover:-translate-y-1 hover:scale-[1.02] transition-all group/app shadow-2xl"
+                className="flex flex-1 sm:flex-none min-w-[140px] items-center gap-3 px-4 md:px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-primary/50 hover:-translate-y-1 hover:scale-[1.02] transition-all group/app shadow-2xl"
               >
                 <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center border border-white/10 group-hover/app:border-primary/50 text-white">
                   <Apple className="w-5 h-5" />
@@ -149,8 +149,8 @@ const Footer = () => (
 
         {/* Navigation Grid */}
         <div className="lg:col-span-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
-            <div className="space-y-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12 md:gap-12">
+            <div className="space-y-6 md:space-y-8">
               <h4 className="text-sm font-black uppercase tracking-[0.2em] text-primary/80 font-heading">
                 Company
               </h4>
@@ -158,7 +158,7 @@ const Footer = () => (
                 {companyLinks.map((l) => (
                   <li key={l.label}>
                     <Link href={l.href} prefetch={false} className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-sm">
-                      <ChevronRight className="w-3 h-3 text-primary opacity-0 -ml-4 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
+                      <ChevronRight className="w-3 h-3 text-primary opacity-0 -ml-5 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
                       {l.label}
                     </Link>
                   </li>
@@ -166,7 +166,7 @@ const Footer = () => (
               </ul>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-6 md:space-y-8">
               <h4 className="text-sm font-black uppercase tracking-[0.2em] text-primary/80 font-heading">
                 Products
               </h4>
@@ -180,7 +180,7 @@ const Footer = () => (
                         rel="noopener noreferrer"
                         className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-sm"
                       >
-                        <ChevronRight className="w-3 h-3 text-primary opacity-0 -ml-4 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
+                        <ChevronRight className="w-3 h-3 text-primary opacity-0 -ml-5 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
                         {l.name}
                       </a>
                     ) : (
@@ -189,7 +189,7 @@ const Footer = () => (
                         prefetch={false}
                         className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-sm"
                       >
-                        <ChevronRight className="w-3 h-3 text-primary opacity-0 -ml-4 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
+                        <ChevronRight className="w-3 h-3 text-primary opacity-0 -ml-5 group-hover/link:opacity-100 group-hover/link:ml-0 transition-all" />
                         {l.name}
                       </Link>
                     )}
@@ -198,17 +198,17 @@ const Footer = () => (
               </ul>
             </div>
 
-            <div className="col-span-2 space-y-8">
+            <div className="col-span-2 space-y-6 md:space-y-8">
               <h4 className="text-sm font-black uppercase tracking-[0.2em] text-primary/80 font-heading">
                 Trending Programs
               </h4>
-              <div className="grid grid-cols-2 gap-4 md:gap-8">
+              <div className="grid grid-cols-2 gap-x-6 md:gap-8">
                 {trainingColumns.map((col, idx) => (
-                  <ul key={idx} className="space-y-4">
+                  <ul key={idx} className="space-y-3 md:space-y-4">
                     {col.map((item) => (
                       <li key={item}>
-                        <Link href="/training-programs" prefetch={false} className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-center gap-2 group/link text-xs">
-                          <span className="w-1.5 h-1.5 bg-primary/20 rounded-full group-hover/link:bg-primary transition-colors" />
+                        <Link href="/training-programs" prefetch={false} className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-start gap-2 group/link text-[13px] md:text-xs leading-snug">
+                          <span className="w-1.5 h-1.5 mt-[0.4em] shrink-0 bg-primary/40 rounded-full group-hover/link:bg-primary transition-colors" />
                           {item}
                         </Link>
                       </li>
@@ -224,7 +224,7 @@ const Footer = () => (
       {/* Bottom Experience Section */}
       <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10">
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-10">
-          <p className="text-slate-500 text-sm font-medium">
+          <p className="text-slate-500 text-sm font-medium text-center md:text-left">
             © 2026 <span className="text-slate-300 font-black tracking-tight">LEARNSQUARE</span> Technologies. All rights reserved.
           </p>
           <div className="flex gap-8 text-slate-500 text-[13px] font-bold">
