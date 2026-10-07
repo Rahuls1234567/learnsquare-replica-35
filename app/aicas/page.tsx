@@ -277,7 +277,7 @@ const coreModulesData = [
             imageGlow: "from-emerald-400/10 to-teal-400/10",
             imageBacking: "from-emerald-400/15 to-teal-400/15"
         },
-        imageSrc: "/images/homeimage/report2_premium.png",
+        imageSrc: "/images/homeimage/report2_premium.webp",
         imageAlt: "Administration Management Dashboard",
         isImageRight: false,
         listItems: [
@@ -308,7 +308,7 @@ const coreModulesData = [
             imageGlow: "from-cyan-400/10 to-blue-400/10",
             imageBacking: "from-cyan-400/15 to-blue-400/15"
         },
-        imageSrc: "/images/homeimage/report3_premium.png",
+        imageSrc: "/images/homeimage/report3_premium.webp",
         imageAlt: "Examination Management Dashboard",
         isImageRight: true,
         listItems: [
@@ -340,7 +340,7 @@ const coreModulesData = [
             imageGlow: "from-amber-400/10 to-orange-400/10",
             imageBacking: "from-amber-400/15 to-orange-400/15"
         },
-        imageSrc: "/images/homeimage/report4_premium.png",
+        imageSrc: "/images/homeimage/report4_premium.webp",
         imageAlt: "Placement Management Dashboard",
         isImageRight: false,
         listItems: [
@@ -432,7 +432,7 @@ const coreModulesData = [
             imageGlow: "from-purple-400/10 to-indigo-400/10",
             imageBacking: "from-purple-400/15 to-indigo-400/15"
         },
-        imageSrc: "/images/homeimage/report7_premium.png",
+        imageSrc: "/images/homeimage/report7_premium.webp",
         imageAlt: "Transportation Management Dashboard",
         isImageRight: true,
         listItems: [
@@ -462,7 +462,7 @@ const coreModulesData = [
             imageGlow: "from-blue-500/10 to-cyan-500/10",
             imageBacking: "from-blue-500/15 to-cyan-500/15"
         },
-        imageSrc: "/images/homeimage/report8_premium.png",
+        imageSrc: "/images/homeimage/report8_premium.webp",
         imageAlt: "Hostel Management Dashboard",
         isImageRight: false,
         listItems: [
@@ -492,7 +492,7 @@ const coreModulesData = [
             imageGlow: "from-pink-400/10 to-rose-400/10",
             imageBacking: "from-pink-400/15 to-rose-400/15"
         },
-        imageSrc: "/images/homeimage/parent_mgmt_premium.png",
+        imageSrc: "/images/homeimage/parent_mgmt_premium.webp",
         imageAlt: "Parent Management Dashboard",
         isImageRight: true,
         listItems: [
@@ -524,7 +524,7 @@ const coreModulesData = [
             imageGlow: "from-teal-400/10 to-emerald-400/10",
             imageBacking: "from-teal-400/15 to-emerald-400/15"
         },
-        imageSrc: "/images/homeimage/comm_mgmt_premium.png",
+        imageSrc: "/images/homeimage/comm_mgmt_premium.webp",
         imageAlt: "Communication Management Dashboard",
         isImageRight: false,
         listItems: [

@@ -84,7 +84,7 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 transform-gpu h-20 md:h-24 flex items-center ${isTransparent ? 'bg-transparent border-b border-transparent' : 'bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm'}`}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 transform-gpu h-20 md:h-24 flex items-center ${isTransparent ? 'bg-transparent border-b border-transparent' : 'bg-white/95 border-b border-slate-200 shadow-sm'}`}
       >
         <div className="w-full px-4 md:px-8">
           <div className="flex items-center justify-between h-full">
@@ -94,8 +94,11 @@ const Navbar = () => {
                 <div className="relative">
                   <div className="absolute inset-0 bg-primary/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <img
-                    src="/logo/LST Logo_No Background.png"
+                    src="/logo/LST Logo_No Background.webp"
                     alt="LEARNSQUARE"
+                    width={560}
+                    height={224}
+                    decoding="async"
                     className="w-40 md:w-56 h-auto object-contain transition-all duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -143,7 +146,7 @@ const Navbar = () => {
                           exit={{ opacity: 0, scale: 0.9, y: 10 }}
                           className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[100]"
                         >
-                          <div className="bg-white/95 backdrop-blur-xl border border-slate-200 shadow-[0_30px_60px_rgba(0,0,0,0.1)] overflow-hidden rounded-[2rem] min-w-[580px] p-2">
+                          <div className="bg-white/95 border border-slate-200 shadow-[0_30px_60px_rgba(0,0,0,0.1)] overflow-hidden rounded-[2rem] min-w-[580px] p-2">
                             <div className="grid grid-cols-3 gap-1">
                               {products.map((p) => (
                                 <Link
@@ -239,7 +242,7 @@ const Navbar = () => {
                     {/* Animated Gradient Edge */}
                     <div className={`absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 group-hover/login:opacity-100 transition-opacity duration-500 ${isTransparent ? 'opacity-40' : 'opacity-100'}`} style={{ backgroundSize: '200% 100%', animation: 'gradient-x 3s linear infinite' }} />
                     {/* Core pill (Transparent mode: frosted glass, Solid mode: dark base) */}
-                    <div className={`absolute inset-[1.5px] rounded-full transition-all duration-500 ${isTransparent ? 'bg-black/40 backdrop-blur-xl group-hover/login:bg-black/10 group-hover/login:backdrop-blur-sm' : 'bg-slate-900 group-hover/login:bg-slate-800'}`} />
+                    <div className={`absolute inset-[1.5px] rounded-full transition-all duration-500 ${isTransparent ? 'bg-black/50 backdrop-blur-md group-hover/login:bg-black/20' : 'bg-slate-900 group-hover/login:bg-slate-800'}`} />
 
                     <span className="relative z-10 flex items-center gap-2 text-[13px] font-black uppercase tracking-[0.15em] text-white">
                       Login
@@ -268,7 +271,7 @@ const Navbar = () => {
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
               className="lg:hidden absolute top-20 inset-x-4 z-40 max-h-[80vh] overflow-y-auto"
             >
-              <div className="bg-white/95 backdrop-blur-xl border border-slate-200 rounded-[2rem] p-4 sm:p-6 shadow-2xl space-y-1">
+              <div className="bg-white/95 border border-slate-200 rounded-[2rem] p-4 sm:p-6 shadow-2xl space-y-1">
                 {isAdmin && (
                   <div className="pb-4 border-b border-slate-100">
                     <button

@@ -14,8 +14,8 @@ interface TeamCard {
 }
 
 const defaultCards: TeamCard[] = [
-  { id: 1, image: "/images/homeimage/sandeep bandari.jpg", name: "Sandeep Bandari", designation: "Founder & CEO" },
-  { id: 2, image: "/alekya mam.jpeg", name: "Alekya Avula", designation: "Co-Founder & Director" },
+  { id: 1, image: "/images/homeimage/sandeep bandari.webp", name: "Sandeep Bandari", designation: "Founder & CEO" },
+  { id: 2, image: "/alekya mam.webp", name: "Alekya Avula", designation: "Co-Founder & Director" },
   { id: 3, image: "/sir.jpeg", name: "Gopinath Puralachetty", designation: "Chief Marketing Officer" },
 ];
 

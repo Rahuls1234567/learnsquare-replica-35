@@ -24,7 +24,7 @@ export const DEFAULT_TEAM_GRID: TeamGridMember[] = [
         id: "g-seed-1",
         name: "Alekya Avula",
         role: "Co-Founder & Director",
-        image: "/alekya mam.jpeg",
+        image: "/alekya mam.webp",
     },
     {
         id: "g-seed-2",

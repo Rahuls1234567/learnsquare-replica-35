@@ -4,6 +4,8 @@ const nextConfig = {
     // doubling all DB queries and making dev 2x slower.
     reactStrictMode: false,
     images: {
+        formats: ['image/avif', 'image/webp'],
+        minimumCacheTTL: 31536000,
         remotePatterns: [
             {
                 protocol: 'https',

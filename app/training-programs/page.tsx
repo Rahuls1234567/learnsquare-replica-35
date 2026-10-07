@@ -72,7 +72,7 @@ const TrainingProgramsPage = () => {
             id: "crt",
             title: "CRT",
             desc: "Equip students with comprehensive skills in Aptitude, Verbal, Reasoning & Soft Skills",
-            img: "/images/illustrations/crt_program.png",
+            img: "/images/illustrations/crt_program.webp",
             details: [
                 {
                     subtitle: "Generative AI",
@@ -107,7 +107,7 @@ const TrainingProgramsPage = () => {
             id: "data-science",
             title: "Data Science",
             desc: "Equip students with comprehensive Data Science skills in Python and R for Data Analysis",
-            img: "/images/illustrations/data_science.png",
+            img: "/images/illustrations/data_science.webp",
             details: [
                 {
                     subtitle: "Foundation",
@@ -140,7 +140,7 @@ const TrainingProgramsPage = () => {
             id: "python-fullstack",
             title: "Python Full Stack",
             desc: "Equip students with the skills to develop, implement, and deploy full-stack web applications",
-            img: "/images/illustrations/python_fullstack.png",
+            img: "/images/illustrations/python_fullstack.webp",
             details: [
                 {
                     subtitle: "Frontend Development",
@@ -168,7 +168,7 @@ const TrainingProgramsPage = () => {
             id: "java-fullstack",
             title: "Java Full Stack",
             desc: "Equip students with the skills to develop, implement, and deploy full-stack web applications",
-            img: "/images/illustrations/java_fullstack.png",
+            img: "/images/illustrations/java_fullstack.webp",
             details: [
                 {
                     subtitle: "Frontend Development",
@@ -224,7 +224,7 @@ const TrainingProgramsPage = () => {
             id: "mobile-dev",
             title: "Mobile Development Full Stack",
             desc: "Refers to proficiency in both front-end and back-end aspects of mobile app development",
-            img: "/images/illustrations/mobile_dev.png",
+            img: "/images/illustrations/mobile_dev.webp",
             details: [
                 {
                     subtitle: "Frontend Development",
@@ -252,7 +252,7 @@ const TrainingProgramsPage = () => {
             id: "cyber-security",
             title: "Cyber Security and Ethical Hacking",
             desc: "Proactively identify and address security risks, protect digital assets, uphold ethical standards",
-            img: "/images/illustrations/cyber_security.png",
+            img: "/images/illustrations/cyber_security.webp",
             details: [
                 {
                     subtitle: "Introduction to Cyber Security",
@@ -425,7 +425,7 @@ const TrainingProgramsPage = () => {
             id: "blockchain",
             title: "Blockchain Technology",
             desc: "Blockchain Technology is to offer a decentralized, secure, and transparent way to record transactions",
-            img: "/images/illustrations/blockchain.png",
+            img: "/images/illustrations/blockchain.webp",
             details: [
                 {
                     subtitle: "Introduction to Blockchain",
@@ -497,7 +497,7 @@ const TrainingProgramsPage = () => {
             id: "cloud-computing",
             title: "Cloud Computing",
             desc: "Cloud Computing is to provide scalable, on-demand access to computing resources, including storage",
-            img: "/images/illustrations/cloud_computing.png",
+            img: "/images/illustrations/cloud_computing.webp",
             details: [
                 {
                     subtitle: "Introduction to Cloud Computing",
@@ -567,7 +567,7 @@ const TrainingProgramsPage = () => {
             id: "quantitative-aptitude",
             title: "Quantitative Aptitude",
             desc: "Number Systems, Percentages, Profit and Loss",
-            img: "/images/illustrations/quantitative_aptitude.png",
+            img: "/images/illustrations/quantitative_aptitude.webp",
             details: [
                 {
                     subtitle: "Quantitative Aptitude",
@@ -590,7 +590,7 @@ const TrainingProgramsPage = () => {
             id: "logical-reasoning",
             title: "Logical Reasoning",
             desc: "Directions, Clocks, Calendars",
-            img: "/images/illustrations/logical_reasoning.png",
+            img: "/images/illustrations/logical_reasoning.webp",
             details: [
                 {
                     subtitle: "Logical Reasoning",
@@ -619,7 +619,7 @@ const TrainingProgramsPage = () => {
             id: "verbal-ability",
             title: "Verbal-Ability",
             desc: "Articles/Nouns/ Adjectives & Prepositions Rules, Sentence formation, Verbs, & S.V.A Rules",
-            img: "/images/illustrations/verbal_ability.png",
+            img: "/images/illustrations/verbal_ability.webp",
             details: [
                 {
                     subtitle: "Verbal-Ability",
@@ -639,7 +639,7 @@ const TrainingProgramsPage = () => {
             id: "resume-interview-skills",
             title: "Resume Writing Interview Skills and Soft-Skills",
             desc: "Resume Writing, LinkedIn Profile Creation, Personal Interviews - Strategies and Tips",
-            img: "/images/illustrations/resume_interview_skills.png",
+            img: "/images/illustrations/resume_interview_skills.webp",
             details: [
                 {
                     subtitle: "Resume Writing Interview Skills and Soft-Skills",
@@ -656,7 +656,7 @@ const TrainingProgramsPage = () => {
             id: "statistics-spss",
             title: "Statistics / Data Analysis in SPSS: Inferential Statistics",
             desc: "Statistics / Data Analysis in SPSS: Inferential Statistics",
-            img: "/images/illustrations/statistics_spss.png",
+            img: "/images/illustrations/statistics_spss.webp",
             details: [
                 {
                     subtitle: "Statistics / Data Analysis in SPSS: Inferential Statistics",

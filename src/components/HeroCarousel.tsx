@@ -3,10 +3,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { EditableContent } from "./EditableContent";
-
-const ParticlesBackground = dynamic(() => import("./ParticlesBackground"), { ssr: false, loading: () => null });
+import ParticlesBackground from "./ParticlesBackground";
 
 const slides = [
   {
@@ -156,11 +154,16 @@ const HeroCarousel = () => {
   return (
     <section className="relative bg-transparent overflow-hidden min-h-screen flex items-center pt-24 perspective-[2000px]">
       {/* SaaS Mesh Gradient Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/20 rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.05)_0%,transparent_70%)]" />
-      </div>
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
+        style={{
+          backgroundImage:
+            'radial-gradient(35% 40% at 8% 8%, rgba(37, 99, 235, 0.20), transparent 70%),' +
+            'radial-gradient(35% 40% at 92% 92%, rgba(79, 70, 229, 0.20), transparent 70%),' +
+            'radial-gradient(circle at center, rgba(99, 102, 241, 0.05) 0%, transparent 70%)',
+        }}
+      />
 
       <ParticlesBackground />
 
@@ -199,7 +202,7 @@ const HeroCarousel = () => {
 
                   <div className="relative">
                     {/* Atmospheric Glow Behind Title */}
-                    <div className={`absolute -inset-10 bg-gradient-to-r ${slide.color} opacity-10 blur-[80px] rounded-full z-[0] pointer-events-none`} />
+                    <div className={`absolute -inset-10 bg-gradient-to-r ${slide.color} opacity-10 blur-2xl rounded-full z-[0] pointer-events-none`} />
                     <EditableContent 
                         contentKey={`hero_slide_${current}_title`}
                         description={`Hero Slide ${current} Title`}
@@ -256,11 +259,7 @@ const HeroCarousel = () => {
                     {slide.link.startsWith('http') ? (
                       <a href={slide.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
                         <div className="relative">
-                          <motion.div
-                            animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.3, 0.1] }}
-                            transition={{ duration: 4, repeat: Infinity }}
-                            className={`absolute -inset-6 rounded-full blur-3xl bg-indigo-400`}
-                          />
+                          <div className="animate-pulse-glow absolute -inset-6 rounded-full blur-2xl bg-indigo-400" />
                           <Button className="relative h-20 w-20 rounded-full bg-indigo-500/20 backdrop-blur-md border border-indigo-400/30 text-white hover:scale-110 active:scale-95 transition-all shadow-[0_0_30px_rgba(99,102,241,0.2)] flex items-center justify-center p-0 group-hover:bg-indigo-500/40 group-hover:border-indigo-400/50">
                             <ChevronRight className="w-10 h-10 text-indigo-100 group-hover:translate-x-1 transition-transform" />
                           </Button>
@@ -275,11 +274,7 @@ const HeroCarousel = () => {
                     ) : (
                       <Link href={slide.link} className="flex items-center gap-6 group">
                         <div className="relative">
-                          <motion.div
-                            animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.3, 0.1] }}
-                            transition={{ duration: 4, repeat: Infinity }}
-                            className={`absolute -inset-6 rounded-full blur-3xl bg-indigo-400`}
-                          />
+                          <div className="animate-pulse-glow absolute -inset-6 rounded-full blur-2xl bg-indigo-400" />
                           <Button className="relative h-20 w-20 rounded-full bg-indigo-500/20 backdrop-blur-md border border-indigo-400/30 text-white hover:scale-110 active:scale-95 transition-all shadow-[0_0_30px_rgba(99,102,241,0.2)] flex items-center justify-center p-0 group-hover:bg-indigo-500/40 group-hover:border-indigo-400/50">
                             <ChevronRight className="w-10 h-10 text-indigo-100 group-hover:translate-x-1 transition-transform" />
                           </Button>
@@ -299,8 +294,13 @@ const HeroCarousel = () => {
               {/* Extreme Right Content - Floating Glass Features */}
               <div className="lg:col-span-5 relative h-full flex items-center justify-center">
                 {/* Central AI Core Glowing Background */}
-                <motion.div
-                  className="absolute w-[120%] aspect-square bg-gradient-to-tr from-indigo-500/10 via-purple-500/5 to-transparent blur-[100px]"
+                <div
+                  aria-hidden="true"
+                  className="absolute w-[120%] aspect-square rounded-full"
+                  style={{
+                    backgroundImage:
+                      'radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(168, 85, 247, 0.06) 40%, transparent 72%)',
+                  }}
                 />
 
                 <motion.div

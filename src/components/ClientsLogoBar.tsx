@@ -80,8 +80,15 @@ const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
 
       {/* Colorful Ambient Grid & Glows for Maximum Pop */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f472b610_1px,transparent_1px),linear-gradient(to_bottom,#818cf810_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
-      <div className="absolute -top-40 -left-20 w-[600px] h-[600px] bg-pink-400/20 rounded-full blur-[120px] mix-blend-multiply pointer-events-none" />
-      <div className="absolute top-20 -right-20 w-[600px] h-[600px] bg-indigo-400/20 rounded-full blur-[120px] mix-blend-multiply pointer-events-none" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            'radial-gradient(30% 45% at 0% 0%, rgba(244, 114, 182, 0.14), transparent 70%),' +
+            'radial-gradient(30% 45% at 100% 15%, rgba(129, 140, 248, 0.14), transparent 70%)',
+        }}
+      />
 
       <div className="container px-4 mx-auto relative z-10">
         {/* Vibrant Floating Header */}
@@ -135,11 +142,11 @@ const ClientsLogoBar = ({ onLogoClick }: ClientsLogoBarProps) => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[450px] md:h-[450px] rounded-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-fuchsia-400 via-purple-500 to-indigo-600 shadow-[inset_0_0_80px_rgba(255,255,255,0.3),0_10px_60px_rgba(168,85,247,0.4)] pointer-events-none" />
 
         {/* Extra glowing orbs tightly grouped around the core circle for color bleeding */}
-        <div className="absolute top-1/2 left-[40%] -translate-y-[80%] w-[150px] h-[150px] bg-pink-400 rounded-full blur-[40px] opacity-60 pointer-events-none mix-blend-screen" />
-        <div className="absolute top-[60%] left-[60%] w-[200px] h-[200px] bg-cyan-400 rounded-full blur-[50px] opacity-60 pointer-events-none mix-blend-screen" />
+        <div className="absolute top-1/2 left-[40%] -translate-y-[80%] w-[150px] h-[150px] bg-pink-400/50 rounded-full blur-2xl opacity-70 pointer-events-none" />
+        <div className="absolute top-[60%] left-[60%] w-[200px] h-[200px] bg-cyan-400/50 rounded-full blur-2xl opacity-70 pointer-events-none" />
 
         {/* The Frosted Glass Pill Container */}
-        <div className="absolute top-1/2 left-[2%] right-[2%] md:left-[5%] md:right-[5%] -translate-y-1/2 h-[180px] sm:h-[220px] md:h-[280px] bg-white/20 backdrop-blur-[24px] rounded-[3rem] sm:rounded-[4rem] md:rounded-[6rem] shadow-[0_8px_40px_rgba(30,27,75,0.08),inset_0_0_0_1.5px_rgba(255,255,255,0.8),inset_0_0_30px_rgba(255,255,255,0.5)] pointer-events-none z-0" />
+        <div className="absolute top-1/2 left-[2%] right-[2%] md:left-[5%] md:right-[5%] -translate-y-1/2 h-[180px] sm:h-[220px] md:h-[280px] bg-white/30 backdrop-blur-lg rounded-[3rem] sm:rounded-[4rem] md:rounded-[6rem] shadow-[0_8px_40px_rgba(30,27,75,0.08),inset_0_0_0_1.5px_rgba(255,255,255,0.8),inset_0_0_30px_rgba(255,255,255,0.5)] pointer-events-none z-0" />
 
         {/* Intense Edge Fades (Blends the pill and track seamlessly into white bg) */}
         <div className="absolute inset-y-0 left-0 w-32 md:w-[350px] bg-gradient-to-r from-white via-white/95 to-transparent z-20 pointer-events-none" />

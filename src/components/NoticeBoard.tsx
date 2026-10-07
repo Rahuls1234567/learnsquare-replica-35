@@ -54,7 +54,7 @@ const NoticeBoard = () => {
         return (
           <div
             key={notice.id}
-            className="relative overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-b from-[#150a2e]/97 to-[#0a0518]/97 text-white shadow-[0_30px_80px_-10px_rgba(0,0,0,0.55)] backdrop-blur-xl ring-1 ring-white/5"
+            className="relative overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-b from-[#150a2e] to-[#0a0518] text-white shadow-[0_30px_80px_-10px_rgba(0,0,0,0.55)] ring-1 ring-white/5"
           >
             <div className="absolute inset-x-0 top-0 z-10 h-[2px] bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-cyan-300" />
 
@@ -63,6 +63,8 @@ const NoticeBoard = () => {
                 <img
                   src={notice.image}
                   alt={notice.title || "Notice"}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0518] via-[#0a0518]/10 to-transparent" />

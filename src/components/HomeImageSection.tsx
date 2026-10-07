@@ -203,11 +203,9 @@ const HomeImageSection = () => {
                                 whileHover={{ y: -10, scale: 1.02 }}
                                 className={`group relative bg-gradient-to-br ${management.color} border border-white/20 rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] p-4 sm:p-6 md:p-8 shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_50px_100px_rgba(0,0,0,0.2)] transition-all duration-700 flex flex-col items-start overflow-hidden cursor-pointer text-white`}
                             >
-                                {/* Glass Texture & Depth Overlay */}
-                                <div className="absolute inset-0 opacity-[0.05] pointer-events-none group-hover:opacity-[0.1] transition-opacity mix-blend-overlay"
-                                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
-                                />
-                                <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                {/* Depth Overlay (per-card SVG feTurbulence noise removed — it
+                                    forced Safari to rasterise a filter for every card). */}
+                                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                                 <div className="flex items-start justify-between w-full mb-4 sm:mb-8 relative z-10">
                                     <div className="relative">

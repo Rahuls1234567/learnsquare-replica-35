@@ -224,7 +224,7 @@ const SemesterPrepPage = () => {
             <Navbar />
 
             {/* Hero Section */}
-            <section className="relative pt-24 pb-16 overflow-hidden bg-[#080118] text-white noise-overlay">
+            <section className="relative pt-24 pb-16 overflow-hidden bg-[#080118] text-white">
                 <AntigravityBackground />
                 <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]">
                     <svg viewBox="0 0 1440 800" className="w-full h-full">
@@ -567,7 +567,7 @@ const SemesterPrepPage = () => {
                             {
                                 name: "Rishab",
                                 role: "II Year CSE Student",
-                                image: "/images/semister/user1.jpeg",
+                                image: "/images/semister/user1.webp",
                                 text: "I am such a kind of Student who always do Last Minute Preparation. 😆. This App Really helped me alot where I found all Previous Year Question Papers and Answers. User Interface is Amazing. Most Importantly its Subscription Fee is Pocket Friendly 😂 😂"
                             },
                             {

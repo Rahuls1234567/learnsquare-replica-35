@@ -1,6 +1,5 @@
 import { ArrowRight, Cpu, Code2, Gem, BookMarked, Presentation, ClipboardList, Zap } from "lucide-react";
 import { motion } from "framer-motion";
-import AntigravityBackground from "./AntigravityBackground";
 import Link from "next/link";
 import { EditableContent } from "./EditableContent";
 

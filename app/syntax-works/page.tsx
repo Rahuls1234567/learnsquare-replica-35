@@ -349,7 +349,7 @@ const SyntaxWorksPage = () => {
                                 contentKey="syntax_feature_1"
                                 title="Comprehensive <br /> Practice Test Series"
                                 desc="Boost your learning with our meticulously designed Practice Test Series, crafted to help you assess your knowledge and achieve mastery in world-class coding assessments."
-                                img="/images/syntaxworks/practice_test_premium.png"
+                                img="/images/syntaxworks/practice_test_premium.webp"
                                 details={[
                                     "Customizable question banks with 50,000+ problems",
                                     "Real-time performance metrics and leaderboard",
@@ -363,7 +363,7 @@ const SyntaxWorksPage = () => {
                                 contentKey="syntax_feature_2"
                                 title="Practice Multiple <br /> Programming Languages"
                                 desc="Our cross-language platform allows you to switch between environments seamlessly, supporting every standard protocol with zero latency."
-                                img="/images/syntaxworks/programming_lang_premium.png"
+                                img="/images/syntaxworks/programming_lang_premium.webp"
                                 reverse={true}
                                 details={[
                                     "Native support for Python, Java, C, C++, and Rust",
@@ -378,7 +378,7 @@ const SyntaxWorksPage = () => {
                                 contentKey="syntax_feature_3"
                                 title="Integrated <br /> Environment (IDE)"
                                 desc="Our platform offers a state-of-the-art IDE designed to streamline your coding experience, enable you to write, test, and debug code all in one place."
-                                img="/images/syntaxworks/ide_premium.png"
+                                img="/images/syntaxworks/ide_premium.webp"
                                 details={[
                                     "Multi-file project support with directory explorer",
                                     "Cloud-based workspace for persistent progress",
@@ -392,7 +392,7 @@ const SyntaxWorksPage = () => {
                                 contentKey="syntax_feature_4"
                                 title="Error Detection and <br /> Debugging Tools"
                                 desc="Advanced debugging support for various languages, with detailed error messages and solutions across different coding environments."
-                                img="/images/syntaxworks/debugging_premium.png"
+                                img="/images/syntaxworks/debugging_premium.webp"
                                 reverse={true}
                                 details={[
                                     "Visual step-by-step code execution tracing",

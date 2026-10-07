@@ -144,7 +144,7 @@ const MySkillForgePage = () => {
             title: "Phase I: Foundational Skills Development",
             subtitle: "Phase I: Foundational Skills Development:",
             description: "This phase focuses on building core technical and communication skills. Students participate in live boot camps and recorded courses covering:",
-            image: "/images/illustrations/java_fullstack.png",
+            image: "/images/illustrations/java_fullstack.webp",
             items: [
                 { label: "Programming Logic", desc: "Boot camps that help students develop problem-solving abilities, improve algorithm design, and enhance debugging skills." },
                 { label: "Business Communication & Technical Writing", desc: "Recorded courses aimed at improving written and verbal communication, essential for professional success." },
@@ -563,7 +563,7 @@ const MySkillForgePage = () => {
                                 {
                                     title: "Comprehensive 3-Phase Program",
                                     desc: "A step-by-step approach combining live boot camps, recorded courses, and an intensive 6-week hackathon-style Internship.",
-                                    img: "/images/features/feature_3phase.png",
+                                    img: "/images/features/feature_3phase.webp",
                                     icon: Rocket,
                                     color: "#6366f1"
                                 },
@@ -577,28 +577,28 @@ const MySkillForgePage = () => {
                                 {
                                     title: "Live & Recorded Sessions",
                                     desc: "Flexible learning through expert-led live sessions and on-demand recorded content, tailored for your schedule.",
-                                    img: "/images/features/feature_sessions.png",
+                                    img: "/images/features/feature_sessions.webp",
                                     icon: Zap,
                                     color: "#ec4899"
                                 },
                                 {
                                     title: "Student Portal",
                                     desc: "Our student portal offers a streamlined learning experience with easy access to video lessons and practice tests.",
-                                    img: "/images/features/feature_portal.png",
+                                    img: "/images/features/feature_portal.webp",
                                     icon: Layout,
                                     color: "#8b5cf6"
                                 },
                                 {
                                     title: "Comprehensive Skill Set",
                                     desc: "Develop technical proficiency, problem-solving abilities, and communication skills to become a well-rounded engineer.",
-                                    img: "/images/features/feature_skills.png",
+                                    img: "/images/features/feature_skills.webp",
                                     icon: Brain,
                                     color: "#10b981"
                                 },
                                 {
                                     title: "6-Week Virtual Internship",
                                     desc: "Gain hands-on industry experience through a focused internship, applying your skills to real-world projects.",
-                                    img: "/images/features/feature_internship.png",
+                                    img: "/images/features/feature_internship.webp",
                                     icon: Briefcase,
                                     color: "#3b82f6"
                                 }
