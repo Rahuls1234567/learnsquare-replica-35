@@ -10,26 +10,27 @@ import { Textarea } from "@/src/components/ui/textarea";
 import { Button } from "@/src/components/ui/button";
 import {
     Brain, BookOpen, Award, Shield,
-    LayoutDashboard, CreditCard, FileText, Video,
-    Code, Briefcase, MonitorPlay, Users,
+    LayoutDashboard, CreditCard, FileText,
+    Code, Briefcase,
     ClipboardList, Bell, Check, Rocket, Loader2,
     User, Phone, Mail, Building2, MapPin, IdCard, MessageSquare,
-    ShieldCheck, Ticket, Bot
+    GraduationCap, Users, ClipboardCheck, ShieldCheck, BedDouble, Ticket, Library, Bus, Megaphone, HeartHandshake, Bot,
+    type LucideIcon
 } from 'lucide-react';
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { toast } from "sonner";
 import { EditableContent } from "@/src/components/EditableContent";
-import AicasNewModules from "@/src/components/AicasNewModules";
+import { AicasNewModuleSection, type AicasNewModuleId } from "@/src/components/AicasNewModules";
 
 
-const AndroidAppleIcon = ({ size = 24 }: { size?: number }) => (
-    <div className="flex items-center gap-1.5" style={{ width: size * 2.2, height: size }}>
-        <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+const AndroidAppleIcon = ({ className = "" }: { className?: string }) => (
+    <div className={`${className} !w-auto flex items-center justify-center gap-1`}>
+        <svg viewBox="0 0 24 24" className="h-[70%] w-auto" fill="currentColor">
             <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4483-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997zm-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997zm11.4045-6.02l1.9973-3.4592a.416.416 0 0 0-.1521-.5676.416.416 0 0 0-.5676.1521l-2.0223 3.503C15.5902 8.244 13.8533 7.8512 12 7.8512s-3.5902.3928-5.1367 1.0988L4.841 5.447a.416.416 0 0 0-.5676-.1521.416.416 0 0 0-.1521.5676l1.9973-3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.44z" />
         </svg>
-        <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+        <svg viewBox="0 0 24 24" className="h-[70%] w-auto" fill="currentColor">
             <path d="M16.365 20.473c-1.332 1.349-2.766 1.4-4.321.472-1.46-.867-2.822-.867-4.28 0-1.636 1.01-2.909.886-4.24-.49C1.192 16.59-1.22 9.073 2.502 4.414c1.64-2.054 3.791-2.614 5.378-2.614 1.708 0 3.3.945 4.35 1.455.975-.41 2.545-1.574 4.544-1.574 2.825 0 4.881 1.6 5.86 3.65-5.286 2.503-4.3 8.356.9 10.428-1.127 2.222-2.182 3.821-3.17 4.714m-3.86-17.74c1.554-1.95 2.155-4.47.16-5.83-2.138-1.554-4.8 1.144-4.8 1.144-1.342 1.6-1.536 3.96.2 5.093 1.042.61 2.378.136 3.32-.423" />
         </svg>
     </div>
@@ -205,24 +206,18 @@ const LiveDashboardMockup = ({
 );
 
 const features = [
-    { title: "AI Powered", text: "Our ERP Enhances decision-making with predictive insights, automates administrative tasks for efficiency, and provides personalized learning", icon: Brain },
-    { title: "NEP 2020 Compliant", text: "Our Campus ERP is NEP 2020-compliant, offering flexible, personalized learning paths and a curriculum structure", icon: BookOpen },
-    { title: "NBA, NAAC, NIRF COMPLIANT", text: "Our ERP ensures compliance with NBA, NAAC, and NIRF standards by facilitating streamlined accreditation processes", icon: Award },
-    { title: "Excl. Android & iOS Apps", text: "Personalised College Apps on Play Store, App Store & Web Applications for Seamless Access on Browser & Mobile.", icon: AndroidAppleIcon },
-    { title: "Admin Panel Access", text: "Exclusive Admin Access to Relevant Stakeholders of the College to Edit, Upload, Create Various Data or Fields", icon: Shield },
-    { title: "Comprehensive Dashboard", text: "Interactive Dashboards for College Management, Principal, Dean and Various Department and Administration Heads for Insightful Data and Efficient Management", icon: LayoutDashboard },
-    { title: "Integrated Payment Gateway", text: "Collect Fees from Students and also other Transactions through Integrated Payment Gateway on Mobile and also through Browser.", icon: CreditCard },
-    { title: "Semester Exam prep. Content", text: "Questions and Answers, Videos*, Relevant Study Material* Curated by Subject Experts Covering", icon: FileText },
-    { title: "Upskilling Videos", text: "Video Courses on Campus Placement Programmes , Company-wise Placement Cracker Video Courses Recorded by Subject Experts", icon: Video },
-    { title: "Multi Language Coding Compiler", text: "Dedicated Multi Language Coding Compiler for Students for Coding Practice & Hackathons", icon: Code },
-    { title: "Career Updates", text: "Regular Updates on Placement Opportunities and Notifications Related to Higher Education and PSUs", icon: Briefcase },
-    { title: "Free Integrated Online Class Platform", text: "Take Unlimited Classes from 10 - 10000 Students with No Extra Cost.", icon: MonitorPlay },
-    { title: "Wall - Facebook of the College", text: "Exclusive Inbuilt Social Media Platform for College to share your thoughts with the Entire Campus.", icon: Users },
-    { title: "Dedicated Test Engine", text: "Integrated Test Engine to conduct Various Online Assessment Tests with detailed Result Analyses", icon: ClipboardList },
-    { title: "Effective Communication", text: "Stay connected with entire Campus Stakeholders through Timely Alerts, Circulars, and updates", icon: Bell },
-    { title: "Accreditation Management", text: "Stay Inspection-Ready All Year with Centralized NAAC, NBA, OBE & NIRF Documentation and Outcome-Based Reports", icon: ShieldCheck },
-    { title: "Ticketing Management", text: "Raise, Assign & Track Academic, Administrative and Technical Issues with Priorities, Auto-Escalation and 48-Hour Resolution Monitoring", icon: Ticket },
-    { title: "LIA - AI Assistant", text: "Ask AICAS in Plain Language and Get Instant Answers, Insights and Guided Navigation Across Every ERP Module", icon: Bot },
+    { cmsIndex: 0, title: "AI Powered", text: "Predictive insights for smarter decisions, automated admin tasks for efficiency and personalized learning for students.", icon: Brain },
+    { cmsIndex: 1, title: "NEP 2020 Compliant", text: "Built for NEP 2020 with flexible credit structures, multidisciplinary pathways and personalized learning journeys.", icon: BookOpen },
+    { cmsIndex: 2, title: "NBA, NAAC & NIRF Compliant", text: "Streamlined accreditation with ready-to-use data, outcome tracking and reports aligned to NBA, NAAC and NIRF norms.", icon: Award },
+    { cmsIndex: 3, title: "Exclusive Android & iOS Apps", text: "Personalized college apps on the Play Store and App Store, plus a web app for seamless access on any device.", icon: AndroidAppleIcon },
+    { cmsIndex: 4, title: "Admin Panel Access", text: "Exclusive admin access for key stakeholders to create, edit and upload institutional data and fields with ease.", icon: Shield },
+    { cmsIndex: 5, title: "Comprehensive Dashboard", text: "Interactive dashboards for management, principal, deans and department heads with real-time, insightful data.", icon: LayoutDashboard },
+    { cmsIndex: 6, title: "Integrated Payment Gateway", text: "Collect student fees and other payments securely through an integrated gateway on the mobile app and web.", icon: CreditCard },
+    { cmsIndex: 7, title: "Semester Exam Prep Content", text: "Expert-curated questions and answers, videos and study material to help students prepare for semester exams.", icon: FileText },
+    { cmsIndex: 9, title: "Multi Language Coding Compiler", text: "A dedicated multi-language coding compiler for students to practice programming and take part in hackathons.", icon: Code },
+    { cmsIndex: 10, title: "Career Updates", text: "Regular updates on placement opportunities, higher education and PSU notifications delivered to every student.", icon: Briefcase },
+    { cmsIndex: 13, title: "Dedicated Test Engine", text: "An integrated test engine to conduct online assessments at any scale with detailed, actionable result analysis.", icon: ClipboardList },
+    { cmsIndex: 14, title: "Effective Communication", text: "Keep every campus stakeholder connected with timely alerts, circulars and updates across app, SMS and email.", icon: Bell },
 ];
 
 const coreModulesData = [
@@ -539,6 +534,32 @@ const coreModulesData = [
     }
 ];
 
+const coreModule = (titlePrefix: string, label: string, icon: LucideIcon) => {
+    const cmsIndex = coreModulesData.findIndex(m => m.titlePrefix === titlePrefix);
+    const module = coreModulesData[cmsIndex];
+    return { kind: "core" as const, module, cmsIndex, label, icon, anchor: `aicas-module-${titlePrefix.toLowerCase()}`, gradient: module.gradientText };
+};
+const newModule = (id: AicasNewModuleId, label: string, icon: LucideIcon, gradient: string) =>
+    ({ kind: "new" as const, id, label, icon, anchor: `aicas-${id}`, gradient });
+
+// Display order of every AICAS module. cmsIndex keeps each core module's saved CMS content attached to it.
+const moduleSequence = [
+    coreModule("Academic", "Academics", GraduationCap),
+    coreModule("Administration", "Administration", Building2),
+    newModule("crm", "Admission CRM", Users, "from-emerald-500 to-cyan-500"),
+    coreModule("Examination", "Examination", ClipboardCheck),
+    newModule("accreditation", "Accreditation", ShieldCheck, "from-violet-500 to-fuchsia-500"),
+    coreModule("Learning", "LMS", BookOpen),
+    coreModule("Placement", "Placement", Briefcase),
+    coreModule("Hostel", "Hostel", BedDouble),
+    newModule("ticketing", "Ticketing", Ticket, "from-amber-500 to-rose-500"),
+    coreModule("Library", "Library", Library),
+    coreModule("Transportation", "Transportation", Bus),
+    coreModule("Communication", "Communication", Megaphone),
+    coreModule("Parent", "Parent", HeartHandshake),
+    newModule("lia", "LIA", Bot, "from-indigo-500 to-sky-500"),
+];
+
 export default function Aicas() {
     const router = useRouter();
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
@@ -806,7 +827,7 @@ export default function Aicas() {
             </main>
 
             {/* Features Section - Redesigned as Premium Dark Mode (Obsidian) */}
-            <section className="py-32 relative overflow-hidden bg-[#020617] border-y border-white/5">
+            <section className="pt-16 md:pt-20 pb-24 md:pb-32 relative overflow-hidden bg-[#020617] border-y border-white/5">
                 {/* High-Fidelity Fluid Wave Background System */}
                 <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
                     {/* Radial Base Cinematic Glow */}
@@ -853,6 +874,44 @@ export default function Aicas() {
                 </div>
 
                 <div className="container mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+                    {/* Module Navigator: one box per module, in page order; click scrolls to that module */}
+                    <nav aria-label="AICAS modules" className="mb-20 md:mb-28">
+                        <div className="flex items-end justify-between gap-4 mb-6 md:mb-8">
+                            <div>
+                                <span className="text-indigo-400 font-bold tracking-[0.3em] md:tracking-[0.4em] uppercase text-[10px] md:text-xs">Explore AICAS</span>
+                                <h2 className="mt-2 text-2xl md:text-3xl font-black text-white tracking-tight">Integrated Modules</h2>
+                            </div>
+                            <span className="hidden sm:block text-xs md:text-sm font-bold text-slate-500">Tap a module to jump to it</span>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2.5 md:gap-3">
+                            {moduleSequence.map((slot, i) => (
+                                <motion.a
+                                    key={slot.anchor}
+                                    href={`#${slot.anchor}`}
+                                    onClick={(e) => {
+                                        const target = document.getElementById(slot.anchor);
+                                        if (!target) return;
+                                        e.preventDefault();
+                                        target.scrollIntoView({ behavior: "smooth", block: "start" });
+                                        history.replaceState(null, "", `#${slot.anchor}`);
+                                    }}
+                                    initial={{ opacity: 0, y: 12 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.4, delay: i * 0.03 }}
+                                    className="group/nav relative flex items-center gap-3 lg:flex-col lg:items-start lg:gap-3 rounded-xl md:rounded-2xl bg-white/[0.03] border border-white/[0.07] hover:border-white/20 hover:bg-white/[0.06] active:scale-[0.98] p-3 md:p-4 transition-all duration-300 min-w-0"
+                                >
+                                    <span className={`w-9 h-9 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-gradient-to-br ${slot.gradient} flex items-center justify-center shrink-0 shadow-lg md:group-hover/nav:scale-110 transition-transform duration-300`}>
+                                        <slot.icon className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                                    </span>
+                                    <span className="text-[13px] md:text-sm font-black text-slate-200 group-hover/nav:text-white leading-tight tracking-tight truncate lg:whitespace-normal">
+                                        {slot.label}
+                                    </span>
+                                </motion.a>
+                            ))}
+                        </div>
+                    </nav>
+
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -883,7 +942,7 @@ export default function Aicas() {
                         </div>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+                    <div className="flex flex-wrap justify-center gap-4 md:gap-8">
                         {features.map((feature, idx) => (
                             <motion.div
                                 key={idx}
@@ -891,25 +950,25 @@ export default function Aicas() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.6, delay: (idx % 3) * 0.1 }}
-                                className="group/feature relative p-6 pb-12 md:p-10 md:pb-16 rounded-[2rem] md:rounded-[3rem] bg-slate-900/60 border border-white/5 shadow-2xl transition-all duration-700 hover:border-indigo-500/30 md:hover:-translate-y-3 overflow-hidden flex flex-col items-start"
+                                className="group/feature relative w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(50%-1rem)] lg:w-[calc((100%-4rem)/3)] p-6 pb-12 md:p-8 md:pb-14 rounded-[2rem] md:rounded-[3rem] bg-slate-900/60 border border-white/5 shadow-2xl transition-all duration-700 hover:border-indigo-500/30 md:hover:-translate-y-3 overflow-hidden flex flex-col items-start"
                             >
                                 {/* Decorative Glow Accent */}
                                 <div className="absolute -inset-10 bg-gradient-to-br from-indigo-500/10 to-transparent opacity-0 group-hover/feature:opacity-100 blur-[80px] transition-all duration-1000" />
 
-                                <div className="relative z-10 w-12 h-12 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 md:mb-10 group-hover/feature:bg-indigo-600 group-hover/feature:scale-110 transition-all duration-500 shadow-2xl">
-                                    <feature.icon className="w-6 h-6 md:w-10 md:h-10 text-indigo-400 group-hover/feature:text-white transition-colors duration-500" />
+                                <div className="relative z-10 w-12 h-12 md:w-16 md:h-16 rounded-2xl md:rounded-[1.25rem] bg-white/5 border border-white/10 flex items-center justify-center mb-5 md:mb-7 group-hover/feature:bg-indigo-600 md:group-hover/feature:scale-110 transition-all duration-500 shadow-2xl">
+                                    <feature.icon className="w-6 h-6 md:w-8 md:h-8 text-indigo-400 group-hover/feature:text-white transition-colors duration-500" />
                                 </div>
 
-                                <div className="relative z-10 flex-grow w-full space-y-2 md:space-y-4 text-left">
+                                <div className="relative z-10 flex-grow w-full text-left">
                                     <EditableContent 
-                                        contentKey={`aicas_feature_${idx}`}
-                                        description={`AICAS Feature ${idx + 1}`}
+                                        contentKey={`aicas_feature_${feature.cmsIndex}`}
+                                        description={`AICAS Feature ${feature.cmsIndex + 1}`}
                                         defaultContent={
                                             <>
-                                                <h3 className="text-xl md:text-2xl font-black text-white tracking-tight leading-tight group-hover/feature:text-indigo-400 transition-colors">
+                                                <h3 className="text-xl md:text-[1.4rem] font-black text-white tracking-tight leading-snug lg:min-h-[2.75em] mb-2.5 md:mb-3 group-hover/feature:text-indigo-400 transition-colors">
                                                     {feature.title}
                                                 </h3>
-                                                <p className="text-slate-400 font-medium md:font-bold leading-relaxed transition-all duration-500 group-hover/feature:text-slate-200 text-sm md:text-base">
+                                                <p className="text-slate-400 font-medium leading-relaxed transition-colors duration-500 group-hover/feature:text-slate-300 text-sm md:text-[15px]">
                                                     {feature.text}
                                                 </p>
                                             </>
@@ -917,7 +976,7 @@ export default function Aicas() {
                                     />
                                 </div>
 
-                                <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 h-1.5 w-10 bg-white/5 rounded-full group-hover/feature:w-24 group-hover/feature:bg-indigo-500 transition-all duration-700" />
+                                <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 h-1.5 w-10 bg-white/5 rounded-full group-hover/feature:w-24 group-hover/feature:bg-indigo-500 transition-all duration-700" />
                             </motion.div>
                         ))}
                     </div>
@@ -929,25 +988,33 @@ export default function Aicas() {
                 {/* Global Connective Background */}
                 <div className="absolute inset-0 bg-slate-950 -z-10" />
 
-                {coreModulesData.map((module, idx) => (
+                {moduleSequence.map((slot, pos) => {
+                    const isImageRight = pos % 2 === 0;
+                    const sectionBg = pos % 2 === 0 ? 'bg-[#020617]' : 'bg-transparent';
+                    if (slot.kind === "new") {
+                        return <AicasNewModuleSection key={slot.id} id={slot.id} visualRight={isImageRight} className={sectionBg} />;
+                    }
+                    const { module, cmsIndex: idx } = slot;
+                    return (
                     <section
                         key={idx}
-                        className={`py-16 md:py-24 lg:py-32 relative overflow-hidden flex items-center ${idx % 2 === 0 ? 'bg-[#020617]' : 'bg-transparent'}`}
+                        id={slot.anchor}
+                        className={`py-16 md:py-24 lg:py-32 relative overflow-hidden flex items-center scroll-mt-28 ${sectionBg}`}
                     >
                         {/* kinetic Technical Background */}
                         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-40">
                             {/* Theme-colored Glow */}
-                            <div className={`absolute top-1/2 ${module.isImageRight ? 'left-[10%]' : 'right-[10%]'} w-[400px] h-[400px] md:w-[800px] md:h-[800px] ${module.theme.glow1} rounded-full blur-[100px] md:blur-[160px] -translate-y-1/2 opacity-[0.06]`} />
+                            <div className={`absolute top-1/2 ${isImageRight ? 'left-[10%]' : 'right-[10%]'} w-[400px] h-[400px] md:w-[800px] md:h-[800px] ${module.theme.glow1} rounded-full blur-[100px] md:blur-[160px] -translate-y-1/2 opacity-[0.06]`} />
 
                             {/* Technical Grid/Dots */}
-                            <div className={`absolute inset-y-0 ${module.isImageRight ? 'left-0 w-1/2' : 'right-0 w-1/2'} bg-[radial-gradient(#ffffff05_1.5px,transparent_1.5px)] [background-size:60px_60px] opacity-100`} />
+                            <div className={`absolute inset-y-0 ${isImageRight ? 'left-0 w-1/2' : 'right-0 w-1/2'} bg-[radial-gradient(#ffffff05_1.5px,transparent_1.5px)] [background-size:60px_60px] opacity-100`} />
                         </div>
 
-                        <div className={`container mx-auto max-w-7xl px-6 lg:px-8 relative z-10 flex flex-col ${module.isImageRight ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-10 lg:gap-20`}>
+                        <div className={`container mx-auto max-w-7xl px-6 lg:px-8 relative z-10 flex flex-col ${isImageRight ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-10 lg:gap-20`}>
 
                             {/* Text Content Column */}
                             <motion.div
-                                initial={{ opacity: 0, x: module.isImageRight ? -50 : 50 }}
+                                initial={{ opacity: 0, x: isImageRight ? -50 : 50 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true, margin: "-100px" }}
                                 transition={{ duration: 0.8, ease: "easeOut" }}
@@ -1034,11 +1101,9 @@ export default function Aicas() {
                             </motion.div>
                         </div>
                     </section>
-                ))}
+                    );
+                })}
             </div>
-
-            {/* Accreditation, CRM, Ticketing & LIA Modules */}
-            <AicasNewModules />
 
             <Footer />
             <WhatsAppButton />
