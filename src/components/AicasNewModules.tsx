@@ -288,7 +288,7 @@ const GroupBand = ({ m, gi }: { m: NewModule; gi: number }) => {
 export type AicasNewModuleId = "accreditation" | "crm" | "ticketing" | "lia";
 
 // Renders one new module as its own section so it can be placed anywhere in the module sequence
-export function AicasNewModuleSection({ id, visualRight, className = "" }: { id: AicasNewModuleId; visualRight: boolean; className?: string }) {
+export function AicasNewModuleSection({ id, serial, visualRight, className = "" }: { id: AicasNewModuleId; serial: number; visualRight: boolean; className?: string }) {
     const m = newModules.find(x => x.id === id);
     if (!m) return null;
     const copyCol = visualRight ? "lg:col-start-1" : "lg:col-start-2";
@@ -311,7 +311,7 @@ export function AicasNewModuleSection({ id, visualRight, className = "" }: { id:
                     >
                         <span className="inline-flex items-center gap-3 px-6 py-2.5 rounded-2xl bg-white/5 border border-white/10 shadow-sm">
                             <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${m.accentBg}`} />
-                            <span className="text-xs font-black tracking-[0.4em] text-white uppercase">Core Module</span>
+                            <span className="text-lg md:text-xl font-black tracking-[0.2em] text-white tabular-nums leading-none">{String(serial).padStart(2, "0")}</span>
                         </span>
 
                         {/* Heading — same style as the core module headings above */}
