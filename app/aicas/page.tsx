@@ -879,7 +879,7 @@ export default function Aicas() {
                         <div className="flex items-end justify-between gap-4 mb-6 md:mb-8">
                             <div>
                                 <span className="text-indigo-400 font-bold tracking-[0.3em] md:tracking-[0.4em] uppercase text-[10px] md:text-xs">Explore AICAS</span>
-                                <h2 className="mt-2 text-2xl md:text-3xl font-black text-white tracking-tight">Integrated Modules</h2>
+                                <h2 className="mt-2 text-2xl md:text-3xl font-black text-white tracking-tight"><span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">{moduleSequence.length}</span> Integrated Modules</h2>
                             </div>
                             <span className="hidden sm:block text-xs md:text-sm font-bold text-slate-500">Tap a module to jump to it</span>
                         </div>

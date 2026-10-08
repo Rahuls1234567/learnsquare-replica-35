@@ -183,7 +183,7 @@ const newModules: NewModule[] = [
         navIcon: Bot,
         eyebrow: "LEARNSQUARE Intelligent Assistant",
         titlePrefix: "LEARNSQUARE",
-        titleHighlight: "Intelligent Assistant",
+        titleHighlight: "Intelligent Assistant (LIA)",
         tagline: "Ask AICAS. Get Intelligent Answers.",
         watermark: "LIA AI",
         gradient: "from-indigo-400 to-sky-400",
