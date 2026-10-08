@@ -9,10 +9,8 @@ import { Input } from "@/src/components/ui/input";
 import { Textarea } from "@/src/components/ui/textarea";
 import { Button } from "@/src/components/ui/button";
 import {
-    Brain, BookOpen, Award, Shield,
-    LayoutDashboard, CreditCard, FileText,
-    Code, Briefcase,
-    ClipboardList, Bell, Check, Rocket, Loader2,
+    Brain, BookOpen, Award, LayoutDashboard, Briefcase,
+    Check, Rocket, Loader2, Sparkles, SlidersHorizontal, DatabaseZap, MonitorPlay, Headset, Cable,
     User, Phone, Mail, Building2, MapPin, IdCard, MessageSquare,
     GraduationCap, Users, ClipboardCheck, ShieldCheck, BedDouble, Ticket, Library, Bus, Megaphone, HeartHandshake, Bot,
     type LucideIcon
@@ -207,17 +205,14 @@ const LiveDashboardMockup = ({
 
 const features = [
     { cmsIndex: 0, title: "AI Powered", text: "Predictive insights for smarter decisions, automated admin tasks for efficiency and personalized learning for students.", icon: Brain },
-    { cmsIndex: 1, title: "NEP 2020 Compliant", text: "Built for NEP 2020 with flexible credit structures, multidisciplinary pathways and personalized learning journeys.", icon: BookOpen },
-    { cmsIndex: 2, title: "NBA, NAAC & NIRF Compliant", text: "Streamlined accreditation with ready-to-use data, outcome tracking and reports aligned to NBA, NAAC and NIRF norms.", icon: Award },
-    { cmsIndex: 3, title: "Exclusive Android & iOS Apps", text: "Personalized college apps on the Play Store and App Store, plus a web app for seamless access on any device.", icon: AndroidAppleIcon },
-    { cmsIndex: 4, title: "Admin Panel Access", text: "Exclusive admin access for key stakeholders to create, edit and upload institutional data and fields with ease.", icon: Shield },
-    { cmsIndex: 5, title: "Comprehensive Dashboard", text: "Interactive dashboards for management, principal, deans and department heads with real-time, insightful data.", icon: LayoutDashboard },
-    { cmsIndex: 6, title: "Integrated Payment Gateway", text: "Collect student fees and other payments securely through an integrated gateway on the mobile app and web.", icon: CreditCard },
-    { cmsIndex: 7, title: "Semester Exam Prep Content", text: "Expert-curated questions and answers, videos and study material to help students prepare for semester exams.", icon: FileText },
-    { cmsIndex: 9, title: "Multi Language Coding Compiler", text: "A dedicated multi-language coding compiler for students to practice programming and take part in hackathons.", icon: Code },
-    { cmsIndex: 10, title: "Career Updates", text: "Regular updates on placement opportunities, higher education and PSU notifications delivered to every student.", icon: Briefcase },
-    { cmsIndex: 13, title: "Dedicated Test Engine", text: "An integrated test engine to conduct online assessments at any scale with detailed, actionable result analysis.", icon: ClipboardList },
-    { cmsIndex: 14, title: "Effective Communication", text: "Keep every campus stakeholder connected with timely alerts, circulars and updates across app, SMS and email.", icon: Bell },
+    { cmsIndex: 20, title: "Fully Customisable", text: "Customisable workflows, modules, branding and features tailored to your institution’s needs. Easily adapt AICAS as your institution grows and evolves.", icon: SlidersHorizontal },
+    { cmsIndex: 21, title: "Data Migration/Updation", text: "Seamlessly migrate, update and manage existing institutional data with accuracy and ease. Ensure smooth data transition and keep your records up to date.", icon: DatabaseZap },
+    { cmsIndex: 3, title: "White-Labelled Android, iOS & Web Applications", text: "Launch your institution’s digital ecosystem with fully white-labelled Android, iOS, and web applications—branded with your institution’s identity and designed to deliver a seamless experience for students, faculty, administrators, and other stakeholders.", icon: AndroidAppleIcon },
+    { cmsIndex: 23, title: "Dedicated Customer Support", text: "Dedicated assistance to ensure smooth operations and a seamless experience.", icon: Headset },
+    { cmsIndex: 1, title: "NEP 2020 & Accreditation Ready", text: "Flexible academic structures with NEP 2020 alignment and simplified NBA, NAAC & NIRF compliance through centralised data, outcome tracking and audit-ready reports.", icon: Award },
+    { cmsIndex: 22, title: "Content-Rich LMS", text: "Deliver engaging learning with rich digital content, resources and course materials. Empower faculty and students with an interactive and accessible learning experience.", icon: MonitorPlay },
+    { cmsIndex: 5, title: "Centralised Dashboard", text: "Get a unified, real-time view of your institution’s data and performance through centralised dashboards designed for informed decision-making.", icon: LayoutDashboard },
+    { cmsIndex: 24, title: "Seamless Hardware & Software Integration", text: "Connect your hardware and software systems for a smooth, unified experience. Enable seamless integration across all institutional operations.", icon: Cable },
 ];
 
 const coreModulesData = [
@@ -225,6 +220,10 @@ const coreModulesData = [
         pillText: "Integrated Module",
         titlePrefix: "Academic",
         titleHighlight: "Management",
+        tagline: "Making Academics Seamless",
+        topItems: [
+            { title: "Engaging Classroom Management", text: "Track attendance, assignments, activities and student participation in one place." }
+        ],
         gradientText: "from-indigo-600 to-purple-600",
         theme: {
             pillBg: "bg-indigo-50 border-indigo-100",
@@ -257,6 +256,10 @@ const coreModulesData = [
         pillText: "Integrated Module",
         titlePrefix: "Administration",
         titleHighlight: "Management",
+        tagline: "Simplify Administration. Empower People. Run Your Institution Smarter.",
+        topItems: [
+            { title: "End-to-End Admission Management", text: "Streamline enquiries, applications, document verification, merit lists, fee payments and admissions from a single platform." }
+        ],
         gradientText: "from-emerald-600 to-teal-600",
         theme: {
             pillBg: "bg-emerald-50 border-emerald-100",
@@ -288,6 +291,7 @@ const coreModulesData = [
         pillText: "Integrated Module",
         titlePrefix: "Examination",
         titleHighlight: "Management",
+        tagline: "Automate Examinations. Improve Accuracy. Deliver Results Faster.",
         gradientText: "from-cyan-600 to-blue-600",
         theme: {
             pillBg: "bg-cyan-50 border-cyan-100",
@@ -320,6 +324,7 @@ const coreModulesData = [
         pillText: "Integrated Module",
         titlePrefix: "Placement",
         titleHighlight: "Management",
+        tagline: "From Placement Drives to Career Success, Manage Every Step Smarter.",
         gradientText: "from-amber-600 to-orange-600",
         theme: {
             pillBg: "bg-amber-50 border-amber-100",
@@ -351,6 +356,7 @@ const coreModulesData = [
         pillText: "Integrated Module",
         titlePrefix: "Learning",
         titleHighlight: "Management",
+        tagline: "Experience Learning in a Smarter, More Engaging Way.",
         gradientText: "from-rose-600 to-red-600",
         theme: {
             pillBg: "bg-rose-50 border-rose-100",
@@ -382,6 +388,7 @@ const coreModulesData = [
         pillText: "Integrated Module",
         titlePrefix: "Library",
         titleHighlight: "Management",
+        tagline: "Books Managed. Circulation Tracked. Library Optimized.",
         gradientText: "from-yellow-600 to-amber-600",
         theme: {
             pillBg: "bg-yellow-50 border-yellow-100",
@@ -412,6 +419,7 @@ const coreModulesData = [
         pillText: "Integrated Module",
         titlePrefix: "Transportation",
         titleHighlight: "Management",
+        tagline: "Safer Journeys. Smarter Transportation.",
         gradientText: "from-purple-600 to-indigo-600",
         theme: {
             pillBg: "bg-purple-50 border-purple-100",
@@ -442,6 +450,7 @@ const coreModulesData = [
         pillText: "Integrated Module",
         titlePrefix: "Hostel",
         titleHighlight: "Management",
+        tagline: "Everything You Need for Smarter Hostel Management.",
         gradientText: "from-blue-700 to-cyan-600",
         theme: {
             pillBg: "bg-blue-50 border-blue-100",
@@ -472,6 +481,7 @@ const coreModulesData = [
         pillText: "Core Module",
         titlePrefix: "Parent",
         titleHighlight: "Management",
+        tagline: "From First Class to Final Result, Stay Informed.",
         gradientText: "from-pink-600 to-rose-600",
         theme: {
             pillBg: "bg-pink-50 border-pink-100",
@@ -504,6 +514,7 @@ const coreModulesData = [
         pillText: "Core Module",
         titlePrefix: "Communication",
         titleHighlight: "Management",
+        tagline: "One Platform for Faster, Smarter and More Effective Communication.",
         gradientText: "from-teal-600 to-emerald-600",
         theme: {
             pillBg: "bg-teal-50 border-teal-100",
@@ -640,10 +651,31 @@ export default function Aicas() {
                             className="flex flex-col items-start text-left space-y-8 min-w-0 overflow-hidden"
                         >
                             {/* Shimmering Top Pill */}
-                            <div className="relative group cursor-default inline-block">
-                                <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
-                                <div className="relative bg-slate-900/80 border border-indigo-500/30 text-indigo-400 px-6 py-2.5 rounded-full font-black tracking-[0.2em] text-[10px] uppercase shadow-2xl flex items-center gap-2 overflow-hidden">
-                                    <span className="relative z-10">AICAS</span>
+                            <div className="relative group cursor-default inline-flex">
+                                {/* Soft glow */}
+                                <div className="absolute -inset-1.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 rounded-full blur-md opacity-40 md:group-hover:opacity-80 transition duration-1000" />
+                                {/* Gradient border */}
+                                <div className="relative rounded-full p-px bg-gradient-to-r from-indigo-400/80 via-purple-400/40 to-fuchsia-400/80">
+                                    <div className="relative bg-slate-950/90 rounded-full pl-1.5 pr-5 py-1.5 flex items-center gap-3 overflow-hidden">
+                                        {/* Shimmer sweep */}
+                                        <motion.span
+                                            aria-hidden="true"
+                                            initial={{ x: "-150%" }}
+                                            animate={{ x: "350%" }}
+                                            transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 2.5, ease: "easeInOut" }}
+                                            className="absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none"
+                                        />
+                                        <span className="relative w-7 h-7 md:w-8 md:h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-[0_0_16px_rgba(99,102,241,0.7)]">
+                                            <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
+                                        </span>
+                                        <span className="relative text-xs md:text-sm font-black tracking-[0.35em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-indigo-200 via-white to-purple-200">
+                                            AICAS
+                                        </span>
+                                        <span className="relative flex w-2 h-2">
+                                            <span className="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                                            <span className="relative inline-flex w-2 h-2 rounded-full bg-emerald-400" />
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -992,7 +1024,7 @@ export default function Aicas() {
                     const isImageRight = pos % 2 === 0;
                     const sectionBg = pos % 2 === 0 ? 'bg-[#020617]' : 'bg-transparent';
                     if (slot.kind === "new") {
-                        return <AicasNewModuleSection key={slot.id} id={slot.id} visualRight={isImageRight} className={sectionBg} />;
+                        return <AicasNewModuleSection key={slot.id} id={slot.id} serial={pos + 1} visualRight={isImageRight} className={sectionBg} />;
                     }
                     const { module, cmsIndex: idx } = slot;
                     return (
@@ -1027,11 +1059,7 @@ export default function Aicas() {
                                         className={`inline-flex items-center gap-3 px-6 py-2.5 rounded-2xl bg-white/5 border border-white/10 shadow-sm`}
                                     >
                                         <span className={`w-2.5 h-2.5 rounded-full ${module.theme.pillDot}`} />
-                                        <EditableContent 
-                                            contentKey={`aicas_module_${idx}_pill`}
-                                            description={`AICAS Module ${idx + 1} Pill Text`}
-                                            defaultContent={<span className={`text-xs font-black tracking-[0.4em] text-white uppercase`}>{module.pillText}</span>}
-                                        />
+                                        <span className="text-lg md:text-xl font-black tracking-[0.2em] text-white tabular-nums leading-none">{String(pos + 1).padStart(2, "0")}</span>
                                     </motion.div>
 
                                     <div className="relative">
@@ -1051,9 +1079,36 @@ export default function Aicas() {
                                             }
                                         />
                                     </div>
+
+                                    {module.tagline && (
+                                        <EditableContent
+                                            contentKey={`aicas_module_${idx}_tagline`}
+                                            description={`AICAS Module ${idx + 1} Subline`}
+                                            defaultContent={<p className="text-xl md:text-2xl font-black text-white tracking-tight leading-snug">{module.tagline}</p>}
+                                        />
+                                    )}
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 md:gap-y-7">
+                                    {/* Top points: same style as the regular points, listed first */}
+                                    {module.topItems?.map((top, t) => (
+                                        <motion.div
+                                            key={`top-${t}`}
+                                            initial={{ opacity: 0, x: -10 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            className="flex items-start gap-5 group/item"
+                                        >
+                                            <div className={`mt-1 w-7 h-7 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover/item:bg-gradient-to-br ${module.gradientText} group-hover/item:border-transparent transition-all duration-500 shadow-lg`}>
+                                                <Check className="w-4 h-4 text-white transition-colors" strokeWidth={4} />
+                                            </div>
+                                            <EditableContent
+                                                contentKey={`aicas_module_${idx}_top_${t}`}
+                                                description={`AICAS Module ${idx + 1} Top Point ${t + 1}`}
+                                                defaultContent={<span className="text-base font-bold text-slate-400 group-hover/item:text-white transition-colors leading-snug py-0.5">{top.title} — {top.text}</span>}
+                                            />
+                                        </motion.div>
+                                    ))}
                                     {module.listItems.map((item, i) => (
                                         <motion.div
                                             key={i}
