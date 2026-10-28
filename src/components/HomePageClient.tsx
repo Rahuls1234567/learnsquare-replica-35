@@ -12,10 +12,8 @@ import AntigravityBackground from "@/components/AntigravityBackground";
 const ClientsLogoBar = dynamic(() => import("@/components/ClientsLogoBar"), { ssr: false });
 const ProductsSection = dynamic(() => import("@/components/ProductsSection"), { ssr: false });
 const HomeImageSection = dynamic(() => import("@/components/HomeImageSection"), { ssr: false });
-const MySkillForgeSection = dynamic(() => import("@/components/MySkillForgeSection"), { ssr: false });
 const SemesterPrepSection = dynamic(() => import("@/components/SemesterPrepSection"), { ssr: false });
 const TrainingProgramsSection = dynamic(() => import("@/components/TrainingProgramsSection"), { ssr: false });
-const TestPrepProSection = dynamic(() => import("@/components/TestPrepProSection"), { ssr: false });
 const CollaborationsSection = dynamic(() => import("@/components/CollaborationsSection"), { ssr: false });
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
 const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), { ssr: false });
@@ -77,6 +75,21 @@ const ScrollToTop = () => {
 };
 
 export default function HomePageClient() {
+    // Arriving from another page via /#products: the products section loads lazily,
+    // so wait until it exists (and the layout above it has settled) before scrolling.
+    useEffect(() => {
+        if (window.location.hash !== "#products") return;
+        let tries = 0;
+        const t = setInterval(() => {
+            const el = document.getElementById("products");
+            if (el || ++tries > 30) {
+                clearInterval(t);
+                el?.scrollIntoView({ behavior: "smooth" });
+            }
+        }, 150);
+        return () => clearInterval(t);
+    }, []);
+
     const handleCollabClick = () => {
         document.getElementById("client-collaborations")?.scrollIntoView({ behavior: "smooth" });
     };
@@ -107,10 +120,8 @@ export default function HomePageClient() {
             <ClientsLogoBar onLogoClick={handleCollabClick} />
             <ProductsSection />
             <HomeImageSection />
-            <MySkillForgeSection />
             <SemesterPrepSection />
             <TrainingProgramsSection />
-            <TestPrepProSection />
             <CollaborationsSection id="client-collaborations" />
             <Footer />
             <WhatsAppButton />

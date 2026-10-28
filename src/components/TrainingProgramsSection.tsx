@@ -205,7 +205,7 @@ const TrainingProgramsSection = () => {
                     </div>
                     <div className="shrink-0 flex items-center gap-4 relative z-10">
                         <div className="h-px w-10 bg-indigo-500/20" />
-                        <span className="text-[11px] font-black uppercase tracking-[0.5em] text-indigo-500">AICAS Vision 2026</span>
+                        <span className="text-[11px] font-black uppercase tracking-[0.5em] text-indigo-500">Training Programs Mission</span>
                     </div>
                 </div>
             </div>

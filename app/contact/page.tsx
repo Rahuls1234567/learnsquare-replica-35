@@ -16,6 +16,9 @@ import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { toast } from "sonner";
 import { EditableContent } from "@/src/components/EditableContent";
+import { FieldError, FormSuccess } from "@/src/components/FormFeedback";
+import { rules } from "@/lib/validation";
+import { SUPPORT_EMAIL, SUPPORT_PHONE, OFFICE_ADDRESS, OFFICE_FLOOR, OFFICE_MAP_URL, OFFICE_MAP_EMBED_URL } from "@/lib/contact";
 
 const Contact = () => {
     const router = useRouter();
@@ -39,7 +42,6 @@ const Contact = () => {
                 description: "We've received your inquiry and will get back to you soon. 🚀",
             });
             reset();
-            router.push('/');
         },
         onError: () => {
             toast.error("Failed to send message", {
@@ -152,7 +154,7 @@ const Contact = () => {
                             <div className="space-y-8">
                                 <div className="space-y-4">
                                     <a
-                                        href="https://maps.app.goo.gl/XetUsuvtNXGpzQqy7?g_st=ic"
+                                        href={OFFICE_MAP_URL}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex items-start gap-4 hover:opacity-80 transition-opacity"
@@ -167,7 +169,7 @@ const Contact = () => {
                                                 <div className="space-y-1">
                                                     <p className="text-slate-900 font-black text-sm uppercase tracking-wider">LEARNSQUARE</p>
                                                     <p className="text-[#1a2b4b] font-medium text-[14px] leading-relaxed max-w-[320px]">
-                                                        Office: 3rd Floor, Bhaswa Business Park, Greenlands, Adjacent Lane to Tourist Plaza Hotel, Begumpet,Hyderabad, Telangana. 500016.
+                                                        Office: {OFFICE_FLOOR}, {OFFICE_ADDRESS}.
                                                     </p>
                                                 </div>
                                             }
@@ -176,7 +178,7 @@ const Contact = () => {
 
                                     {/* Small Map Thumbnail */}
                                     <motion.a
-                                        href="https://maps.app.goo.gl/XetUsuvtNXGpzQqy7?g_st=ic"
+                                        href={OFFICE_MAP_URL}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         initial={{ opacity: 0, y: 10 }}
@@ -189,7 +191,8 @@ const Contact = () => {
                                             <span className="bg-white px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-[#1a2b4b] shadow-xl">Open In Maps</span>
                                         </div>
                                         <iframe
-                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.452632283!2d78.4552467!3d17.437142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb90afd668a73d%3A0xad635ebc1c738e4a!2sGST%20Bhaswa%20Business%20Park!5e0!3m2!1sen!2sin!4v1710173661159!5m2!1sen!2sin"
+                                            src={OFFICE_MAP_EMBED_URL}
+                                            title="LEARNSQUARE office on Google Maps"
                                             width="100%"
                                             height="100%"
                                             style={{ border: 0 }}
@@ -207,7 +210,7 @@ const Contact = () => {
                                     <EditableContent
                                         contentKey="contact_phone"
                                         description="Contact Phone Number"
-                                        defaultContent={<p className="text-[#1a2b4b] font-medium text-[15px]">9000177063</p>}
+                                        defaultContent={<p className="text-[#1a2b4b] font-medium text-[15px]">{SUPPORT_PHONE}</p>}
                                     />
                                 </div>
 
@@ -218,7 +221,7 @@ const Contact = () => {
                                     <EditableContent
                                         contentKey="contact_email"
                                         description="Contact Email"
-                                        defaultContent={<p className="text-[#1a2b4b] font-medium text-[15px]">hello@learnsquare.co</p>}
+                                        defaultContent={<p className="text-[#1a2b4b] font-medium text-[15px]">{SUPPORT_EMAIL}</p>}
                                     />
                                 </div>
                             </div>
@@ -231,56 +234,76 @@ const Contact = () => {
                             viewport={{ once: true }}
                             className="relative bg-white p-8 md:p-12 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.05)] border border-slate-100"
                         >
-                            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                            {mutation.isSuccess ? (
+                                <FormSuccess
+                                    title="Message sent"
+                                    message="Thanks for reaching out. We've received your message and will get back to you soon."
+                                    actionLabel="Send another message"
+                                    onAction={() => mutation.reset()}
+                                />
+                            ) : (
+                            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} noValidate>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
                                         <Input
-                                            {...register("firstName", { required: true })}
+                                            {...register("firstName", rules.required("First name"))}
                                             placeholder="First Name*"
+                                            aria-invalid={!!errors.firstName}
                                             className={`h-14 bg-[#f8faff] border-slate-200 rounded-xl focus:bg-white transition-all text-slate-700 placeholder:text-slate-400 ${errors.firstName ? 'border-red-500' : ''}`}
                                         />
+                                        <FieldError message={errors.firstName?.message} />
                                     </div>
                                     <div className="space-y-2">
                                         <Input
-                                            {...register("lastName", { required: true })}
+                                            {...register("lastName", rules.required("Last name"))}
                                             placeholder="Last Name*"
+                                            aria-invalid={!!errors.lastName}
                                             className={`h-14 bg-[#f8faff] border-slate-200 rounded-xl focus:bg-white transition-all text-slate-700 placeholder:text-slate-400 ${errors.lastName ? 'border-red-500' : ''}`}
                                         />
+                                        <FieldError message={errors.lastName?.message} />
                                     </div>
                                 </div>
 
                                 <div className="space-y-2">
                                     <Input
-                                        {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+                                        {...register("email", rules.email())}
                                         type="email"
                                         placeholder="Email*"
+                                        aria-invalid={!!errors.email}
                                         className={`h-14 bg-[#f8faff] border-slate-200 rounded-xl focus:bg-white transition-all text-slate-700 placeholder:text-slate-400 ${errors.email ? 'border-red-500' : ''}`}
                                     />
+                                    <FieldError message={errors.email?.message} />
                                 </div>
 
                                 <div className="space-y-2">
                                     <Input
-                                        {...register("whatsappNo", { required: true })}
+                                        {...register("whatsappNo", rules.phone("Phone number"))}
                                         type="tel"
                                         placeholder="Phone Number (WhatsApp)*"
+                                        aria-invalid={!!errors.whatsappNo}
                                         className={`h-14 bg-[#f8faff] border-slate-200 rounded-xl focus:bg-white transition-all text-slate-700 placeholder:text-slate-400 ${errors.whatsappNo ? 'border-red-500' : ''}`}
                                     />
+                                    <FieldError message={errors.whatsappNo?.message} />
                                 </div>
 
                                 <div className="space-y-2">
                                     <Input
-                                        {...register("collegeName", { required: true })}
+                                        {...register("collegeName", rules.required("College / organization name"))}
                                         placeholder="College / Organization Name*"
+                                        aria-invalid={!!errors.collegeName}
                                         className={`h-14 bg-[#f8faff] border-slate-200 rounded-xl focus:bg-white transition-all text-slate-700 placeholder:text-slate-400 ${errors.collegeName ? 'border-red-500' : ''}`}
                                     />
+                                    <FieldError message={errors.collegeName?.message} />
                                 </div>
 
                                 <div className="space-y-2">
                                     <Textarea
-                                        {...register("message", { required: true })}
-                                        placeholder="Your message..."
+                                        {...register("message", rules.required("Message"))}
+                                        placeholder="Your message*"
+                                        aria-invalid={!!errors.message}
                                         className={`min-h-[160px] bg-[#f8faff] border-slate-200 rounded-xl focus:bg-white transition-all text-slate-700 placeholder:text-slate-400 resize-none pt-4 ${errors.message ? 'border-red-500' : ''}`}
                                     />
+                                    <FieldError message={errors.message?.message} />
                                 </div>
 
                                 <Button
@@ -289,9 +312,10 @@ const Contact = () => {
                                     className="w-full h-14 bg-[#7c66dc] hover:bg-[#6853c4] text-white font-bold text-lg rounded-xl transition-all duration-300 shadow-lg active:scale-[0.98] disabled:opacity-50 gap-2"
                                 >
                                     {mutation.isPending && <Loader2 className="w-4 h-4 animate-spin" />}
-                                    {mutation.isPending ? "Sending..." : "Submit !!"}
+                                    {mutation.isPending ? "Sending..." : "Submit"}
                                 </Button>
                             </form>
+                            )}
                         </motion.div>
                     </div>
                 </div>

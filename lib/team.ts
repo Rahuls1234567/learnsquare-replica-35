@@ -26,7 +26,7 @@ export const DEFAULT_TEAM: TeamMember[] = [
         role: "Founder & CEO",
         education: "EPBM - IIM K, M.TECH - JNTUH, B.TECH - JNTUH",
         contact: "988 555 2350 | sandeep@learnsquare.co",
-        bio: "With over 18 years in the Ed-Tech industry, he is a passionate leader known for creating innovative learning solutions and building strategic partnerships with universities, government bodies, and channel partners nationwide. He has successfully launched and managed multiple Ed-Tech Products, LMS and CMS platforms, and led top educators across domains. A mentor to thousands of students through GATE, ESE, and competitive exam sessions, his expertise spans market research, product planning, implementation, budgeting, resource management, and team performance.",
+        bio: "With over 18 years in the ed-tech industry, he is a passionate leader known for creating innovative learning solutions and building strategic partnerships with universities, government bodies and channel partners nationwide. He has successfully launched and managed multiple ed-tech products, LMS and CMS platforms, and led top educators across domains. A mentor to thousands of students through GATE, ESE and competitive exam sessions, his expertise spans market research, product planning, implementation, budgeting, resource management and team performance.",
         image: "/images/homeimage/sandeep bandari.webp",
     },
     {
@@ -35,7 +35,7 @@ export const DEFAULT_TEAM: TeamMember[] = [
         role: "Co-Founder & Director",
         education: "IPBA - IIM INDORE, M.TECH - JNTUH, B.TECH - JNTUH",
         contact: "",
-        bio: "She is passionate about driving impactful product development through innovation and collaboration. With a strong foundation in business analytics and operational excellence, she leverages data-driven insights to optimize performance and achieve strategic goals. Known for leading cross-functional teams, she consistently delivers innovative solutions that exceed expectations.",
+        bio: "She is passionate about driving impactful product development through innovation and collaboration. With a strong foundation in business analytics and operational excellence, she leverages data-driven insights to optimise performance and achieve strategic goals. Known for leading cross-functional teams, she consistently delivers innovative solutions that exceed expectations.",
         image: "/alekya mam.webp",
     },
     {
@@ -44,7 +44,7 @@ export const DEFAULT_TEAM: TeamMember[] = [
         role: "Chief Marketing Officer",
         education: "IRPM - Andhra University, M.Sc IT - Manipal University",
         contact: "77 9493 1347 | gopinath.p@learnsquare.co",
-        bio: "He is a seasoned business leader with over 20 years of experience in education, business operations, and strategic planning. Holding a Master of Science in IT from Manipal University and a Degree in Industrial Relations from Andhra University, he has led key roles at T.I.M.E., CONDUIRA, FIITJEE, and APTECH. Known for his visionary leadership, strategic partnerships, and strong business acumen, he has consistently driven growth and delivered exceptional results across diverse markets.",
+        bio: "He is a seasoned business leader with over 20 years of experience in education, business operations and strategic planning. Holding a Master of Science in IT from Manipal University and a degree in Industrial Relations from Andhra University, he has led key roles at T.I.M.E., CONDUIRA, FIITJEE and APTECH. Known for his visionary leadership, strategic partnerships and strong business acumen, he has consistently driven growth and delivered exceptional results across diverse markets.",
         image: "/sir.jpeg",
     },
 ];

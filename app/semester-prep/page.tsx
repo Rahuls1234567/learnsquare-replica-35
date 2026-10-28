@@ -14,6 +14,8 @@ import AntigravityBackground from "@/components/AntigravityBackground";
 import { toast } from "sonner";
 import { EditableContent } from "@/src/components/EditableContent";
 import { UNIVERSITY_DATA } from "@/src/data/universityData";
+import { FieldError, FormSuccess } from "@/src/components/FormFeedback";
+import { EMAIL_RE, isValidPhone } from "@/lib/validation";
 import {
     Popover,
     PopoverContent,
@@ -28,6 +30,10 @@ import {
     CommandList,
 } from "@/src/components/ui/command";
 
+
+// Titles are styled uppercase; keep "PYQs" readable as PYQs (not PYQS).
+const keepPyqsCase = (text: string) =>
+    text.split(/(PYQs)/).map((part, i) => (part === "PYQs" ? <span key={i} className="normal-case">PYQs</span> : part));
 
 const ExtraEdgeFeatureCard = ({ number, title, desc, icon: Icon, contentKey }: { number: number; title: string; desc: string; icon: React.ComponentType<{ className?: string }>; contentKey: string }) => (
     <motion.div
@@ -52,7 +58,7 @@ const ExtraEdgeFeatureCard = ({ number, title, desc, icon: Icon, contentKey }: {
                     description={`Extra Edge Feature ${number}`}
                     defaultContent={
                         <>
-                            <h4 className="font-black text-white text-lg tracking-tight leading-tight uppercase drop-shadow-sm">{title}</h4>
+                            <h4 className="font-black text-white text-lg tracking-tight leading-tight uppercase drop-shadow-sm">{keepPyqsCase(title)}</h4>
                             <p className="text-blue-100/90 text-[13px] leading-relaxed font-bold">{desc}</p>
                         </>
                     }
@@ -158,23 +164,37 @@ const SemesterPrepPage = () => {
 
 
     const [submitting, setSubmitting] = useState(false);
+    const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof typeof formData, string>>>({});
+    const [createdFor, setCreatedFor] = useState<string | null>(null);
+
+    type SignupField = keyof typeof formData;
+    // Update one field and clear its error as soon as the user edits it.
+    const setField = <K extends SignupField>(field: K, value: (typeof formData)[K], extra: Partial<typeof formData> = {}) => {
+        setFormData((prev) => ({ ...prev, ...extra, [field]: value }));
+        setFieldErrors((prev) => ({ ...prev, [field]: undefined }));
+    };
+
+    const validateSignup = () => {
+        const errs: Partial<Record<SignupField, string>> = {};
+        if (!formData.name.trim()) errs.name = "Name is required";
+        if (!formData.university) errs.university = "Select your university";
+        if (!formData.college) errs.college = "Select your college";
+        if (!formData.email.trim()) errs.email = "Email is required";
+        else if (!EMAIL_RE.test(formData.email.trim())) errs.email = "Enter a valid email address, like name@example.com";
+        if (!formData.password) errs.password = "Password is required";
+        else if (formData.password.length < 6) errs.password = "Password must be at least 6 characters";
+        if (!formData.confirmPassword) errs.confirmPassword = "Re-enter your password";
+        else if (formData.password !== formData.confirmPassword) errs.confirmPassword = "Passwords do not match";
+        if (!formData.mobile.trim()) errs.mobile = "Mobile number is required";
+        else if (!isValidPhone(formData.mobile)) errs.mobile = "Enter a valid 10-digit mobile number";
+        if (!formData.agree) errs.agree = "Please agree to the Terms and Conditions";
+        setFieldErrors(errs);
+        return Object.keys(errs).length === 0;
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        // Validation
-        if (!formData.name || !formData.university || !formData.college || !formData.email || !formData.password || !formData.mobile) {
-            toast.error("Please fill in all required fields.");
-            return;
-        }
-        if (formData.password !== formData.confirmPassword) {
-            toast.error("Passwords do not match.");
-            return;
-        }
-        if (!formData.agree) {
-            toast.error("Please agree to the Terms and Conditions.");
-            return;
-        }
+        if (!validateSignup()) return;
 
         setSubmitting(true);
         try {
@@ -186,6 +206,7 @@ const SemesterPrepPage = () => {
 
             if (res.ok) {
                 toast.success(`Account created successfully for ${formData.name}! Welcome to SemesterPrep.`);
+                setCreatedFor(formData.name.trim());
                 setFormData({
                     name: "",
                     university: "",
@@ -256,6 +277,7 @@ const SemesterPrepPage = () => {
                                 </motion.div>
                                 <EditableContent 
                                     contentKey="semesterprep_hero_content"
+                                    pageHeading
                                     description="SemesterPrep Hero"
                                     defaultContent={
                                         <>
@@ -297,35 +319,54 @@ const SemesterPrepPage = () => {
                                 <h3 className="text-xl font-bold text-center mb-8 text-white relative z-10">
                                     Register here to explore <span className="italic bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent block mt-2 uppercase text-base tracking-widest font-black">FREE Content</span>
                                 </h3>
-                                <form className="space-y-4 relative z-10" onSubmit={handleSubmit} autoComplete="off">
+                                {createdFor ? (
+                                    <FormSuccess
+                                        tone="dark"
+                                        title="Account created"
+                                        message={`Welcome to SemesterPrep, ${createdFor}! Your free account is ready.`}
+                                        actionLabel="Create another account"
+                                        onAction={() => setCreatedFor(null)}
+                                    />
+                                ) : (
+                                <form className="space-y-4 relative z-10" onSubmit={handleSubmit} autoComplete="off" noValidate>
                                     <div className="grid grid-cols-1 gap-4">
                                         <div className="space-y-4">
+                                            <div>
                                             <Input
-                                                placeholder="YOUR NAME"
+                                                placeholder="YOUR NAME*"
                                                 value={formData.name}
-                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                className="h-14 bg-white/5 border-white/10 rounded-2xl text-sm focus:ring-2 focus:ring-indigo-500/50 text-white placeholder:text-slate-500 transition-all font-bold"
+                                                onChange={(e) => setField("name", e.target.value)}
+                                                aria-invalid={!!fieldErrors.name}
+                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl text-sm focus:ring-2 focus:ring-indigo-500/50 text-white placeholder:text-slate-500 transition-all font-bold ${fieldErrors.name ? "border-red-400/70" : ""}`}
                                             />
+                                            <FieldError message={fieldErrors.name} tone="dark" />
+                                            </div>
+                                            <div>
                                             <div className="relative">
                                                 <select
                                                     value={formData.university}
-                                                    onChange={(e) => setFormData({ ...formData, university: e.target.value, college: "" })}
-                                                    className="w-full h-14 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-slate-400 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all font-bold"
+                                                    onChange={(e) => setField("university", e.target.value, { college: "" })}
+                                                    aria-invalid={!!fieldErrors.university}
+                                                    className={`w-full h-14 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-slate-400 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all font-bold ${fieldErrors.university ? "border-red-400/70" : ""}`}
                                                 >
-                                                    <option value="" className="bg-slate-900">Select University</option>
+                                                    <option value="" className="bg-slate-900">Select University*</option>
                                                     {Object.keys(UNIVERSITY_DATA).map(uni => <option key={uni} value={uni} className="bg-slate-900">{uni}</option>)}
                                                 </select>
                                                 <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
                                             </div>
+                                            <FieldError message={fieldErrors.university} tone="dark" />
+                                            </div>
+                                            <div>
                                             <Popover open={collegeDropdownOpen} onOpenChange={setCollegeDropdownOpen}>
                                                 <PopoverTrigger asChild>
                                                     <button
                                                         type="button"
                                                         disabled={!formData.university}
-                                                        className="w-full h-14 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-left text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 disabled:opacity-50 transition-all flex items-center justify-between font-bold"
+                                                        aria-invalid={!!fieldErrors.college}
+                                                        className={`w-full h-14 rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-left text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 disabled:opacity-50 transition-all flex items-center justify-between font-bold ${fieldErrors.college ? "border-red-400/70" : ""}`}
                                                     >
                                                         <span className={formData.college ? "text-white truncate" : ""}>
-                                                            {formData.college || "Select College"}
+                                                            {formData.college || "Select College*"}
                                                         </span>
                                                         <ChevronDown className="w-4 h-4 text-slate-500 shrink-0 ml-2" />
                                                     </button>
@@ -341,7 +382,7 @@ const SemesterPrepPage = () => {
                                                                 key={college}
                                                                 value={college}
                                                                 onSelect={() => {
-                                                                    setFormData({ ...formData, college });
+                                                                    setField("college", college);
                                                                     setCollegeDropdownOpen(false);
                                                                 }}
                                                                 className="text-sm cursor-pointer"
@@ -354,48 +395,71 @@ const SemesterPrepPage = () => {
                                             </Command>
                                         </PopoverContent>
                                     </Popover>
+                                            <FieldError message={fieldErrors.college} tone="dark" />
+                                            </div>
+                                            <div>
                                             <Input
-                                                placeholder="YOUR EMAIL"
+                                                placeholder="YOUR EMAIL*"
                                                 type="email"
                                                 autoComplete="off"
                                                 value={formData.email}
-                                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                className="h-14 bg-white/5 border-white/10 rounded-2xl text-sm text-white placeholder:text-slate-500 transition-all font-bold"
+                                                onChange={(e) => setField("email", e.target.value)}
+                                                aria-invalid={!!fieldErrors.email}
+                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl text-sm text-white placeholder:text-slate-500 transition-all font-bold ${fieldErrors.email ? "border-red-400/70" : ""}`}
                                             />
+                                            <FieldError message={fieldErrors.email} tone="dark" />
+                                            </div>
                                             <div className="grid grid-cols-2 gap-4">
+                                                <div>
                                                 <Input
-                                                    placeholder="PASSWORD"
+                                                    placeholder="PASSWORD*"
                                                     type="password"
                                                     autoComplete="new-password"
                                                     value={formData.password}
-                                                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                                    className="h-14 bg-white/5 border-white/10 rounded-2xl text-sm text-white placeholder:text-slate-500 transition-all font-bold"
+                                                    onChange={(e) => setField("password", e.target.value)}
+                                                    aria-invalid={!!fieldErrors.password}
+                                                    className={`h-14 bg-white/5 border-white/10 rounded-2xl text-sm text-white placeholder:text-slate-500 transition-all font-bold ${fieldErrors.password ? "border-red-400/70" : ""}`}
                                                 />
+                                                <FieldError message={fieldErrors.password} tone="dark" />
+                                                </div>
+                                                <div>
                                                 <Input
-                                                    placeholder="RE-ENTER"
+                                                    placeholder="RE-ENTER*"
                                                     type="password"
                                                     autoComplete="new-password"
                                                     value={formData.confirmPassword}
-                                                    onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                                                    className="h-14 bg-white/5 border-white/10 rounded-2xl text-sm text-white placeholder:text-slate-500 transition-all font-bold"
+                                                    onChange={(e) => setField("confirmPassword", e.target.value)}
+                                                    aria-invalid={!!fieldErrors.confirmPassword}
+                                                    className={`h-14 bg-white/5 border-white/10 rounded-2xl text-sm text-white placeholder:text-slate-500 transition-all font-bold ${fieldErrors.confirmPassword ? "border-red-400/70" : ""}`}
                                                 />
+                                                <FieldError message={fieldErrors.confirmPassword} tone="dark" />
+                                                </div>
                                             </div>
+                                            <div>
                                             <Input
-                                                placeholder="MOBILE NUMBER"
+                                                placeholder="MOBILE NUMBER*"
+                                                type="tel"
                                                 value={formData.mobile}
-                                                onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                                                className="h-14 bg-white/5 border-white/10 rounded-2xl text-sm text-white placeholder:text-slate-500 transition-all font-bold"
+                                                onChange={(e) => setField("mobile", e.target.value)}
+                                                aria-invalid={!!fieldErrors.mobile}
+                                                className={`h-14 bg-white/5 border-white/10 rounded-2xl text-sm text-white placeholder:text-slate-500 transition-all font-bold ${fieldErrors.mobile ? "border-red-400/70" : ""}`}
                                             />
+                                            <FieldError message={fieldErrors.mobile} tone="dark" />
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-2 py-2">
+                                    <div className="py-2">
+                                    <div className="flex items-center gap-2">
                                         <Checkbox
                                             id="terms"
                                             checked={formData.agree}
-                                            onCheckedChange={(checked) => setFormData({ ...formData, agree: checked as boolean })}
+                                            onCheckedChange={(checked) => setField("agree", checked === true)}
+                                            aria-invalid={!!fieldErrors.agree}
                                             className="rounded-md border-white/20 data-[state=checked]:bg-indigo-500 data-[state=checked]:border-indigo-500"
                                         />
-                                        <label htmlFor="terms" className="text-xs font-bold text-slate-400 cursor-pointer select-none">I agree to the Terms and Conditions</label>
+                                        <label htmlFor="terms" className="text-xs font-bold text-slate-400 cursor-pointer select-none">I agree to the Terms and Conditions*</label>
+                                    </div>
+                                    <FieldError message={fieldErrors.agree} tone="dark" />
                                     </div>
                                     <Button
                                         type="submit"
@@ -411,6 +475,7 @@ const SemesterPrepPage = () => {
                                     </Button>
                                     <p onClick={() => toast.info("Login feature is currently in development.")} className="text-center text-[13px] font-bold text-slate-500 mt-6 cursor-pointer hover:text-indigo-400 transition-colors uppercase tracking-widest">Already have an account? <span className="text-indigo-400">Sign In</span></p>
                                 </form>
+                                )}
                             </motion.div>
                         </div>
                     </div>
@@ -450,7 +515,7 @@ const SemesterPrepPage = () => {
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <ExtraEdgeFeatureCard contentKey="semprep_edge_1" number={1} title="Univ. Sem Exam PYQ's & Answers" desc="10,000+ Univ. Sem Exam Prev. Year Questions & Answers Covering 120 + Subjects" icon={FileQuestion} />
+                        <ExtraEdgeFeatureCard contentKey="semprep_edge_1" number={1} title="Univ. Sem Exam PYQs & Answers" desc="10,000+ Univ. Sem Exam Prev. Year Questions & Answers Covering 120 + Subjects" icon={FileQuestion} />
                         <ExtraEdgeFeatureCard contentKey="semprep_edge_2" number={2} title="Curated by Subject Experts" desc="Detailed Explanation of Answers from Top-Notch Subject Experts" icon={Users} />
                         <ExtraEdgeFeatureCard contentKey="semprep_edge_3" number={3} title="Univ. Sem Exam PYQ.Papers" desc="Repository of Subject-wise Univ. Sem Exam Prev. Year Q.Papers" icon={BookOpen} />
                         <ExtraEdgeFeatureCard contentKey="semprep_edge_4" number={4} title="University Updates" desc="One Stop Destination for all University Exam Updates." icon={Bell} />

@@ -32,7 +32,7 @@ type ReportKey = keyof Omit<ReportCounts, "total">;
 
 const REPORT_LABELS: { key: ReportKey; label: string; icon: typeof FileText }[] = [
     { key: "contact", label: "Contact Form", icon: Mail },
-    { key: "syntaxwork", label: "Syntax Works", icon: FileText },
+    { key: "syntaxwork", label: "SyntaxWorks", icon: FileText },
     { key: "aicas", label: "AICAS", icon: BookOpen },
     { key: "trainingRequest", label: "Training Programs", icon: GraduationCap },
     { key: "testPrepPro", label: "Test Prep Pro", icon: FileText },

@@ -29,6 +29,15 @@ interface EditableContentProps {
     onContentChange?: (content: string, loading: boolean) => void;
     /** Disable the inline pencil editor even for admins in edit mode (e.g. when editing happens elsewhere, like an admin dashboard) */
     readOnly?: boolean;
+    /** This block holds the page's main heading: saved HTML always renders one <h1>. Every other block has its <h1>s demoted to <h2>, so a page never gets two. */
+    pageHeading?: boolean;
+}
+
+/** Keep exactly one H1 per page regardless of what admins saved (see `pageHeading`). */
+function normalizeHeadings(html: string, pageHeading: boolean): string {
+    if (!pageHeading) return html.replace(/<(\/?)h1(?=[\s>])/gi, "<$1h2");
+    if (/<h1[\s>]/i.test(html)) return html;
+    return html.replace(/<h2(?=[\s>])/i, "<h1").replace(/<\/h2>/i, "</h1>");
 }
 
 export const EditableContent = ({
@@ -40,6 +49,7 @@ export const EditableContent = ({
     plainText = false,
     onContentChange,
     readOnly = false,
+    pageHeading = false,
 }: EditableContentProps) => {
     const { isAdmin, editMode } = useAdmin();
     const [htmlContent, setHtmlContent] = useState<string | null>(null);
@@ -109,7 +119,7 @@ export const EditableContent = ({
             <p className="whitespace-pre-wrap">{htmlContent}</p>
         ) : (
             <div
-                dangerouslySetInnerHTML={{ __html: sanitizeHtml(htmlContent) }}
+                dangerouslySetInnerHTML={{ __html: normalizeHeadings(sanitizeHtml(htmlContent), pageHeading) }}
             />
         )
     ) : defaultContent;

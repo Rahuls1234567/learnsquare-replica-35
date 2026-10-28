@@ -2,7 +2,7 @@ import { Settings, Code, ClipboardCheck, BookOpen, Monitor, ShieldCheck } from "
 import { EditableContent } from "./EditableContent";
 
 const items = [
-  { icon: Settings, label: "AICAS - ERP (AI Powered Campus Automation Sol.)" },
+  { icon: Settings, label: "AICAS - ERP (AI Powered Campus Automation Solution)" },
   { icon: Code, label: "Coding Platform" },
   { icon: ClipboardCheck, label: "Assessments" },
   { icon: BookOpen, label: "Courses for Semester Exams Preparation" },

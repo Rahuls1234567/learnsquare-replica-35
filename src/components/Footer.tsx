@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight, Apple, Play } from "lucide-react";
@@ -14,33 +16,41 @@ const companyLinks = [
 const productFooterLinks = [
   { name: "AICAS", href: "/aicas", external: false },
   { name: "SyntaxWorks", href: "/syntax-works", external: false },
-  { name: "MySkillForge", href: "/myskillforge", external: false },
-  { name: "SemesterPrep", href: "https://semesterprep.in/", external: true },
+  { name: "SemesterPrep", href: "/semester-prep", external: false },
   { name: "Training Programs", href: "/training-programs", external: false },
-  { name: "Test Prep - Pro", href: "/test-prep-pro", external: false },
 ];
 
+// `id` matches the program id (and card anchor) on /training-programs.
 const trainingColumns = [
   [
-    "CRT Training",
-    "Python Full Stack",
-    "MERN Stack Development",
-    "Cyber Security & Ethical Hacking",
-    "Blockchain Technology",
-    "Quantitative Aptitude",
-    "Verbal-Ability",
-    "Statistics / SPSS Data Analysis"
+    { name: "CRT Training", id: "crt" },
+    { name: "Python Full Stack", id: "python-fullstack" },
+    { name: "MERN Stack Development", id: "mern-stack" },
+    { name: "Cyber Security & Ethical Hacking", id: "cyber-security" },
+    { name: "Blockchain Technology", id: "blockchain" },
+    { name: "Quantitative Aptitude", id: "quantitative-aptitude" },
+    { name: "Verbal-Ability", id: "verbal-ability" },
+    { name: "Statistics / SPSS Data Analysis", id: "statistics-spss" }
   ],
   [
-    "Data Science",
-    "Java Full Stack",
-    "Mobile Development",
-    "Internet of Things (IoT)",
-    "Cloud Computing",
-    "Logical Reasoning",
-    "Soft-Skills & Interview Prep"
+    { name: "Data Science", id: "data-science" },
+    { name: "Java Full Stack", id: "java-fullstack" },
+    { name: "Mobile Development", id: "mobile-dev" },
+    { name: "Internet of Things (IoT)", id: "iot" },
+    { name: "Cloud Computing", id: "cloud-computing" },
+    { name: "Logical Reasoning", id: "logical-reasoning" },
+    { name: "Soft-Skills & Interview Prep", id: "resume-interview-skills" }
   ]
 ];
+
+// Already on /training-programs: set the hash natively so the page gets a hashchange
+// (a client-side Link navigation to the same path would not fire one).
+const goToCourse = (e: React.MouseEvent, id: string) => {
+  if (window.location.pathname === "/training-programs") {
+    e.preventDefault();
+    window.location.hash = id;
+  }
+};
 
 const InstagramBrandIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
@@ -206,10 +216,10 @@ const Footer = () => (
                 {trainingColumns.map((col, idx) => (
                   <ul key={idx} className="space-y-3 md:space-y-4">
                     {col.map((item) => (
-                      <li key={item}>
-                        <Link href="/training-programs" prefetch={false} className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-start gap-2 group/link text-[13px] md:text-xs leading-snug">
+                      <li key={item.id}>
+                        <Link href={`/training-programs#${item.id}`} onClick={(e) => goToCourse(e, item.id)} prefetch={false} className="text-slate-400 hover:text-white transition-all duration-300 font-bold flex items-start gap-2 group/link text-[13px] md:text-xs leading-snug">
                           <span className="w-1.5 h-1.5 mt-[0.4em] shrink-0 bg-primary/40 rounded-full group-hover/link:bg-primary transition-colors" />
-                          {item}
+                          {item.name}
                         </Link>
                       </li>
                     ))}
@@ -244,7 +254,7 @@ const Footer = () => (
             <InstagramBrandIcon className="w-9 h-9 md:w-11 md:h-11 shadow-[0_4px_10px_rgba(0,0,0,0.3)] group-hover/social:shadow-[0_8px_20px_rgba(238,42,123,0.4)] rounded-xl transition-all" />
           </a>
           <a
-            href="https://www.linkedin.com/company/learnsquaretechnologies/?viewAsMember=true"
+            href="https://www.linkedin.com/company/learnsquaretechnologies/"
             target="_blank"
             rel="noopener noreferrer"
             className="group/social transition-transform hover:-translate-y-1 hover:scale-110"

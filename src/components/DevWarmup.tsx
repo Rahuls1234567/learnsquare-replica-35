@@ -7,9 +7,7 @@ const ROUTES_TO_PREFETCH = [
     "/contact",
     "/syntax-works",
     "/aicas",
-    "/myskillforge",
     "/training-programs",
-    "/test-prep-pro",
     "/login",
     "/register",
 ];

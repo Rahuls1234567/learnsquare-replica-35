@@ -15,6 +15,9 @@ import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { toast } from "sonner";
 import { setAuthCookie } from "@/lib/auth";
+import { SUPPORT_WHATSAPP_URL } from "@/lib/contact";
+import { FieldError, FormSuccess } from "@/src/components/FormFeedback";
+import { rules } from "@/lib/validation";
 
 const generateCaptcha = () => {
     const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -30,6 +33,7 @@ const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [captcha, setCaptcha] = useState("");
     const [captchaInput, setCaptchaInput] = useState("");
+    const [captchaError, setCaptchaError] = useState("");
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -57,14 +61,27 @@ const LoginPage = () => {
 
     const refreshCaptcha = () => setCaptcha(generateCaptcha());
 
-    const onSubmit = (data: LoginFormData) => {
+    // Checked on every submit (not only once the other fields pass), so all errors show together.
+    const checkCaptcha = () => {
+        if (!captchaInput.trim()) {
+            setCaptchaError("Enter the CAPTCHA shown below");
+            return false;
+        }
         if (captchaInput.toUpperCase() !== captcha) {
-            toast.error("Invalid CAPTCHA", { description: "Please enter the 6 characters shown above." });
+            setCaptchaError("That CAPTCHA doesn't match. Enter the new characters shown below.");
             setCaptchaInput("");
             refreshCaptcha();
-            return;
+            return false;
         }
-        mutation.mutate(data);
+        setCaptchaError("");
+        return true;
+    };
+
+    const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        const captchaOk = checkCaptcha();
+        handleSubmit((data: LoginFormData) => {
+            if (captchaOk) mutation.mutate(data);
+        })(e);
     };
 
     return (
@@ -160,23 +177,24 @@ const LoginPage = () => {
                             <h2 className="text-2xl font-black text-slate-900 text-center mb-1">Sign In</h2>
                             <p className="text-slate-500 text-sm text-center mb-8">Access your learning dashboard</p>
 
-                            <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+                            <form className="space-y-5" onSubmit={onFormSubmit} noValidate>
                                 <div className="space-y-2">
                                     <Label htmlFor="email" className="text-slate-700 font-semibold text-sm">Username / Email *</Label>
                                     <Input
                                         id="email"
-                                        {...register("email", { required: true })}
+                                        {...register("email", rules.required("Username or email"))} aria-invalid={!!errors.email}
                                         type="text"
                                         placeholder="Enter username or email"
                                         className={`h-12 rounded-xl border-slate-200 bg-slate-50/50 focus:bg-white ${errors.email ? "border-red-500/50" : ""}`}
                                     />
+                                    <FieldError message={errors.email?.message} />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="password" className="text-slate-700 font-semibold text-sm">Password *</Label>
                                     <div className="relative">
                                         <Input
                                             id="password"
-                                            {...register("password", { required: true })}
+                                            {...register("password", rules.required("Password"))} aria-invalid={!!errors.password}
                                             type={showPassword ? "text" : "password"}
                                             placeholder="Enter password"
                                             className={`h-12 rounded-xl border-slate-200 bg-slate-50/50 focus:bg-white pr-12 ${errors.password ? "border-red-500/50" : ""}`}
@@ -190,17 +208,21 @@ const LoginPage = () => {
                                             {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                         </button>
                                     </div>
+                                    <FieldError message={errors.password?.message} />
                                 </div>
 
                                 <div className="space-y-2">
-                                    <Label className="text-slate-700 font-semibold text-sm">ENTER CAPTCHA</Label>
+                                    <Label htmlFor="captcha" className="text-slate-700 font-semibold text-sm">ENTER CAPTCHA *</Label>
                                     <Input
+                                        id="captcha"
                                         value={captchaInput}
-                                        onChange={(e) => setCaptchaInput(e.target.value.toUpperCase())}
+                                        onChange={(e) => { setCaptchaInput(e.target.value.toUpperCase()); setCaptchaError(""); }}
+                                        aria-invalid={!!captchaError}
                                         placeholder="Enter captcha"
                                         maxLength={6}
-                                        className="h-12 rounded-xl border-slate-200 bg-slate-50/50 focus:bg-white font-mono tracking-widest uppercase"
+                                        className={`h-12 rounded-xl border-slate-200 bg-slate-50/50 focus:bg-white font-mono tracking-widest uppercase ${captchaError ? "border-red-500/50" : ""}`}
                                     />
+                                    <FieldError message={captchaError} />
                                     <div className="flex items-center gap-3">
                                         <div className="flex-1 flex items-center justify-center gap-1 py-3 px-4 rounded-xl bg-slate-100 border border-slate-200 relative overflow-hidden">
                                             <span className="text-lg font-black text-slate-700 tracking-[0.35em] select-none relative z-10" style={{ textDecoration: "line-through", textDecorationColor: "rgba(0,0,0,0.3)" }}>
@@ -229,7 +251,7 @@ const LoginPage = () => {
                                 <Link href="/register" className="text-violet-600 font-semibold hover:text-violet-700 hover:underline">Create account</Link>
                                 <a href="#" className="text-violet-600 font-semibold hover:text-violet-700 hover:underline">Forgot Password?</a>
                                 <a
-                                    href="https://wa.me/919885552350"
+                                    href={SUPPORT_WHATSAPP_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-1.5 text-emerald-600 font-semibold hover:underline"
