@@ -165,13 +165,8 @@ const TrainingProgramsPage = () => {
         {
             id: "python-fullstack",
             title: "Python Full Stack",
-<<<<<<< Updated upstream
-            desc: "Equip students with the skills to develop, implement, and deploy full-stack web applications",
-            img: "/images/illustrations/python_fullstack.webp",
-=======
             desc: "Build and deploy full-stack web applications with Python and Flask on the back end and React on the front end",
-            img: "/images/illustrations/python_fullstack.png",
->>>>>>> Stashed changes
+            img: "/images/illustrations/python_fullstack.webp",
             details: [
                 {
                     subtitle: "Frontend Development",
@@ -198,13 +193,8 @@ const TrainingProgramsPage = () => {
         {
             id: "java-fullstack",
             title: "Java Full Stack",
-<<<<<<< Updated upstream
-            desc: "Equip students with the skills to develop, implement, and deploy full-stack web applications",
-            img: "/images/illustrations/java_fullstack.webp",
-=======
             desc: "Build and deploy enterprise web applications with Java and Spring Boot on the back end and React on the front end",
-            img: "/images/illustrations/java_fullstack.png",
->>>>>>> Stashed changes
+            img: "/images/illustrations/java_fullstack.webp",
             details: [
                 {
                     subtitle: "Frontend Development",
@@ -259,13 +249,8 @@ const TrainingProgramsPage = () => {
         {
             id: "mobile-dev",
             title: "Mobile Development Full Stack",
-<<<<<<< Updated upstream
-            desc: "Refers to proficiency in both front-end and back-end aspects of mobile app development",
-            img: "/images/illustrations/mobile_dev.webp",
-=======
             desc: "Build cross-platform mobile apps end to end, with Flutter on the front end and Node.js on the back end",
-            img: "/images/illustrations/mobile_dev.png",
->>>>>>> Stashed changes
+            img: "/images/illustrations/mobile_dev.webp",
             details: [
                 {
                     subtitle: "Frontend Development",
@@ -292,13 +277,8 @@ const TrainingProgramsPage = () => {
         {
             id: "cyber-security",
             title: "Cyber Security and Ethical Hacking",
-<<<<<<< Updated upstream
-            desc: "Proactively identify and address security risks, protect digital assets, uphold ethical standards",
-            img: "/images/illustrations/cyber_security.webp",
-=======
             desc: "Learn to identify and address security risks, protect digital assets and uphold ethical standards",
-            img: "/images/illustrations/cyber_security.png",
->>>>>>> Stashed changes
+            img: "/images/illustrations/cyber_security.webp",
             details: [
                 {
                     subtitle: "Introduction to Cyber Security",
@@ -470,13 +450,8 @@ const TrainingProgramsPage = () => {
         {
             id: "blockchain",
             title: "Blockchain Technology",
-<<<<<<< Updated upstream
-            desc: "Blockchain Technology is to offer a decentralized, secure, and transparent way to record transactions",
-            img: "/images/illustrations/blockchain.webp",
-=======
             desc: "Learn how blockchain records transactions in a decentralized, secure and transparent way, and build real solutions",
-            img: "/images/illustrations/blockchain.png",
->>>>>>> Stashed changes
+            img: "/images/illustrations/blockchain.webp",
             details: [
                 {
                     subtitle: "Introduction to Blockchain",
@@ -547,13 +522,8 @@ const TrainingProgramsPage = () => {
         {
             id: "cloud-computing",
             title: "Cloud Computing",
-<<<<<<< Updated upstream
-            desc: "Cloud Computing is to provide scalable, on-demand access to computing resources, including storage",
-            img: "/images/illustrations/cloud_computing.webp",
-=======
             desc: "Learn to deploy and manage scalable, on-demand cloud infrastructure, storage and networking",
-            img: "/images/illustrations/cloud_computing.png",
->>>>>>> Stashed changes
+            img: "/images/illustrations/cloud_computing.webp",
             details: [
                 {
                     subtitle: "Introduction to Cloud Computing",
@@ -622,13 +592,8 @@ const TrainingProgramsPage = () => {
         {
             id: "quantitative-aptitude",
             title: "Quantitative Aptitude",
-<<<<<<< Updated upstream
-            desc: "Number Systems, Percentages, Profit and Loss",
-            img: "/images/illustrations/quantitative_aptitude.webp",
-=======
             desc: "Master the number, percentage, ratio and time-and-work problems asked in placement aptitude tests",
-            img: "/images/illustrations/quantitative_aptitude.png",
->>>>>>> Stashed changes
+            img: "/images/illustrations/quantitative_aptitude.webp",
             details: [
                 {
                     subtitle: "Quantitative Aptitude",
@@ -650,13 +615,8 @@ const TrainingProgramsPage = () => {
         {
             id: "logical-reasoning",
             title: "Logical Reasoning",
-<<<<<<< Updated upstream
-            desc: "Directions, Clocks, Calendars",
-            img: "/images/illustrations/logical_reasoning.webp",
-=======
             desc: "Solve placement-test reasoning questions on series, puzzles, seating arrangements, coding-decoding and more",
-            img: "/images/illustrations/logical_reasoning.png",
->>>>>>> Stashed changes
+            img: "/images/illustrations/logical_reasoning.webp",
             details: [
                 {
                     subtitle: "Logical Reasoning",
@@ -684,13 +644,8 @@ const TrainingProgramsPage = () => {
         {
             id: "verbal-ability",
             title: "Verbal-Ability",
-<<<<<<< Updated upstream
-            desc: "Articles/Nouns/ Adjectives & Prepositions Rules, Sentence formation, Verbs, & S.V.A Rules",
-            img: "/images/illustrations/verbal_ability.webp",
-=======
             desc: "Strengthen grammar, vocabulary and reading comprehension to crack the verbal section of placement tests",
-            img: "/images/illustrations/verbal_ability.png",
->>>>>>> Stashed changes
+            img: "/images/illustrations/verbal_ability.webp",
             details: [
                 {
                     subtitle: "Verbal-Ability",
@@ -709,13 +664,8 @@ const TrainingProgramsPage = () => {
         {
             id: "resume-interview-skills",
             title: "Resume Writing Interview Skills and Soft-Skills",
-<<<<<<< Updated upstream
-            desc: "Resume Writing, LinkedIn Profile Creation, Personal Interviews - Strategies and Tips",
-            img: "/images/illustrations/resume_interview_skills.webp",
-=======
             desc: "Build a strong resume and LinkedIn profile, and learn interview strategies and business communication",
-            img: "/images/illustrations/resume_interview_skills.png",
->>>>>>> Stashed changes
+            img: "/images/illustrations/resume_interview_skills.webp",
             details: [
                 {
                     subtitle: "Resume Writing Interview Skills and Soft-Skills",
@@ -731,13 +681,8 @@ const TrainingProgramsPage = () => {
         {
             id: "statistics-spss",
             title: "Statistics / Data Analysis in SPSS: Inferential Statistics",
-<<<<<<< Updated upstream
-            desc: "Statistics / Data Analysis in SPSS: Inferential Statistics",
-            img: "/images/illustrations/statistics_spss.webp",
-=======
             desc: "Learn inferential statistics and run your own data analysis in SPSS through on-demand video lessons",
-            img: "/images/illustrations/statistics_spss.png",
->>>>>>> Stashed changes
+            img: "/images/illustrations/statistics_spss.webp",
             details: [
                 {
                     subtitle: "Statistics / Data Analysis in SPSS: Inferential Statistics",

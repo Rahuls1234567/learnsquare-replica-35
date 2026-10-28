@@ -190,13 +190,8 @@ const Navbar = () => {
                           exit={{ opacity: 0, scale: 0.9, y: 10 }}
                           className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[100]"
                         >
-<<<<<<< Updated upstream
-                          <div className="bg-white/95 border border-slate-200 shadow-[0_30px_60px_rgba(0,0,0,0.1)] overflow-hidden rounded-[2rem] min-w-[580px] p-2">
-                            <div className="grid grid-cols-3 gap-1">
-=======
-                          <div className="bg-white/95 backdrop-blur-xl border border-slate-200 shadow-[0_30px_60px_rgba(0,0,0,0.12)] overflow-hidden rounded-3xl w-[580px] p-3">
+                          <div className="bg-white/95 border border-slate-200 shadow-[0_30px_60px_rgba(0,0,0,0.12)] overflow-hidden rounded-3xl w-[580px] p-3">
                             <div className="grid grid-cols-2 gap-1.5">
->>>>>>> Stashed changes
                               {products.map((p) => (
                                 <Link
                                   key={p.title}

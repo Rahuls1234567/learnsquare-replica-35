@@ -12,17 +12,10 @@ import { Textarea } from "@/src/components/ui/textarea";
 import { toast } from "sonner";
 
 const collaborations = [
-<<<<<<< Updated upstream
   { image: "/images/client-1.webp", title: "AICAS MoU with Modern Educational Society" },
   { image: "/images/client-2.webp", title: "AICAS MoU with Shree Ramachandra College of Engineering" },
-  { image: "/images/client-3.webp", title: "MoU with SHADAN for MySkillForge Program" },
+  { image: "/images/client-3.webp", title: "MoU with SHADAN for Training" },
   { image: "/images/client-4.webp", title: "MoU with GPREC for Training" },
-=======
-  { image: "/images/client-1.png", title: "AICAS MoU with Modern Educational Society" },
-  { image: "/images/client-2.png", title: "AICAS MoU with Shree Ramachandra College of Engineering" },
-  { image: "/images/client-3.png", title: "MoU with SHADAN for Training" },
-  { image: "/images/client-4.png", title: "MoU with GPREC for Training" },
->>>>>>> Stashed changes
 ];
 
 interface CollaborationsSectionProps {

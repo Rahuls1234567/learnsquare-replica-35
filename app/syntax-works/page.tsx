@@ -405,13 +405,8 @@ const SyntaxWorksPage = () => {
                                 icon={Monitor}
                                 contentKey="syntax_feature_3"
                                 title="Integrated <br /> Environment (IDE)"
-<<<<<<< Updated upstream
-                                desc="Our platform offers a state-of-the-art IDE designed to streamline your coding experience, enable you to write, test, and debug code all in one place."
-                                img="/images/syntaxworks/ide_premium.webp"
-=======
                                 desc="Our platform offers a state-of-the-art IDE designed to streamline your coding experience, enabling you to write, test, and debug code all in one place."
-                                img="/images/syntaxworks/ide_premium.png"
->>>>>>> Stashed changes
+                                img="/images/syntaxworks/ide_premium.webp"
                                 details={[
                                     "Multi-file project support with directory explorer",
                                     "Cloud-based workspace for persistent progress",

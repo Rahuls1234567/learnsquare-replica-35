@@ -26,13 +26,8 @@ export const DEFAULT_TEAM: TeamMember[] = [
         role: "Founder & CEO",
         education: "EPBM - IIM K, M.TECH - JNTUH, B.TECH - JNTUH",
         contact: "988 555 2350 | sandeep@learnsquare.co",
-<<<<<<< Updated upstream
-        bio: "With over 18 years in the Ed-Tech industry, he is a passionate leader known for creating innovative learning solutions and building strategic partnerships with universities, government bodies, and channel partners nationwide. He has successfully launched and managed multiple Ed-Tech Products, LMS and CMS platforms, and led top educators across domains. A mentor to thousands of students through GATE, ESE, and competitive exam sessions, his expertise spans market research, product planning, implementation, budgeting, resource management, and team performance.",
-        image: "/images/homeimage/sandeep bandari.webp",
-=======
         bio: "With over 18 years in the ed-tech industry, he is a passionate leader known for creating innovative learning solutions and building strategic partnerships with universities, government bodies and channel partners nationwide. He has successfully launched and managed multiple ed-tech products, LMS and CMS platforms, and led top educators across domains. A mentor to thousands of students through GATE, ESE and competitive exam sessions, his expertise spans market research, product planning, implementation, budgeting, resource management and team performance.",
-        image: "/images/homeimage/sandeep bandari.jpg",
->>>>>>> Stashed changes
+        image: "/images/homeimage/sandeep bandari.webp",
     },
     {
         id: "seed-2",
@@ -40,13 +35,8 @@ export const DEFAULT_TEAM: TeamMember[] = [
         role: "Co-Founder & Director",
         education: "IPBA - IIM INDORE, M.TECH - JNTUH, B.TECH - JNTUH",
         contact: "",
-<<<<<<< Updated upstream
-        bio: "She is passionate about driving impactful product development through innovation and collaboration. With a strong foundation in business analytics and operational excellence, she leverages data-driven insights to optimize performance and achieve strategic goals. Known for leading cross-functional teams, she consistently delivers innovative solutions that exceed expectations.",
-        image: "/alekya mam.webp",
-=======
         bio: "She is passionate about driving impactful product development through innovation and collaboration. With a strong foundation in business analytics and operational excellence, she leverages data-driven insights to optimise performance and achieve strategic goals. Known for leading cross-functional teams, she consistently delivers innovative solutions that exceed expectations.",
-        image: "/alekya mam.jpeg",
->>>>>>> Stashed changes
+        image: "/alekya mam.webp",
     },
     {
         id: "seed-3",

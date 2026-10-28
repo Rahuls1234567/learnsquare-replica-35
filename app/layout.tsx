@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-<<<<<<< Updated upstream
+import { SITE_URL, pageMetadata } from "@/lib/seo";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -15,11 +15,6 @@ const jakarta = Plus_Jakarta_Sans({
     display: "swap",
     variable: "--font-jakarta",
 });
-=======
-import { SITE_URL, pageMetadata } from "@/lib/seo";
-import NoticeBoard from "@/src/components/NoticeBoard";
-const inter = Inter({ subsets: ["latin"] });
->>>>>>> Stashed changes
 
 // Home page metadata doubles as the site-wide default; other routes override it in their own layout.tsx.
 export const metadata: Metadata = {
