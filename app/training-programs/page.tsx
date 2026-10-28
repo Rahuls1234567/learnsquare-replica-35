@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -20,6 +20,8 @@ import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { toast } from "sonner";
 import { EditableContent } from "@/components/EditableContent";
+import { FieldError, FormSuccess } from "@/src/components/FormFeedback";
+import { rules } from "@/lib/validation";
 
 type TrainingRequestFormData = {
     firstName: string;
@@ -33,6 +35,31 @@ type TrainingRequestFormData = {
 const TrainingProgramsPage = () => {
     const router = useRouter();
     const [selectedProgram, setSelectedProgram] = useState<any>(null);
+    const [highlightedProgram, setHighlightedProgram] = useState<string | null>(null);
+
+    // Footer "Trending Programs" links land here as /training-programs#<program id>:
+    // bring that card into view and highlight it briefly.
+    useEffect(() => {
+        let timers: ReturnType<typeof setTimeout>[] = [];
+        const focusFromHash = () => {
+            const id = decodeURIComponent(window.location.hash.slice(1));
+            if (!programs.some((p) => p.id === id)) return;
+            timers.forEach(clearTimeout);
+            setHighlightedProgram(id);
+            timers = [
+                // wait for images and saved CMS text to settle so the card doesn't move after scrolling
+                setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" }), 400),
+                setTimeout(() => setHighlightedProgram(null), 3000),
+            ];
+        };
+        focusFromHash();
+        window.addEventListener("hashchange", focusFromHash);
+        return () => {
+            timers.forEach(clearTimeout);
+            window.removeEventListener("hashchange", focusFromHash);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<TrainingRequestFormData>({
         defaultValues: {
@@ -54,7 +81,6 @@ const TrainingProgramsPage = () => {
                 description: "We've received your request and will contact you shortly.",
             });
             reset();
-            router.push('/');
         },
         onError: () => {
             toast.error("Failed to submit request", {
@@ -139,8 +165,13 @@ const TrainingProgramsPage = () => {
         {
             id: "python-fullstack",
             title: "Python Full Stack",
+<<<<<<< Updated upstream
             desc: "Equip students with the skills to develop, implement, and deploy full-stack web applications",
             img: "/images/illustrations/python_fullstack.webp",
+=======
+            desc: "Build and deploy full-stack web applications with Python and Flask on the back end and React on the front end",
+            img: "/images/illustrations/python_fullstack.png",
+>>>>>>> Stashed changes
             details: [
                 {
                     subtitle: "Frontend Development",
@@ -167,8 +198,13 @@ const TrainingProgramsPage = () => {
         {
             id: "java-fullstack",
             title: "Java Full Stack",
+<<<<<<< Updated upstream
             desc: "Equip students with the skills to develop, implement, and deploy full-stack web applications",
             img: "/images/illustrations/java_fullstack.webp",
+=======
+            desc: "Build and deploy enterprise web applications with Java and Spring Boot on the back end and React on the front end",
+            img: "/images/illustrations/java_fullstack.png",
+>>>>>>> Stashed changes
             details: [
                 {
                     subtitle: "Frontend Development",
@@ -194,25 +230,25 @@ const TrainingProgramsPage = () => {
         },
         {
             id: "mern-stack",
-            title: "Mern Stack",
-            desc: "Equip students with comprehensive skills in Python Programming, Web Development",
+            title: "MERN Stack",
+            desc: "Build full-stack JavaScript web applications with MongoDB, Express, React and Node.js",
             img: "/images/illustrations/mern_stack.png",
             details: [
                 {
-                    subtitle: "Frontend Development",
-                    items: ["HTML5", "CSS", "JavaScript", "React Programming"]
+                    subtitle: "Frontend Development (React)",
+                    items: ["HTML5", "CSS", "Modern JavaScript (ES6+)", "React Components, Hooks & Routing"]
                 },
                 {
-                    subtitle: "Backend Development",
-                    items: ["NODE.JS", "Express.JS", "REST API Development"]
+                    subtitle: "Backend Development (Node.js & Express)",
+                    items: ["NODE.JS", "Express.JS", "REST API Development", "Authentication with JWT"]
                 },
                 {
-                    subtitle: "Databases",
-                    items: ["SQL vs NOSQL Databases", "MSSQL", "MongoDB", "Data Modelling in NOSQL"]
+                    subtitle: "Database (MongoDB)",
+                    items: ["NoSQL Concepts", "MongoDB CRUD Operations", "Mongoose ODM", "Data Modelling in MongoDB"]
                 },
                 {
                     subtitle: "Project Development",
-                    items: ["Frontend Development - REACT", "Backend - NODE.JS", "Database Integration", "UI/UX Design"]
+                    items: ["React Frontend", "Node.js & Express API", "MongoDB Integration", "UI/UX Design"]
                 },
                 {
                     subtitle: "Project Deployment",
@@ -223,8 +259,13 @@ const TrainingProgramsPage = () => {
         {
             id: "mobile-dev",
             title: "Mobile Development Full Stack",
+<<<<<<< Updated upstream
             desc: "Refers to proficiency in both front-end and back-end aspects of mobile app development",
             img: "/images/illustrations/mobile_dev.webp",
+=======
+            desc: "Build cross-platform mobile apps end to end, with Flutter on the front end and Node.js on the back end",
+            img: "/images/illustrations/mobile_dev.png",
+>>>>>>> Stashed changes
             details: [
                 {
                     subtitle: "Frontend Development",
@@ -251,8 +292,13 @@ const TrainingProgramsPage = () => {
         {
             id: "cyber-security",
             title: "Cyber Security and Ethical Hacking",
+<<<<<<< Updated upstream
             desc: "Proactively identify and address security risks, protect digital assets, uphold ethical standards",
             img: "/images/illustrations/cyber_security.webp",
+=======
+            desc: "Learn to identify and address security risks, protect digital assets and uphold ethical standards",
+            img: "/images/illustrations/cyber_security.png",
+>>>>>>> Stashed changes
             details: [
                 {
                     subtitle: "Introduction to Cyber Security",
@@ -347,7 +393,7 @@ const TrainingProgramsPage = () => {
         {
             id: "iot",
             title: "Internet of Things (IoT)",
-            desc: "Is to create a network of interconnected devices that can communicate, collect, and exchange data over the internet",
+            desc: "Build connected devices that sense, communicate and exchange data over the internet, from hardware to the cloud",
             img: "/images/illustrations/iot.png",
             details: [
                 {
@@ -424,8 +470,13 @@ const TrainingProgramsPage = () => {
         {
             id: "blockchain",
             title: "Blockchain Technology",
+<<<<<<< Updated upstream
             desc: "Blockchain Technology is to offer a decentralized, secure, and transparent way to record transactions",
             img: "/images/illustrations/blockchain.webp",
+=======
+            desc: "Learn how blockchain records transactions in a decentralized, secure and transparent way, and build real solutions",
+            img: "/images/illustrations/blockchain.png",
+>>>>>>> Stashed changes
             details: [
                 {
                     subtitle: "Introduction to Blockchain",
@@ -496,8 +547,13 @@ const TrainingProgramsPage = () => {
         {
             id: "cloud-computing",
             title: "Cloud Computing",
+<<<<<<< Updated upstream
             desc: "Cloud Computing is to provide scalable, on-demand access to computing resources, including storage",
             img: "/images/illustrations/cloud_computing.webp",
+=======
+            desc: "Learn to deploy and manage scalable, on-demand cloud infrastructure, storage and networking",
+            img: "/images/illustrations/cloud_computing.png",
+>>>>>>> Stashed changes
             details: [
                 {
                     subtitle: "Introduction to Cloud Computing",
@@ -566,8 +622,13 @@ const TrainingProgramsPage = () => {
         {
             id: "quantitative-aptitude",
             title: "Quantitative Aptitude",
+<<<<<<< Updated upstream
             desc: "Number Systems, Percentages, Profit and Loss",
             img: "/images/illustrations/quantitative_aptitude.webp",
+=======
+            desc: "Master the number, percentage, ratio and time-and-work problems asked in placement aptitude tests",
+            img: "/images/illustrations/quantitative_aptitude.png",
+>>>>>>> Stashed changes
             details: [
                 {
                     subtitle: "Quantitative Aptitude",
@@ -589,8 +650,13 @@ const TrainingProgramsPage = () => {
         {
             id: "logical-reasoning",
             title: "Logical Reasoning",
+<<<<<<< Updated upstream
             desc: "Directions, Clocks, Calendars",
             img: "/images/illustrations/logical_reasoning.webp",
+=======
+            desc: "Solve placement-test reasoning questions on series, puzzles, seating arrangements, coding-decoding and more",
+            img: "/images/illustrations/logical_reasoning.png",
+>>>>>>> Stashed changes
             details: [
                 {
                     subtitle: "Logical Reasoning",
@@ -602,8 +668,8 @@ const TrainingProgramsPage = () => {
                         "Number Series",
                         "Letter Series",
                         "Analogy",
-                        "Odd Man",
-                        "Out Coding and Decoding",
+                        "Odd Man Out",
+                        "Coding and Decoding",
                         "Ranking",
                         "Element Series",
                         "Seating Arrangement",
@@ -618,8 +684,13 @@ const TrainingProgramsPage = () => {
         {
             id: "verbal-ability",
             title: "Verbal-Ability",
+<<<<<<< Updated upstream
             desc: "Articles/Nouns/ Adjectives & Prepositions Rules, Sentence formation, Verbs, & S.V.A Rules",
             img: "/images/illustrations/verbal_ability.webp",
+=======
+            desc: "Strengthen grammar, vocabulary and reading comprehension to crack the verbal section of placement tests",
+            img: "/images/illustrations/verbal_ability.png",
+>>>>>>> Stashed changes
             details: [
                 {
                     subtitle: "Verbal-Ability",
@@ -638,8 +709,13 @@ const TrainingProgramsPage = () => {
         {
             id: "resume-interview-skills",
             title: "Resume Writing Interview Skills and Soft-Skills",
+<<<<<<< Updated upstream
             desc: "Resume Writing, LinkedIn Profile Creation, Personal Interviews - Strategies and Tips",
             img: "/images/illustrations/resume_interview_skills.webp",
+=======
+            desc: "Build a strong resume and LinkedIn profile, and learn interview strategies and business communication",
+            img: "/images/illustrations/resume_interview_skills.png",
+>>>>>>> Stashed changes
             details: [
                 {
                     subtitle: "Resume Writing Interview Skills and Soft-Skills",
@@ -655,13 +731,21 @@ const TrainingProgramsPage = () => {
         {
             id: "statistics-spss",
             title: "Statistics / Data Analysis in SPSS: Inferential Statistics",
+<<<<<<< Updated upstream
             desc: "Statistics / Data Analysis in SPSS: Inferential Statistics",
             img: "/images/illustrations/statistics_spss.webp",
+=======
+            desc: "Learn inferential statistics and run your own data analysis in SPSS through on-demand video lessons",
+            img: "/images/illustrations/statistics_spss.png",
+>>>>>>> Stashed changes
             details: [
                 {
                     subtitle: "Statistics / Data Analysis in SPSS: Inferential Statistics",
                     items: [
-                        "This course includes: 5 hours on-demand video 15 downloadable resources Access on mobile and TV Certificate of completion"
+                        "5 hours of on-demand video",
+                        "15 downloadable resources",
+                        "Access on mobile and TV",
+                        "Certificate of completion"
 
                     ]
                 }
@@ -732,11 +816,12 @@ const TrainingProgramsPage = () => {
                             <EditableContent 
                                 contentKey="training_hero_heading"
                                 description="Training Programs Hero Heading"
+                                pageHeading
                                 defaultContent={
-                                    <h2 className="font-black tracking-tight flex flex-col items-start drop-shadow-xl w-full">
+                                    <h1 className="font-black tracking-tight flex flex-col items-start drop-shadow-xl w-full">
                                         <span className="text-5xl sm:text-6xl md:text-7xl lg:text-[4.5rem] xl:text-[5.5rem] 2xl:text-[6rem] text-slate-100 mb-2 lg:mb-4 leading-none">Unlock Your</span>
                                         <span className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem] 2xl:text-[4.5rem] text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-400 pb-2 pr-6 leading-[1.1] italic">Potential</span>
-                                    </h2>
+                                    </h1>
                                 }
                             />
 
@@ -796,56 +881,73 @@ const TrainingProgramsPage = () => {
                                     <div className="h-1 w-12 bg-indigo-500 rounded-full mx-auto shadow-[0_0_15px_rgba(99,102,241,0.8)]" />
                                 </div>
 
-                                <form className="space-y-5 relative z-10 flex-grow" onSubmit={handleSubmit(onRequestSubmit)}>
+                                {mutation.isSuccess ? (
+                                    <div className="relative z-10">
+                                        <FormSuccess
+                                            tone="dark"
+                                            title="Request submitted"
+                                            message="Thanks for your interest in our training programs. Our team will contact you shortly."
+                                            actionLabel="Submit another request"
+                                            onAction={() => mutation.reset()}
+                                        />
+                                    </div>
+                                ) : (
+                                <form className="space-y-5 relative z-10 flex-grow" onSubmit={handleSubmit(onRequestSubmit)} noValidate>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div className="space-y-2">
                                             <Input
-                                                {...register("firstName", { required: true })}
+                                                {...register("firstName", rules.required("First name"))} aria-invalid={!!errors.firstName}
                                                 placeholder="First Name*"
                                                 className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.firstName ? 'border-red-500/50' : ''}`}
                                             />
+                                            <FieldError message={errors.firstName?.message} tone="dark" />
                                         </div>
                                         <div className="space-y-2">
                                             <Input
-                                                {...register("lastName", { required: true })}
+                                                {...register("lastName", rules.required("Last name"))} aria-invalid={!!errors.lastName}
                                                 placeholder="Last Name*"
                                                 className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.lastName ? 'border-red-500/50' : ''}`}
                                             />
+                                            <FieldError message={errors.lastName?.message} tone="dark" />
                                         </div>
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div className="space-y-2">
                                             <Input
-                                                {...register("whatsappNo", { required: true })}
+                                                {...register("whatsappNo", rules.phone("WhatsApp number"))} aria-invalid={!!errors.whatsappNo}
                                                 placeholder="Whatsapp No.*"
                                                 className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.whatsappNo ? 'border-red-500/50' : ''}`}
                                             />
+                                            <FieldError message={errors.whatsappNo?.message} tone="dark" />
                                         </div>
                                         <div className="space-y-2">
                                             <Input
-                                                {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+                                                {...register("email", rules.email())} aria-invalid={!!errors.email}
                                                 placeholder="Email*"
                                                 type="email"
                                                 className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.email ? 'border-red-500/50' : ''}`}
                                             />
+                                            <FieldError message={errors.email?.message} tone="dark" />
                                         </div>
                                     </div>
 
                                     <div className="space-y-2">
                                         <Input
-                                            {...register("collegeName", { required: true })}
+                                            {...register("collegeName", rules.required("College name"))} aria-invalid={!!errors.collegeName}
                                             placeholder="College Name*"
                                             className={`h-14 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-sm shadow-inner ${errors.collegeName ? 'border-red-500/50' : ''}`}
                                         />
+                                        <FieldError message={errors.collegeName?.message} tone="dark" />
                                     </div>
                                     
                                     <div className="space-y-2">
                                         <Textarea 
-                                            {...register("message", { required: true })} 
-                                            placeholder="Tell us what you're looking for..." 
+                                            {...register("message", rules.required("Message"))} aria-invalid={!!errors.message} 
+                                            placeholder="Tell us what you're looking for*" 
                                             className={`min-h-[100px] bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold p-5 resize-none text-sm shadow-inner flex pt-4 items-center justify-start ${errors.message ? 'border-red-500/50' : ''}`} 
                                         />
+                                        <FieldError message={errors.message?.message} tone="dark" />
                                     </div>
 
                                     <div className="pt-4 mt-auto">
@@ -866,6 +968,7 @@ const TrainingProgramsPage = () => {
                                         </div>
                                     </div>
                                 </form>
+                                )}
                             </div>
                         </motion.div>
                     </div>
@@ -889,11 +992,12 @@ const TrainingProgramsPage = () => {
                             {programs.map((prog, i) => (
                                 <motion.div
                                     key={i}
+                                    id={prog.id}
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.05 }}
-                                    className="group relative bg-slate-900/40 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/10 hover:border-indigo-500/30 transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-[0_20px_40px_rgba(99,102,241,0.2)]"
+                                    className={`group relative scroll-mt-32 bg-slate-900/40 backdrop-blur-xl rounded-[2.5rem] p-8 border transition-all duration-500 overflow-hidden shadow-2xl hover:shadow-[0_20px_40px_rgba(99,102,241,0.2)] ${highlightedProgram === prog.id ? "border-indigo-400 ring-4 ring-indigo-500/40" : "border-white/10 hover:border-indigo-500/30"}`}
                                 >
                                     {/* Texture & Glow */}
                                     <div className="absolute inset-0 z-0 opacity-10 group-hover:opacity-20 transition-opacity">

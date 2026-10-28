@@ -18,7 +18,7 @@ const slides = [
     cardSubtitle: "Transforming Futures",
     description: "The Idea: Everything University need to Manage, Engage, and Elevate their Educational Experience within a Single Platform.",
     features: [
-      "AICAS - ERP (AI Powered Campus Automation Sol.)",
+      "AICAS - ERP (AI Powered Campus Automation Solution)",
       "Coding Platform",
       "Assessments",
       "Courses for Semester Exams Preparation",
@@ -205,6 +205,7 @@ const HeroCarousel = () => {
                     <div className={`absolute -inset-10 bg-gradient-to-r ${slide.color} opacity-10 blur-2xl rounded-full z-[0] pointer-events-none`} />
                     <EditableContent 
                         contentKey={`hero_slide_${current}_title`}
+                        pageHeading
                         description={`Hero Slide ${current} Title`}
                         onEditOpenChange={setHeroEditDialogOpen}
                         defaultContent={

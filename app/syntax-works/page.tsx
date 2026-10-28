@@ -23,6 +23,8 @@ import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { toast } from "sonner";
 import { EditableContent } from "@/components/EditableContent";
+import { FieldError, FormSuccess } from "@/src/components/FormFeedback";
+import { rules } from "@/lib/validation";
 
 const FeatureCard = ({ title, desc, img, reverse = false, icon: Icon, details, contentKey }: any) => {
     return (
@@ -169,7 +171,7 @@ const FeatureCard = ({ title, desc, img, reverse = false, icon: Icon, details, c
 };
 
 const SyntaxWorksPage = () => {
-    const { register, handleSubmit, reset } = useForm({
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
         defaultValues: {
             firstName: '',
             lastName: '',
@@ -238,10 +240,11 @@ const SyntaxWorksPage = () => {
 
                                     <EditableContent 
                                         contentKey="syntax_hero_heading"
+                                        pageHeading
                                         description="SyntaxWorks Hero Heading"
                                         defaultContent={
                                             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight tracking-tighter py-2">
-                                                Syntax <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 italic pr-8 inline-block">Works</span>
+                                                Syntax<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 italic pr-8 inline-block">Works</span>
                                             </h1>
                                         }
                                     />
@@ -262,7 +265,7 @@ const SyntaxWorksPage = () => {
                                         { icon: Shield, title: "Secure Platform", desc: "Enterprise-grade safety" },
                                         { icon: Rocket, title: "Fast Execution", desc: "Real-time compiling" },
                                         { icon: Globe, title: "Multi-language", desc: "Support for 50+ languages" },
-                                        { icon: Code2, title: "Smart\u00A0\u00A0IDE", desc: "AI-assisted coding" }
+                                        { icon: Code2, title: "Smart IDE", desc: "AI-assisted coding" }
                                     ].map((item, i) => (
                                         <motion.div key={i} className="flex gap-5 items-start group">
                                             <div className="mt-1 p-3 rounded-xl bg-white/5 border border-white/10 group-hover:bg-indigo-600 group-hover:border-transparent transition-all duration-500">
@@ -288,19 +291,43 @@ const SyntaxWorksPage = () => {
                                 <div className="relative bg-slate-900/60 backdrop-blur-3xl rounded-[2rem] p-8 md:p-10 border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.4)] max-w-md ml-auto">
                                     <div className="text-center mb-10">
                                         <h3 className="text-4xl font-black text-white tracking-tight leading-none mb-4">Request Access</h3>
-                                        <p className="text-indigo-300 font-bold text-sm tracking-wide">Transform your campus automation today</p>
+                                        <p className="text-indigo-300 font-bold text-sm tracking-wide">Practice coding and ace technical tests with SyntaxWorks</p>
                                     </div>
 
-                                    <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+                                    {mutation.isSuccess ? (
+                                        <FormSuccess
+                                            tone="dark"
+                                            title="Request submitted"
+                                            message="Thanks for your interest in SyntaxWorks. We'll get back to you soon with access details."
+                                            actionLabel="Submit another request"
+                                            onAction={() => mutation.reset()}
+                                        />
+                                    ) : (
+                                    <form className="space-y-5" onSubmit={handleSubmit(onSubmit)} noValidate>
                                         <div className="grid md:grid-cols-2 gap-5">
-                                            <Input {...register("firstName", { required: true })} placeholder="First Name*" className="h-16 rounded-[1.2rem] border-white/10 bg-white/5 text-white placeholder:text-slate-500 font-bold px-7 focus:ring-2 focus:ring-indigo-500/50 transition-all" />
-                                            <Input {...register("lastName", { required: true })} placeholder="Last Name*" className="h-16 rounded-[1.2rem] border-white/10 bg-white/5 text-white placeholder:text-slate-500 font-bold px-7 focus:ring-2 focus:ring-indigo-500/50 transition-all" />
+                                            <div>
+                                                <Input {...register("firstName", rules.required("First name"))} aria-invalid={!!errors.firstName} placeholder="First Name*" className={`h-16 rounded-[1.2rem] border-white/10 bg-white/5 text-white placeholder:text-slate-500 font-bold px-7 focus:ring-2 focus:ring-indigo-500/50 transition-all ${errors.firstName ? "border-red-400/70" : ""}`} />
+                                                <FieldError message={errors.firstName?.message} tone="dark" />
+                                            </div>
+                                            <div>
+                                                <Input {...register("lastName", rules.required("Last name"))} aria-invalid={!!errors.lastName} placeholder="Last Name*" className={`h-16 rounded-[1.2rem] border-white/10 bg-white/5 text-white placeholder:text-slate-500 font-bold px-7 focus:ring-2 focus:ring-indigo-500/50 transition-all ${errors.lastName ? "border-red-400/70" : ""}`} />
+                                                <FieldError message={errors.lastName?.message} tone="dark" />
+                                            </div>
                                         </div>
                                         <div className="grid md:grid-cols-2 gap-5">
-                                            <Input {...register("whatsappNo", { required: true })} placeholder="Whatsapp No.*" className="h-16 rounded-[1.2rem] border-white/10 bg-white/5 text-white placeholder:text-slate-500 font-bold px-7 focus:ring-2 focus:ring-indigo-500/50 transition-all" />
-                                            <Input {...register("email", { required: true })} type="email" placeholder="Email*" className="h-16 rounded-[1.2rem] border-white/10 bg-white/5 text-white placeholder:text-slate-500 font-bold px-7 focus:ring-2 focus:ring-indigo-500/50 transition-all" />
+                                            <div>
+                                                <Input {...register("whatsappNo", rules.phone("WhatsApp number"))} aria-invalid={!!errors.whatsappNo} type="tel" placeholder="Whatsapp No.*" className={`h-16 rounded-[1.2rem] border-white/10 bg-white/5 text-white placeholder:text-slate-500 font-bold px-7 focus:ring-2 focus:ring-indigo-500/50 transition-all ${errors.whatsappNo ? "border-red-400/70" : ""}`} />
+                                                <FieldError message={errors.whatsappNo?.message} tone="dark" />
+                                            </div>
+                                            <div>
+                                                <Input {...register("email", rules.email())} aria-invalid={!!errors.email} type="email" placeholder="Email*" className={`h-16 rounded-[1.2rem] border-white/10 bg-white/5 text-white placeholder:text-slate-500 font-bold px-7 focus:ring-2 focus:ring-indigo-500/50 transition-all ${errors.email ? "border-red-400/70" : ""}`} />
+                                                <FieldError message={errors.email?.message} tone="dark" />
+                                            </div>
                                         </div>
-                                        <Textarea {...register("message", { required: true })} placeholder="Message*" className="min-h-[140px] rounded-[1.2rem] border-white/10 bg-white/5 text-white placeholder:text-slate-500 font-bold p-7 focus:ring-2 focus:ring-indigo-500/50 transition-all resize-none" />
+                                        <div>
+                                            <Textarea {...register("message", rules.required("Message"))} aria-invalid={!!errors.message} placeholder="Message*" className={`min-h-[140px] rounded-[1.2rem] border-white/10 bg-white/5 text-white placeholder:text-slate-500 font-bold p-7 focus:ring-2 focus:ring-indigo-500/50 transition-all resize-none ${errors.message ? "border-red-400/70" : ""}`} />
+                                            <FieldError message={errors.message?.message} tone="dark" />
+                                        </div>
 
                                         <div className="flex justify-center pt-4">
                                             <Button type="submit" disabled={mutation.isPending} className="px-10 h-12 rounded-[1rem] bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black text-sm hover:shadow-[0_20px_40px_-10px_rgba(37,99,235,0.4)] hover:scale-[1.02] transition-all group/btn disabled:opacity-70 disabled:cursor-not-allowed gap-2">
@@ -310,6 +337,7 @@ const SyntaxWorksPage = () => {
                                             </Button>
                                         </div>
                                     </form>
+                                    )}
                                 </div>
                             </motion.div>
                         </div>
@@ -377,8 +405,13 @@ const SyntaxWorksPage = () => {
                                 icon={Monitor}
                                 contentKey="syntax_feature_3"
                                 title="Integrated <br /> Environment (IDE)"
+<<<<<<< Updated upstream
                                 desc="Our platform offers a state-of-the-art IDE designed to streamline your coding experience, enable you to write, test, and debug code all in one place."
                                 img="/images/syntaxworks/ide_premium.webp"
+=======
+                                desc="Our platform offers a state-of-the-art IDE designed to streamline your coding experience, enabling you to write, test, and debug code all in one place."
+                                img="/images/syntaxworks/ide_premium.png"
+>>>>>>> Stashed changes
                                 details={[
                                     "Multi-file project support with directory explorer",
                                     "Cloud-based workspace for persistent progress",

@@ -17,6 +17,10 @@ import { EditableContent } from "./EditableContent";
 
 const SEMESTERPREP_URL = "https://semesterprep.in/";
 
+// Titles are styled uppercase; keep "PYQs" readable as PYQs (not PYQS).
+const keepPyqsCase = (text: string) =>
+  text.split(/(PYQs)/).map((part, i) => (part === "PYQs" ? <span key={i} className="normal-case">PYQs</span> : part));
+
 const SemesterPrepSection = () => {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -32,7 +36,7 @@ const SemesterPrepSection = () => {
 
   const features = [
     {
-      title: "10,000+ PYQ’s & Answers",
+      title: "10,000+ PYQs & Answers",
       desc: "Comprehensive coverage across 120+ university subjects.",
       icon: ScrollText,
       gradient: "from-purple-500 to-indigo-600",
@@ -189,7 +193,7 @@ const SemesterPrepSection = () => {
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex items-center gap-3">
                     <h5 className="text-[10px] sm:text-base md:text-lg font-black text-white uppercase tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-purple-300 transition-all text-center sm:text-left truncate">
-                      {feature.title}
+                      {keepPyqsCase(feature.title)}
                     </h5>
                     <motion.div
                       initial={{ scale: 0 }}

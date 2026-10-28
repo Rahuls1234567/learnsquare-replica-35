@@ -6,6 +6,10 @@ import Footer from "@/src/components/Footer";
 import WhatsAppButton from "@/src/components/WhatsAppButton";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { SUPPORT_EMAIL, SUPPORT_PHONE } from "@/lib/contact";
+
+// Change this whenever the terms are revised.
+const EFFECTIVE_DATE = "28 October 2026";
 
 const TermsPage = () => (
     <motion.div
@@ -21,6 +25,7 @@ const TermsPage = () => (
                     <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-6">
                         Terms &amp; Conditions
                     </h1>
+                    <p className="text-sm font-semibold text-slate-500 mb-6">Effective date: {EFFECTIVE_DATE}</p>
                     <p className="text-slate-600 leading-relaxed text-justify">
                         You can purchase a Subscription Service of your choice for any category(ies) of content by following instructions on the Platform and making the payment applicable for the Subscription you intend to purchase. Please read the below terms applicable for the purchase of your Platform Subscription. The below terms are to be read with any other terms communicated to you at the time of purchase of your Subscription.
                     </p>
@@ -29,7 +34,7 @@ const TermsPage = () => (
                 <section className="mb-10 p-8 rounded-2xl bg-slate-50 border border-slate-100">
                     <h2 className="text-2xl font-black text-slate-900 mb-4">1. Payment Policy</h2>
                     <p className="text-slate-600 leading-relaxed text-justify">
-                        Agree that you are solely responsible for all charges that occur through and acknowledge and agree to indemnify, defend, and hold harmless LEARNSQUARE, its licensors, their affiliates, and their respective officers, directors, employees, and agents from any loss arising out of or related to the use of the Platform or any purchases made through the Platform. This obligation will survive your use of the Platform and termination of your Agreement with us. For purposes of the Platform Terms, "Loss" means all losses, liabilities, damages, awards, settlements, claims, suits, proceedings, costs, and expenses (including reasonable legal fees and disbursements and costs of investigation, litigation, settlement, judgement, interest, and penalties). LEARNSQUARE shall not be liable to you for any claims arising out of any act or omission on the part of the Third-Party Service Provider(s) including, but not limited to, any lost, stolen, or incorrectly processed payments.
+                        You agree that you are solely responsible for all charges incurred through your account, and you agree to indemnify, defend and hold harmless LEARNSQUARE, its licensors, their affiliates, and their respective officers, directors, employees and agents from any loss arising out of or related to the use of the Platform or any purchases made through the Platform. This obligation will survive your use of the Platform and termination of your Agreement with us. For purposes of the Platform Terms, "Loss" means all losses, liabilities, damages, awards, settlements, claims, suits, proceedings, costs, and expenses (including reasonable legal fees and disbursements and costs of investigation, litigation, settlement, judgement, interest, and penalties). LEARNSQUARE shall not be liable to you for any claims arising out of any act or omission on the part of the Third-Party Service Provider(s) including, but not limited to, any lost, stolen, or incorrectly processed payments.
                     </p>
                 </section>
 
@@ -58,6 +63,15 @@ const TermsPage = () => (
                     <h2 className="text-2xl font-black text-slate-900 mb-4">5. GST and other Service Taxes</h2>
                     <p className="text-slate-600 leading-relaxed text-justify">
                         Your payments to LEARNSQUARE shall be subject to applicable taxes including without limitation Goods and Service Taxes (GST) and Value Added Taxes (VAT) or other similar taxes as may be applicable in your country of residence/from where you have created your account on the Platform/ purchased the underlying Subscriptions.
+                    </p>
+                </section>
+
+                <section className="mb-10 p-8 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                    <h2 className="text-2xl font-black text-slate-900 mb-4">6. Contact Us</h2>
+                    <p className="text-slate-600 leading-relaxed text-justify">
+                        If you have any questions about these Terms &amp; Conditions, please contact us at{" "}
+                        <a href={`mailto:${SUPPORT_EMAIL}`} className="text-primary font-semibold hover:underline">{SUPPORT_EMAIL}</a>{" "}
+                        or call {SUPPORT_PHONE}.
                     </p>
                 </section>
 

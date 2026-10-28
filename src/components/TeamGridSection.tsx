@@ -136,7 +136,7 @@ const TeamGridSection = () => {
             <div className="container relative px-4 md:px-6 mx-auto">
                 <div className="flex flex-col items-center text-center mb-14">
                     <span className="inline-flex items-center px-5 py-2 rounded-full bg-primary/10 text-primary font-extrabold text-xs tracking-[0.2em] uppercase mb-6">
-                        Our Team
+                        Our team
                     </span>
 
                     <EditableContent
@@ -144,7 +144,7 @@ const TeamGridSection = () => {
                         description="Our Team Grid Heading"
                         defaultContent={
                             <h2 className="text-3xl md:text-5xl font-black text-[#1e293b] tracking-tight">
-                                Meet the People Behind LearnSquare
+                                Meet the people behind LEARNSQUARE
                             </h2>
                         }
                     />

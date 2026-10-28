@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+<<<<<<< Updated upstream
 
 const inter = Inter({
     subsets: ["latin"],
@@ -14,27 +15,22 @@ const jakarta = Plus_Jakarta_Sans({
     display: "swap",
     variable: "--font-jakarta",
 });
+=======
+import { SITE_URL, pageMetadata } from "@/lib/seo";
+import NoticeBoard from "@/src/components/NoticeBoard";
+const inter = Inter({ subsets: ["latin"] });
+>>>>>>> Stashed changes
 
+// Home page metadata doubles as the site-wide default; other routes override it in their own layout.tsx.
 export const metadata: Metadata = {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:8080'),
-    title: "LEARNSQUARE",
-    description: "LEARNSQUARE - AI Powered Education Platform",
+    metadataBase: new URL(SITE_URL),
+    ...pageMetadata("home"),
     authors: [{ name: "LEARNSQUARE" }],
     icons: {
         icon: "/fav icon.png",
         shortcut: "/fav icon.png",
         apple: "/fav icon.png",
     },
-    openGraph: {
-        title: "LEARNSQUARE",
-        description: "LEARNSQUARE - AI Powered Education Platform",
-        type: "website",
-        images: ["/logo/LEARNSQUARE_LOGO (500x200).png"]
-    },
-    twitter: {
-        card: "summary_large_image",
-        images: ["/logo/LEARNSQUARE_LOGO (500x200).png"]
-    }
 };
 
 export default function RootLayout({

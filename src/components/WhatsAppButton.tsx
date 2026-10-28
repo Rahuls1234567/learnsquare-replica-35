@@ -1,6 +1,8 @@
+import { SUPPORT_WHATSAPP_URL } from "@/lib/contact";
+
 const WhatsAppButton = () => (
   <a
-    href="https://wa.me/9000177063"
+    href={SUPPORT_WHATSAPP_URL}
     target="_blank"
     rel="noopener noreferrer"
     className="fixed bottom-10 left-6 z-50 w-16 h-16 rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_0_20px_rgba(37,211,102,0.4)] hover:scale-110 transition-transform group animate-bounce-subtle"

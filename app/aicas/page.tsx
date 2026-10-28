@@ -21,6 +21,8 @@ import apiClient from "@/lib/api-client";
 import { toast } from "sonner";
 import { EditableContent } from "@/src/components/EditableContent";
 import { AicasNewModuleSection, type AicasNewModuleId } from "@/src/components/AicasNewModules";
+import { FieldError, FormSuccess } from "@/src/components/FormFeedback";
+import { rules } from "@/lib/validation";
 
 
 const AndroidAppleIcon = ({ className = "" }: { className?: string }) => (
@@ -283,7 +285,7 @@ const coreModulesData = [
             "Fee Dues Management & New Admissions Management",
             "Enquiries Handling & Visitor Management",
             "Effective Leave Management System",
-            "Generation of Invoices & Receives as per Std. Templates",
+            "Generation of Invoices & Receipts as per Std. Templates",
             "Effective Tracking of Inventory"
         ]
     },
@@ -597,7 +599,6 @@ export default function Aicas() {
                 description: "We've received your request and will contact you shortly. 🚀",
             });
             reset();
-            router.push('/');
         },
         onError: () => {
             toast.error("Failed to send inquiry", {
@@ -682,13 +683,14 @@ export default function Aicas() {
                             <EditableContent 
                                 contentKey="aicas_hero_content"
                                 description="AICAS Hero Heading & Subtitle"
+                                pageHeading
                                 defaultContent={
                                     <>
-                                        <h2 className="font-black tracking-tight flex flex-col items-start drop-shadow-xl w-full">
+                                        <h1 className="font-black tracking-tight flex flex-col items-start drop-shadow-xl w-full">
                                             <span className="text-5xl sm:text-6xl md:text-7xl lg:text-[4.5rem] xl:text-[5.5rem] 2xl:text-[6rem] text-slate-100 mb-2 lg:mb-4 leading-none">AI Powered</span>
                                             <span className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem] 2xl:text-[4.5rem] text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-400 pb-1 leading-[1.1]">Campus Automation</span>
                                             <span className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem] 2xl:text-[4.5rem] text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-400 pb-2 leading-[1.1]">System</span>
-                                        </h2>
+                                        </h1>
 
                                         <div className="space-y-6">
                                             <p className="text-xl md:text-2xl text-slate-300 font-bold max-w-xl leading-relaxed tracking-tight">
@@ -744,27 +746,40 @@ export default function Aicas() {
                                     <div className="h-1 w-12 bg-indigo-500 rounded-full mx-auto shadow-[0_0_15px_rgba(99,102,241,0.8)]" />
                                 </div>
 
-                                <form className="space-y-5 relative z-10 flex-grow" onSubmit={handleSubmit(onSubmit)}>
+                                {mutation.isSuccess ? (
+                                    <div className="relative z-10">
+                                        <FormSuccess
+                                            tone="dark"
+                                            title="Inquiry sent"
+                                            message="Thanks for your interest in AICAS. Our team will contact you shortly to schedule a demo."
+                                            actionLabel="Send another inquiry"
+                                            onAction={() => mutation.reset()}
+                                        />
+                                    </div>
+                                ) : (
+                                <form className="space-y-5 relative z-10 flex-grow" onSubmit={handleSubmit(onSubmit)} noValidate>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div className="space-y-2">
                                             <div className="relative">
                                                 <User className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                                                 <Input
-                                                    {...register("firstName", { required: true })}
+                                                    {...register("firstName", rules.required("First name"))} aria-invalid={!!errors.firstName}
                                                     placeholder="First Name*"
                                                     className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.firstName ? 'border-red-500/50' : ''}`}
                                                 />
                                             </div>
+                                            <FieldError message={errors.firstName?.message} tone="dark" />
                                         </div>
                                         <div className="space-y-2">
                                             <div className="relative">
                                                 <User className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                                                 <Input
-                                                    {...register("lastName", { required: true })}
+                                                    {...register("lastName", rules.required("Last name"))} aria-invalid={!!errors.lastName}
                                                     placeholder="Last Name*"
                                                     className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.lastName ? 'border-red-500/50' : ''}`}
                                                 />
                                             </div>
+                                            <FieldError message={errors.lastName?.message} tone="dark" />
                                         </div>
                                     </div>
 
@@ -773,23 +788,25 @@ export default function Aicas() {
                                             <div className="relative">
                                                 <Phone className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                                                 <Input
-                                                    {...register("whatsappNo", { required: true })}
+                                                    {...register("whatsappNo", rules.phone("WhatsApp number"))} aria-invalid={!!errors.whatsappNo}
                                                     placeholder="Whatsapp No.*"
                                                     type="tel"
                                                     className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.whatsappNo ? 'border-red-500/50' : ''}`}
                                                 />
                                             </div>
+                                            <FieldError message={errors.whatsappNo?.message} tone="dark" />
                                         </div>
                                         <div className="space-y-2">
                                             <div className="relative">
                                                 <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                                                 <Input
-                                                    {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+                                                    {...register("email", rules.email())} aria-invalid={!!errors.email}
                                                     placeholder="Email*"
                                                     type="email"
                                                     className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.email ? 'border-red-500/50' : ''}`}
                                                 />
                                             </div>
+                                            <FieldError message={errors.email?.message} tone="dark" />
                                         </div>
                                     </div>
 
@@ -798,21 +815,23 @@ export default function Aicas() {
                                             <div className="relative">
                                                 <Building2 className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                                                 <Input
-                                                    {...register("collegeName", { required: true })}
+                                                    {...register("collegeName", rules.required("Institution / organization"))} aria-invalid={!!errors.collegeName}
                                                     placeholder="Institution / Organization*"
                                                     className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.collegeName ? 'border-red-500/50' : ''}`}
                                                 />
                                             </div>
+                                            <FieldError message={errors.collegeName?.message} tone="dark" />
                                         </div>
                                         <div className="space-y-2">
                                             <div className="relative">
                                                 <IdCard className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                                                 <Input
-                                                    {...register("designation", { required: true })}
+                                                    {...register("designation", rules.required("Designation"))} aria-invalid={!!errors.designation}
                                                     placeholder="Designation*"
                                                     className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.designation ? 'border-red-500/50' : ''}`}
                                                 />
                                             </div>
+                                            <FieldError message={errors.designation?.message} tone="dark" />
                                         </div>
                                     </div>
 
@@ -820,21 +839,23 @@ export default function Aicas() {
                                         <div className="relative">
                                             <MapPin className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                                             <Input
-                                                {...register("city", { required: true })}
+                                                {...register("city", rules.required("City"))} aria-invalid={!!errors.city}
                                                 placeholder="City*"
                                                 className={`h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 font-bold text-base md:text-sm shadow-inner ${errors.city ? 'border-red-500/50' : ''}`}
                                             />
                                         </div>
+                                        <FieldError message={errors.city?.message} tone="dark" />
                                     </div>
 
                                     <div className="relative">
                                         <MessageSquare className="absolute left-6 top-5 w-4 h-4 text-slate-500" />
                                         <Textarea
-                                            {...register("message", { required: true })}
+                                            {...register("message", rules.required("Message"))} aria-invalid={!!errors.message}
                                             placeholder="Message*"
                                             className={`min-h-[120px] bg-white/5 border-white/10 rounded-[1.5rem] focus:bg-white/10 transition-all text-white placeholder:text-slate-500 focus-visible:ring-indigo-500/30 resize-none pt-5 pl-12 pr-6 font-bold text-base md:text-sm shadow-inner ${errors.message ? 'border-red-500/50' : ''}`}
                                         />
                                     </div>
+                                    <FieldError message={errors.message?.message} tone="dark" />
 
                                     <div className="pt-6">
                                         <button
@@ -850,6 +871,7 @@ export default function Aicas() {
                                         </button>
                                     </div>
                                 </form>
+                                )}
 
                             </div>
                         </motion.div>

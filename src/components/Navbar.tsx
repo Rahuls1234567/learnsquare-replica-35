@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronRight, User, LayoutDashboard, LogOut, LogIn, Sparkles } from "lucide-react";
+import { Menu, X, ChevronRight, User, LayoutDashboard, LogOut, LogIn, Sparkles, Cpu, Code2, BookMarked, Presentation, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -13,18 +13,16 @@ import { Edit3 } from "lucide-react";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Our Products", href: "#products", hasDropdown: true },
+  { label: "Our Products", href: "/#products", hasDropdown: true },
   { label: "Contact us", href: "/contact" },
   { label: "ERP Enquiry", href: "/aicas#enquiry", highlight: true },
 ];
 
 const products = [
-  { title: "AICAS", href: "/aicas", external: false },
-  { title: "SyntaxWorks", href: "/syntax-works", external: false },
-  { title: "MySkillForge", href: "/myskillforge", external: false },
-  { title: "SemesterPrep", href: "/semester-prep", external: false },
-  { title: "Training Programs", href: "/training-programs", external: false },
-  { title: "Test Prep - Pro", href: "/test-prep-pro", external: false }
+  { title: "AICAS", tagline: "AI-powered campus ERP", href: "/aicas", external: false, icon: Cpu, iconBg: "bg-blue-50 text-blue-600" },
+  { title: "SyntaxWorks", tagline: "Coding practice & assessments", href: "/syntax-works", external: false, icon: Code2, iconBg: "bg-purple-50 text-purple-600" },
+  { title: "SemesterPrep", tagline: "Semester exam preparation", href: "/semester-prep", external: false, icon: BookMarked, iconBg: "bg-orange-50 text-orange-600" },
+  { title: "Training Programs", tagline: "Industry-ready courses", href: "/training-programs", external: false, icon: Presentation, iconBg: "bg-pink-50 text-pink-600" }
 ];
 
 const Navbar = () => {
@@ -34,10 +32,11 @@ const Navbar = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
+  const productsRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const pathname = usePathname();
   const { isAdmin, editMode, setEditMode } = useAdmin();
-  const transparentPaths = ["/", "/aicas", "/syntax-works", "/myskillforge", "/training-programs", "/test-prep-pro", "/semester-prep"];
+  const transparentPaths = ["/", "/aicas", "/syntax-works", "/training-programs", "/semester-prep"];
   const isTransparentPath = transparentPaths.includes(pathname);
   // The navbar is transparent only if we are on transparent-enabled pages and haven't scrolled down.
   const isTransparent = isTransparentPath && !scrolled;
@@ -73,6 +72,43 @@ const Navbar = () => {
     document.addEventListener("click", handler);
     return () => document.removeEventListener("click", handler);
   }, []);
+
+  // Desktop products menu: close on a tap/click outside it or on Escape.
+  useEffect(() => {
+    if (!showProducts) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (productsRef.current && !productsRef.current.contains(e.target as Node)) setShowProducts(false);
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setShowProducts(false); };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [showProducts]);
+
+  // "Our Products" in the desktop bar: on touch screens there is no hover, so the first tap
+  // opens the menu and only a tap while it is open goes to the products section.
+  const onProductsClick = (e: React.MouseEvent) => {
+    if (!showProducts) {
+      e.preventDefault();
+      setShowProducts(true);
+      return;
+    }
+    goToProducts(e);
+  };
+
+  // Next.js won't re-scroll to a hash on the same page, so scroll manually on home.
+  const goToProducts = (e: React.MouseEvent) => {
+    setShowProducts(false);
+    setOpen(false);
+    if (pathname === "/") {
+      e.preventDefault();
+      document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
+      window.history.replaceState(null, "", "/#products");
+    }
+  };
 
   const logout = () => {
     clearAuthCookie();
@@ -110,9 +146,14 @@ const Navbar = () => {
               {navLinks.map((l) => (
                 <div
                   key={l.label}
+                  ref={l.hasDropdown ? productsRef : undefined}
                   className="relative"
-                  onMouseEnter={() => l.hasDropdown && setShowProducts(true)}
-                  onMouseLeave={() => l.hasDropdown && setShowProducts(false)}
+                  // Hover only for real mice; touch taps also fire enter/leave, which would race the tap handler.
+                  onPointerEnter={(e) => l.hasDropdown && e.pointerType === "mouse" && setShowProducts(true)}
+                  onPointerLeave={(e) => l.hasDropdown && e.pointerType === "mouse" && setShowProducts(false)}
+                  // Keyboard focus only (:focus-visible); a tap also focuses the link and must not pre-open the menu.
+                  onFocus={(e) => l.hasDropdown && (e.target as Element).matches(":focus-visible") && setShowProducts(true)}
+                  onBlur={(e) => l.hasDropdown && !e.currentTarget.contains(e.relatedTarget as Node) && setShowProducts(false)}
                 >
                   {l.highlight ? (
                     <Link
@@ -129,6 +170,9 @@ const Navbar = () => {
                   ) : (
                     <Link
                       href={l.href}
+                      onClick={l.hasDropdown ? onProductsClick : undefined}
+                      aria-haspopup={l.hasDropdown ? "menu" : undefined}
+                      aria-expanded={l.hasDropdown ? showProducts : undefined}
                       className={`flex items-center gap-1.5 px-3 py-2.5 text-[12.5px] font-bold uppercase tracking-[0.05em] rounded-xl transition-all ${isTransparent ? 'text-slate-200 hover:text-white hover:bg-white/10' : 'text-slate-700 hover:text-primary hover:bg-slate-50'}`}
                     >
                       {l.label}
@@ -146,8 +190,13 @@ const Navbar = () => {
                           exit={{ opacity: 0, scale: 0.9, y: 10 }}
                           className="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-[100]"
                         >
+<<<<<<< Updated upstream
                           <div className="bg-white/95 border border-slate-200 shadow-[0_30px_60px_rgba(0,0,0,0.1)] overflow-hidden rounded-[2rem] min-w-[580px] p-2">
                             <div className="grid grid-cols-3 gap-1">
+=======
+                          <div className="bg-white/95 backdrop-blur-xl border border-slate-200 shadow-[0_30px_60px_rgba(0,0,0,0.12)] overflow-hidden rounded-3xl w-[580px] p-3">
+                            <div className="grid grid-cols-2 gap-1.5">
+>>>>>>> Stashed changes
                               {products.map((p) => (
                                 <Link
                                   key={p.title}
@@ -155,18 +204,28 @@ const Navbar = () => {
                                   prefetch={false}
                                   target={p.external ? (isMobile ? "_self" : "_blank") : undefined}
                                   rel={p.external ? "noopener noreferrer" : undefined}
-                                  className="px-3 py-3 text-indigo-600 font-bold text-[12px] hover:text-primary hover:bg-indigo-50/50 rounded-xl transition-all flex items-center justify-between group border border-transparent hover:border-indigo-100"
+                                  onClick={() => setShowProducts(false)}
+                                  className="p-3 rounded-2xl transition-all flex items-center gap-3 group border border-transparent hover:bg-indigo-50/60 hover:border-indigo-100"
                                 >
-                                  <div className="flex items-center gap-3">
-                                    <div className="w-6 h-6 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-400">
-                                      <ChevronRight className="w-3 h-3" />
-                                    </div>
-                                    {p.title}
+                                  <div className={`w-10 h-10 shrink-0 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 ${p.iconBg}`}>
+                                    <p.icon className="w-5 h-5" />
                                   </div>
-                                  <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0" />
+                                  <div className="flex-1 min-w-0">
+                                    <div className="text-[13px] font-black text-slate-900 group-hover:text-indigo-600 transition-colors">{p.title}</div>
+                                    <div className="text-[11.5px] font-medium text-slate-500 leading-snug">{p.tagline}</div>
+                                  </div>
+                                  <ChevronRight className="w-4 h-4 text-indigo-500 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                                 </Link>
                               ))}
                             </div>
+                            <Link
+                              href="/#products"
+                              onClick={goToProducts}
+                              className="mt-2 flex items-center justify-between px-4 py-3 rounded-2xl bg-slate-50 hover:bg-indigo-50 text-[12px] font-bold text-slate-600 hover:text-indigo-600 transition-colors group"
+                            >
+                              View all products
+                              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </Link>
                           </div>
                         </motion.div>
                       )}
@@ -238,7 +297,7 @@ const Navbar = () => {
                     </AnimatePresence>
                   </div>
                 ) : (
-                  <Link href="https://lms.semesterprep.in/login" target="_blank" rel="noopener noreferrer" className="relative group/login inline-flex overflow-hidden px-8 py-3 rounded-full transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_rgba(99,102,241,0.6)]">
+                  <Link href="https://lms.learnsquare.co/login" target="_blank" rel="noopener noreferrer" className="relative group/login inline-flex overflow-hidden px-8 py-3 rounded-full transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_rgba(99,102,241,0.6)]">
                     {/* Animated Gradient Edge */}
                     <div className={`absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 group-hover/login:opacity-100 transition-opacity duration-500 ${isTransparent ? 'opacity-40' : 'opacity-100'}`} style={{ backgroundSize: '200% 100%', animation: 'gradient-x 3s linear infinite' }} />
                     {/* Core pill (Transparent mode: frosted glass, Solid mode: dark base) */}
@@ -320,11 +379,16 @@ const Navbar = () => {
                                   prefetch={false}
                                   target={p.external ? (isMobile ? "_self" : "_blank") : undefined}
                                   rel={p.external ? "noopener noreferrer" : undefined}
-                                  className="flex items-center gap-3 p-3 text-base font-bold text-slate-600 hover:text-primary transition-all"
+                                  className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-all group"
                                   onClick={() => setOpen(false)}
                                 >
-                                  <ChevronRight className="w-4 h-4 text-slate-400" />
-                                  {p.title}
+                                  <div className={`w-9 h-9 shrink-0 rounded-lg flex items-center justify-center ${p.iconBg}`}>
+                                    <p.icon className="w-4 h-4" />
+                                  </div>
+                                  <div className="min-w-0">
+                                    <div className="text-base font-bold text-slate-700 group-hover:text-primary transition-colors">{p.title}</div>
+                                    <div className="text-xs text-slate-500">{p.tagline}</div>
+                                  </div>
                                 </Link>
                               ))}
                             </motion.div>
@@ -364,7 +428,7 @@ const Navbar = () => {
                       <button onClick={() => { logout(); setOpen(false); }} className="w-full p-3 text-left font-bold text-red-600">Logout</button>
                     </>
                   ) : (
-                    <Link href="https://lms.semesterprep.in/login" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="relative group/mobile-login block w-full overflow-hidden p-[2px] rounded-2xl transition-all">
+                    <Link href="https://lms.learnsquare.co/login" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="relative group/mobile-login block w-full overflow-hidden p-[2px] rounded-2xl transition-all">
                       <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 opacity-50 group-hover/mobile-login:opacity-100 transition-opacity duration-500" style={{ backgroundSize: '200% 100%', animation: 'gradient-x 3s linear infinite' }} />
                       <div className="relative flex flex-col items-center justify-center bg-slate-950 group-hover/mobile-login:bg-slate-900 transition-colors w-full h-16 rounded-[14px]">
                         <span className="flex items-center gap-2 text-white font-black uppercase tracking-[0.2em] text-sm">

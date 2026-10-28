@@ -1,4 +1,4 @@
-import { Cpu, Code2, Gem, BookMarked, Presentation, ClipboardList, FileText, Mail, Home } from "lucide-react";
+import { Cpu, Code2, BookMarked, Presentation, FileText, Mail, Home } from "lucide-react";
 
 export type CmsCardConfig = {
     contentKey: string;
@@ -23,8 +23,5 @@ export const CMS_CARDS: CmsCardConfig[] = [
     { contentKey: "products_heading", pageName: "Products - Section Heading", icon: Home, color: "from-blue-500/10 to-indigo-500/10", iconColor: "text-blue-600", badge: "Home" },
     { contentKey: "product_aicas", pageName: "AICAS", icon: Cpu, color: "from-blue-500/10 to-indigo-500/10", iconColor: "text-blue-600", badge: "AI Powered" },
     { contentKey: "product_syntaxworks", pageName: "SyntaxWorks", icon: Code2, color: "from-purple-500/10 to-fuchsia-500/10", iconColor: "text-purple-600", badge: "Coding" },
-    { contentKey: "product_myskillforge", pageName: "MySkillForge", icon: Gem, color: "from-emerald-500/10 to-teal-500/10", iconColor: "text-emerald-600", badge: "Skill Building" },
     { contentKey: "product_semesterprep", pageName: "SemesterPrep", icon: BookMarked, color: "from-orange-500/10 to-red-500/10", iconColor: "text-orange-600", badge: "Exam Prep" },
-    { contentKey: "product_training", pageName: "Training Programs", icon: Presentation, color: "from-pink-500/10 to-rose-500/10", iconColor: "text-pink-600", badge: "Industry Ready" },
-    { contentKey: "product_testpreppro", pageName: "Test Prep - Pro", icon: ClipboardList, color: "from-cyan-500/10 to-blue-500/10", iconColor: "text-cyan-600", badge: "Assessment" },
-];
+    { contentKey: "product_training", pageName: "Training Programs", icon: Presentation, color: "from-pink-500/10 to-rose-500/10", iconColor: "text-pink-600", badge: "Industry Ready" },];

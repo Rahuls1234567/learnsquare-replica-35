@@ -51,7 +51,7 @@ async function main() {
                 {
                     name: "Priya Varma",
                     role: "Placed at TCS, GPREC",
-                    text: "MySkillForge's training was the turning point for my career. The industry-focused curriculum helped me crack my dream company's interview.",
+                    text: "LearnSquare's training was the turning point for my career. The industry-focused curriculum helped me crack my dream company's interview.",
                     page: "home",
                     rating: 5
                 },

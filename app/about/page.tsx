@@ -113,7 +113,7 @@ const About = () => {
                             transition={{ delay: 0.2 }}
                             className="inline-flex items-center px-8 py-3 rounded-full bg-primary/80 backdrop-blur-md text-white font-bold text-lg shadow-xl shadow-primary/20 mb-12"
                         >
-                            About Us
+                            About us
                         </motion.div>
 
                         <motion.h1
@@ -127,11 +127,11 @@ const About = () => {
                                 description="About Page Heading"
                                 defaultContent={
                                     <>
-                                        To Revolutionise the Educational Landscape by Providing{" "}
+                                        To revolutionise the educational landscape by providing{" "}
                                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-indigo-600 to-accent">
-                                            AI Powered Tech Solutions
+                                            AI-powered tech solutions
                                         </span>{" "}
-                                        to Every Educational Institution.
+                                        to every educational institution.
                                     </>
                                 }
                             />
@@ -149,7 +149,7 @@ const About = () => {
                                 className="text-[13px] md:text-[15px] text-[#5e6282] font-semibold leading-relaxed max-w-4xl text-justify px-4"
                                 defaultContent={
                                     <p>
-                                        In light of the National Education Policy's Emphasis on Modernising Educational Systems, the Demand for Streamlined Campus Automation Solutions is at an All-Time High. Our Campus Automation Solution addresses this need by offering Educational Institutions a Simple yet Powerful Platform to Manage Academics, Operations, Communication, and Data Effectively.
+                                        In light of the National Education Policy's emphasis on modernising educational systems, the demand for streamlined campus automation solutions is at an all-time high. Our campus automation solution addresses this need by offering educational institutions a simple yet powerful platform to manage academics, operations, communication and data effectively.
                                     </p>
                                 }
                             />

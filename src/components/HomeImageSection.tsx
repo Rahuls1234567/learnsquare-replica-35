@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronRight, Terminal, Binary, Monitor, Sparkles, Cpu, CheckCircle2, GraduationCap, Building2, FileCheck, Briefcase, Laptop, Library, Bus, BedDouble, Users, MessageSquare, BarChart3, Zap } from "lucide-react";
+import { ArrowRight, ChevronRight, Terminal, Binary, Monitor, Sparkles, Cpu, CheckCircle2, GraduationCap, Building2, FileCheck, Briefcase, Laptop, Library, Bus, BedDouble, Users, MessageSquare, BarChart3, Zap, UserPlus, ShieldCheck, Ticket, Bot } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { EditableContent } from "./EditableContent";
@@ -13,6 +13,7 @@ const HomeImageSection = () => {
         {
             id: "Comprehensive",
             label: "Comprehensive Language Support",
+            summary: "Code, compile and run Python, Java, C++ and JavaScript in one place.",
             description: [
                 "With Comprehensive Language Support in SyntaxWorks, you can code seamlessly in your favorite languages—whether it's Python, Java, C++, or JavaScript.",
                 "No matter what language your project or employer demands, SyntaxWorks lets you compile, interpret, and execute code effortlessly, giving you the versatility to excel in any coding environment."
@@ -21,6 +22,7 @@ const HomeImageSection = () => {
         {
             id: "Algorithm",
             label: "Algorithm and Data Structure Practice",
+            summary: "Sharpen your skills with a rich library of algorithm and data structure problems.",
             description: [
                 "With Algorithm and Data Structure Practice in SyntaxWorks, you get access to a rich library of templates and resources to sharpen your skills.",
                 "Whether you're preparing for interviews or refining your coding knowledge, SyntaxWorks helps you master essential algorithms and data structures, ensuring you're always ahead of the curve."
@@ -29,6 +31,7 @@ const HomeImageSection = () => {
         {
             id: "Analytics",
             label: "Detailed Performance Analytics",
+            summary: "Track your progress and see your strengths and weak areas at a glance.",
             description: [
                 "With Detailed Performance Analytics in SyntaxWorks, you can track your coding progress like never before. Get in-depth insights into your strengths and weaknesses, monitor improvements.",
                 "Focus on areas that need attention—giving you the power to continuously sharpen your skills and ace every challenge."
@@ -37,6 +40,7 @@ const HomeImageSection = () => {
         {
             id: "Testing",
             label: "Dynamic Testings",
+            summary: "Questions adapt to your level in real time, so every test keeps you challenged.",
             description: [
                 "With Dynamic Testing in SyntaxWorks, your coding challenges adapt to you! As you improve, SyntaxWorks adjusts question difficulty in real-time.",
                 "Ensuring a personalized and engaging experience that keeps pushing your skills to the next level."
@@ -145,7 +149,7 @@ const HomeImageSection = () => {
                             {[
                                 "AI Powered Architecture",
                                 "NEP2020, NBA, NAAC Compliant",
-                                "10 Managements covering all Depts",
+                                "14 Modules covering all Depts",
                                 "White-labelled App Ecosystem",
                                 "Deeply Customisable Framework"
                             ].map((item, idx) => (
@@ -177,7 +181,8 @@ const HomeImageSection = () => {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-5">
+                    {/* Centered flex rows (not grid) so the 14 cards' short last row sits in the middle */}
+                    <div className="flex flex-wrap justify-center gap-3 md:gap-5">
                         {[
                             { num: '01', title: 'ACADEMICS MANAGEMENT', desc: 'End to End Management of College Academics, Daily Classes, Students Progress, Communication to Faculty & Students and all Day to Day Activities', icon: GraduationCap, color: 'from-blue-500 to-indigo-600', shadow: 'shadow-blue-500/20' },
                             { num: '02', title: 'ADMINISTRATION MANAGEMENT', desc: 'End-End Management of College Faculty, Students, Staff, Fee Payments, Daily Ops, Payrolls and Many More', icon: Building2, color: 'from-rose-500 to-pink-600', shadow: 'shadow-rose-500/20' },
@@ -189,6 +194,10 @@ const HomeImageSection = () => {
                             { num: '08', title: 'HOSTEL MANAGEMENT', desc: 'Hostel Allotment, Live Tracking Students, Hostel Fee Management, Inventory, Due List & Reports', icon: BedDouble, color: 'from-indigo-500 to-violet-600', shadow: 'shadow-indigo-500/20' },
                             { num: '09', title: 'PARENT MANAGEMENT', desc: 'Send Various Notifications to Parents, Fee Reminders, Send Attendance Information along with Several other Relevant College Updates', icon: Users, color: 'from-pink-500 to-rose-600', shadow: 'shadow-pink-500/20' },
                             { num: '10', title: 'COMMUNICATION MANAGEMENT', desc: 'Stay Connected with Entire Campus and Send Various Information Via SMS, WhatsApp, Push Notifications & E-Mails', icon: MessageSquare, color: 'from-teal-500 to-emerald-600', shadow: 'shadow-teal-500/20' },
+                            { num: '11', title: 'ADMISSION CRM', desc: 'Capture, Nurture and Convert Prospective Students with AI-Powered Lead Engagement, from First Inquiry to Enrollment', icon: UserPlus, color: 'from-sky-500 to-cyan-600', shadow: 'shadow-sky-500/20' },
+                            { num: '12', title: 'ACCREDITATION MANAGEMENT', desc: 'Stay Always Ready for NAAC, NBA and NEP 2020 with Organised Accreditation Data, Documents and Reports', icon: ShieldCheck, color: 'from-violet-500 to-fuchsia-600', shadow: 'shadow-violet-500/20' },
+                            { num: '13', title: 'TICKETING MANAGEMENT', desc: 'Raise, Assign, Track and Resolve Academic, Administrative and Technical Campus Issues in One Place', icon: Ticket, color: 'from-yellow-500 to-amber-600', shadow: 'shadow-yellow-500/20' },
+                            { num: '14', title: 'LIA AI ASSISTANT', desc: 'Ask AICAS in Plain Language and Get Answers, Insights and Guidance from Every Module', icon: Bot, color: 'from-lime-500 to-green-600', shadow: 'shadow-lime-500/20' },
                         ].map((management, i) => (
                             <motion.div
                                 key={management.num}
@@ -201,7 +210,7 @@ const HomeImageSection = () => {
                                     ease: [0.22, 1, 0.36, 1]
                                 }}
                                 whileHover={{ y: -10, scale: 1.02 }}
-                                className={`group relative bg-gradient-to-br ${management.color} border border-white/20 rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] p-4 sm:p-6 md:p-8 shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_50px_100px_rgba(0,0,0,0.2)] transition-all duration-700 flex flex-col items-start overflow-hidden cursor-pointer text-white`}
+                                className={`w-[calc((100%_-_0.75rem)/2)] md:w-[calc((100%_-_2.5rem)/3)] lg:w-[calc((100%_-_5rem)/5)] group relative bg-gradient-to-br ${management.color} border border-white/20 rounded-2xl sm:rounded-[2rem] md:rounded-[2.5rem] p-4 sm:p-6 md:p-8 shadow-[0_20px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_50px_100px_rgba(0,0,0,0.2)] transition-all duration-700 flex flex-col items-start overflow-hidden cursor-pointer text-white`}
                             >
                                 {/* Depth Overlay (per-card SVG feTurbulence noise removed — it
                                     forced Safari to rasterise a filter for every card). */}
@@ -234,7 +243,7 @@ const HomeImageSection = () => {
                                                     ))}
                                                 </h4>
                                                 <div className="w-6 h-[2px] bg-white/20 group-hover:w-full transition-all duration-700 rounded-full" />
-                                                <p className="text-[9px] sm:text-[11px] text-white/70 font-medium leading-relaxed group-hover:text-white transition-colors line-clamp-3 sm:line-clamp-4">
+                                                <p className="text-[9px] sm:text-[11px] text-white/70 font-medium leading-relaxed group-hover:text-white transition-colors">
                                                     {management.desc}
                                                 </p>
                                             </>
@@ -391,8 +400,8 @@ const HomeImageSection = () => {
                                         {tab.id === "Analytics" && "Deep Analytics"}
                                         {tab.id === "Testing" && "Dynamic Testing"}
                                     </h4>
-                                    <p className="text-[9px] sm:text-[13px] text-slate-400 font-medium leading-relaxed group-hover:text-slate-200 transition-colors line-clamp-3 sm:line-clamp-none">
-                                        {tab.description[0].substring(0, 80)}...
+                                    <p className="text-[9px] sm:text-[13px] text-slate-400 font-medium leading-relaxed group-hover:text-slate-200 transition-colors">
+                                        {tab.summary}
                                     </p>
 
                                     <div className="mt-6 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
