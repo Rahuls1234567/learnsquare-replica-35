@@ -8,8 +8,11 @@ export const SITE_URL = "https://learnsquare.co";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
-/** public/share-logo.png (copy of "fav icon.png" without the space in the URL). */
-const LOGO_SIZE = { width: 350, height: 350 };
+/**
+ * public/share-logo.png ("fav icon.png" resized, no space in the URL).
+ * Kept under 300px wide so WhatsApp shows a small side thumbnail instead of a big banner.
+ */
+const LOGO_SIZE = { width: 200, height: 200 };
 
 type PageSeo = { title: string; description: string; path: string };
 
@@ -17,8 +20,8 @@ type PageSeo = { title: string; description: string; path: string };
 export const PAGE_SEO = {
     home: {
         path: "/",
-        title: "LEARNSQUARE | AI-Powered Campus ERP & Student Training",
-        description: "LEARNSQUARE builds AI-powered education tools: the AICAS campus ERP, SyntaxWorks coding platform, SemesterPrep and industry-ready training programs.",
+        title: "LEARNSQUARE - AICAS(ERP) | Industry Ready Trainings | AI LMS | SemesterPrep",
+        description: "Transforming Campuses with a One-Stop Solution.",
     },
     about: {
         path: "/about",
