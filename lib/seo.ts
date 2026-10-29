@@ -8,6 +8,9 @@ export const SITE_URL = "https://learnsquare.co";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
+/** public/share-logo.png (copy of "fav icon.png" without the space in the URL). */
+const LOGO_SIZE = { width: 350, height: 350 };
+
 type PageSeo = { title: string; description: string; path: string };
 
 /** Per-page titles (50–60 chars) and descriptions (120–160 chars). */
@@ -73,8 +76,9 @@ export type PageKey = keyof typeof PAGE_SEO;
 
 export function pageMetadata(page: PageKey): Metadata {
     const { title, description, path } = PAGE_SEO[page];
-    // 1200x630 share image rendered by app/og/[page]/route.tsx
-    const image = { url: `/og/${page}`, ...OG_SIZE, alt: title };
+    // Square logo so WhatsApp/Telegram show the LEARNSQUARE icon as the link thumbnail.
+    // (The 1200x630 banner from app/og/[page]/route.tsx is still available at /og/<page>.)
+    const image = { url: "/share-logo.png", ...LOGO_SIZE, alt: "LEARNSQUARE logo" };
     return {
         title,
         description,
@@ -89,7 +93,7 @@ export function pageMetadata(page: PageKey): Metadata {
             images: [image],
         },
         twitter: {
-            card: "summary_large_image",
+            card: "summary",
             title,
             description,
             images: [image],
