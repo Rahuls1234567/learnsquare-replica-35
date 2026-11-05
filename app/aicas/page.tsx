@@ -595,13 +595,13 @@ export default function Aicas() {
             return apiClient.post('/aicas', data);
         },
         onSuccess: () => {
-            toast.success("Inquiry Sent!", {
+            toast.success("Enquiry Sent!", {
                 description: "We've received your request and will contact you shortly. 🚀",
             });
             reset();
         },
         onError: () => {
-            toast.error("Failed to send inquiry", {
+            toast.error("Failed to send enquiry", {
                 description: "Please check your connection and try again.",
             });
         }
@@ -741,7 +741,7 @@ export default function Aicas() {
 
                                 <div className="relative z-10 mb-8 text-center">
                                     <h3 className="text-3xl font-black text-white tracking-tight leading-none mb-3">
-                                        Get Started Today
+                                        Book a Free Demo
                                     </h3>
                                     <div className="h-1 w-12 bg-indigo-500 rounded-full mx-auto shadow-[0_0_15px_rgba(99,102,241,0.8)]" />
                                 </div>
@@ -750,9 +750,9 @@ export default function Aicas() {
                                     <div className="relative z-10">
                                         <FormSuccess
                                             tone="dark"
-                                            title="Inquiry sent"
+                                            title="Enquiry sent"
                                             message="Thanks for your interest in AICAS. Our team will contact you shortly to schedule a demo."
-                                            actionLabel="Send another inquiry"
+                                            actionLabel="Send another enquiry"
                                             onAction={() => mutation.reset()}
                                         />
                                     </div>
@@ -866,7 +866,7 @@ export default function Aicas() {
                                             <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
                                             <span className="relative z-10 uppercase group-hover/btn:text-white transition-colors duration-500 flex items-center gap-2">
                                                 {mutation.isPending && <Loader2 className="w-5 h-5 animate-spin" />}
-                                                {mutation.isPending ? "Sending..." : "Send Inquiry"}
+                                                {mutation.isPending ? "Sending..." : "Send Enquiry"}
                                             </span>
                                         </button>
                                     </div>
